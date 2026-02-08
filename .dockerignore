@@ -1,0 +1,13 @@
+**/bin
+**/obj
+**/node_modules
+**/.angular
+**/.vscode
+**/.git
+**/.gitignore
+**/.DS_Store
+**/dist
+old_project
+CGG.WebClient/.angular
+CGG.WebClient/dist
+CGG.WebClient/node_modules

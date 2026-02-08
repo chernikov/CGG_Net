@@ -1,0 +1,50 @@
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: cgg-db
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "${MSSQL_SA_PASSWORD}"
+    ports:
+      - "1433:1433"
+    volumes:
+      - mssql_data:/var/opt/mssql
+    restart: unless-stopped
+
+  api:
+    image: "${DOCKERHUB_NAMESPACE}/cgg-api:${TAG:-latest}"
+    container_name: cgg-api
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Production"
+      ASPNETCORE_URLS: "http://+:8080"
+      ConnectionStrings__DefaultConnection: "Server=db;Database=CareerGuidanceGuild;User Id=sa;Password=${MSSQL_SA_PASSWORD};TrustServerCertificate=True;MultipleActiveResultSets=true"
+      JwtSettings__SecretKey: "${JWT_SECRET_KEY}"
+      JwtSettings__Issuer: "CareerGuidanceGuild"
+      JwtSettings__Audience: "CareerGuidanceGuildUsers"
+      Cors__AllowedOrigins__0: "${CORS_ALLOWED_ORIGIN_0:-http://46.101.247.177}"
+      OpenAI__ApiKey: "${OPENAI_API_KEY}"
+      Email__SmtpHost: "${EMAIL_SMTP_HOST}"
+      Email__SmtpPort: "${EMAIL_SMTP_PORT}"
+      Email__Username: "${EMAIL_USERNAME}"
+      Email__Password: "${EMAIL_PASSWORD}"
+      Email__FromEmail: "${EMAIL_FROM}"
+      Email__FromName: "${EMAIL_FROM_NAME}"
+      Monobank__Token: "${MONOBANK_TOKEN}"
+      Monobank__WebhookUrl: "${MONOBANK_WEBHOOK_URL}"
+    depends_on:
+      - db
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+
+  web:
+    image: "${DOCKERHUB_NAMESPACE}/cgg-web:${TAG:-latest}"
+    container_name: cgg-web
+    depends_on:
+      - api
+    ports:
+      - "80:80"
+    restart: unless-stopped
+
+volumes:
+  mssql_data:
