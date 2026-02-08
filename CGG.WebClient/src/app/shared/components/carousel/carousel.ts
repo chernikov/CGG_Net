@@ -38,6 +38,10 @@ export class CarouselComponent {
   currentIndex = 0;
   autoPlayTimer: any;
 
+  get progressPercentage(): number {
+    return ((this.currentIndex + 1) / this.slides.length) * 100;
+  }
+
   ngOnInit() {
     this.startAutoPlay();
   }

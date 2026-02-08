@@ -16,7 +16,9 @@ export class LandingComponent {
       title: 'FIND YOUR PATH',
       subtitle: 'WITHOUT RUSHING INTO THE WRONG ONE',
       description: 'Navigate your career journey with confidence and clarity',
+      secondaryButton: 'MORE FOR PARENTS',
       primaryButton: 'START JOURNEY',
+      secondaryAction: () => this.moreForParents(),
       primaryAction: () => this.startSurvey()
     },
     {
@@ -25,7 +27,9 @@ export class LandingComponent {
       title: 'LIGHT UP YOUR PATH',
       subtitle: 'INTO NEW WAYS OF CONFIDENCE',
       description: 'Discover new possibilities and unlock your potential',
+      secondaryButton: 'MORE FOR PARENTS',
       primaryButton: 'START JOURNEY',
+      secondaryAction: () => this.moreForParents(),
       primaryAction: () => this.startSurvey()
     },
     {
@@ -34,10 +38,10 @@ export class LandingComponent {
       title: '[1] SUPPORT THEIR FUTURE',
       subtitle: 'WITHOUT GUESSING',
       description: 'Help your family make informed career decisions',
-      primaryButton: 'TRY DEMO SURVEY',
-      secondaryButton: 'JOIN THE GUILD',
-      primaryAction: () => this.tryDemo(),
-      secondaryAction: () => this.joinGuild()
+      secondaryButton: 'TRY DEMO SURVEY',
+      primaryButton: 'JOIN THE GUILD',
+      secondaryAction: () => this.tryDemo(),
+      primaryAction: () => this.joinGuild()
     },
     {
       id: 4,
@@ -45,14 +49,19 @@ export class LandingComponent {
       title: '[2] MORE ABOUT THE FAMILY',
       subtitle: 'BALANCES INSIDE GUILD',
       description: 'Learn how families grow together in our community',
-      primaryButton: 'TRY DEMO SURVEY',
-      secondaryButton: 'JOIN THE GUILD',
-      primaryAction: () => this.tryDemo(),
-      secondaryAction: () => this.joinGuild()
+      secondaryButton: 'TRY DEMO SURVEY',
+      primaryButton: 'JOIN THE GUILD',
+      secondaryAction: () => this.tryDemo(),
+      primaryAction: () => this.joinGuild()
     }
   ];
 
   constructor(private router: Router) {}
+
+  moreForParents() {
+    // TODO: Navigate to parents info page
+    console.log('More for parents');
+  }
 
   startSurvey() {
     this.router.navigate(['/survey']);

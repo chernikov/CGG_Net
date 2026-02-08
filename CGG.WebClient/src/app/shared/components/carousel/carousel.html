@@ -7,30 +7,18 @@
         <p *ngIf="slides[currentIndex].subtitle" class="slide-subtitle">{{ slides[currentIndex].subtitle }}</p>
         <p class="slide-description">{{ slides[currentIndex].description }}</p>
         <div class="slide-actions">
-          <button class="btn btn-primary" (click)="slides[currentIndex].primaryAction(); onUserInteraction()">
-            {{ slides[currentIndex].primaryButton }}
-          </button>
           <button *ngIf="slides[currentIndex].secondaryButton" 
                   class="btn btn-secondary" 
                   (click)="slides[currentIndex].secondaryAction?.(); onUserInteraction()">
             {{ slides[currentIndex].secondaryButton }}
           </button>
+          <button class="btn btn-primary" (click)="slides[currentIndex].primaryAction(); onUserInteraction()">
+            {{ slides[currentIndex].primaryButton }}
+          </button>
         </div>
       </div>
     </div>
   </div>
-
-  <button class="carousel-nav carousel-nav-prev" (click)="previous(); onUserInteraction()" aria-label="Previous slide">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-    </svg>
-  </button>
-
-  <button class="carousel-nav carousel-nav-next" (click)="next(); onUserInteraction()" aria-label="Next slide">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-    </svg>
-  </button>
 
   <div class="carousel-indicators">
     <button *ngFor="let slide of slides; let i = index"
@@ -38,5 +26,9 @@
             (click)="goToSlide(i)"
             [attr.aria-label]="'Go to slide ' + (i + 1)">
     </button>
+  </div>
+
+  <div class="carousel-progress">
+    <div class="progress-bar" [style.width.%]="progressPercentage"></div>
   </div>
 </div>
