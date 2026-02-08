@@ -1,6 +1,9 @@
 # Old project folder
 old_project/
 
+# Plans folder (development notes)
+plans/
+
 # Visual Studio
 .vs/
 *.suo

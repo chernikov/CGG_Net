@@ -1,4 +1,5 @@
 using CGG.Core.Entities;
+using CGG.Infrastructure.Data.Configurations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -16,7 +17,21 @@ namespace CGG.Infrastructure.Data
         public DbSet<Member> Members { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
         public DbSet<School> Schools { get; set; }
+        
+        // Survey-related tables
+        public DbSet<Language> Languages { get; set; }
+        public DbSet<Survey> Surveys { get; set; }
+        public DbSet<SurveyStep> SurveySteps { get; set; }
+        public DbSet<SurveyQuestion> SurveyQuestions { get; set; }
+        public DbSet<SurveyQuestionTranslation> SurveyQuestionTranslations { get; set; }
+        public DbSet<SurveyQuestionOption> SurveyQuestionOptions { get; set; }
+        public DbSet<SurveyQuestionOptionTranslation> SurveyQuestionOptionTranslations { get; set; }
         public DbSet<SurveyResult> SurveyResults { get; set; }
+        
+        // AI-related tables
+        public DbSet<AiPromptTemplate> AiPromptTemplates { get; set; }
+        public DbSet<AiLog> AiLogs { get; set; }
+        
         public DbSet<AIRecommendation> AIRecommendations { get; set; }
         public DbSet<PromoCode> PromoCodes { get; set; }
 
@@ -24,50 +39,24 @@ namespace CGG.Infrastructure.Data
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<User>(entity =>
-            {
-                entity.Property(e => e.Credits).HasColumnType("decimal(18,2)");
-                entity.HasOne(e => e.Family)
-                    .WithMany()
-                    .HasForeignKey(e => e.FamilyId)
-                    .OnDelete(DeleteBehavior.SetNull);
-            });
-
-            builder.Entity<Family>(entity =>
-            {
-                entity.HasKey(e => e.Id);
-                entity.Property(e => e.Credits).HasColumnType("decimal(18,2)");
-            });
-
-            builder.Entity<Member>(entity =>
-            {
-                entity.HasKey(e => e.Id);
-                entity.HasOne(e => e.User)
-                    .WithOne(u => u.Member)
-                    .HasForeignKey<Member>(e => e.UserId);
-                entity.HasOne(e => e.Family)
-                    .WithMany(f => f.Members)
-                    .HasForeignKey(e => e.FamilyId);
-            });
-
-            builder.Entity<Transaction>(entity =>
-            {
-                entity.HasKey(e => e.Id);
-                entity.Property(e => e.Amount).HasColumnType("decimal(18,2)");
-            });
-
-            builder.Entity<School>(entity =>
-            {
-                entity.HasKey(e => e.Id);
-                entity.Property(e => e.Credits).HasColumnType("decimal(18,2)");
-            });
-
-            builder.Entity<PromoCode>(entity =>
-            {
-                entity.HasKey(e => e.Id);
-                entity.HasIndex(e => e.Code).IsUnique();
-                entity.Property(e => e.Credits).HasColumnType("decimal(18,2)");
-            });
+            // Apply all entity configurations
+            builder.ApplyConfiguration(new UserConfiguration());
+            builder.ApplyConfiguration(new FamilyConfiguration());
+            builder.ApplyConfiguration(new MemberConfiguration());
+            builder.ApplyConfiguration(new TransactionConfiguration());
+            builder.ApplyConfiguration(new SchoolConfiguration());
+            builder.ApplyConfiguration(new PromoCodeConfiguration());
+            builder.ApplyConfiguration(new LanguageConfiguration());
+            builder.ApplyConfiguration(new SurveyConfiguration());
+            builder.ApplyConfiguration(new SurveyStepConfiguration());
+            builder.ApplyConfiguration(new SurveyQuestionConfiguration());
+            builder.ApplyConfiguration(new SurveyQuestionTranslationConfiguration());
+            builder.ApplyConfiguration(new SurveyQuestionOptionConfiguration());
+            builder.ApplyConfiguration(new SurveyQuestionOptionTranslationConfiguration());
+            builder.ApplyConfiguration(new SurveyResultConfiguration());
+            builder.ApplyConfiguration(new AIRecommendationConfiguration());
+            builder.ApplyConfiguration(new AiPromptTemplateConfiguration());
+            builder.ApplyConfiguration(new AiLogConfiguration());
         }
     }
 }
