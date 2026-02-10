@@ -1,0 +1,34 @@
+<div class="carousel-container" *ngIf="slides.length > 0">
+  <div class="carousel-slide" @slideAnimation>
+    <div class="slide-content">
+      <img [src]="slides[currentIndex].image" [alt]="slides[currentIndex].title" class="slide-image">
+      <div class="slide-text">
+        <h1 class="slide-title">{{ slides[currentIndex].title }}</h1>
+        <p *ngIf="slides[currentIndex].subtitle" class="slide-subtitle">{{ slides[currentIndex].subtitle }}</p>
+        <p class="slide-description">{{ slides[currentIndex].description }}</p>
+        <div class="slide-actions">
+          <button *ngIf="slides[currentIndex].secondaryButton" 
+                  class="btn btn-secondary" 
+                  (click)="slides[currentIndex].secondaryAction?.(); onUserInteraction()">
+            {{ slides[currentIndex].secondaryButton }}
+          </button>
+          <button class="btn btn-primary" (click)="slides[currentIndex].primaryAction(); onUserInteraction()">
+            {{ slides[currentIndex].primaryButton }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="carousel-indicators">
+    <button *ngFor="let slide of slides; let i = index"
+            [class.active]="i === currentIndex"
+            (click)="goToSlide(i)"
+            [attr.aria-label]="'Go to slide ' + (i + 1)">
+    </button>
+  </div>
+
+  <div class="carousel-progress">
+    <div class="progress-bar" [style.width.%]="progressPercentage"></div>
+  </div>
+</div>

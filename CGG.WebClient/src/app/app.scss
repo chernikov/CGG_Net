@@ -1,0 +1,26 @@
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  padding: 1rem;
+}
+
+.mobile-frame {
+  width: 390px;
+  min-height: 100vh;
+  background: white;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 420px) {
+  .app-container {
+    padding: 0;
+  }
+
+  .mobile-frame {
+    width: 100%;
+  }
+}

@@ -1,11 +1,14 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './pages/home/home.component';
+import { LandingComponent } from './pages/landing/landing';
+import { AdminComponent } from './pages/admin/admin';
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent },
-  {
-    path: 'auth',
-    loadChildren: () => import('./features/auth/auth.module').then(m => m.AuthModule)
-  },
+  { path: '', component: LandingComponent },
+  { path: 'admin', component: AdminComponent },
+  // TODO: Add auth routes when auth module is created
+  // {
+  //   path: 'auth',
+  //   loadChildren: () => import('./features/auth/auth.module').then(m => m.AuthModule)
+  // },
   { path: '**', redirectTo: '' }
 ];

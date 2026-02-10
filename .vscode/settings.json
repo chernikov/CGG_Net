@@ -1,0 +1,9 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "git remote": true,
+        "npm uninstall": true,
+        "npm install": true,
+        "c:\\projects\\uss\\CGG_DotNet\\start-frontend.ps1": true,
+        "Microsoft.PowerShell.Management\\Copy-Item": true
+    }
+}

@@ -432,6 +432,8 @@ Thumbs.db
 .env
 .env.local
 .env.*.local
+.env.production
+.env.server
 
 # Database
 *.db
