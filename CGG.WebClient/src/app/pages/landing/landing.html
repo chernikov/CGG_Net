@@ -1,3 +1,26 @@
 <div class="landing-page">
-  <app-carousel [slides]="slides" [autoPlayInterval]="5000"></app-carousel>
+  <div class="landing-container">
+    <h1 class="landing-title">Career Guidance Guild</h1>
+    <p class="landing-subtitle">Оберіть ваш шлях</p>
+    
+    <div class="choices-container">
+      <button class="choice-card parent" (click)="navigateToParent()">
+        <div class="choice-icon">👨‍👩‍👧‍👦</div>
+        <h2>Батько</h2>
+        <p>Інформація для батьків</p>
+      </button>
+
+      <button class="choice-card school" (click)="navigateToSchool()">
+        <div class="choice-icon">🏫</div>
+        <h2>Школа</h2>
+        <p>Ресурси для шкіл</p>
+      </button>
+
+      <button class="choice-card student" (click)="navigateToStudent()">
+        <div class="choice-icon">🎓</div>
+        <h2>Студент</h2>
+        <p>Почни свою подорож</p>
+      </button>
+    </div>
+  </div>
 </div>
