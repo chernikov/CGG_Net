@@ -41,6 +41,6 @@ export class ParentChoiceComponent {
   }
 
   joinGuild() {
-    this.router.navigate(['/register']);
+    this.router.navigate(['/parent-register']);
   }
 }

@@ -37,8 +37,7 @@ export class StudentChoiceComponent {
   constructor(private router: Router) {}
 
   moreForParents() {
-    // TODO: Navigate to parents info page
-    console.log('More for parents');
+    this.router.navigate(['/parent-choice']);
   }
 
   startSurvey() {

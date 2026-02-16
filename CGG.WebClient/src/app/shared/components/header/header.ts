@@ -11,6 +11,11 @@ import { Router } from '@angular/router';
 export class HeaderComponent {
   constructor(private router: Router) {}
 
+  navigateToLanding() {
+    // TODO: Add authentication check
+    this.router.navigate(['/landing']);
+  }
+
   navigateToLogin() {
     this.router.navigate(['/login']);
   }
