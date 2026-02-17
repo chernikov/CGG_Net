@@ -24,21 +24,14 @@ public static class Dependencies
         services.AddScoped<IAuthService, AuthService>();
 
         // Email Service with Resend
-        var resendApiKey = configuration["Resend:ApiKey"];
-        if (!string.IsNullOrEmpty(resendApiKey))
+        var resendApiKey = configuration["Resend:ApiKey"] 
+            ?? throw new InvalidOperationException("Resend:ApiKey is not configured");
+        
+        services.AddHttpClient<IResend, ResendClient>((serviceProvider, client) =>
         {
-            services.AddOptions<ResendClientOptions>().Configure(o =>
-            {
-                o.ApiToken = resendApiKey;
-            });
-            services.AddTransient<IResend, ResendClient>();
-            services.AddScoped<IEmailService, EmailService>();
-        }
-        else
-        {
-            // Fallback to console logger if no API key
-            services.AddScoped<IEmailService, EmailService>();
-        }
+            return new ResendClient(resendApiKey, client);
+        });
+        services.AddScoped<IEmailService, EmailService>();
 
         return services;
     }
