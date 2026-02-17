@@ -7,9 +7,12 @@ import { StudentChoiceComponent } from './pages/student-choice/student-choice';
 import { ParentRegisterComponent } from './pages/parent-register/parent-register';
 import { SchoolRegisterComponent } from './pages/school-register/school-register';
 import { StudentRegisterComponent } from './pages/student-register/student-register';
+import { LoginComponent } from './pages/login/login';
 
 export const routes: Routes = [
   { path: '', component: LandingComponent },
+  { path: 'landing', component: LandingComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'parent-choice', component: ParentChoiceComponent },
   { path: 'school-choice', component: SchoolChoiceComponent },
   { path: 'student-choice', component: StudentChoiceComponent },
