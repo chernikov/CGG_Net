@@ -14,6 +14,18 @@
     <h1 class="register-title">Реєстрація батька</h1>
     <p class="register-subtitle">Створіть обліковий запис для підтримки вашої дитини</p>
 
+    @if (validationError) {
+      <div class="error-message">
+        {{ validationError }}
+      </div>
+    }
+
+    @if (error$ | async; as error) {
+      <div class="error-message">
+        {{ error }}
+      </div>
+    }
+
     <form class="register-form" (ngSubmit)="onSubmit()">
       <div class="form-group">
         <label for="firstName">Ім'я</label>
@@ -24,6 +36,7 @@
           name="firstName"
           required
           placeholder="Введіть ваше ім'я"
+          [disabled]="(loading$ | async) ?? false"
         >
       </div>
 
@@ -36,6 +49,7 @@
           name="lastName"
           required
           placeholder="Введіть ваше прізвище"
+          [disabled]="(loading$ | async) ?? false"
         >
       </div>
 
@@ -47,6 +61,7 @@
           [(ngModel)]="formData.email"
           name="email"
           required
+          [disabled]="(loading$ | async) ?? false"
           placeholder="your@email.com"
         >
       </div>
@@ -59,6 +74,7 @@
           [(ngModel)]="formData.password"
           name="password"
           required
+          [disabled]="(loading$ | async) ?? false"
           placeholder="Мінімум 8 символів"
         >
       </div>
@@ -70,13 +86,22 @@
           id="confirmPassword" 
           [(ngModel)]="formData.confirmPassword"
           name="confirmPassword"
+          [disabled]="(loading$ | async) ?? false"
           required
           placeholder="Повторіть пароль"
         >
       </div>
 
-      <button type="submit" class="submit-button">
-        Зареєструватися
+      <button 
+        type="submit" 
+        class="submit-button"
+        [disabled]="(loading$ | async) ?? false"
+      >
+        @if (loading$ | async) {
+          <span>Завантаження...</span>
+        } @else {
+          <span>Зареєструватися</span>
+        }
       </button>
     </form>
 

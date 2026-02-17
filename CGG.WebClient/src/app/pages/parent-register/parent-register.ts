@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import * as AuthActions from '../../store/auth/auth.actions';
 import { selectAuthError, selectAuthLoading } from '../../store/auth/auth.selectors';
+import { UserRole } from '../../store/auth/auth.state';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -59,14 +60,14 @@ export class ParentRegisterComponent {
     console.log('Parent registration:', {
       email: this.formData.email,
       displayName,
-      role: '1' // UserParent
+      role: UserRole.UserParent
     });
 
     this.store.dispatch(AuthActions.register({
       email: this.formData.email,
       password: this.formData.password,
       displayName: displayName,
-      role: '1' // UserParent = 1 в enum
+      role: UserRole.UserParent
     }));
   }
 

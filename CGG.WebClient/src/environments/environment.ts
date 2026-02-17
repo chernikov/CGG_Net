@@ -1,5 +1,5 @@
 export const environment = {
   production: false,
-  apiUrl: 'https://localhost:7001/api',
+  apiUrl: '/api', // Uses proxy.conf.json -> https://localhost:7070
   openAiModel: 'gpt-4',
 };

@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://your-production-api.com/api',
+  apiUrl: '/api', // In production, configure reverse proxy (nginx/IIS)
   openAiModel: 'gpt-4',
 };

@@ -324,27 +324,54 @@ export class AuthEffects {
 
 ```typescript
 @Injectable({ providedIn: 'root' })
-export class AuthService {
-  private readonly apiUrl = environment.apiUrl + '/api/auth';
+export class ApiService {
+  private apiUrl = environment.apiUrl; // '/api' (uses proxy in dev)
   
   constructor(private http: HttpClient) {}
   
-  register(email: string, password: string, name: string): Observable<RegisterResponse> {
-    return this.http.post<RegisterResponse>(`${this.apiUrl}/register`, {
-      email,
-      password,
-      name
+  post<T>(endpoint: string, data: any): Observable<T> {
+    return this.http.post<T>(`${this.apiUrl}/${endpoint}`, data, {
+      headers: this.getHeaders()
     });
   }
   
-  login(email: string, password: string): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(`${this.apiUrl}/login`, {
-      email,
-      password
+  private getHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token');
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': token ? `Bearer ${token}` : ''
     });
   }
 }
 ```
+
+### Development Proxy Configuration
+
+**IMPORTANT**: In development, use relative API paths (`/api`) that route through the Angular dev server proxy.
+
+**proxy.conf.json**:
+```json
+{
+  "/api": {
+    "target": "https://localhost:7070",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}
+```
+
+**Environment Configuration**:
+- **Development** (`environment.ts`): `apiUrl: '/api'` → proxied to `https://localhost:7070/api`
+- **Production** (`environment.prod.ts`): `apiUrl: '/api'` → served by reverse proxy (nginx/IIS)
+
+**Why Use Proxy**:
+- Avoids CORS issues in development
+- Matches production URL structure
+- Simplifies environment configuration
+- Backend runs on `https://localhost:7070` (see `launchSettings.json`)
+
+**Never** use absolute URLs like `https://localhost:7070/api` directly in ApiService calls.
 
 ## Database
 
