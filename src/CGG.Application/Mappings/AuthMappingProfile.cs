@@ -1,6 +1,7 @@
 using AutoMapper;
 using CGG.Application.DTOs.Auth;
 using CGG.Application.Features.Auth.Commands.Login;
+using CGG.Application.Features.Auth.Commands.Register;
 using CGG.Core.Entities;
 
 namespace CGG.Application.Mappings
@@ -15,6 +16,9 @@ namespace CGG.Application.Mappings
 
             // LoginRequestDto -> LoginCommand
             CreateMap<LoginRequestDto, LoginCommand>();
+
+            // RegisterRequestDto -> RegisterCommand
+            CreateMap<RegisterRequestDto, RegisterCommand>();
         }
     }
 }

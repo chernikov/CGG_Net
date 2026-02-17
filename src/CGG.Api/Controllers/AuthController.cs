@@ -1,9 +1,8 @@
 using AutoMapper;
 using CGG.Application.DTOs.Auth;
 using CGG.Application.Features.Auth.Commands.Login;
-using CGG.Core.Entities;
+using CGG.Application.Features.Auth.Commands.Register;
 using MediatR;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CGG.Api.Controllers
@@ -14,38 +13,36 @@ namespace CGG.Api.Controllers
     {
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
-        private readonly UserManager<User> _userManager;
 
         public AuthController(
             IMediator mediator,
-            IMapper mapper,
-            UserManager<User> userManager)
+            IMapper mapper)
         {
             _mediator = mediator;
             _mapper = mapper;
-            _userManager = userManager;
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterRequest request)
+        public async Task<IActionResult> Register([FromBody] RegisterRequestDto requestDto, CancellationToken cancellationToken)
         {
-            var user = new User
+            try
             {
-                UserName = request.Email,
-                Email = request.Email,
-                DisplayName = request.DisplayName,
-                Role = request.Role,
-                EmailConfirmed = false
-            };
+                // Map DTO to Command
+                var command = _mapper.Map<RegisterCommand>(requestDto);
 
-            var result = await _userManager.CreateAsync(user, request.Password);
+                // Send command through MediatR
+                var response = await _mediator.Send(command, cancellationToken);
 
-            if (!result.Succeeded)
-            {
-                return BadRequest(result.Errors);
+                return Ok(response);
             }
-
-            return Ok(new { message = "User registered successfully", userId = user.Id });
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "An error occurred during registration", error = ex.Message });
+            }
         }
 
         [HttpPost("login")]
@@ -70,13 +67,5 @@ namespace CGG.Api.Controllers
                 return StatusCode(500, new { message = "An error occurred during login", error = ex.Message });
             }
         }
-    }
-
-    public class RegisterRequest
-    {
-        public string Email { get; set; } = string.Empty;
-        public string Password { get; set; } = string.Empty;
-        public string DisplayName { get; set; } = string.Empty;
-        public UserRole Role { get; set; }
     }
 }

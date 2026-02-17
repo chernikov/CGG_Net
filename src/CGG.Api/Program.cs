@@ -13,7 +13,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddInfrastructure(builder.Configuration);
 
 // Add Application layer dependencies (Services, AutoMapper, Validation)
-builder.Services.AddApplication();
+builder.Services.AddApplication(builder.Configuration);
 
 // Add API layer dependencies (JWT, CORS)
 builder.Services.AddApiServices(builder.Configuration);

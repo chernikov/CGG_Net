@@ -3,7 +3,6 @@
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
-
   <!-- Package Versions -->
   <ItemGroup>
     <!-- Microsoft ASP.NET Core & Extensions -->
@@ -13,34 +12,26 @@
     <PackageVersion Include="Microsoft.Extensions.Configuration.Abstractions" Version="10.0.2" />
     <PackageVersion Include="Microsoft.Extensions.Http" Version="10.0.2" />
     <PackageVersion Include="Microsoft.Extensions.Identity.Stores" Version="9.0.1" />
-    
     <!-- Microsoft Entity Framework Core -->
     <PackageVersion Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.2" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.2" />
-    
     <!-- Microsoft OpenApi -->
     <PackageVersion Include="Microsoft.OpenApi" Version="2.5.0" />
-    
     <!-- AutoMapper -->
     <PackageVersion Include="AutoMapper" Version="12.0.1" />
     <PackageVersion Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
-    
     <!-- FluentValidation -->
     <PackageVersion Include="FluentValidation" Version="12.1.1" />
     <PackageVersion Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" />
-    
     <!-- MediatR -->
     <PackageVersion Include="MediatR" Version="12.5.0" />
-    
     <!-- JWT -->
+    <PackageVersion Include="Resend" Version="0.2.1" />
     <PackageVersion Include="System.IdentityModel.Tokens.Jwt" Version="8.3.1" />
-    
     <!-- Swagger -->
     <PackageVersion Include="Swashbuckle.AspNetCore" Version="10.1.1" />
-    
     <!-- Email -->
     <PackageVersion Include="MailKit" Version="4.14.1" />
     <PackageVersion Include="MimeKit" Version="4.14.0" />
   </ItemGroup>
-
 </Project>

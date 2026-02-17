@@ -20,6 +20,19 @@ Content-Type: application/json
 
 ###
 
+### Register Another User
+POST {{CGG.Api_HostAddress}}/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "student@example.com",
+  "password": "Student123!",
+  "displayName": "Student User",
+  "role": 0
+}
+
+###
+
 ### Login
 POST {{CGG.Api_HostAddress}}/api/auth/login
 Content-Type: application/json

@@ -5,6 +5,7 @@
         "npm install": true,
         "c:\\projects\\uss\\CGG_DotNet\\start-frontend.ps1": true,
         "Microsoft.PowerShell.Management\\Copy-Item": true,
-        "&": true
+        "&": true,
+        "dotnet add": true
     }
 }
