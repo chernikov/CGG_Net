@@ -1,8 +1,0 @@
-<Solution>
-  <Folder Name="/src/">
-    <Project Path="src/CGG.Api/CGG.Api.csproj" />
-    <Project Path="src/CGG.Application/CGG.Application.csproj" />
-    <Project Path="src/CGG.Core/CGG.Core.csproj" />
-    <Project Path="src/CGG.Infrastructure/CGG.Infrastructure.csproj" />
-  </Folder>
-</Solution>

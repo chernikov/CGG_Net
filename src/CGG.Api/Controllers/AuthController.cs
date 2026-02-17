@@ -1,10 +1,10 @@
+using AutoMapper;
+using CGG.Application.DTOs.Auth;
+using CGG.Application.Features.Auth.Commands.Login;
 using CGG.Core.Entities;
+using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 
 namespace CGG.Api.Controllers
 {
@@ -12,18 +12,18 @@ namespace CGG.Api.Controllers
     [Route("api/[controller]")]
     public class AuthController : ControllerBase
     {
+        private readonly IMediator _mediator;
+        private readonly IMapper _mapper;
         private readonly UserManager<User> _userManager;
-        private readonly SignInManager<User> _signInManager;
-        private readonly IConfiguration _configuration;
 
         public AuthController(
-            UserManager<User> userManager,
-            SignInManager<User> signInManager,
-            IConfiguration configuration)
+            IMediator mediator,
+            IMapper mapper,
+            UserManager<User> userManager)
         {
+            _mediator = mediator;
+            _mapper = mapper;
             _userManager = userManager;
-            _signInManager = signInManager;
-            _configuration = configuration;
         }
 
         [HttpPost("register")]
@@ -49,62 +49,26 @@ namespace CGG.Api.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginRequest request)
+        public async Task<IActionResult> Login([FromBody] LoginRequestDto requestDto, CancellationToken cancellationToken)
         {
-            var user = await _userManager.FindByEmailAsync(request.Email);
-            
-            if (user == null)
+            try
             {
-                return Unauthorized(new { message = "Invalid email or password" });
+                // Map DTO to Command
+                var command = _mapper.Map<LoginCommand>(requestDto);
+
+                // Send command through MediatR
+                var response = await _mediator.Send(command, cancellationToken);
+
+                return Ok(response);
             }
-
-            var result = await _signInManager.CheckPasswordSignInAsync(user, request.Password, false);
-
-            if (!result.Succeeded)
+            catch (UnauthorizedAccessException ex)
             {
-                return Unauthorized(new { message = "Invalid email or password" });
+                return Unauthorized(new { message = ex.Message });
             }
-
-            var token = GenerateJwtToken(user);
-
-            return Ok(new
+            catch (Exception ex)
             {
-                token,
-                user = new
-                {
-                    user.Id,
-                    user.Email,
-                    user.DisplayName,
-                    user.Role,
-                    user.Credits
-                }
-            });
-        }
-
-        private string GenerateJwtToken(User user)
-        {
-            var jwtSettings = _configuration.GetSection("JwtSettings");
-            var secretKey = jwtSettings["SecretKey"];
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey!));
-            var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
-            var claims = new[]
-            {
-                new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
-                new Claim(JwtRegisteredClaimNames.Email, user.Email!),
-                new Claim(ClaimTypes.Role, user.Role.ToString()),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-            };
-
-            var token = new JwtSecurityToken(
-                issuer: jwtSettings["Issuer"],
-                audience: jwtSettings["Audience"],
-                claims: claims,
-                expires: DateTime.UtcNow.AddMinutes(double.Parse(jwtSettings["ExpirationInMinutes"]!)),
-                signingCredentials: credentials
-            );
-
-            return new JwtSecurityTokenHandler().WriteToken(token);
+                return StatusCode(500, new { message = "An error occurred during login", error = ex.Message });
+            }
         }
     }
 
@@ -114,11 +78,5 @@ namespace CGG.Api.Controllers
         public string Password { get; set; } = string.Empty;
         public string DisplayName { get; set; } = string.Empty;
         public UserRole Role { get; set; }
-    }
-
-    public class LoginRequest
-    {
-        public string Email { get; set; } = string.Empty;
-        public string Password { get; set; } = string.Empty;
     }
 }

@@ -1,4 +1,5 @@
 using CGG.Core.Entities;
+using CGG.Core.Interfaces;
 using CGG.Infrastructure.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -17,15 +18,12 @@ public static class Dependencies
         services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
-        // Identity (AddIdentity includes SignInManager which requires ASP.NET Core)
-        // For class library, we configure Identity through the API project
-        // services.AddIdentityCore<User>()
-        //     .AddRoles<IdentityRole<Guid>>()
-        //     .AddEntityFrameworkStores<ApplicationDbContext>();
+        // Unit of Work and Repositories
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
+        services.AddScoped<IUserRepository, Repositories.UserRepository>();
 
-        // TODO: Add repositories, email service, etc.
-        // services.AddScoped<IUserRepository, UserRepository>();
-        // services.AddScoped<IEmailService, EmailService>();
+        // Generic Repository
+        services.AddScoped(typeof(IRepository<>), typeof(Repositories.Repository<>));
 
         return services;
     }

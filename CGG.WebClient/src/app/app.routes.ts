@@ -8,6 +8,7 @@ import { ParentRegisterComponent } from './pages/parent-register/parent-register
 import { SchoolRegisterComponent } from './pages/school-register/school-register';
 import { StudentRegisterComponent } from './pages/student-register/student-register';
 import { LoginComponent } from './pages/login/login';
+import { authGuard } from './core/guards/auth-guard';
 
 export const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -19,11 +20,6 @@ export const routes: Routes = [
   { path: 'parent-register', component: ParentRegisterComponent },
   { path: 'school-register', component: SchoolRegisterComponent },
   { path: 'student-register', component: StudentRegisterComponent },
-  { path: 'admin', component: AdminComponent },
-  // TODO: Add auth routes when auth module is created
-  // {
-  //   path: 'auth',
-  //   loadChildren: () => import('./features/auth/auth.module').then(m => m.AuthModule)
-  // },
+  { path: 'admin', component: AdminComponent, canActivate: [authGuard] },
   { path: '**', redirectTo: '' }
 ];

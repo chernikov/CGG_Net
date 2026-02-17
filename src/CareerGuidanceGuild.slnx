@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/Projects/">
+    <Project Path="CGG.Api/CGG.Api.csproj" />
+    <Project Path="CGG.Application/CGG.Application.csproj" />
+    <Project Path="CGG.Core/CGG.Core.csproj" />
+    <Project Path="CGG.Infrastructure/CGG.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+  </Folder>
+</Solution>
