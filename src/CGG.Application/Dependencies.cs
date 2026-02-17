@@ -3,6 +3,7 @@ using CGG.Application.Services;
 using FluentValidation;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Http;
 using Resend;
 
 namespace CGG.Application;
@@ -27,10 +28,10 @@ public static class Dependencies
         var resendApiKey = configuration["Resend:ApiKey"] 
             ?? throw new InvalidOperationException("Resend:ApiKey is not configured");
         
-        services.AddHttpClient<IResend, ResendClient>((serviceProvider, client) =>
-        {
-            return new ResendClient(resendApiKey, client);
-        });
+        services.AddOptions<ResendClientOptions>()
+            .Configure(options => options.ApiToken = resendApiKey);
+        
+        services.AddHttpClient<IResend, ResendClient>();
         services.AddScoped<IEmailService, EmailService>();
 
         return services;
