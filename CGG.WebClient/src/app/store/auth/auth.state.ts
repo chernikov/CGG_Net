@@ -17,7 +17,8 @@ export interface UserTokenContext {
 export interface User {
   id: string;
   email: string;
-  displayName: string;
+  firstName: string | null;
+  surname: string | null;
   role: string;
   credits: number;
 }

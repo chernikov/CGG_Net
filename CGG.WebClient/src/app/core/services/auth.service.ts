@@ -6,7 +6,8 @@ import { ApiService } from './api.service';
 interface User {
   id: string;
   email: string;
-  displayName: string;
+  firstName: string | null;
+  surname: string | null;
   role: string;
   credits: number;
 }
@@ -53,8 +54,8 @@ export class AuthService {
       );
   }
 
-  register(email: string, password: string, displayName: string, role: string): Observable<any> {
-    return this.api.post('auth/register', { email, password, displayName, role });
+  register(email: string, password: string, firstName: string, surname: string, role: string): Observable<any> {
+    return this.api.post('auth/register', { email, password, firstName, surname, role });
   }
 
   logout(): void {

@@ -14,7 +14,8 @@ Content-Type: application/json
 {
   "email": "test@example.com",
   "password": "Test123!",
-  "displayName": "Test User",
+  "firstName": "Test",
+  "surname": "User",
   "role": 0
 }
 
@@ -27,7 +28,8 @@ Content-Type: application/json
 {
   "email": "student@example.com",
   "password": "Student123!",
-  "displayName": "Student User",
+  "firstName": "Student",
+  "surname": "User",
   "role": 0
 }
 

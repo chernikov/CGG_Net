@@ -20,7 +20,7 @@ export const loginFailure = createAction(
 // Register Actions
 export const register = createAction(
   '[Auth] Register',
-  props<{ email: string; password: string; displayName: string; role: number }>()
+  props<{ email: string; password: string; firstName: string; surname: string; role: number }>()
 );
 
 export const registerSuccess = createAction(

@@ -12,7 +12,8 @@ interface LoginResponse {
   user: {
     id: string;
     email: string;
-    displayName: string;
+    firstName: string | null;
+    surname: string | null;
     role: string;
     credits: number;
   };
@@ -31,7 +32,8 @@ interface RegisterResponse {
   user: {
     id: string;
     email: string;
-    displayName: string;
+    firstName: string | null;
+    surname: string | null;
     role: string;
     credits: number;
   };
@@ -128,7 +130,8 @@ export class AuthEffects {
         this.apiService.post<RegisterResponse>('auth/register', {
           email: action.email,
           password: action.password,
-          displayName: action.displayName,
+          firstName: action.firstName,
+          surname: action.surname,
           role: action.role
         }).pipe(
           map((response) => {
@@ -142,7 +145,8 @@ export class AuthEffects {
               user: {
                 id: response.user.id,
                 email: response.user.email,
-                displayName: response.user.displayName,
+                firstName: response.user.firstName,
+                surname: response.user.surname,
                 role: response.user.role,
                 credits: response.user.credits
               },

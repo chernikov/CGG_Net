@@ -55,18 +55,18 @@ export class ParentRegisterComponent {
     }
 
     // Відправка на backend через NgRx
-    const displayName = `${this.formData.firstName} ${this.formData.lastName}`;
-    
     console.log('Parent registration:', {
       email: this.formData.email,
-      displayName,
+      firstName: this.formData.firstName,
+      surname: this.formData.lastName,
       role: UserRole.UserParent
     });
 
     this.store.dispatch(AuthActions.register({
       email: this.formData.email,
       password: this.formData.password,
-      displayName: displayName,
+      firstName: this.formData.firstName,
+      surname: this.formData.lastName,
       role: UserRole.UserParent
     }));
   }
