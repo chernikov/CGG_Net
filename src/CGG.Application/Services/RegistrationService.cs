@@ -3,7 +3,6 @@ using CGG.Application.Interfaces;
 using CGG.Application.Specifications;
 using CGG.Core.Entities;
 using CGG.Core.Interfaces;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 
 namespace CGG.Application.Services;
@@ -15,7 +14,7 @@ public class RegistrationService : IRegistrationService
     private readonly IRepository<Member> _memberRepository;
     private readonly IRepository<MemberRole> _memberRoleRepository;
     private readonly IReadRepository<Role> _roleReadRepository;
-    private readonly IPasswordHasher<User> _passwordHasher;
+    private readonly IPasswordHasher _passwordHasher;
     private readonly IAuthService _authService;
     private readonly ILogger<RegistrationService> _logger;
 
@@ -25,7 +24,7 @@ public class RegistrationService : IRegistrationService
         IRepository<Member> memberRepository,
         IRepository<MemberRole> memberRoleRepository,
         IReadRepository<Role> roleReadRepository,
-        IPasswordHasher<User> passwordHasher,
+        IPasswordHasher passwordHasher,
         IAuthService authService,
         ILogger<RegistrationService> logger)
     {
@@ -58,7 +57,7 @@ public class RegistrationService : IRegistrationService
             UpdatedAt = DateTime.UtcNow,
             PasswordHash = string.Empty
         };
-        user.PasswordHash = _passwordHasher.HashPassword(user, request.Password);
+        user.PasswordHash = _passwordHasher.Hash(request.Password);
 
         if (request.Role == UserRole.UserParent)
         {

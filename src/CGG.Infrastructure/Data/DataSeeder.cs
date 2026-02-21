@@ -1,5 +1,5 @@
 using CGG.Core.Entities;
-using Microsoft.AspNetCore.Identity;
+using CGG.Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace CGG.Infrastructure.Data
@@ -7,9 +7,9 @@ namespace CGG.Infrastructure.Data
     public class DataSeeder
     {
         private readonly ApplicationDbContext _context;
-        private readonly IPasswordHasher<User> _passwordHasher;
+        private readonly IPasswordHasher _passwordHasher;
 
-        public DataSeeder(ApplicationDbContext context, IPasswordHasher<User> passwordHasher)
+        public DataSeeder(ApplicationDbContext context, IPasswordHasher passwordHasher)
         {
             _context = context;
             _passwordHasher = passwordHasher;
@@ -70,7 +70,7 @@ namespace CGG.Infrastructure.Data
                 PasswordHash = string.Empty
             };
 
-            admin.PasswordHash = _passwordHasher.HashPassword(admin, "Admin123!");
+            admin.PasswordHash = _passwordHasher.Hash("Admin123!");
 
             _context.Set<User>().Add(admin);
             await _context.SaveChangesAsync();

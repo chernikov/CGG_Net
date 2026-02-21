@@ -1,7 +1,5 @@
-using CGG.Core.Entities;
 using CGG.Core.Interfaces;
 using CGG.Infrastructure.Data;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +15,9 @@ public static class Dependencies
         // Database
         services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+
+        // Password Hasher
+        services.AddScoped<IPasswordHasher, Security.PasswordHasher>();
 
         // Unit of Work
         services.AddScoped<IUnitOfWork, UnitOfWork>();

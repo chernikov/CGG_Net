@@ -1,8 +1,6 @@
 using CGG.Application.Interfaces;
 using CGG.Application.Services;
-using CGG.Core.Entities;
 using FluentValidation;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Http;
@@ -22,9 +20,6 @@ public static class Dependencies
 
         // FluentValidation
         services.AddValidatorsFromAssembly(typeof(Dependencies).Assembly);
-
-        // Password Hasher
-        services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 
         // Application Services
         services.AddScoped<IAuthService, AuthService>();

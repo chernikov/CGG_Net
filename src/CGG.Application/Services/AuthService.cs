@@ -3,7 +3,6 @@ using CGG.Application.Interfaces;
 using CGG.Application.Specifications;
 using CGG.Core.Entities;
 using CGG.Core.Interfaces;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -20,7 +19,7 @@ public class AuthService : IAuthService
     private readonly IReadRepository<MemberRole> _memberRoleRepository;
     private readonly IReadRepository<Role> _roleRepository;
     private readonly IReadRepository<School> _schoolRepository;
-    private readonly IPasswordHasher<User> _passwordHasher;
+    private readonly IPasswordHasher _passwordHasher;
     private readonly IConfiguration _configuration;
 
     public AuthService(
@@ -30,7 +29,7 @@ public class AuthService : IAuthService
         IReadRepository<MemberRole> memberRoleRepository,
         IReadRepository<Role> roleRepository,
         IReadRepository<School> schoolRepository,
-        IPasswordHasher<User> passwordHasher,
+        IPasswordHasher passwordHasher,
         IConfiguration configuration)
     {
         _userRepository = userRepository;
@@ -52,8 +51,8 @@ public class AuthService : IAuthService
         if (user == null)
             return (false, null, "Invalid email or password");
 
-        var result = _passwordHasher.VerifyHashedPassword(user, user.PasswordHash!, password);
-        if (result == PasswordVerificationResult.Failed)
+        var result = _passwordHasher.Verify(user.PasswordHash!, password);
+        if (!result)
             return (false, null, "Invalid email or password");
 
         return (true, user, null);
