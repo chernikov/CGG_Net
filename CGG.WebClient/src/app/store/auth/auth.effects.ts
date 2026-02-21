@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { map, catchError, exhaustMap, tap } from 'rxjs/operators';
 import { ApiService } from '../../core/services/api.service';
-import { UserTokenContext } from './auth.state';
+import { UserRole, UserTokenContext } from './auth.state';
 import * as AuthActions from './auth.actions';
 
 interface LoginResponse {
@@ -87,8 +87,12 @@ export class AuthEffects {
     () =>
       this.actions$.pipe(
         ofType(AuthActions.loginSuccess),
-        tap(() => {
-          this.router.navigate(['/admin']);
+        tap((action) => {
+          const role = Number(action.user.role);
+          const isAdmin = isNaN(role)
+            ? action.user.role === 'Admin'
+            : role === UserRole.Admin;
+          this.router.navigate([isAdmin ? '/admin' : '/dashboard']);
         })
       ),
     { dispatch: false }

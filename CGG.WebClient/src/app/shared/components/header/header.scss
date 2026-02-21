@@ -51,6 +51,10 @@
 }
 
 .login-button {
+  display: none;
+}
+
+.auth-button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -69,8 +73,9 @@
     transform: scale(1.05);
   }
 
-  svg {
+  img {
     width: 1.5rem;
     height: 1.5rem;
+    filter: brightness(0) invert(1);
   }
 }

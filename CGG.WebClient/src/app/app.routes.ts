@@ -10,10 +10,11 @@ import { StudentRegisterComponent } from './pages/student-register/student-regis
 import { LoginComponent } from './pages/login/login';
 import { DashboardComponent } from './pages/dashboard/dashboard';
 import { authGuard } from './core/guards/auth-guard';
+import { homeGuard } from './core/guards/home-guard';
 
 export const routes: Routes = [
-  { path: '', component: LandingComponent },
-  { path: 'landing', component: LandingComponent },
+  { path: '', component: LandingComponent, canActivate: [homeGuard] },
+  { path: 'landing', component: LandingComponent, canActivate: [homeGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'parent-choice', component: ParentChoiceComponent },
   { path: 'school-choice', component: SchoolChoiceComponent },
