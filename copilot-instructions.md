@@ -21,6 +21,8 @@ CGG.WebClient       - Angular frontend (standalone components, NgRx)
 
 **Dependency Flow:** `CGG.Api` → `CGG.Infrastructure` → `CGG.Application` → `CGG.Core`
 
+> 📄 Детальна модель даних: [docs/domain-model.md](docs/domain-model.md)
+
 ### Key Patterns
 
 - **CQRS with MediatR**: Commands and Queries separated in `CGG.Application/Features/`

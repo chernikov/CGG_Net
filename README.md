@@ -49,6 +49,7 @@ CGG.WebClient         - Angular Frontend
 - [Dependency Injection](DEPENDENCY_INJECTION.md) - DI architecture
 - [Package Management](PACKAGE_MANAGEMENT.md) - Centralized package versioning
 - [Migration Guide](MIGRATION_GUIDE.md) - Database migration info
+- [Domain Model](docs/domain-model.md) - User vs Member, Roles, seed-дані
 
 ## 🎯 Features
 
