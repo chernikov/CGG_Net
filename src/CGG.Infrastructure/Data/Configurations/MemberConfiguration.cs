@@ -22,6 +22,11 @@ namespace CGG.Infrastructure.Data.Configurations
                 
             builder.HasIndex(e => e.UserId);
             builder.HasIndex(e => e.FamilyId);
+
+            builder.HasMany(e => e.MemberRoles)
+                .WithOne(mr => mr.Member)
+                .HasForeignKey(mr => mr.MemberId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

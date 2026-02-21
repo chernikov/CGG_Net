@@ -32,6 +32,8 @@ namespace CGG.Infrastructure.Data
         
         public DbSet<AIRecommendation> AIRecommendations { get; set; }
         public DbSet<PromoCode> PromoCodes { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<MemberRole> MemberRoles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -53,6 +55,8 @@ namespace CGG.Infrastructure.Data
             builder.ApplyConfiguration(new AIRecommendationConfiguration());
             builder.ApplyConfiguration(new AiPromptTemplateConfiguration());
             builder.ApplyConfiguration(new AiLogConfiguration());
+            builder.ApplyConfiguration(new RoleConfiguration());
+            builder.ApplyConfiguration(new MemberRoleConfiguration());
         }
     }
 }

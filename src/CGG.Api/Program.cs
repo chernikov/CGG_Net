@@ -1,7 +1,9 @@
 using CGG.Api;
 using CGG.Application;
+using CGG.Core.Entities;
 using CGG.Infrastructure;
 using CGG.Infrastructure.Data;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -31,6 +33,10 @@ using (var scope = app.Services.CreateScope())
         var context = services.GetRequiredService<ApplicationDbContext>();
         context.Database.Migrate();
         app.Logger.LogInformation("Database migration completed successfully");
+
+        var seeder = new DataSeeder(context, services.GetRequiredService<IPasswordHasher<User>>());
+        await seeder.SeedAsync();
+        app.Logger.LogInformation("Database seeding completed successfully");
     }
     catch (Exception ex)
     {
