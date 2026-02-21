@@ -26,8 +26,10 @@ CGG.WebClient       - Angular frontend (standalone components, NgRx)
 ### Key Patterns
 
 - **CQRS with MediatR**: Commands and Queries separated in `CGG.Application/Features/`
-- **Repository Pattern**: Generic + specific repositories in `CGG.Infrastructure/Repositories/`
-- **Unit of Work**: Transaction management in `CGG.Infrastructure/UnitOfWork.cs`
+- **Repository Pattern**: Write-only `IRepository<T>` + read-only `IReadRepository<T>` via `ISpecification<T>`
+- **Specification Pattern**: Query descriptors in `CGG.Application/Specifications/`, evaluated by `SpecificationEvaluator<T>`
+- **Unit of Work**: Only `SaveChangesAsync` — no repositories, no transactions; Handler calls it at the end
+- **Call Flow**: `Handler → Service → Repository`, `Handler` calls `_unitOfWork.SaveChangesAsync()` after service work
 - **Dependency Injection**: Each layer has `Dependencies.cs` with extension methods
 
 ## Backend (.NET)
@@ -131,22 +133,70 @@ public class AuthController : ControllerBase
 
 #### 4. Repository Pattern
 
+**Split read and write concerns, but `IRepository<T>` includes both via inheritance:**
+
+```
+CGG.Core/Interfaces/
+  ISpecification<T>     # query descriptor: Criteria, Includes, OrderBy, Paging
+  IReadRepository<T>    # read-only via ISpecification<T>
+  IRepository<T>        # extends IReadRepository<T> + Add/Update/Remove
+  IUserRepository       # extends IReadRepository<User>
+
+CGG.Application/Specifications/
+  BaseSpecification<T>  # base class for all specs
+
+CGG.Infrastructure/Repositories/
+  ReadRepository<T>          # implements IReadRepository<T> via SpecificationEvaluator
+  Repository<T>              # extends ReadRepository<T>, implements IRepository<T>
+  SpecificationEvaluator<T>  # applies spec to IQueryable
+  UserRepository             # extends ReadRepository<User>, implements IUserRepository
+```
+
+- Inject `IReadRepository<T>` when the service only reads
+- Inject `IRepository<T>` when the service also writes
+
+**`IUnitOfWork` — only `SaveChangesAsync`:**
 ```csharp
-// Generic repository in CGG.Core
-public interface IRepository<T> where T : class
+public interface IUnitOfWork : IDisposable
 {
-    Task<T?> GetByIdAsync(string id);
-    Task<IEnumerable<T>> GetAllAsync();
-    Task<T> AddAsync(T entity);
-    Task UpdateAsync(T entity);
-    Task DeleteAsync(string id);
+    Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
+}
+```
+
+**Call flow: Handler → Service → Repository. The Handler calls `SaveChangesAsync` at the end.**
+
+```csharp
+// Handler orchestrates: calls service, then saves
+public async Task<ResponseDto> Handle(MyCommand request, CancellationToken ct)
+{
+    await _myService.DoWorkAsync(request, ct);   // service uses IRepository<T> / IReadRepository<T>
+    await _unitOfWork.SaveChangesAsync(ct);       // handler is responsible for saving
+    return result;
+}
+```
+
+**Specification — defined in `CGG.Application/Specifications/`, never use raw lambda queries outside specs:**
+```csharp
+// Define once
+public class MemberByUserIdSpec : BaseSpecification<Member>
+{
+    public MemberByUserIdSpec(Guid userId)
+        : base(m => m.UserId == userId)
+    {
+        AddInclude(m => m.MemberRoles);
+    }
 }
 
-// Specific repository
-public interface IUserRepository : IRepository<User>
-{
-    Task<User?> GetByEmailAsync(string email);
-}
+// Use in service
+var member = await _memberReadRepo.FirstOrDefaultAsync(new MemberByUserIdSpec(userId), ct);
+```
+
+**DI registration (CGG.Infrastructure/Dependencies.cs):**
+```csharp
+services.AddScoped<IUnitOfWork, UnitOfWork>();
+services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+services.AddScoped(typeof(IReadRepository<>), typeof(ReadRepository<>));
+services.AddScoped<IUserRepository, UserRepository>();
 ```
 
 #### 5. Service Pattern

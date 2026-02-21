@@ -28,6 +28,7 @@ public static class Dependencies
 
         // Application Services
         services.AddScoped<IAuthService, AuthService>();
+        services.AddScoped<IRegistrationService, RegistrationService>();
 
         // Email Service with Resend
         var resendApiKey = configuration["Resend:ApiKey"] 

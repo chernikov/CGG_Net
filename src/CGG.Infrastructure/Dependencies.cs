@@ -18,12 +18,15 @@ public static class Dependencies
         services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
-        // Unit of Work and Repositories
+        // Unit of Work
         services.AddScoped<IUnitOfWork, UnitOfWork>();
-        services.AddScoped<IUserRepository, Repositories.UserRepository>();
 
-        // Generic Repository
+        // Generic repositories
+        services.AddScoped(typeof(IReadRepository<>), typeof(Repositories.ReadRepository<>));
         services.AddScoped(typeof(IRepository<>), typeof(Repositories.Repository<>));
+
+        // Domain-specific repositories
+        services.AddScoped<IUserRepository, Repositories.UserRepository>();
 
         return services;
     }
