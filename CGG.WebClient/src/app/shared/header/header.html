@@ -1,1 +1,11 @@
-<p>header works!</p>
+@if (isAuthenticated$ | async) {
+  <header class="app-header">
+    <div class="header-inner">
+      <span class="logo">CGG</span>
+      <nav class="header-actions">
+        <app-context-switcher />
+        <button class="logout-btn" (click)="logout()">Вийти</button>
+      </nav>
+    </div>
+  </header>
+}

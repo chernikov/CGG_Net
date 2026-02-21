@@ -5,6 +5,15 @@ export enum UserRole {
   Admin = 3
 }
 
+export type ContextType = 'System' | 'Family' | 'School';
+
+export interface UserTokenContext {
+  type: ContextType;
+  contextId?: string;
+  contextRole?: string;
+  contextName?: string;
+}
+
 export interface User {
   id: string;
   email: string;
@@ -19,6 +28,10 @@ export interface AuthState {
   isAuthenticated: boolean;
   loading: boolean;
   error: string | null;
+  activeContext: UserTokenContext | null;
+  availableContexts: UserTokenContext[];
+  canSwitchContext: boolean;
+  switchContextLoading: boolean;
 }
 
 export const initialAuthState: AuthState = {
@@ -26,5 +39,9 @@ export const initialAuthState: AuthState = {
   token: null,
   isAuthenticated: false,
   loading: false,
-  error: null
+  error: null,
+  activeContext: null,
+  availableContexts: [],
+  canSwitchContext: false,
+  switchContextLoading: false
 };

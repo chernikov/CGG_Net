@@ -1,0 +1,103 @@
+.context-switcher {
+  position: relative;
+  display: inline-block;
+
+  &:hover .context-dropdown {
+    display: flex;
+  }
+
+  .context-current {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: inherit;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.2s;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .context-role {
+      font-size: 11px;
+      opacity: 0.7;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .chevron {
+      font-size: 10px;
+      opacity: 0.7;
+    }
+  }
+
+  .context-dropdown {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    min-width: 200px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    z-index: 100;
+    overflow: hidden;
+
+    .context-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      background: none;
+      border: none;
+      width: 100%;
+      text-align: left;
+      cursor: pointer;
+      color: #374151;
+      transition: background 0.15s;
+
+      &:hover:not(:disabled) {
+        background: #f3f4f6;
+      }
+
+      &.active {
+        background: #eff6ff;
+        color: #1d4ed8;
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      .context-info {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+      }
+
+      .context-name {
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      .context-role {
+        font-size: 11px;
+        opacity: 0.6;
+        text-transform: uppercase;
+      }
+
+      .check {
+        color: #1d4ed8;
+        font-weight: bold;
+      }
+    }
+  }
+}

@@ -37,3 +37,28 @@ export const selectUserCredits = createSelector(
   selectUser,
   (user) => user?.credits ?? 0
 );
+
+export const selectActiveContext = createSelector(
+  selectAuthState,
+  (state: AuthState) => state.activeContext
+);
+
+export const selectAvailableContexts = createSelector(
+  selectAuthState,
+  (state: AuthState) => state.availableContexts
+);
+
+export const selectCanSwitchContext = createSelector(
+  selectAuthState,
+  (state: AuthState) => state.canSwitchContext
+);
+
+export const selectSwitchContextLoading = createSelector(
+  selectAuthState,
+  (state: AuthState) => state.switchContextLoading
+);
+
+export const selectActiveContextRole = createSelector(
+  selectActiveContext,
+  (ctx) => ctx?.contextRole
+);

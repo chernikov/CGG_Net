@@ -12,13 +12,16 @@ export const authReducer = createReducer(
     error: null
   })),
 
-  on(AuthActions.loginSuccess, (state, { user, token }) => ({
+  on(AuthActions.loginSuccess, (state, { user, token, activeContext, availableContexts, canSwitchContext }) => ({
     ...state,
     user,
     token,
     isAuthenticated: true,
     loading: false,
-    error: null
+    error: null,
+    activeContext,
+    availableContexts,
+    canSwitchContext
   })),
 
   on(AuthActions.loginFailure, (state, { error }) => ({
@@ -46,17 +49,40 @@ export const authReducer = createReducer(
     error
   })),
 
+  // Switch Context
+  on(AuthActions.switchContext, (state) => ({
+    ...state,
+    switchContextLoading: true,
+    error: null
+  })),
+
+  on(AuthActions.switchContextSuccess, (state, { token, activeContext }) => ({
+    ...state,
+    token,
+    activeContext,
+    switchContextLoading: false
+  })),
+
+  on(AuthActions.switchContextFailure, (state, { error }) => ({
+    ...state,
+    switchContextLoading: false,
+    error
+  })),
+
   // Logout
   on(AuthActions.logout, () => ({
     ...initialAuthState
   })),
 
   // Load from Storage
-  on(AuthActions.loadUserFromStorageSuccess, (state, { user, token }) => ({
+  on(AuthActions.loadUserFromStorageSuccess, (state, { user, token, activeContext, availableContexts, canSwitchContext }) => ({
     ...state,
     user,
     token,
-    isAuthenticated: true
+    isAuthenticated: true,
+    activeContext,
+    availableContexts,
+    canSwitchContext
   })),
 
   // Clear Error
