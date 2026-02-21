@@ -2,8 +2,11 @@ using AutoMapper;
 using CGG.Application.DTOs.Auth;
 using CGG.Application.Features.Auth.Commands.Login;
 using CGG.Application.Features.Auth.Commands.Register;
+using CGG.Application.Features.Auth.Commands.SwitchContext;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace CGG.Api.Controllers
 {
@@ -65,6 +68,38 @@ namespace CGG.Api.Controllers
             catch (Exception ex)
             {
                 return StatusCode(500, new { message = "An error occurred during login", error = ex.Message });
+            }
+        }
+
+        [HttpPost("switch-context")]
+        [Authorize]
+        public async Task<IActionResult> SwitchContext([FromBody] SwitchContextRequestDto requestDto, CancellationToken cancellationToken)
+        {
+            try
+            {
+                var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier)
+                    ?? User.FindFirstValue("sub");
+
+                if (!Guid.TryParse(userIdClaim, out var userId))
+                    return Unauthorized(new { message = "Invalid token" });
+
+                var command = new SwitchContextCommand
+                {
+                    UserId = userId,
+                    ContextType = requestDto.ContextType,
+                    ContextId = requestDto.ContextId
+                };
+
+                var response = await _mediator.Send(command, cancellationToken);
+                return Ok(response);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Unauthorized(new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "An error occurred during context switch", error = ex.Message });
             }
         }
     }

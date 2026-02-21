@@ -1,3 +1,4 @@
+using CGG.Application.DTOs.Auth;
 using CGG.Application.Interfaces;
 using CGG.Core.Entities;
 using CGG.Core.Interfaces;
@@ -57,20 +58,29 @@ namespace CGG.Application.Services
             return (true, user, null);
         }
 
-        public string GenerateJwtToken(User user)
+        public string GenerateJwtToken(User user, UserTokenContext? context = null)
         {
             var jwtSettings = _configuration.GetSection("JwtSettings");
             var secretKey = jwtSettings["SecretKey"] ?? throw new InvalidOperationException("JWT SecretKey is not configured");
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-            var claims = new[]
+            context ??= new UserTokenContext { Type = ContextType.System };
+
+            var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
                 new Claim(JwtRegisteredClaimNames.Email, user.Email ?? string.Empty),
                 new Claim(ClaimTypes.Role, user.Role.ToString()),
+                new Claim("ctx_type", context.Type.ToString()),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
+
+            if (context.ContextId.HasValue)
+                claims.Add(new Claim("ctx_id", context.ContextId.Value.ToString()));
+
+            if (!string.IsNullOrEmpty(context.ContextRole))
+                claims.Add(new Claim("ctx_role", context.ContextRole));
 
             var token = new JwtSecurityToken(
                 issuer: jwtSettings["Issuer"],
@@ -81,6 +91,61 @@ namespace CGG.Application.Services
             );
 
             return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+        public async Task<List<UserTokenContext>> GetAvailableContextsAsync(User user, CancellationToken cancellationToken = default)
+        {
+            var contexts = new List<UserTokenContext>
+            {
+                new UserTokenContext { Type = ContextType.System, ContextRole = user.Role.ToString() }
+            };
+
+            // Family context via Member
+            if (user.FamilyId.HasValue)
+            {
+                var member = await _unitOfWork.Repository<Member>()
+                    .FirstOrDefaultAsync(m => m.UserId == user.Id, cancellationToken);
+
+                if (member != null)
+                {
+                    var family = await _unitOfWork.Repository<Family>()
+                        .GetByIdAsync(member.FamilyId, cancellationToken);
+
+                    var memberRoles = await _unitOfWork.Repository<MemberRole>()
+                        .FindAsync(mr => mr.MemberId == member.Id, cancellationToken);
+
+                    foreach (var mr in memberRoles)
+                    {
+                        var role = await _unitOfWork.Repository<Role>()
+                            .GetByIdAsync(mr.RoleId, cancellationToken);
+
+                        contexts.Add(new UserTokenContext
+                        {
+                            Type = ContextType.Family,
+                            ContextId = member.FamilyId,
+                            ContextName = family?.Name,
+                            ContextRole = role?.Name
+                        });
+                    }
+                }
+            }
+
+            // School context
+            if (user.SchoolId.HasValue)
+            {
+                var school = await _unitOfWork.Repository<School>()
+                    .GetByIdAsync(user.SchoolId.Value, cancellationToken);
+
+                contexts.Add(new UserTokenContext
+                {
+                    Type = ContextType.School,
+                    ContextId = user.SchoolId,
+                    ContextName = school?.Name,
+                    ContextRole = user.Role == UserRole.Teacher ? "teacher" : "school-admin"
+                });
+            }
+
+            return contexts;
         }
     }
 }

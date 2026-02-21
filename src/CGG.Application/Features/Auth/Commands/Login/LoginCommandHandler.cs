@@ -20,28 +20,30 @@ namespace CGG.Application.Features.Auth.Commands.Login
 
         public async Task<LoginResponseDto> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
-            // Validate credentials through service
             var (success, user, errorMessage) = await _authService.ValidateUserCredentialsAsync(
                 request.Email,
                 request.Password,
                 cancellationToken);
 
             if (!success || user == null)
-            {
                 throw new UnauthorizedAccessException(errorMessage ?? "Invalid credentials");
-            }
 
-            // Generate JWT token
-            var token = _authService.GenerateJwtToken(user);
+            var availableContexts = await _authService.GetAvailableContextsAsync(user, cancellationToken);
 
-            // Map user to DTO
+            // Default context: first family, or school, or system
+            var activeContext = availableContexts.FirstOrDefault(c => c.Type == ContextType.Family)
+                ?? availableContexts.FirstOrDefault(c => c.Type == ContextType.School)
+                ?? availableContexts.First(c => c.Type == ContextType.System);
+
+            var token = _authService.GenerateJwtToken(user, activeContext);
             var userDto = _mapper.Map<UserDto>(user);
 
-            // Return response
             return new LoginResponseDto
             {
                 Token = token,
-                User = userDto
+                User = userDto,
+                ActiveContext = activeContext,
+                AvailableContexts = availableContexts
             };
         }
     }
