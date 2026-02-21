@@ -61,7 +61,8 @@ namespace CGG.Infrastructure.Data
             {
                 Id = Guid.NewGuid(),
                 Email = adminEmail,
-                DisplayName = "Administrator",
+                FirstName = "Admin",
+                Surname = "User",
                 Role = UserRole.Admin,
                 EmailConfirmed = true,
                 Credits = 0,

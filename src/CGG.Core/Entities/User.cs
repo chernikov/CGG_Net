@@ -5,7 +5,8 @@ namespace CGG.Core.Entities
         public Guid Id { get; set; }
         public required string Email { get; set; }
         public required string PasswordHash { get; set; }
-        public string? DisplayName { get; set; }
+        public string? FirstName { get; set; }
+        public string? Surname { get; set; }
         public DateTime? DateOfBirth { get; set; }
         public UserRole Role { get; set; }
         public decimal Credits { get; set; } = 0;

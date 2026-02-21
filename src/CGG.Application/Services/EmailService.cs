@@ -24,13 +24,13 @@ public class EmailService : IEmailService
     }
 
     public async Task SendWelcomeEmailAsync(
-        string toEmail, 
-        string displayName, 
+        string toEmail,
+        string firstName,
         CancellationToken cancellationToken = default)
     {
         try
         {
-            var html = GetWelcomeEmailTemplate(displayName);
+            var html = GetWelcomeEmailTemplate(firstName);
             
             var message = new EmailMessage();
             message.From = $"{_fromName} <{_fromEmail}>";
@@ -102,7 +102,7 @@ public class EmailService : IEmailService
         }
     }
 
-    private string GetWelcomeEmailTemplate(string displayName)
+    private string GetWelcomeEmailTemplate(string firstName)
     {
         return $@"
 <!DOCTYPE html>
@@ -112,7 +112,7 @@ public class EmailService : IEmailService
 </head>
 <body style=""font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;"">
     <h2 style=""color: #6366f1;"">Вітаємо в Career Guidance Guild!</h2>
-    <p>Привіт, <strong>{displayName}</strong>!</p>
+    <p>Привіт, <strong>{firstName}</strong>!</p>
     <p>Дякуємо за реєстрацію в нашій системі профорієнтації.</p>
     <p>Ви успішно створили обліковий запис і тепер можете користуватися всіма можливостями платформи.</p>
     

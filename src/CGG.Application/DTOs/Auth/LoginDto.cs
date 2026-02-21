@@ -22,7 +22,8 @@ namespace CGG.Application.DTOs.Auth
     {
         public Guid Id { get; set; }
         public required string Email { get; set; }
-        public string? DisplayName { get; set; }
+        public string? FirstName { get; set; }
+        public string? Surname { get; set; }
         public UserRole Role { get; set; }
         public decimal Credits { get; set; }
     }

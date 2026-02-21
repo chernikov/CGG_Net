@@ -18,10 +18,15 @@ public class RegisterCommandValidator : AbstractValidator<RegisterCommand>
             .Matches("[a-z]").WithMessage("Password must contain at least one lowercase letter")
             .Matches("[0-9]").WithMessage("Password must contain at least one number");
 
-        RuleFor(x => x.DisplayName)
-            .NotEmpty().WithMessage("Display name is required")
-            .MinimumLength(2).WithMessage("Display name must be at least 2 characters")
-            .MaximumLength(50).WithMessage("Display name must not exceed 50 characters");
+        RuleFor(x => x.FirstName)
+            .NotEmpty().WithMessage("First name is required")
+            .MinimumLength(2).WithMessage("First name must be at least 2 characters")
+            .MaximumLength(50).WithMessage("First name must not exceed 50 characters");
+
+        RuleFor(x => x.Surname)
+            .NotEmpty().WithMessage("Surname is required")
+            .MinimumLength(2).WithMessage("Surname must be at least 2 characters")
+            .MaximumLength(50).WithMessage("Surname must not exceed 50 characters");
 
         RuleFor(x => x.Role)
             .IsInEnum().WithMessage("Invalid role");

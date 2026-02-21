@@ -18,8 +18,11 @@ namespace CGG.Infrastructure.Data.Configurations
                 .IsRequired()
                 .HasMaxLength(512);
 
-            builder.Property(e => e.DisplayName)
-                .HasMaxLength(100);
+            builder.Property(e => e.FirstName)
+                .HasMaxLength(50);
+
+            builder.Property(e => e.Surname)
+                .HasMaxLength(50);
 
             builder.Property(e => e.Role)
                 .IsRequired();

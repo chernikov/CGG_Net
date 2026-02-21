@@ -49,7 +49,8 @@ public class RegistrationService : IRegistrationService
         {
             Id = Guid.NewGuid(),
             Email = request.Email,
-            DisplayName = request.DisplayName,
+            FirstName = request.FirstName,
+            Surname = request.Surname,
             Role = request.Role,
             EmailConfirmed = false,
             Credits = 0,
@@ -64,7 +65,7 @@ public class RegistrationService : IRegistrationService
             var family = new Family
             {
                 Id = Guid.NewGuid(),
-                Name = $"{request.DisplayName}\u2019s Family",
+                Name = $"{request.FirstName} {request.Surname}\u2019s Family",
                 Credits = 0,
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow

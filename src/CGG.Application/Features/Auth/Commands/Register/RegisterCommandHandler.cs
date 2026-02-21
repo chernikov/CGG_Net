@@ -34,7 +34,7 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, RegisterR
         _logger.LogInformation("User registered: {UserId} {Email} {Role}",
             result.User.Id, result.User.Email, result.User.Role);
 
-        try { await _emailService.SendWelcomeEmailAsync(result.User.Email, result.User.DisplayName, cancellationToken); }
+        try { await _emailService.SendWelcomeEmailAsync(result.User.Email, result.User.FirstName ?? result.User.Surname ?? result.User.Email, cancellationToken); }
         catch (Exception ex) { _logger.LogWarning(ex, "Welcome email failed for {Email}", result.User.Email); }
 
         return new RegisterResponseDto
@@ -44,7 +44,8 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, RegisterR
             {
                 Id = result.User.Id,
                 Email = result.User.Email,
-                DisplayName = result.User.DisplayName ?? string.Empty,
+                FirstName = result.User.FirstName,
+                Surname = result.User.Surname,
                 Role = result.User.Role,
                 Credits = result.User.Credits
             },
