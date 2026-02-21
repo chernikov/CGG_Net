@@ -222,7 +222,15 @@ builder.Services
     "Issuer": "CGG.Api",
     "Audience": "CGG.WebClient",
     "ExpiryInMinutes": 60
+  },
+  "OpenAI": {
+    "ApiKey": "sk-xxx", // Store in user secrets
+    "MiniModel": "gpt-5-mini", // Faster, cost-efficient GPT-5 for well-defined tasks
+    "NanoModel": "gpt-5-nano"  // Fastest, most cost-efficient GPT-5
   }
+```
+
+Правила вибору моделі та характеристики: [docs/openai-models.md](docs/openai-models.md)
 }
 ```
 
@@ -658,6 +666,7 @@ See `PACKAGE_MANAGEMENT.md` for details.
 - [Dependency Injection Architecture](DEPENDENCY_INJECTION.md)
 - [Package Management](PACKAGE_MANAGEMENT.md)
 - [NgRx Auth Guide](CGG.WebClient/NGRX_AUTH_GUIDE.md)
+- [OpenAI Models Reference](docs/openai-models.md)
 
 ---
 

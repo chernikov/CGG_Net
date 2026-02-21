@@ -6,6 +6,9 @@
         "c:\\projects\\uss\\CGG_DotNet\\start-frontend.ps1": true,
         "Microsoft.PowerShell.Management\\Copy-Item": true,
         "&": true,
-        "dotnet add": true
+        "dotnet add": true,
+        "Push-Location": true,
+        "Pop-Location": true,
+        "dotnet run": true
     }
 }

@@ -11,25 +11,26 @@ namespace CGG.Infrastructure.Data.Configurations
             builder.HasKey(e => e.Id);
             
             // Relationships
+            // Note: Using NoAction for User and Member to avoid multiple cascade paths in SQL Server
             builder.HasOne(e => e.User)
                 .WithMany(u => u.AiLogs)
                 .HasForeignKey(e => e.UserId)
-                .OnDelete(DeleteBehavior.SetNull);
+                .OnDelete(DeleteBehavior.NoAction);
                 
             builder.HasOne(e => e.Member)
                 .WithMany(m => m.AiLogs)
                 .HasForeignKey(e => e.MemberId)
-                .OnDelete(DeleteBehavior.SetNull);
+                .OnDelete(DeleteBehavior.NoAction);
                 
             builder.HasOne(e => e.SurveyResult)
                 .WithMany(sr => sr.AiLogs)
                 .HasForeignKey(e => e.SurveyResultId)
-                .OnDelete(DeleteBehavior.SetNull);
+                .OnDelete(DeleteBehavior.NoAction);
                 
             builder.HasOne(e => e.PromptTemplate)
                 .WithMany(pt => pt.AiLogs)
                 .HasForeignKey(e => e.PromptTemplateId)
-                .OnDelete(DeleteBehavior.SetNull);
+                .OnDelete(DeleteBehavior.NoAction);
             
             // Indexes
             builder.HasIndex(e => e.UserId);

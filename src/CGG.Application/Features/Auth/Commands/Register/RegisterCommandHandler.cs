@@ -1,6 +1,7 @@
 using CGG.Application.DTOs.Auth;
 using CGG.Application.Interfaces;
 using CGG.Core.Entities;
+using CGG.Core.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
@@ -9,16 +10,19 @@ namespace CGG.Application.Features.Auth.Commands.Register;
 
 public class RegisterCommandHandler : IRequestHandler<RegisterCommand, RegisterResponseDto>
 {
-    private readonly UserManager<User> _userManager;
+    private readonly IUnitOfWork _unitOfWork;
+    private readonly IPasswordHasher<User> _passwordHasher;
     private readonly IEmailService _emailService;
     private readonly ILogger<RegisterCommandHandler> _logger;
 
     public RegisterCommandHandler(
-        UserManager<User> userManager,
+        IUnitOfWork unitOfWork,
+        IPasswordHasher<User> passwordHasher,
         IEmailService emailService,
         ILogger<RegisterCommandHandler> logger)
     {
-        _userManager = userManager;
+        _unitOfWork = unitOfWork;
+        _passwordHasher = passwordHasher;
         _emailService = emailService;
         _logger = logger;
     }
@@ -26,7 +30,7 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, RegisterR
     public async Task<RegisterResponseDto> Handle(RegisterCommand request, CancellationToken cancellationToken)
     {
         // Check if user already exists
-        var existingUser = await _userManager.FindByEmailAsync(request.Email);
+        var existingUser = await _unitOfWork.Users.GetByEmailAsync(request.Email, cancellationToken);
         if (existingUser != null)
         {
             throw new InvalidOperationException("User with this email already exists");
@@ -35,31 +39,30 @@ public class RegisterCommandHandler : IRequestHandler<RegisterCommand, RegisterR
         // Create new user
         var user = new User
         {
-            UserName = request.Email,
+            Id = Guid.NewGuid(),
             Email = request.Email,
             DisplayName = request.DisplayName,
             Role = request.Role,
             EmailConfirmed = false,
             Credits = 0,
-            CreatedAt = DateTime.UtcNow
+            CreatedAt = DateTime.UtcNow,
+            UpdatedAt = DateTime.UtcNow,
+            PasswordHash = string.Empty // Temporary, will be set below
         };
 
-        // Create user with password
-        var result = await _userManager.CreateAsync(user, request.Password);
+        // Hash password
+        user.PasswordHash = _passwordHasher.HashPassword(user, request.Password);
 
-        if (!result.Succeeded)
-        {
-            var errors = string.Join(", ", result.Errors.Select(e => e.Description));
-            _logger.LogError("Failed to create user {Email}: {Errors}", request.Email, errors);
-            throw new InvalidOperationException($"Failed to create user: {errors}");
-        }
+        // Add user to database
+        await _unitOfWork.Users.AddAsync(user, cancellationToken);
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
 
         _logger.LogInformation("User created successfully: {UserId}, {Email}", user.Id, user.Email);
 
         // Send welcome email (don't fail registration if email fails)
         try
         {
-            await _emailService.SendWelcomeEmailAsync(user.Email!, user.DisplayName, cancellationToken);
+            await _emailService.SendWelcomeEmailAsync(user.Email, user.DisplayName, cancellationToken);
         }
         catch (Exception ex)
         {

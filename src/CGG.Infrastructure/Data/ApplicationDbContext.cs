@@ -1,12 +1,10 @@
 using CGG.Core.Entities;
 using CGG.Infrastructure.Data.Configurations;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace CGG.Infrastructure.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
+    public class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -37,8 +35,6 @@ namespace CGG.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            base.OnModelCreating(builder);
-
             // Apply all entity configurations
             builder.ApplyConfiguration(new UserConfiguration());
             builder.ApplyConfiguration(new FamilyConfiguration());
