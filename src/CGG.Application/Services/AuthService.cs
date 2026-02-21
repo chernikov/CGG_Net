@@ -56,13 +56,6 @@ public class AuthService : IAuthService
         if (result == PasswordVerificationResult.Failed)
             return (false, null, "Invalid email or password");
 
-        // Mark for rehash — handler will call SaveChangesAsync
-        if (result == PasswordVerificationResult.SuccessRehashNeeded)
-        {
-            user.PasswordHash = _passwordHasher.HashPassword(user, password);
-            _userRepository.Update(user);
-        }
-
         return (true, user, null);
     }
 

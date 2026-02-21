@@ -1,7 +1,6 @@
 using AutoMapper;
 using CGG.Application.DTOs.Auth;
 using CGG.Application.Interfaces;
-using CGG.Core.Interfaces;
 using MediatR;
 
 namespace CGG.Application.Features.Auth.Commands.Login;
@@ -9,16 +8,11 @@ namespace CGG.Application.Features.Auth.Commands.Login;
 public class LoginCommandHandler : IRequestHandler<LoginCommand, LoginResponseDto>
 {
     private readonly IAuthService _authService;
-    private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
 
-    public LoginCommandHandler(
-        IAuthService authService,
-        IUnitOfWork unitOfWork,
-        IMapper mapper)
+    public LoginCommandHandler(IAuthService authService, IMapper mapper)
     {
         _authService = authService;
-        _unitOfWork = unitOfWork;
         _mapper = mapper;
     }
 
@@ -31,9 +25,6 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, LoginResponseDt
 
         if (!success || user == null)
             throw new UnauthorizedAccessException(errorMessage ?? "Invalid credentials");
-
-        // Persist password rehash if needed (no-op when nothing changed)
-        await _unitOfWork.SaveChangesAsync(cancellationToken);
 
         var availableContexts = await _authService.GetAvailableContextsAsync(user, cancellationToken);
 
