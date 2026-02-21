@@ -1,0 +1,35 @@
+<div class="dashboard-container">
+  <h1 class="dashboard-title">Dashboard</h1>
+
+  <section class="jwt-section">
+    <h2>Decoded JWT Claims</h2>
+
+    @if (claims.length === 0) {
+      <p class="no-token">No token available.</p>
+    } @else {
+      <table class="claims-table">
+        <thead>
+          <tr>
+            <th>Claim</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (claim of claims; track claim.key) {
+            <tr>
+              <td class="claim-key">{{ claim.key }}</td>
+              <td class="claim-value">{{ claim.value }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
+  </section>
+
+  @if (rawToken) {
+    <section class="raw-section">
+      <h2>Raw Token</h2>
+      <pre class="raw-token">{{ rawToken }}</pre>
+    </section>
+  }
+</div>

@@ -8,6 +8,7 @@ import { ParentRegisterComponent } from './pages/parent-register/parent-register
 import { SchoolRegisterComponent } from './pages/school-register/school-register';
 import { StudentRegisterComponent } from './pages/student-register/student-register';
 import { LoginComponent } from './pages/login/login';
+import { DashboardComponent } from './pages/dashboard/dashboard';
 import { authGuard } from './core/guards/auth-guard';
 
 export const routes: Routes = [
@@ -21,5 +22,6 @@ export const routes: Routes = [
   { path: 'school-register', component: SchoolRegisterComponent },
   { path: 'student-register', component: StudentRegisterComponent },
   { path: 'admin', component: AdminComponent, canActivate: [authGuard] },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard] },
   { path: '**', redirectTo: '' }
 ];

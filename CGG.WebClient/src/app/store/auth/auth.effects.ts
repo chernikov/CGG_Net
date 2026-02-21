@@ -27,8 +27,17 @@ interface SwitchContextResponse {
 }
 
 interface RegisterResponse {
-  message: string;
-  userId: string;
+  token: string;
+  user: {
+    id: string;
+    email: string;
+    displayName: string;
+    role: string;
+    credits: number;
+  };
+  activeContext: UserTokenContext;
+  availableContexts: UserTokenContext[];
+  canSwitchContext: boolean;
 }
 
 @Injectable()
@@ -122,9 +131,26 @@ export class AuthEffects {
           displayName: action.displayName,
           role: action.role
         }).pipe(
-          map((response) =>
-            AuthActions.registerSuccess({ message: response.message })
-          ),
+          map((response) => {
+            localStorage.setItem('token', response.token);
+            localStorage.setItem('currentUser', JSON.stringify(response.user));
+            localStorage.setItem('activeContext', JSON.stringify(response.activeContext));
+            localStorage.setItem('availableContexts', JSON.stringify(response.availableContexts));
+            localStorage.setItem('canSwitchContext', JSON.stringify(response.canSwitchContext));
+            return AuthActions.registerSuccess({
+              token: response.token,
+              user: {
+                id: response.user.id,
+                email: response.user.email,
+                displayName: response.user.displayName,
+                role: response.user.role,
+                credits: response.user.credits
+              },
+              activeContext: response.activeContext,
+              availableContexts: response.availableContexts,
+              canSwitchContext: response.canSwitchContext
+            });
+          }),
           catchError((error) =>
             of(AuthActions.registerFailure({
               error: error.error?.message || error.message || 'Registration failed'
@@ -141,7 +167,7 @@ export class AuthEffects {
       this.actions$.pipe(
         ofType(AuthActions.registerSuccess),
         tap(() => {
-          this.router.navigate(['/login']);
+          this.router.navigate(['/dashboard']);
         })
       ),
     { dispatch: false }

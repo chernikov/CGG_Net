@@ -1,0 +1,75 @@
+.dashboard-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+}
+
+.dashboard-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.jwt-section,
+.raw-section {
+  margin-bottom: 2rem;
+
+  h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #374151;
+  }
+}
+
+.claims-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+
+  th {
+    background-color: #f3f4f6;
+    padding: 0.6rem 1rem;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 2px solid #e5e7eb;
+  }
+
+  td {
+    padding: 0.55rem 1rem;
+    border-bottom: 1px solid #e5e7eb;
+    vertical-align: top;
+  }
+
+  tr:hover td {
+    background-color: #f9fafb;
+  }
+
+  .claim-key {
+    font-family: monospace;
+    color: #6366f1;
+    white-space: nowrap;
+    width: 30%;
+  }
+
+  .claim-value {
+    font-family: monospace;
+    word-break: break-all;
+  }
+}
+
+.no-token {
+  color: #9ca3af;
+  font-style: italic;
+}
+
+.raw-token {
+  background: #1e1e2e;
+  color: #cdd6f4;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.7rem;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-all;
+}

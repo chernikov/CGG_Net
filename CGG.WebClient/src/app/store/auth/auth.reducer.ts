@@ -37,10 +37,16 @@ export const authReducer = createReducer(
     error: null
   })),
 
-  on(AuthActions.registerSuccess, (state) => ({
+  on(AuthActions.registerSuccess, (state, { user, token, activeContext, availableContexts, canSwitchContext }) => ({
     ...state,
     loading: false,
-    error: null
+    error: null,
+    user,
+    token,
+    isAuthenticated: true,
+    activeContext,
+    availableContexts,
+    canSwitchContext
   })),
 
   on(AuthActions.registerFailure, (state, { error }) => ({

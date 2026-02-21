@@ -12,6 +12,9 @@ public class RegisterRequestDto
 
 public class RegisterResponseDto
 {
-    public required string Message { get; set; }
-    public Guid UserId { get; set; }
+    public required string Token { get; set; }
+    public required UserDto User { get; set; }
+    public required UserTokenContext ActiveContext { get; set; }
+    public List<UserTokenContext> AvailableContexts { get; set; } = [];
+    public bool CanSwitchContext => AvailableContexts.Count(c => c.Type != ContextType.System) > 1;
 }

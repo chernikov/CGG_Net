@@ -25,7 +25,7 @@ export const register = createAction(
 
 export const registerSuccess = createAction(
   '[Auth] Register Success',
-  props<{ message: string }>()
+  props<{ user: User; token: string; activeContext: UserTokenContext; availableContexts: UserTokenContext[]; canSwitchContext: boolean }>()
 );
 
 export const registerFailure = createAction(
