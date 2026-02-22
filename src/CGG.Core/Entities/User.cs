@@ -8,6 +8,8 @@ namespace CGG.Core.Entities
         public string? FirstName { get; set; }
         public string? Surname { get; set; }
         public DateTime? DateOfBirth { get; set; }
+        public int? Age { get; set; }
+        public DateTime? AgeAddedDate { get; set; }
         public UserRole Role { get; set; }
         public decimal Credits { get; set; } = 0;
         public bool EmailConfirmed { get; set; } = false;

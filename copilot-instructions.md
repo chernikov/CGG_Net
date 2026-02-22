@@ -375,9 +375,52 @@ export class AuthEffects {
 ### Angular Conventions
 
 - **Standalone Components**: All components use `standalone: true`
-- **Signals**: Prefer signals for reactive state in components
+- **Signals**: Prefer signals for reactive state in components (`store.selectSignal(selector)`)
 - **TailwindCSS**: Use utility classes for styling
 - **TypeScript Strict Mode**: Enabled
+
+### NgRx Store Structure (Family Pattern)
+
+All domain features follow this file structure under `src/app/store/<feature>/`:
+
+| File | Purpose |
+|---|---|
+| `feature.state.ts` | Interfaces + initial state |
+| `feature.actions.ts` | All `createAction` definitions |
+| `feature.effects.ts` | Side effects (HTTP, navigation) using `inject()` |
+| `feature.reducer.ts` | Pure state transitions (`createReducer`/`on`) |
+| `feature.selectors.ts` | Memoized `createSelector` functions |
+| `index.ts` | Barrel re-export of all public API |
+
+**Registration** — add to `app.config.ts`:
+```typescript
+provideStore({ auth: authReducer, family: familyReducer, /* new */ }),
+provideEffects([AuthEffects, FamilyEffects, /* new */]),
+```
+
+**Component pattern** — use `selectSignal` for zero-boilerplate reactivity:
+```typescript
+// FamilyComponent
+children  = this.store.selectSignal(selectChildren);
+isLoading = this.store.selectSignal(selectChildrenLoading);
+
+ngOnInit() { this.store.dispatch(loadChildren()); }
+```
+
+**Mutation pattern** — dispatch actions, let effects handle async + navigation:
+```typescript
+// AddChild component — no subscribe, no manual navigation
+this.store.dispatch(addChild({ name, email, age, gender }));
+// FamilyEffects.addChildSuccess$ navigates to /dashboard automatically
+```
+
+**Effect conventions**:
+- `switchMap` for read/query effects (cancellable)
+- `exhaustMap` for write/command effects (prevents duplicates)
+- `{ dispatch: false }` for navigation-only effects
+- All injections via `inject()`, not constructor
+
+**Error lifecycle**: dispatch `clearXxxError` on component `OnDestroy` to avoid stale errors.
 - **File Naming**: `feature-name.component.ts`, `feature-name.service.ts`
 
 ### API Service Pattern

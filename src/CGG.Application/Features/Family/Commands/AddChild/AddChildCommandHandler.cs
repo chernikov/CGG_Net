@@ -65,7 +65,8 @@ public class AddChildCommandHandler : IRequestHandler<AddChildCommand, AddChildR
             CreatedAt = DateTime.UtcNow,
             UpdatedAt = DateTime.UtcNow,
             FamilyId = parent.FamilyId,
-            DateOfBirth = DateTime.UtcNow.AddYears(-request.Age), // Approximate DOB based on age
+            Age = request.Age,
+            AgeAddedDate = DateTime.UtcNow,
             PasswordHash = _passwordHasher.Hash(randomPassword)
         };
 
@@ -94,7 +95,7 @@ public class AddChildCommandHandler : IRequestHandler<AddChildCommand, AddChildR
         }
 
         childUser.MemberId = member.Id;
-        _userRepository.Update(childUser);
+        // No explicit Update() needed — EF tracks the entity from AddAsync and picks up the MemberId change automatically
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 

@@ -8,6 +8,8 @@ namespace CGG.Infrastructure.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
+            builder.ToTable("Users");
+
             builder.HasKey(e => e.Id);
 
             builder.Property(e => e.Email)
@@ -23,6 +25,10 @@ namespace CGG.Infrastructure.Data.Configurations
 
             builder.Property(e => e.Surname)
                 .HasMaxLength(50);
+
+            builder.Property(e => e.Age);
+
+            builder.Property(e => e.AgeAddedDate);
 
             builder.Property(e => e.Role)
                 .IsRequired();

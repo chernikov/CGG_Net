@@ -2,7 +2,10 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { FamilyService, ChildProfile } from '../../services/family';
+import { Store } from '@ngrx/store';
+import { loadChildren } from '../../../../store/family/family.actions';
+import { selectChildren, selectChildrenLoading } from '../../../../store/family/family.selectors';
+import { ChildProfile } from '../../../../store/family/family.state';
 
 @Component({
   selector: 'app-family-component',
@@ -13,22 +16,13 @@ import { FamilyService, ChildProfile } from '../../services/family';
 })
 export class FamilyComponent implements OnInit {
   private router = inject(Router);
-  private familyService = inject(FamilyService);
+  private store = inject(Store);
 
-  children: ChildProfile[] = [];
-  isLoading = true;
+  children = this.store.selectSignal(selectChildren);
+  isLoading = this.store.selectSignal(selectChildrenLoading);
 
   ngOnInit(): void {
-    this.familyService.getChildren().subscribe({
-      next: (data) => {
-        this.children = data;
-        this.isLoading = false;
-      },
-      error: (err) => {
-        console.error('Failed to fetch children', err);
-        this.isLoading = false;
-      }
-    });
+    this.store.dispatch(loadChildren());
   }
 
   goToChildProfile(childId: string) {
@@ -39,3 +33,4 @@ export class FamilyComponent implements OnInit {
     this.router.navigate(['/add-child']);
   }
 }
+

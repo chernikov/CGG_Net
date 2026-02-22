@@ -34,18 +34,18 @@
         </div>
       }
 
-      @if (errorMessage) {
+      @if (errorMessage()) {
         <div class="error-message">
-          {{ errorMessage }}
+          {{ errorMessage() }}
         </div>
       }
     </form>
   </div>
 
   <div class="action-buttons">
-    <button class="btn-outline" (click)="cancel()" [disabled]="isSubmitting">{{ 'addChild.cancel' | translate }}</button>
-    <button class="btn-primary" (click)="add()" [disabled]="isSubmitting">
-      {{ isSubmitting ? ('common.loading' | translate) : ('addChild.add' | translate) }}
+    <button class="btn-outline" (click)="cancel()" [disabled]="isSubmitting()">{{ 'addChild.cancel' | translate }}</button>
+    <button class="btn-primary" (click)="add()" [disabled]="isSubmitting()">
+      {{ isSubmitting() ? ('common.loading' | translate) : ('addChild.add' | translate) }}
     </button>
   </div>
 </div>

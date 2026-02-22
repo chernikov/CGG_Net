@@ -1,18 +1,18 @@
 <div class="family-section">
   <div class="section-header">
     <h3 class="section-title">{{ 'family.title' | translate }}</h3>
-    @if (children.length > 0) {
+    @if (children().length > 0) {
       <button class="add-btn" (click)="addChild()">{{ 'family.addChild' | translate }}</button>
     }
   </div>
 
-  @if (isLoading) {
+  @if (isLoading()) {
     <div class="loading-state">
       <p>{{ 'common.loading' | translate }}</p>
     </div>
   } @else {
     <div class="children-grid">
-      @for (child of children; track child.id) {
+      @for (child of children(); track child.id) {
         <div class="child-tile" (click)="goToChildProfile(child.id)">
           <div class="avatar-container">
             <svg class="avatar-placeholder" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -26,7 +26,7 @@
         </div>
       }
 
-      @if (children.length === 0) {
+      @if (children().length === 0) {
         <div class="empty-state">
           <div class="empty-icon">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">

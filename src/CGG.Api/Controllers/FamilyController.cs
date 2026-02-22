@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using CGG.Application.Features.Family.Commands.AddChild;
+using CGG.Application.Features.Family.Queries.GetChildren;
 
 namespace CGG.Api.Controllers;
 
@@ -16,6 +17,27 @@ public class FamilyController : ControllerBase
     public FamilyController(IMediator mediator)
     {
         _mediator = mediator;
+    }
+
+    [HttpGet("children")]
+    public async Task<IActionResult> GetChildren(CancellationToken cancellationToken)
+    {
+        try
+        {
+            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier)
+                ?? User.FindFirstValue("sub");
+
+            if (!Guid.TryParse(userIdClaim, out var userId))
+                return Unauthorized(new { message = "Invalid token" });
+
+            var query = new GetChildrenQuery { ParentUserId = userId };
+            var response = await _mediator.Send(query, cancellationToken);
+            return Ok(response);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { message = "An error occurred while fetching children", error = ex.Message });
+        }
     }
 
     [HttpPost("children")]
