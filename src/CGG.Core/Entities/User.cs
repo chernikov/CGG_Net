@@ -1,13 +1,16 @@
-using Microsoft.AspNetCore.Identity;
-
 namespace CGG.Core.Entities
 {
-    public class User : IdentityUser<Guid>
+    public class User
     {
-        public string? DisplayName { get; set; }
+        public Guid Id { get; set; }
+        public required string Email { get; set; }
+        public required string PasswordHash { get; set; }
+        public string? FirstName { get; set; }
+        public string? Surname { get; set; }
         public DateTime? DateOfBirth { get; set; }
         public UserRole Role { get; set; }
         public decimal Credits { get; set; } = 0;
+        public bool EmailConfirmed { get; set; } = false;
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 

@@ -1,6 +1,67 @@
-@CGG.Api_HostAddress = http://localhost:5296
+@CGG.Api_HostAddress = https://localhost:7000
+@CGG.Api_HostAddress_Http = http://localhost:5296
 
+### Health Check
 GET {{CGG.Api_HostAddress}}/weatherforecast/
 Accept: application/json
+
+###
+
+### Register User
+POST {{CGG.Api_HostAddress}}/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "password": "Test123!",
+  "firstName": "Test",
+  "surname": "User",
+  "role": 0
+}
+
+###
+
+### Register Another User
+POST {{CGG.Api_HostAddress}}/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "student@example.com",
+  "password": "Student123!",
+  "firstName": "Student",
+  "surname": "User",
+  "role": 0
+}
+
+###
+
+### Login
+POST {{CGG.Api_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "password": "Test123!"
+}
+
+###
+
+### Login (save token)
+# @name login
+POST {{CGG.Api_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "password": "Test123!"
+}
+
+###
+
+### Use saved token for authenticated request
+@authToken = {{login.response.body.token}}
+
+GET {{CGG.Api_HostAddress}}/api/user/profile
+Authorization: Bearer {{authToken}}
 
 ###

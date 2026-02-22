@@ -1,0 +1,36 @@
+@if (canSwitch$ | async) {
+  <div class="context-switcher">
+    @if (activeContext$ | async; as active) {
+      <button class="context-current" [attr.aria-label]="'Поточний контекст: ' + contextLabel(active)">
+        <span class="context-icon">{{ contextIcon(active.type) }}</span>
+        <span class="context-name">{{ contextLabel(active) }}</span>
+        <span class="context-role">{{ active.contextRole }}</span>
+        <span class="chevron">▾</span>
+      </button>
+    }
+
+    <div class="context-dropdown">
+      @if (availableContexts$ | async; as contexts) {
+        @for (ctx of contexts; track ctx.type + ctx.contextId) {
+          @if (ctx.type !== 'System') {
+            <button
+              class="context-option"
+              [class.active]="isActive(ctx, (activeContext$ | async))"
+              [disabled]="(loading$ | async) ?? false"
+              (click)="switchTo(ctx)"
+            >
+              <span class="context-icon">{{ contextIcon(ctx.type) }}</span>
+              <span class="context-info">
+                <span class="context-name">{{ contextLabel(ctx) }}</span>
+                <span class="context-role">{{ ctx.contextRole }}</span>
+              </span>
+              @if (isActive(ctx, (activeContext$ | async))) {
+                <span class="check">✓</span>
+              }
+            </button>
+          }
+        }
+      }
+    </div>
+  </div>
+}

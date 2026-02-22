@@ -7,11 +7,17 @@
     </svg>
   </button>
 
-  <div class="logo">
+  <div class="logo" (click)="navigateToLanding()">
     <img class="logo-image" src="assets/images/logo.png" alt="Carreer Guidance guild logo">
   </div>
 
-  <button class="login-button" (click)="navigateToLogin()" aria-label="Login">
-    Login
-  </button>
+  @if (isAuthenticated$ | async) {
+    <button class="auth-button" (click)="logout()">
+      <img src="assets/icons/logout.svg" alt="Вихід" />
+    </button>
+  } @else {
+    <button class="auth-button" (click)="navigateToLogin()">
+      <img src="assets/icons/login.svg" alt="Увійти" />
+    </button>
+  }
 </header>

@@ -11,6 +11,7 @@ namespace CGG.Infrastructure.Data.Configurations
             builder.HasKey(e => e.Id);
             
             // Relationships
+            // Note: Using NoAction for Member and Family to avoid multiple cascade paths in SQL Server
             builder.HasOne(e => e.Survey)
                 .WithMany(s => s.SurveyResults)
                 .HasForeignKey(e => e.SurveyId)
@@ -19,17 +20,17 @@ namespace CGG.Infrastructure.Data.Configurations
             builder.HasOne(e => e.User)
                 .WithMany(u => u.SurveyResults)
                 .HasForeignKey(e => e.UserId)
-                .OnDelete(DeleteBehavior.SetNull);
+                .OnDelete(DeleteBehavior.NoAction);
                 
             builder.HasOne(e => e.Member)
                 .WithMany(m => m.SurveyResults)
                 .HasForeignKey(e => e.MemberId)
-                .OnDelete(DeleteBehavior.SetNull);
+                .OnDelete(DeleteBehavior.NoAction);
                 
             builder.HasOne(e => e.Family)
                 .WithMany(f => f.SurveyResults)
                 .HasForeignKey(e => e.FamilyId)
-                .OnDelete(DeleteBehavior.SetNull);
+                .OnDelete(DeleteBehavior.NoAction);
                 
             builder.HasOne(e => e.Language)
                 .WithMany()

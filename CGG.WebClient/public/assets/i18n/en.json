@@ -1,0 +1,13 @@
+{
+  "errors": {
+    "invalidCredentials": "Invalid email or password",
+    "userAlreadyExists": "User with this email already exists",
+    "invalidCredentialsAlt": "Invalid credentials",
+    "unknown": "Something went wrong"
+  },
+  "auth": {
+    "loginFailed": "Login failed",
+    "registrationFailed": "Registration failed",
+    "contextSwitchFailed": "Context switch failed"
+  }
+}

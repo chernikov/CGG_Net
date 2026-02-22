@@ -1,12 +1,10 @@
 using CGG.Core.Entities;
 using CGG.Infrastructure.Data.Configurations;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace CGG.Infrastructure.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
+    public class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -34,11 +32,11 @@ namespace CGG.Infrastructure.Data
         
         public DbSet<AIRecommendation> AIRecommendations { get; set; }
         public DbSet<PromoCode> PromoCodes { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<MemberRole> MemberRoles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            base.OnModelCreating(builder);
-
             // Apply all entity configurations
             builder.ApplyConfiguration(new UserConfiguration());
             builder.ApplyConfiguration(new FamilyConfiguration());
@@ -57,6 +55,8 @@ namespace CGG.Infrastructure.Data
             builder.ApplyConfiguration(new AIRecommendationConfiguration());
             builder.ApplyConfiguration(new AiPromptTemplateConfiguration());
             builder.ApplyConfiguration(new AiLogConfiguration());
+            builder.ApplyConfiguration(new RoleConfiguration());
+            builder.ApplyConfiguration(new MemberRoleConfiguration());
         }
     }
 }

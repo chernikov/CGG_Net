@@ -1,10 +1,12 @@
-using CGG.Core.Entities;
-using Microsoft.AspNetCore.Identity;
+using AutoMapper;
+using CGG.Application.DTOs.Auth;
+using CGG.Application.Features.Auth.Commands.Login;
+using CGG.Application.Features.Auth.Commands.Register;
+using CGG.Application.Features.Auth.Commands.SwitchContext;
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Text;
 
 namespace CGG.Api.Controllers
 {
@@ -12,113 +14,93 @@ namespace CGG.Api.Controllers
     [Route("api/[controller]")]
     public class AuthController : ControllerBase
     {
-        private readonly UserManager<User> _userManager;
-        private readonly SignInManager<User> _signInManager;
-        private readonly IConfiguration _configuration;
+        private readonly IMediator _mediator;
+        private readonly IMapper _mapper;
 
         public AuthController(
-            UserManager<User> userManager,
-            SignInManager<User> signInManager,
-            IConfiguration configuration)
+            IMediator mediator,
+            IMapper mapper)
         {
-            _userManager = userManager;
-            _signInManager = signInManager;
-            _configuration = configuration;
+            _mediator = mediator;
+            _mapper = mapper;
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterRequest request)
+        public async Task<IActionResult> Register([FromBody] RegisterRequestDto requestDto, CancellationToken cancellationToken)
         {
-            var user = new User
+            try
             {
-                UserName = request.Email,
-                Email = request.Email,
-                DisplayName = request.DisplayName,
-                Role = request.Role,
-                EmailConfirmed = false
-            };
+                // Map DTO to Command
+                var command = _mapper.Map<RegisterCommand>(requestDto);
 
-            var result = await _userManager.CreateAsync(user, request.Password);
+                // Send command through MediatR
+                var response = await _mediator.Send(command, cancellationToken);
 
-            if (!result.Succeeded)
-            {
-                return BadRequest(result.Errors);
+                return Ok(response);
             }
-
-            return Ok(new { message = "User registered successfully", userId = user.Id });
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "An error occurred during registration", error = ex.Message });
+            }
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginRequest request)
+        public async Task<IActionResult> Login([FromBody] LoginRequestDto requestDto, CancellationToken cancellationToken)
         {
-            var user = await _userManager.FindByEmailAsync(request.Email);
-            
-            if (user == null)
+            try
             {
-                return Unauthorized(new { message = "Invalid email or password" });
+                // Map DTO to Command
+                var command = _mapper.Map<LoginCommand>(requestDto);
+
+                // Send command through MediatR
+                var response = await _mediator.Send(command, cancellationToken);
+
+                return Ok(response);
             }
-
-            var result = await _signInManager.CheckPasswordSignInAsync(user, request.Password, false);
-
-            if (!result.Succeeded)
+            catch (UnauthorizedAccessException ex)
             {
-                return Unauthorized(new { message = "Invalid email or password" });
+                return Unauthorized(new { message = ex.Message });
             }
-
-            var token = GenerateJwtToken(user);
-
-            return Ok(new
+            catch (Exception ex)
             {
-                token,
-                user = new
+                return StatusCode(500, new { message = "An error occurred during login", error = ex.Message });
+            }
+        }
+
+        [HttpPost("switch-context")]
+        [Authorize]
+        public async Task<IActionResult> SwitchContext([FromBody] SwitchContextRequestDto requestDto, CancellationToken cancellationToken)
+        {
+            try
+            {
+                var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier)
+                    ?? User.FindFirstValue("sub");
+
+                if (!Guid.TryParse(userIdClaim, out var userId))
+                    return Unauthorized(new { message = "Invalid token" });
+
+                var command = new SwitchContextCommand
                 {
-                    user.Id,
-                    user.Email,
-                    user.DisplayName,
-                    user.Role,
-                    user.Credits
-                }
-            });
-        }
+                    UserId = userId,
+                    ContextType = requestDto.ContextType,
+                    ContextId = requestDto.ContextId
+                };
 
-        private string GenerateJwtToken(User user)
-        {
-            var jwtSettings = _configuration.GetSection("JwtSettings");
-            var secretKey = jwtSettings["SecretKey"];
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey!));
-            var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
-            var claims = new[]
+                var response = await _mediator.Send(command, cancellationToken);
+                return Ok(response);
+            }
+            catch (UnauthorizedAccessException ex)
             {
-                new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
-                new Claim(JwtRegisteredClaimNames.Email, user.Email!),
-                new Claim(ClaimTypes.Role, user.Role.ToString()),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-            };
-
-            var token = new JwtSecurityToken(
-                issuer: jwtSettings["Issuer"],
-                audience: jwtSettings["Audience"],
-                claims: claims,
-                expires: DateTime.UtcNow.AddMinutes(double.Parse(jwtSettings["ExpirationInMinutes"]!)),
-                signingCredentials: credentials
-            );
-
-            return new JwtSecurityTokenHandler().WriteToken(token);
+                return Unauthorized(new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "An error occurred during context switch", error = ex.Message });
+            }
         }
-    }
-
-    public class RegisterRequest
-    {
-        public string Email { get; set; } = string.Empty;
-        public string Password { get; set; } = string.Empty;
-        public string DisplayName { get; set; } = string.Empty;
-        public UserRole Role { get; set; }
-    }
-
-    public class LoginRequest
-    {
-        public string Email { get; set; } = string.Empty;
-        public string Password { get; set; } = string.Empty;
     }
 }

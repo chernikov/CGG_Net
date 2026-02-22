@@ -1,6 +1,5 @@
-using CGG.Core.Entities;
+using CGG.Core.Interfaces;
 using CGG.Infrastructure.Data;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,15 +16,18 @@ public static class Dependencies
         services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
-        // Identity (AddIdentity includes SignInManager which requires ASP.NET Core)
-        // For class library, we configure Identity through the API project
-        // services.AddIdentityCore<User>()
-        //     .AddRoles<IdentityRole<Guid>>()
-        //     .AddEntityFrameworkStores<ApplicationDbContext>();
+        // Password Hasher
+        services.AddScoped<IPasswordHasher, Security.PasswordHasher>();
 
-        // TODO: Add repositories, email service, etc.
-        // services.AddScoped<IUserRepository, UserRepository>();
-        // services.AddScoped<IEmailService, EmailService>();
+        // Unit of Work
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+        // Generic repositories
+        services.AddScoped(typeof(IReadRepository<>), typeof(Repositories.ReadRepository<>));
+        services.AddScoped(typeof(IRepository<>), typeof(Repositories.Repository<>));
+
+        // Domain-specific repositories
+        services.AddScoped<IUserRepository, Repositories.UserRepository>();
 
         return services;
     }

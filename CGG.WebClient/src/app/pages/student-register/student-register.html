@@ -1,0 +1,112 @@
+<div class="register-page">
+  <div class="register-container">
+    <button class="back-button" (click)="goBack()">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M9.195 18.44c1.25.713 2.805-.19 2.805-1.629v-2.34l6.945 3.968c1.25.714 2.805-.188 2.805-1.628V8.688c0-1.44-1.555-2.342-2.805-1.628L12 11.03v-2.34c0-1.44-1.555-2.343-2.805-1.629l-7.108 4.062c-1.26.72-1.26 2.536 0 3.256l7.108 4.061z" />
+      </svg>
+      Назад
+    </button>
+
+    <div class="register-icon">
+      <img src="assets/images/register_icon.png" alt="Register Student" />
+    </div>
+
+    <h1 class="register-title">Реєстрація студента</h1>
+    <p class="register-subtitle">Почни свою подорож до кар'єри мрії</p>
+
+    @if (validationError) {
+      <div class="error-message">
+        {{ validationError }}
+      </div>
+    }
+
+    @if (error$ | async; as error) {
+      <div class="error-message">
+        {{ error }}
+      </div>
+    }
+
+    <form class="register-form" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="firstName">Ім'я</label>
+        <input 
+          type="text" 
+          id="firstName" 
+          [(ngModel)]="formData.firstName"
+          name="firstName"
+          required
+          placeholder="Введіть ваше ім'я"
+          [disabled]="(loading$ | async) ?? false"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="lastName">Прізвище</label>
+        <input 
+          type="text" 
+          id="lastName" 
+          [(ngModel)]="formData.lastName"
+          name="lastName"
+          required
+          placeholder="Введіть ваше прізвище"
+          [disabled]="(loading$ | async) ?? false"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input 
+          type="email" 
+          id="email" 
+          [(ngModel)]="formData.email"
+          name="email"
+          required
+          placeholder="your@email.com"
+          [disabled]="(loading$ | async) ?? false"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="password">Пароль</label>
+        <input 
+          type="password" 
+          id="password" 
+          [(ngModel)]="formData.password"
+          name="password"
+          required
+          placeholder="Мінімум 8 символів"
+          [disabled]="(loading$ | async) ?? false"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">Підтвердження паролю</label>
+        <input 
+          type="password" 
+          id="confirmPassword" 
+          [(ngModel)]="formData.confirmPassword"
+          name="confirmPassword"
+          required
+          placeholder="Повторіть пароль"
+          [disabled]="(loading$ | async) ?? false"
+        >
+      </div>
+
+      <button 
+        type="submit" 
+        class="submit-button"
+        [disabled]="(loading$ | async) ?? false"
+      >
+        @if (loading$ | async) {
+          <span>Завантаження...</span>
+        } @else {
+          <span>Зареєструватися</span>
+        }
+      </button>
+    </form>
+
+    <div class="login-link">
+      Вже є акаунт? <a [routerLink]="['/login']">Увійти</a>
+    </div>
+  </div>
+</div>

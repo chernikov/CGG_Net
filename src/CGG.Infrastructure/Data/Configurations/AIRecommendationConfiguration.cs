@@ -11,7 +11,7 @@ namespace CGG.Infrastructure.Data.Configurations
             builder.HasKey(e => e.Id);
             
             builder.HasOne(e => e.User)
-                .WithMany()
+                .WithMany(u => u.AIRecommendations)
                 .HasForeignKey(e => e.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
                 

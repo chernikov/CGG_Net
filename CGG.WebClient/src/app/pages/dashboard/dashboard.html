@@ -1,0 +1,17 @@
+<div class="dashboard-container">
+  <h1 class="dashboard-title">Dashboard</h1>
+
+  <section class="roles-section">
+    <h2>Ваші ролі</h2>
+
+    @if (roles.length === 0) {
+      <p class="no-token">Ролі не знайдено.</p>
+    } @else {
+      <div class="roles-list">
+        @for (role of roles; track role) {
+          <span class="role-badge">{{ role }}</span>
+        }
+      </div>
+    }
+  </section>
+</div>

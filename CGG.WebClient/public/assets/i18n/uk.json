@@ -1,0 +1,13 @@
+{
+  "errors": {
+    "invalidCredentials": "Невірний email або пароль",
+    "userAlreadyExists": "Користувач з таким email вже існує",
+    "invalidCredentialsAlt": "Невірні дані для входу",
+    "unknown": "Щось пішло не так"
+  },
+  "auth": {
+    "loginFailed": "Помилка входу",
+    "registrationFailed": "Помилка реєстрації",
+    "contextSwitchFailed": "Помилка зміни контексту"
+  }
+}

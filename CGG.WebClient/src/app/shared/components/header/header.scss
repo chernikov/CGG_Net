@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 1rem 1rem 0.5rem;
-  background: white;
+  background: transparent;
   border-bottom: none;
   position: relative;
   z-index: 100;
@@ -37,6 +37,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 0.8;
+  }
 }
 
 .logo-image {
@@ -45,26 +51,31 @@
 }
 
 .login-button {
-  display: inline-flex;
+  display: none;
+}
+
+.auth-button {
+  display: flex;
   align-items: center;
   justify-content: center;
   background: #0ea5e9;
   border: none;
   cursor: pointer;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem;
   color: #ffffff;
-  font-weight: 600;
-  font-size: 0.875rem;
-  transition: background 0.2s;
-  border-radius: 0.5rem;
+  transition: all 0.2s;
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
 
   &:hover {
     background: #0284c7;
+    transform: scale(1.05);
   }
 
-  span {
-    @media (max-width: 360px) {
-      display: none;
-    }
+  img {
+    width: 1.5rem;
+    height: 1.5rem;
+    filter: brightness(0) invert(1);
   }
 }

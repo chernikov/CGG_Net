@@ -1,7 +1,4 @@
-using CGG.Core.Entities;
-using CGG.Infrastructure.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -13,19 +10,6 @@ public static class Dependencies
         this IServiceCollection services, 
         IConfiguration configuration)
     {
-        // Identity
-        services.AddIdentity<User, IdentityRole<Guid>>(options =>
-        {
-            options.Password.RequireDigit = true;
-            options.Password.RequireLowercase = true;
-            options.Password.RequireUppercase = true;
-            options.Password.RequireNonAlphanumeric = false;
-            options.Password.RequiredLength = 8;
-            options.User.RequireUniqueEmail = true;
-        })
-        .AddEntityFrameworkStores<ApplicationDbContext>()
-        .AddDefaultTokenProviders();
-
         // JWT Authentication
         var jwtSettings = configuration.GetSection("JwtSettings");
         var secretKey = jwtSettings["SecretKey"];

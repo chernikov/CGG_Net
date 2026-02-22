@@ -5,15 +5,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="MailKit" Version="$(MailKitVersion)" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="$(MicrosoftAspNetCoreVersion)" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="$(MicrosoftEntityFrameworkCoreVersion)" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="$(MicrosoftEntityFrameworkCoreVersion)">
+    <PackageReference Include="BCrypt.Net-Next" />
+    <PackageReference Include="MailKit" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.Http" Version="$(MicrosoftAspNetCoreVersion)" />
-    <PackageReference Include="MimeKit" Version="$(MimeKitVersion)" />
+    <PackageReference Include="Microsoft.Extensions.Http" />
+    <PackageReference Include="MimeKit" />
   </ItemGroup>
 
 </Project>
