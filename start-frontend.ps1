@@ -1,6 +1,8 @@
 #!/usr/bin/env pwsh
 # Start Angular Frontend
 
+$Host.UI.RawUI.WindowTitle = "CGG_Frontend"
+
 Write-Host "Starting CGG.WebClient..." -ForegroundColor Cyan
 
 Set-Location -Path "$PSScriptRoot\CGG.WebClient"

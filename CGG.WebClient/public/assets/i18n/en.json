@@ -9,5 +9,30 @@
     "loginFailed": "Login failed",
     "registrationFailed": "Registration failed",
     "contextSwitchFailed": "Context switch failed"
+  },
+  "common": {
+    "loading": "Loading..."
+  },
+  "family": {
+    "title": "My Family",
+    "addChild": "+ Add Child",
+    "yearsOld": "years old",
+    "emptyStateText": "You haven't added any children yet.",
+    "addFirstChild": "Add Your First Child"
+  },
+  "addChild": {
+    "title": "LET'S ADD YOUR KID",
+    "subtitle": "Fill name and email address of your kid",
+    "namePlaceholder": "Name or Nickname",
+    "emailPlaceholder": "Email",
+    "emailOptional": "Email (optional)",
+    "agePlaceholder": "Age",
+    "genderFemale": "Female",
+    "genderMale": "Male",
+    "genderOther": "Other",
+    "showAdditionalInfo": "Additional info",
+    "hideAdditionalInfo": "Hide additional info",
+    "cancel": "CANCEL",
+    "add": "ADD"
   }
 }

@@ -1,0 +1,33 @@
+import { Component, inject, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { selectUser } from '../../../../store/auth/auth.selectors';
+import { FamilyComponent } from '../family-component/family-component';
+
+@Component({
+  selector: 'app-parent-component',
+  standalone: true,
+  imports: [CommonModule, FamilyComponent],
+  templateUrl: './parent-component.html',
+  styleUrl: './parent-component.scss',
+})
+export class ParentComponent implements OnInit {
+  private store = inject(Store);
+  private router = inject(Router);
+
+  parentName: string = 'Parent';
+  parentAvatar: string = 'assets/images/avatar-parent.png';
+
+  ngOnInit(): void {
+    this.store.select(selectUser).subscribe(user => {
+      if (user) {
+        this.parentName = user.firstName || 'Parent';
+      }
+    });
+  }
+
+  takeSurvey() {
+    this.router.navigate(['/survey']);
+  }
+}
