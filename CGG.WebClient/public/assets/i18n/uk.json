@@ -20,6 +20,30 @@
     "emptyStateText": "Ви ще не додали жодної дитини.",
     "addFirstChild": "Додати першу дитину"
   },
+  "parentProfile": {
+    "roleLabel": "Батько / Мати"
+  },
+  "studentProfile": {
+    "roleLabel": "Студент"
+  },
+  "childProfile": {
+    "roleLabel": "Дитина",
+    "tabProfile": "Профіль",
+    "tabTests": "Тести",
+    "tabResults": "Результати",
+    "tabObservations": "Спостереження",
+    "tabLocalRequest": "Локальний запит",
+    "lockedHint": "Доступно після проходження тестів",
+    "name": "Ім'я",
+    "age": "Вік",
+    "gender": "Стать",
+    "email": "Email",
+    "edit": "РЕДАГУВАТИ",
+    "testsEmpty": "Тести ще не призначені",
+    "resultsEmpty": "Результатів поки немає",
+    "observationsEmpty": "Спостережень поки немає",
+    "localRequestEmpty": "Локальних запитів поки немає"
+  },
   "addChild": {
     "title": "ДОДАТИ ДИТИНУ",
     "subtitle": "Введіть ім'я та email вашої дитини",

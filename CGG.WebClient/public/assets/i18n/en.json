@@ -20,6 +20,30 @@
     "emptyStateText": "You haven't added any children yet.",
     "addFirstChild": "Add Your First Child"
   },
+  "parentProfile": {
+    "roleLabel": "Parent"
+  },
+  "studentProfile": {
+    "roleLabel": "Student"
+  },
+  "childProfile": {
+    "roleLabel": "Child",
+    "tabProfile": "Profile",
+    "tabTests": "Tests",
+    "tabResults": "Results",
+    "tabObservations": "Observations",
+    "tabLocalRequest": "Local Request",
+    "lockedHint": "Available after completing tests",
+    "name": "Name",
+    "age": "Age",
+    "gender": "Gender",
+    "email": "Email",
+    "edit": "EDIT",
+    "testsEmpty": "No tests assigned yet",
+    "resultsEmpty": "No results yet",
+    "observationsEmpty": "No observations yet",
+    "localRequestEmpty": "No local requests yet"
+  },
   "addChild": {
     "title": "LET'S ADD YOUR KID",
     "subtitle": "Fill name and email address of your kid",

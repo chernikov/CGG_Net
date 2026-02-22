@@ -16,15 +16,19 @@ export class ParentComponent implements OnInit {
   private store = inject(Store);
   private router = inject(Router);
 
-  parentName: string = 'Parent';
+  parentName: string = 'User';
   parentAvatar: string = 'assets/images/avatar-parent.png';
 
   ngOnInit(): void {
     this.store.select(selectUser).subscribe(user => {
       if (user) {
-        this.parentName = user.firstName || 'Parent';
+        this.parentName = user.firstName || 'User';
       }
     });
+  }
+
+  goToProfile() {
+    this.router.navigate(['/profile']);
   }
 
   takeSurvey() {

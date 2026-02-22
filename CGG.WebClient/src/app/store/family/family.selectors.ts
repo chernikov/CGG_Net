@@ -32,3 +32,6 @@ export const selectAddChildError = createSelector(
   selectFamilyState,
   (state) => state.addChildError
 );
+
+export const selectChildById = (id: string) =>
+  createSelector(selectChildren, (children) => children.find((c) => c.id === id));

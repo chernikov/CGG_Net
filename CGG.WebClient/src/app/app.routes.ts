@@ -11,6 +11,7 @@ import { LoginComponent } from './pages/login/login';
 import { DashboardComponent } from './pages/dashboard/dashboard';
 import { AddChild } from './pages/add-child/add-child';
 import { EditChild } from './pages/child/edit-child/edit-child';
+import { ProfileComponent } from './pages/profile/profile.component';
 import { authGuard } from './core/guards/auth-guard';
 import { homeGuard } from './core/guards/home-guard';
 
@@ -27,6 +28,8 @@ export const routes: Routes = [
   { path: 'admin', component: AdminComponent, canActivate: [authGuard] },
   { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard] },
   { path: 'add-child', component: AddChild, canActivate: [authGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [authGuard] },
   { path: 'child/edit/:id', component: EditChild, canActivate: [authGuard] },
+  { path: 'child/:id', component: ProfileComponent, canActivate: [authGuard] },
   { path: '**', redirectTo: '' }
 ];

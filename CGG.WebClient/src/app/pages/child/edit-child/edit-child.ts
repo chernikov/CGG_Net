@@ -44,14 +44,14 @@ export class EditChild implements OnInit {
   }
 
   cancel() {
-    this.router.navigate(['/dashboard']); // Or back to child profile
+    this.router.navigate(['/child', this.childId]);
   }
 
   saveChanges() {
     if (this.childForm.valid) {
       // TODO: Update child data in state/backend
       console.log('Updated kid:', this.childForm.value);
-      this.router.navigate(['/dashboard']); // Or back to child profile
+      this.router.navigate(['/child', this.childId]);
     } else {
       this.childForm.markAllAsTouched();
     }

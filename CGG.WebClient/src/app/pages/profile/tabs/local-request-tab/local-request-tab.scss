@@ -1,0 +1,20 @@
+.empty-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+  color: #9ca3af;
+  gap: 1rem;
+  text-align: center;
+
+  svg {
+    width: 3rem;
+    height: 3rem;
+    opacity: 0.5;
+  }
+
+  p {
+    font-size: 0.9375rem;
+  }
+}
