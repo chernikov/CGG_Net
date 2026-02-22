@@ -2,7 +2,8 @@ export enum UserRole {
   UserChild = 0,
   UserParent = 1,
   Teacher = 2,
-  Admin = 3
+  Admin = 3,
+  UserStudent = 4
 }
 
 export type ContextType = 'System' | 'Family' | 'School';

@@ -6,6 +6,8 @@ import { map, catchError, exhaustMap, tap } from 'rxjs/operators';
 import { ApiService } from '../../core/services/api.service';
 import { UserRole, UserTokenContext } from './auth.state';
 import * as AuthActions from './auth.actions';
+import { TranslateService } from '@ngx-translate/core';
+import { toTranslationKey } from '../../core/utils/error-translations';
 
 interface LoginResponse {
   token: string;
@@ -47,6 +49,11 @@ export class AuthEffects {
   private actions$ = inject(Actions);
   private apiService = inject(ApiService);
   private router = inject(Router);
+  private translate = inject(TranslateService);
+
+  private t(backendMessage: string | undefined): string {
+    return this.translate.instant(toTranslationKey(backendMessage));
+  }
 
   // Login Effect
   login$ = createEffect(() =>
@@ -74,7 +81,7 @@ export class AuthEffects {
           }),
           catchError((error) =>
             of(AuthActions.loginFailure({
-              error: error.error?.message || error.message || 'Login failed'
+              error: this.t(error.error?.message || error.message)
             }))
           )
         )
@@ -118,7 +125,7 @@ export class AuthEffects {
           }),
           catchError((error) =>
             of(AuthActions.switchContextFailure({
-              error: error.error?.message || error.message || 'Context switch failed'
+              error: this.t(error.error?.message || error.message)
             }))
           )
         )
@@ -161,7 +168,7 @@ export class AuthEffects {
           }),
           catchError((error) =>
             of(AuthActions.registerFailure({
-              error: error.error?.message || error.message || 'Registration failed'
+              error: this.t(error.error?.message || error.message)
             }))
           )
         )

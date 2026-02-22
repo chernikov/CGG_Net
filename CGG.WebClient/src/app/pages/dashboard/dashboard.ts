@@ -1,13 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
-import { map } from 'rxjs/operators';
 import { selectToken } from '../../store/auth/auth.selectors';
-
-interface JwtClaim {
-  key: string;
-  value: string;
-}
 
 @Component({
   selector: 'app-dashboard',
@@ -19,26 +13,23 @@ interface JwtClaim {
 export class DashboardComponent implements OnInit {
   private store = inject(Store);
 
-  claims: JwtClaim[] = [];
-  rawToken = '';
+  roles: string[] = [];
 
   ngOnInit(): void {
     this.store.select(selectToken).subscribe((token) => {
-      this.rawToken = token ?? '';
-      this.claims = token ? this.decodeJwt(token) : [];
+      this.roles = token ? this.extractRoles(token) : [];
     });
   }
 
-  private decodeJwt(token: string): JwtClaim[] {
+  private extractRoles(token: string): string[] {
     try {
       const payload = token.split('.')[1];
       const decoded = JSON.parse(atob(payload.replace(/-/g, '+').replace(/_/g, '/')));
-      return Object.entries(decoded).map(([key, value]) => ({
-        key,
-        value: typeof value === 'object' ? JSON.stringify(value) : String(value)
-      }));
+      const role = decoded['role'] ?? decoded['roles'] ?? decoded['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+      if (!role) return [];
+      return Array.isArray(role) ? role : [role];
     } catch {
-      return [{ key: 'error', value: 'Failed to decode token' }];
+      return [];
     }
   }
 }

@@ -5,6 +5,7 @@ namespace CGG.Core.Entities
         UserChild,
         UserParent,
         Teacher,
-        Admin
+        Admin,
+        UserStudent
     }
 }

@@ -41,6 +41,6 @@ export class StudentChoiceComponent {
   }
 
   startSurvey() {
-    this.router.navigate(['/survey']);
+    this.router.navigate(['/student-register']);
   }
 }

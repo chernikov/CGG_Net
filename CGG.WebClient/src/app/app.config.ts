@@ -5,6 +5,8 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { provideTranslateService } from '@ngx-translate/core';
+import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { routes } from './app.routes';
 import { authReducer } from './store/auth/auth.reducer';
@@ -25,6 +27,8 @@ export const appConfig: ApplicationConfig = {
       autoPause: true,
       trace: false,
       traceLimit: 75,
-    })
+    }),
+    provideTranslateService({ defaultLanguage: 'uk' }),
+    provideTranslateHttpLoader({ prefix: '/assets/i18n/', suffix: '.json' }),
   ]
 };
