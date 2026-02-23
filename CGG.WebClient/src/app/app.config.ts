@@ -11,6 +11,8 @@ import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import { routes } from './app.routes';
 import { authReducer } from './store/auth/auth.reducer';
 import { AuthEffects } from './store/auth/auth.effects';
+import { familyReducer } from './store/family/family.reducer';
+import { FamilyEffects } from './store/family/family.effects';
 import { jwtInterceptor } from './core/interceptors/jwt-interceptor';
 
 export const appConfig: ApplicationConfig = {
@@ -19,8 +21,8 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(withInterceptors([jwtInterceptor])),
     provideAnimations(),
-    provideStore({ auth: authReducer }),
-    provideEffects([AuthEffects]),
+    provideStore({ auth: authReducer, family: familyReducer }),
+    provideEffects([AuthEffects, FamilyEffects]),
     provideStoreDevtools({
       maxAge: 25,
       logOnly: !isDevMode(),

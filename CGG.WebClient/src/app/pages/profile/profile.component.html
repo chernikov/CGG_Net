@@ -1,0 +1,117 @@
+<div class="profile-container">
+
+  <!-- Header -->
+  <div class="profile-header">
+    <button class="back-btn" (click)="goBack()">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M17 10a.75.75 0 01-.75.75H5.612l4.158 3.96a.75.75 0 11-1.04 1.08l-5.5-5.25a.75.75 0 010-1.08l5.5-5.25a.75.75 0 111.04 1.08L5.612 9.25H16.25A.75.75 0 0117 10z" clip-rule="evenodd" />
+      </svg>
+    </button>
+
+    @if (profile()) {
+      <div class="avatar-wrap">
+        <svg class="avatar-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+          <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clip-rule="evenodd" />
+        </svg>
+      </div>
+      <h2 class="profile-name">{{ profile()!.name }}</h2>
+      
+      @if (profile()!.isChild) {
+        @if (profile()!.age) {
+          <p class="profile-role">{{ profile()!.age }} {{ 'family.yearsOld' | translate }}</p>
+        }
+      } @else {
+        <p class="profile-role">{{ profile()!.roleLabel | translate }}</p>
+      }
+    } @else {
+      <div class="avatar-wrap skeleton"></div>
+      <div class="skeleton-text"></div>
+    }
+  </div>
+
+  <!-- Profile card (always visible) -->
+  <div class="profile-info-card">
+    @if (profile()) {
+      <div class="profile-info-rows">
+        @if (profile()!.age) {
+          <div class="info-row">
+            <span class="info-label">{{ 'childProfile.age' | translate }}</span>
+            <span class="info-value">{{ profile()!.age }} {{ 'family.yearsOld' | translate }}</span>
+          </div>
+        }
+        @if (profile()!.gender) {
+          <div class="info-row">
+            <span class="info-label">{{ 'childProfile.gender' | translate }}</span>
+            <span class="info-value">{{ profile()!.gender }}</span>
+          </div>
+        }
+        @if (profile()!.email) {
+          <div class="info-row">
+            <span class="info-label">{{ 'childProfile.email' | translate }}</span>
+            <span class="info-value">{{ profile()!.email }}</span>
+          </div>
+        }
+      </div>
+      
+      @if (profile()!.isChild) {
+        <button class="edit-inline-btn" (click)="editProfile()">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M5.433 13.917l1.262-3.155A4 4 0 017.58 9.42l6.92-6.918a2.121 2.121 0 013 3l-6.92 6.918c-.383.383-.84.685-1.343.886l-3.154 1.262a.5.5 0 01-.65-.65z" />
+            <path d="M3.5 5.75c0-.69.56-1.25 1.25-1.25H10A.75.75 0 0010 3H4.75A2.75 2.75 0 002 5.75v9.5A2.75 2.75 0 004.75 18h9.5A2.75 2.75 0 0017 15.25V10a.75.75 0 00-1.5 0v5.25c0 .69-.56 1.25-1.25 1.25h-9.5c-.69 0-1.25-.56-1.25-1.25v-9.5z" />
+          </svg>
+          {{ 'childProfile.edit' | translate }}
+        </button>
+      }
+    }
+  </div>
+
+  <!-- Tabs -->
+  <div class="tabs-bar">
+    <button class="tab-btn" [class.active]="activeTab === 'surveyTab'" (click)="setTab('surveyTab')">
+      {{ (hasResults ? 'childProfile.tabResults' : 'childProfile.tabTests') | translate }}
+    </button>
+    <button
+      class="tab-btn"
+      [class.active]="activeTab === 'observations'"
+      [class.locked]="!hasResults && profile()?.isChild"
+      [title]="(!hasResults && profile()?.isChild) ? ('childProfile.lockedHint' | translate) : ''"
+      (click)="setTab('observations')">
+      @if (!hasResults && profile()?.isChild) {
+        <svg class="lock-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z" clip-rule="evenodd" />
+        </svg>
+      }
+      {{ 'childProfile.tabObservations' | translate }}
+    </button>
+    
+    @if (profile()?.isChild) {
+      <button
+        class="tab-btn"
+        [class.active]="activeTab === 'localRequest'"
+        [class.locked]="!hasResults"
+        [title]="!hasResults ? ('childProfile.lockedHint' | translate) : ''"
+        (click)="setTab('localRequest')">
+        @if (!hasResults) {
+          <svg class="lock-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z" clip-rule="evenodd" />
+          </svg>
+        }
+        {{ 'childProfile.tabLocalRequest' | translate }}
+      </button>
+    }
+  </div>
+
+  <!-- Tab Content -->
+  <div class="tab-content">
+    @if (activeTab === 'surveyTab') {
+      <app-survey-tab [hasResults]="hasResults" />
+    }
+    @if (activeTab === 'observations') {
+      <app-observations-tab />
+    }
+    @if (activeTab === 'localRequest' && profile()?.isChild) {
+      <app-local-request-tab />
+    }
+  </div>
+
+</div>

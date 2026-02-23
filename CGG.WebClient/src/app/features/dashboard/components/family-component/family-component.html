@@ -1,0 +1,47 @@
+<div class="family-section">
+  <div class="section-header">
+    <h3 class="section-title">{{ 'family.title' | translate }}</h3>
+    @if (children().length > 0) {
+      <button class="add-btn" (click)="addChild()">{{ 'family.addChild' | translate }}</button>
+    }
+  </div>
+
+  @if (isLoading()) {
+    <div class="loading-state">
+      <p>{{ 'common.loading' | translate }}</p>
+    </div>
+  } @else {
+    <div class="children-grid">
+      @for (child of children(); track child.id) {
+        <div class="child-tile" (click)="goToChildProfile(child.id)">
+          <div class="avatar-container">
+            <svg class="avatar-placeholder" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <div class="child-info">
+            <span class="child-name">{{ child.name }}</span>
+            <span class="child-age">{{ child.age }} {{ 'family.yearsOld' | translate }}</span>
+          </div>
+        </div>
+      }
+
+      @if (children().length === 0) {
+        <div class="empty-state">
+          <div class="empty-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
+            </svg>
+          </div>
+          <p>{{ 'family.emptyStateText' | translate }}</p>
+          <button class="btn-primary-large" (click)="addChild()">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="btn-icon">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+            {{ 'family.addFirstChild' | translate }}
+          </button>
+        </div>
+      }
+    </div>
+  }
+</div>

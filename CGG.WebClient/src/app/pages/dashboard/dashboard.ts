@@ -2,11 +2,12 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { selectToken } from '../../store/auth/auth.selectors';
+import { ParentComponent } from '../../features/dashboard/components/parent-component/parent-component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ParentComponent],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss'
 })

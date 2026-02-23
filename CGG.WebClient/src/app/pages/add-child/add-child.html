@@ -1,0 +1,51 @@
+<div class="add-child-container">
+  <div class="form-card">
+    <h2 class="card-title">{{ 'addChild.title' | translate }}</h2>
+    <p class="card-subtitle">{{ 'addChild.subtitle' | translate }}</p>
+
+    <form [formGroup]="childForm" class="child-form">
+      <div class="form-group">
+        <input type="text" formControlName="name" [placeholder]="'addChild.namePlaceholder' | translate" class="input-field">
+      </div>
+
+      <div class="form-row">
+        <div class="form-group half-width">
+          <input type="number" formControlName="age" [placeholder]="'addChild.agePlaceholder' | translate" class="input-field">
+        </div>
+        <div class="form-group half-width">
+          <select formControlName="gender" class="input-field select-field">
+            <option value="Female">{{ 'addChild.genderFemale' | translate }}</option>
+            <option value="Male">{{ 'addChild.genderMale' | translate }}</option>
+            <option value="Other">{{ 'addChild.genderOther' | translate }}</option>
+          </select>
+        </div>
+      </div>
+
+      <button type="button" class="toggle-additional-btn" (click)="toggleAdditionalInfo()">
+        {{ (showAdditionalInfo ? 'addChild.hideAdditionalInfo' : 'addChild.showAdditionalInfo') | translate }}
+        <svg [class.rotated]="showAdditionalInfo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="chevron-icon">
+          <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+        </svg>
+      </button>
+
+      @if (showAdditionalInfo) {
+        <div class="form-group">
+          <input type="email" formControlName="email" [placeholder]="'addChild.emailOptional' | translate" class="input-field">
+        </div>
+      }
+
+      @if (errorMessage()) {
+        <div class="error-message">
+          {{ errorMessage() }}
+        </div>
+      }
+    </form>
+  </div>
+
+  <div class="action-buttons">
+    <button class="btn-outline" (click)="cancel()" [disabled]="isSubmitting()">{{ 'addChild.cancel' | translate }}</button>
+    <button class="btn-primary" (click)="add()" [disabled]="isSubmitting()">
+      {{ isSubmitting() ? ('common.loading' | translate) : ('addChild.add' | translate) }}
+    </button>
+  </div>
+</div>

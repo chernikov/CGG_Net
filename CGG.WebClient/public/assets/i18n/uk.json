@@ -9,5 +9,54 @@
     "loginFailed": "Помилка входу",
     "registrationFailed": "Помилка реєстрації",
     "contextSwitchFailed": "Помилка зміни контексту"
+  },
+  "common": {
+    "loading": "Завантаження..."
+  },
+  "family": {
+    "title": "Моя сім'я",
+    "addChild": "+ Додати дитину",
+    "yearsOld": "років",
+    "emptyStateText": "Ви ще не додали жодної дитини.",
+    "addFirstChild": "Додати першу дитину"
+  },
+  "parentProfile": {
+    "roleLabel": "Батько / Мати"
+  },
+  "studentProfile": {
+    "roleLabel": "Студент"
+  },
+  "childProfile": {
+    "roleLabel": "Дитина",
+    "tabProfile": "Профіль",
+    "tabTests": "Тести",
+    "tabResults": "Результати",
+    "tabObservations": "Спостереження",
+    "tabLocalRequest": "Локальний запит",
+    "lockedHint": "Доступно після проходження тестів",
+    "name": "Ім'я",
+    "age": "Вік",
+    "gender": "Стать",
+    "email": "Email",
+    "edit": "РЕДАГУВАТИ",
+    "testsEmpty": "Тести ще не призначені",
+    "resultsEmpty": "Результатів поки немає",
+    "observationsEmpty": "Спостережень поки немає",
+    "localRequestEmpty": "Локальних запитів поки немає"
+  },
+  "addChild": {
+    "title": "ДОДАТИ ДИТИНУ",
+    "subtitle": "Введіть ім'я та email вашої дитини",
+    "namePlaceholder": "Ім'я або нікнейм",
+    "emailPlaceholder": "Email",
+    "emailOptional": "Email (необов'язково)",
+    "agePlaceholder": "Вік",
+    "genderFemale": "Жіноча",
+    "genderMale": "Чоловіча",
+    "genderOther": "Інша",
+    "showAdditionalInfo": "Додаткова інформація",
+    "hideAdditionalInfo": "Сховати додаткову інформацію",
+    "cancel": "СКАСУВАТИ",
+    "add": "ДОДАТИ"
   }
 }

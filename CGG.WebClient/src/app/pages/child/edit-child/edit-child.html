@@ -1,0 +1,47 @@
+<div class="edit-child-container">
+  <div class="form-card">
+    <h2 class="card-title">EDIT CHILD PROFILE</h2>
+    <p class="card-subtitle">Update information for your kid</p>
+
+    <form [formGroup]="childForm" class="child-form">
+      <div class="form-group">
+        <label class="input-label">Name or Nickname</label>
+        <input type="text" formControlName="name" placeholder="Name or Nickname" class="input-field">
+      </div>
+
+      <div class="form-row">
+        <div class="form-group half-width">
+          <label class="input-label">Age</label>
+          <input type="number" formControlName="age" placeholder="Age" class="input-field">
+        </div>
+        <div class="form-group half-width">
+          <label class="input-label">Gender</label>
+          <select formControlName="gender" class="input-field select-field">
+            <option value="Female">Female</option>
+            <option value="Male">Male</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+      </div>
+
+      <button type="button" class="toggle-additional-btn" (click)="toggleAdditionalInfo()">
+        {{ showAdditionalInfo ? 'Hide additional info' : 'Additional info' }}
+        <svg [class.rotated]="showAdditionalInfo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="chevron-icon">
+          <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+        </svg>
+      </button>
+
+      @if (showAdditionalInfo) {
+        <div class="form-group">
+          <label class="input-label">Email (optional)</label>
+          <input type="email" formControlName="email" placeholder="Email (optional)" class="input-field">
+        </div>
+      }
+    </form>
+  </div>
+
+  <div class="action-buttons">
+    <button class="btn-outline" (click)="cancel()">CANCEL</button>
+    <button class="btn-primary" (click)="saveChanges()">SAVE CHANGES</button>
+  </div>
+</div>

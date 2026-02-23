@@ -1,0 +1,23 @@
+<div class="parent-dashboard-container">
+  <div class="profile-header" (click)="goToProfile()" style="cursor:pointer">
+    <div class="avatar-container">
+      <svg class="avatar-placeholder" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+        <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clip-rule="evenodd" />
+      </svg>
+    </div>
+    <div class="profile-info">
+      <h2 class="profile-name">{{ parentName }}</h2>
+      <span class="profile-status">Остання активність нещодавно</span>
+    </div>
+  </div>
+
+  <div class="action-card">
+    <div class="action-content">
+      <h3>Take the Career Test</h3>
+      <p>Discover your own career path and get personalized recommendations.</p>
+    </div>
+    <button class="btn-primary" (click)="takeSurvey()">TAKE TEST</button>
+  </div>
+
+  <app-family-component></app-family-component>
+</div>
