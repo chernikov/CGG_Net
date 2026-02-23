@@ -35,7 +35,7 @@ foreach ($script in $scripts) {
 }
 
 # 3. Free up ports
-$ports = @(7070, 4200)
+$ports = @(7070, 5296, 4200)
 foreach ($port in $ports) {
     $portPids = (Get-NetTCPConnection -LocalPort $port -ErrorAction SilentlyContinue).OwningProcess | Select-Object -Unique
     foreach ($pid in $portPids) {
