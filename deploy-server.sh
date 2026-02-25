@@ -81,55 +81,10 @@ echo -e "${YELLOW}Recent API logs:${NC}"
 docker compose --env-file .env.production -f docker-compose.prod.yml logs --tail=20 api
 echo ""
 
-# Check if nginx is installed
-if ! command -v nginx &> /dev/null; then
-    echo -e "${YELLOW}Nginx not installed. Installing...${NC}"
-    apt update
-    apt install -y nginx certbot python3-certbot-nginx
-    echo -e "${GREEN}✓${NC} Nginx installed"
-else
-    echo -e "${GREEN}✓${NC} Nginx already installed"
-fi
-
-# Create nginx configuration if it doesn't exist
-NGINX_CONF="/etc/nginx/sites-available/cgg.eduzerone.com"
-if [ ! -f "$NGINX_CONF" ]; then
-    echo -e "${YELLOW}Creating nginx configuration...${NC}"
-    cat > $NGINX_CONF <<'EOF'
-server {
-    listen 80;
-    server_name cgg.eduzerone.com;
-
-    client_max_body_size 100M;
-
-    location / {
-        proxy_pass http://localhost:80;
-        proxy_http_version 1.1;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection 'upgrade';
-        proxy_cache_bypass $http_upgrade;
-    }
-}
-EOF
-    
-    # Enable site
-    ln -sf $NGINX_CONF /etc/nginx/sites-enabled/cgg.eduzerone.com
-    
-    # Test nginx config
-    nginx -t
-    
-    # Reload nginx
-    systemctl reload nginx
-    
-    echo -e "${GREEN}✓${NC} Nginx configured"
-else
-    echo -e "${GREEN}✓${NC} Nginx configuration exists"
-    nginx -t && systemctl reload nginx
-fi
+# Reload nginx in docker container
+echo -e "${YELLOW}Reloading Nginx configuration...${NC}"
+docker exec cgg_nginx nginx -s reload
+echo -e "${GREEN}✓${NC} Nginx reloaded"
 
 echo ""
 echo -e "${GREEN}==================================="
@@ -153,7 +108,7 @@ echo ""
 echo "SSL Certificate:"
 if [ ! -d "/etc/letsencrypt/live/cgg.eduzerone.com" ]; then
     echo -e "${YELLOW}  SSL certificate not configured yet.${NC}"
-    echo "  Run: certbot --nginx -d cgg.eduzerone.com"
+    echo "  Run: docker stop cgg_nginx && certbot certonly --standalone -d cgg.eduzerone.com && docker start cgg_nginx"
 else
     echo -e "${GREEN}  ✓ SSL certificate installed${NC}"
 fi
