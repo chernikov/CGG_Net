@@ -1,0 +1,26 @@
+{
+  "$schema": "./schemas/index.schema.json",
+  "name": "parent-child-talents",
+  "title": {
+    "uk": "Батьківське бачення талантів дитини",
+    "en": "Parent View of Child's Talents",
+    "hi": "बच्चे की प्रतिभाओं के बारे में माता-पिता का दृष्टिकोण"
+  },
+  "description": {
+    "uk": "Опитування для батьків\nОпишіть таланти, інтереси та особливості вашої дитини для персоналізованих рекомендацій.",
+    "en": "Survey for parents\nDescribe your child's talents, interests and characteristics for personalized recommendations.",
+    "hi": "माता-पिता के लिए सर्वे\nव्यक्तिगत सिफारिशों के लिए अपने बच्चे की प्रतिभाओं, रुचियों और विशेषताओं का वर्णन करें।"
+  },
+  "version": "1.0",
+  "totalSteps": 1,
+  "languages": ["uk", "en", "hi"],
+  "defaultLanguage": "uk",
+  "creditCost": 20,
+  "metadata": {
+    "category": "career-guidance",
+    "targetAudience": "parents",
+    "subjectType": "child",
+    "estimatedDuration": "10-15 minutes",
+    "insightType": "parent-survey"
+  }
+}

@@ -16,4 +16,10 @@
     <PackageReference Include="MimeKit" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Include="Data\SeedData\**\*.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

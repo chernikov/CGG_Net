@@ -9,6 +9,10 @@
         "dotnet add": true,
         "Push-Location": true,
         "Pop-Location": true,
-        "dotnet run": true
+        "dotnet run": true,
+        "/^cd src/CGG\\.Infrastructure/Data/SeedData/surveys; npx tsc parent\\.ts teacher\\.ts --esModuleInterop --skipLibCheck; node -e \"const p = require\\('\\./parent\\.js'\\); const t = require\\('\\./teacher\\.js'\\); const fs = require\\('fs'\\); fs\\.writeFileSync\\('parent\\.json', JSON\\.stringify\\(p\\.parentSurveyQuestions, null, 2\\)\\); fs\\.writeFileSync\\('teacher\\.json', JSON\\.stringify\\(t\\.teacherSurveyQuestions, null, 2\\)\\);\"$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
     }
 }

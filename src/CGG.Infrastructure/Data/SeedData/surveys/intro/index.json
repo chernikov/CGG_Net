@@ -1,0 +1,23 @@
+{
+  "$schema": "./schemas/index.schema.json",
+  "name": "intro",
+  "title": {
+    "uk": "Пробний тест для батьків: «Моя кар'єрна орієнтація»",
+    "en": "Parent Trial: My Career Orientation",
+    "hi": "अभिभावक परीक्षण: मेरा करियर अभिमुखीकरण"
+  },
+  "description": {
+    "uk": "Короткий опитник для батьків\nДізнайтеся більше про свою професійну орієнтацію, мотиви та очікування.",
+    "en": "Short survey for parents\nLearn more about your career orientation, motives, and expectations.",
+    "hi": "माता-पिता के लिए संक्षिप्त सर्वे\nअपने करियर अभिमुखीकरण, प्रेरणाओं और अपेक्षाओं के बारे में अधिक जानें।"
+  },
+  "version": "1.0",
+  "totalSteps": 1,
+  "languages": ["uk", "en", "hi"],
+  "defaultLanguage": "uk",
+  "metadata": {
+    "category": "career-guidance",
+    "targetAudience": "parents",
+    "estimatedDuration": "5-7 minutes"
+  }
+}

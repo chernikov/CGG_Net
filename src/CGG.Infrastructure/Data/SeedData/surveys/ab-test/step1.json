@@ -1,0 +1,220 @@
+{
+  "$schema": "../schemas/step.schema.json",
+  "step": 1,
+  "name": "about_you",
+  "title": {
+    "uk": "Крок 1: Про себе",
+    "en": "Step 1: About You",
+    "hi": "चरण 1: आपके बारे में"
+  },
+  "description": {
+    "uk": "Розкажи про себе, щоб ми краще тебе зрозуміли",
+    "en": "Tell us about yourself so we can understand you better",
+    "hi": "हमें अपने बारे में बताएं ताकि हम आपको बेहतर समझ सकें"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "type": "input",
+      "text": {
+        "uk": "В якій країні ти народився?",
+        "en": "In which country were you born?",
+        "hi": "आप किस देश में पैदा हुए थे?"
+      },
+      "placeholder": {
+        "uk": "Україна",
+        "en": "Ukraine",
+        "hi": "यूक्रेन"
+      }
+    },
+    {
+      "id": "q2",
+      "type": "input",
+      "text": {
+        "uk": "В якій країні ти проживаєш зараз?",
+        "en": "In which country do you currently live?",
+        "hi": "आप अभी किस देश में रहते हैं?"
+      },
+      "placeholder": {
+        "uk": "Україна",
+        "en": "Ukraine",
+        "hi": "यूक्रेन"
+      }
+    },
+    {
+      "id": "q3",
+      "type": "textarea",
+      "text": {
+        "uk": "Який настрій у тебе зараз? Чому?",
+        "en": "What is your mood right now? Why?",
+        "hi": "अभी आपका मूड कैसा है? क्यों?"
+      },
+      "placeholder": {
+        "uk": "Опиши свій настрій і причину...",
+        "en": "Describe your mood and the reason...",
+        "hi": "अपने मूड और कारण का वर्णन करें..."
+      }
+    },
+    {
+      "id": "q4",
+      "type": "textarea",
+      "text": {
+        "uk": "Розкажи про своє хоббі?",
+        "en": "Tell us about your hobbies?",
+        "hi": "अपने शौक के बारे में बताएं?"
+      },
+      "placeholder": {
+        "uk": "Чим ти любиш займатися у вільний час?",
+        "en": "What do you like to do in your free time?",
+        "hi": "आप अपने खाली समय में क्या करना पसंद करते हैं?"
+      }
+    },
+    {
+      "id": "q5",
+      "type": "textarea",
+      "text": {
+        "uk": "Опиши свої (важливі для тебе) звички (клацаю ручкою, гризу олівець, прокидаюсь о 7 ранку і т.д.)",
+        "en": "Describe your (important to you) habits (clicking pen, biting pencil, waking up at 7 am, etc.)",
+        "hi": "अपनी (आपके लिए महत्वपूर्ण) आदतों का वर्णन करें (पेन क्लिक करना, पेंसिल काटना, सुबह 7 बजे उठना आदि)"
+      },
+      "placeholder": {
+        "uk": "Які твої повсякденні звички?",
+        "en": "What are your daily habits?",
+        "hi": "आपकी दैनिक आदतें क्या हैं?"
+      }
+    },
+    {
+      "id": "q6",
+      "type": "textarea",
+      "text": {
+        "uk": "Назви три здібності, які в тебе розвинуті найкраще?",
+        "en": "Name three abilities that are most developed in you?",
+        "hi": "तीन क्षमताओं का नाम बताएं जो आपमें सबसे अधिक विकसित हैं?"
+      },
+      "placeholder": {
+        "uk": "Наприклад: комунікація, творчість, логіка...",
+        "en": "For example: communication, creativity, logic...",
+        "hi": "उदाहरण के लिए: संचार, रचनात्मकता, तर्क..."
+      }
+    },
+    {
+      "id": "q7",
+      "type": "textarea",
+      "text": {
+        "uk": "Назви свої три здібності, які би ти хотів розвинути?",
+        "en": "Name three abilities you would like to develop?",
+        "hi": "तीन क्षमताओं का नाम बताएं जिन्हें आप विकसित करना चाहते हैं?"
+      },
+      "placeholder": {
+        "uk": "Які навички ти хочеш покращити?",
+        "en": "Which skills do you want to improve?",
+        "hi": "आप किन कौशल को सुधारना चाहते हैं?"
+      }
+    },
+    {
+      "id": "q8",
+      "type": "input",
+      "text": {
+        "uk": "Яку професію ти обрав для себе зараз?",
+        "en": "What profession have you chosen for yourself now?",
+        "hi": "अभी आपने अपने लिए कौन सा पेशा चुना है?"
+      },
+      "placeholder": {
+        "uk": "Наприклад: дизайнер, програміст, лікар...",
+        "en": "For example: designer, programmer, doctor...",
+        "hi": "उदाहरण के लिए: डिजाइनर, प्रोग्रामर, डॉक्टर..."
+      }
+    },
+    {
+      "id": "q9",
+      "type": "textarea",
+      "text": {
+        "uk": "Назви свого улюбленого персонажа (героя з книги, фільму, коміксу…). Чим він тобі подобається?",
+        "en": "Name your favorite character (hero from book, movie, comic...). What do you like about them?",
+        "hi": "अपने पसंदीदा चरित्र (किताब, फिल्म, कॉमिक से नायक...) का नाम बताएं। आपको उनके बारे में क्या पसंद है?"
+      },
+      "placeholder": {
+        "uk": "Опиши персонажа і чому він тобі імпонує...",
+        "en": "Describe the character and why they appeal to you...",
+        "hi": "चरित्र का वर्णन करें और वे आपको क्यों आकर्षित करते हैं..."
+      }
+    },
+    {
+      "id": "q10",
+      "type": "textarea",
+      "text": {
+        "uk": "Назви свого антигероя (злого, негативного) з книги, фільму, коміксу. Чим він тобі НЕ подобається?",
+        "en": "Name your anti-hero (evil, negative) from book, movie, comic. What do you NOT like about them?",
+        "hi": "अपने प्रति-नायक (बुरे, नकारात्मक) का नाम किताब, फिल्म, कॉमिक से बताएं। आपको उनके बारे में क्या पसंद नहीं है?"
+      },
+      "placeholder": {
+        "uk": "Опиши персонажа і що тобі в ньому не подобається...",
+        "en": "Describe the character and what you don't like about them...",
+        "hi": "चरित्र का वर्णन करें और आपको उनके बारे में क्या पसंद नहीं है..."
+      }
+    },
+    {
+      "id": "q11",
+      "type": "textarea",
+      "text": {
+        "uk": "Ким з своїх рідних (мама, тато, брати, сестри, дідусі, бабусі та інші прародичі) ти захоплюєшся? Чому вони тобі подобаються?",
+        "en": "Which of your relatives (mom, dad, brothers, sisters, grandparents and other ancestors) do you admire? Why do you like them?",
+        "hi": "अपने रिश्तेदारों में से किसकी (माँ, पिताजी, भाई, बहन, दादा-दादी और अन्य पूर्वज) आप प्रशंसा करते हैं? आपको वे क्यों पसंद हैं?"
+      },
+      "placeholder": {
+        "uk": "Розкажи про родича, яким ти захоплюєшся...",
+        "en": "Tell us about a relative you admire...",
+        "hi": "उस रिश्तेदार के बारे में बताएं जिसकी आप प्रशंसा करते हैं..."
+      }
+    },
+    {
+      "id": "q12",
+      "type": "textarea",
+      "text": {
+        "uk": "На кого з своїх родичів ти не хотів би бути схожим? Чим вони тобі НЕ подобаються?",
+        "en": "Which of your relatives would you not want to be like? What do you NOT like about them?",
+        "hi": "अपने रिश्तेदारों में से किसके जैसा आप नहीं बनना चाहते? आपको उनके बारे में क्या पसंद नहीं है?"
+      },
+      "placeholder": {
+        "uk": "Опиши що саме тобі не подобається...",
+        "en": "Describe what exactly you don't like...",
+        "hi": "वर्णन करें कि आपको वास्तव में क्या पसंद नहीं है..."
+      }
+    },
+    {
+      "id": "q13",
+      "type": "textarea",
+      "text": {
+        "uk": "Додай бонусні характеристики - Про що з важливого про себе ти хотів би з нами поділитись?",
+        "en": "Add bonus characteristics - What important things about yourself would you like to share with us?",
+        "hi": "बोनस विशेषताएं जोड़ें - अपने बारे में कौन सी महत्वपूर्ण बातें आप हमारे साथ साझा करना चाहेंगे?"
+      },
+      "placeholder": {
+        "uk": "Розкажи ще щось важливе про себе...",
+        "en": "Tell us something else important about yourself...",
+        "hi": "अपने बारे में कुछ और महत्वपूर्ण बताएं..."
+      }
+    }
+  ],
+  "aiPrompt": {
+    "systemPrompt": "You are an expert career psychologist analyzing a student's personality and interests.",
+    "userPromptTemplate": "Analyze the following answers with deep psychological insight.\n\n<answers>\n{{answers}}\n</answers>\n\nLook for underlying patterns, motivations, and personality traits. Don't just extract answers - interpret what they reveal about the student's character, values, and potential. Provide exactly 3 professions that truly match their psychological profile. For each profession, explain WHY it fits based on deep personality analysis, not just surface-level interests.",
+    "maxTokens": 600,
+    "temperature": 0.7
+  },
+  "model": {
+    "provider": "openai",
+    "name": "gpt-5-nano",
+    "reasoning": {
+      "effort": "medium"
+    },
+    "text": {
+      "verbosity": "medium"
+    }
+  },
+  "outputFormat": {
+    "type": "structured",
+    "mode": "short",
+    "formatFile": "/formats/short-profession.json"
+  }
+}

@@ -19,6 +19,9 @@ namespace CGG.Infrastructure.Data
         {
             await SeedRolesAsync();
             await SeedAdminUserAsync();
+            
+            var surveySeeder = new SurveySeeder(_context, Microsoft.Extensions.Logging.Abstractions.NullLogger<SurveySeeder>.Instance);
+            await surveySeeder.SeedAsync();
         }
 
         private async Task SeedRolesAsync()

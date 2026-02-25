@@ -1,0 +1,99 @@
+{
+  "$schema": "../schemas/step.schema.json",
+  "step": 3,
+  "name": "endgame_achievements",
+  "title": {
+    "uk": "Крок 3: Спробуй магію",
+    "en": "Step 3: Try Magic",
+    "hi": "चरण 3: जादू आज़माएं"
+  },
+  "description": {
+    "uk": "Обери напрямок і навички для персональних рекомендацій. Відповідай на запитання по черзі.",
+    "en": "Choose your direction and skills for personalized recommendations. Answer the questions one by one.",
+    "hi": "व्यक्तिगत सुझावों के लिए अपना दिशा और कौशल चुनें. प्रश्नों का उत्तर क्रम से दें."
+  },
+  "questions": [
+    {
+      "id": "desired_profession",
+      "type": "input",
+      "text": {
+        "uk": "Твоя бажана професія",
+        "en": "Your desired profession",
+        "hi": "आपका इच्छित पेशा"
+      },
+      "placeholder": {
+        "uk": "Введи професію...",
+        "en": "Enter a profession...",
+        "hi": "पेशा दर्ज करें..."
+      }
+    },
+    {
+      "id": "skills_to_develop",
+      "type": "multiselect",
+      "text": {
+        "uk": "Обери навички, які хочеш розвинути (максимум 3)",
+        "en": "Select the skills you want to develop (max 3)",
+        "hi": "वे कौशल चुनें जिन्हें आप विकसित करना चाहते हैं (अधिकतम 3)"
+      },
+      "options": {
+        "uk": [
+          "Creativity",
+          "Teamwork",
+          "Problem-solving",
+          "Communication",
+          "Leadership",
+          "Technical skills"
+        ],
+        "en": [
+          "Creativity",
+          "Teamwork",
+          "Problem-solving",
+          "Communication",
+          "Leadership",
+          "Technical skills"
+        ],
+        "hi": [
+          "रचनात्मकता",
+          "टीमवर्क",
+          "समस्या समाधान",
+          "संचार",
+          "नेतृत्व",
+          "तकनीकी कौशल"
+        ]
+      },
+      "maxSelections": 3
+    },
+    {
+      "id": "custom_skill",
+      "type": "input",
+      "optional": true,
+      "text": {
+        "uk": "Додай свою навичку (необов'язково)",
+        "en": "Add your own skill (optional)",
+        "hi": "अपना कौशल जोड़ें (वैकल्पिक)"
+      },
+      "placeholder": {
+        "uk": "Введи свою навичку...",
+        "en": "Enter your skill...",
+        "hi": "अपना कौशल दर्ज करें..."
+      }
+    }
+  ],
+  "systemPrompt": "You are an expert career psychologist providing the final comprehensive analysis.",
+  "userPromptTemplate": "Aggregated previous results:\n\n<prev_results>\n{{prev_results}}\n</prev_results>\n\nNow analyze final step answers to complete the psychological profile.\n\n<answers>\n{{answers}}\n</answers>\n\nProvide exactly 3 professions representing the most accurate recommendations.",
+  "model": {
+    "provider": "openai",
+    "name": "gpt-5-mini",
+    "reasoning": {
+      "effort": "medium"
+    },
+    "text": {
+      "verbosity": "medium"
+    }
+  },
+  "outputFormat": {
+    "type": "structured",
+    "mode": "full",
+    "formatFile": "/formats/short-profession.json"
+  }
+}

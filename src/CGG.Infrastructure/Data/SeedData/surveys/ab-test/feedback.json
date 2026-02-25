@@ -1,0 +1,115 @@
+{
+  "$schema": "../schemas/step.schema.json",
+  "step": 4,
+  "name": "feedback",
+  "title": {
+    "uk": "Крок 4: Відгук",
+    "en": "Step 4: Feedback",
+    "hi": "चरण 4: प्रतिक्रिया"
+  },
+  "description": {
+    "uk": "Поділись своїми враженнями про магічну подорож",
+    "en": "Share your impressions about the magical journey",
+    "hi": "जादुई यात्रा के बारे में अपने विचार साझा करें"
+  },
+  "questions": [
+    {
+      "id": "q39",
+      "type": "number",
+      "text": {
+        "uk": "Наскільки сильною була твоя магічна подорож? (1-10)",
+        "en": "How strong was your magical journey? (1-10)",
+        "hi": "आपकी जादुई यात्रा कितनी मजबूत थी? (1-10)"
+      },
+      "min": 1,
+      "max": 10
+    },
+    {
+      "id": "q40",
+      "type": "textarea",
+      "text": {
+        "uk": "Опиши свою магічну подорож.",
+        "en": "Describe your magical journey.",
+        "hi": "अपनी जादुई यात्रा का वर्णन करें।"
+      },
+      "placeholder": {
+        "uk": "Розкажи про свої враження...",
+        "en": "Tell us about your impressions...",
+        "hi": "हमें अपनी छापों के बारे में बताएं..."
+      }
+    },
+    {
+      "id": "q41",
+      "type": "number",
+      "text": {
+        "uk": "Наскільки тобі подобалась твоя магічна подорож? (1-10)",
+        "en": "How much did you enjoy your magical journey? (1-10)",
+        "hi": "आपको अपनी जादुई यात्रा कितनी पसंद आई? (1-10)"
+      },
+      "min": 1,
+      "max": 10
+    },
+    {
+      "id": "q42",
+      "type": "textarea",
+      "text": {
+        "uk": "Чому тобі подобалась твоя магічна подорож?",
+        "en": "Why did you enjoy your magical journey?",
+        "hi": "आपको अपनी जादुई यात्रा क्यों पसंद आई?"
+      },
+      "placeholder": {
+        "uk": "Що тобі найбільше сподобалось?",
+        "en": "What did you like the most?",
+        "hi": "आपको सबसे ज्यादा क्या पसंद आया?"
+      }
+    },
+    {
+      "id": "q43",
+      "type": "textarea",
+      "text": {
+        "uk": "Які були найскладніші випробування в твоїй магічній подорожі?",
+        "en": "What were the most challenging trials in your magical journey?",
+        "hi": "आपकी जादुई यात्रा में सबसे कठिन परीक्षण क्या थे?"
+      },
+      "placeholder": {
+        "uk": "Опиши найскладніші моменти...",
+        "en": "Describe the most difficult moments...",
+        "hi": "सबसे कठिन क्षणों का वर्णन करें..."
+      }
+    },
+    {
+      "id": "q44",
+      "type": "textarea",
+      "text": {
+        "uk": "Що б ти хотів(ла) покращити в цій магічній подорожі?",
+        "en": "What would you like to improve in this magical journey?",
+        "hi": "इस जादुई यात्रा में आप क्या सुधार करना चाहेंगे?"
+      },
+      "placeholder": {
+        "uk": "Твої пропозиції...",
+        "en": "Your suggestions...",
+        "hi": "आपके सुझाव..."
+      }
+    }
+  ],
+  "aiPrompt": {
+    "systemPrompt": "You are collecting user feedback about their career exploration experience.",
+    "userPromptTemplate": "User feedback about the career exploration journey:\n\n<feedback>\n{{answers}}\n</feedback>\n\nStore this feedback for analysis and improvements.",
+    "maxTokens": 400,
+    "temperature": 0.7
+  },
+  "model": {
+    "provider": "openai",
+    "name": "gpt-5-nano",
+    "reasoning": {
+      "effort": "low"
+    },
+    "text": {
+      "verbosity": "low"
+    }
+  },
+  "outputFormat": {
+    "type": "raw",
+    "mode": "feedback"
+  }
+}

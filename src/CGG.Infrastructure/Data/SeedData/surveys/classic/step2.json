@@ -1,0 +1,398 @@
+{
+  "$schema": "./schemas/step.schema.json",
+  "step": 2,
+  "name": "work_style_and_environment",
+  "title": {
+    "uk": "Крок 2: Навчання та розвиток",
+    "en": "Step 2: Learning and Development",
+    "hi": "चरण 2: सीखना और विकास"
+  },
+  "description": {
+    "uk": "Відповідайте на питання про ваші навички, звички та підхід до навчання.",
+    "en": "Answer questions about your skills, habits, and approach to learning.",
+    "hi": "अपने कौशल, आदतों और सीखने के दृष्टिकोण के बारे में प्रश्नों के उत्तर दें।"
+  },
+  "questions": [
+    {
+      "id": "memorize_easily",
+      "type": "select",
+      "text": {
+        "uk": "Чи легко вам запам'ятовувати нову інформацію?",
+        "en": "Do you easily remember new information?",
+        "hi": "क्या आप आसानी से नई जानकारी याद कर लेते हैं?"
+      },
+      "options": {
+        "uk": ["Так", "Ні"],
+        "en": ["Yes", "No"],
+        "hi": ["हाँ", "नहीं"]
+      }
+    },
+    {
+      "id": "best_learning_method",
+      "type": "multiselect",
+      "text": {
+        "uk": "Який метод навчання вам підходить найбільше? (Виберіть один або кілька варіантів):",
+        "en": "Which learning method suits you best? (Select one or more):",
+        "hi": "आपके लिए कौन सा सीखने का तरीका सबसे अच्छा है? (एक या अधिक चुनें):"
+      },
+      "options": {
+        "uk": [
+          "Читання книг і конспектування",
+          "Прослуховування пояснень",
+          "Практичне виконання завдань",
+          "Обговорення з іншими людьми"
+        ],
+        "en": [
+          "Reading books and taking notes",
+          "Listening to explanations",
+          "Doing practical tasks",
+          "Discussing with others"
+        ],
+        "hi": [
+          "किताबें पढ़ना और नोट्स बनाना",
+          "व्याख्यान सुनना",
+          "व्यावहारिक कार्य करना",
+          "दूसरों के साथ चर्चा करना"
+        ]
+      }
+    },
+    {
+      "id": "quick_learn_situation",
+      "type": "textarea",
+      "text": {
+        "uk": "Опишіть ситуацію, коли вам довелося швидко засвоїти новий матеріал. Як ви це зробили?",
+        "en": "Describe a situation when you had to quickly learn new material. How did you do it?",
+        "hi": "ऐसी स्थिति का वर्णन करें जब आपको जल्दी से नया विषय सीखना पड़ा। आपने यह कैसे किया?"
+      }
+    },
+    {
+      "id": "persistent_goals",
+      "type": "select",
+      "text": {
+        "uk": "Чи вважаєте ви себе наполегливим у досягненні цілей?",
+        "en": "Do you consider yourself persistent in achieving goals?",
+        "hi": "क्या आप अपने लक्ष्यों को प्राप्त करने में दृढ़ हैं?"
+      },
+      "options": {
+        "uk": ["Так", "Ні"],
+        "en": ["Yes", "No"],
+        "hi": ["हाँ", "नहीं"]
+      }
+    },
+    {
+      "id": "overcome_difficulties",
+      "type": "multiselect",
+      "text": {
+        "uk": "Що вам допомагає справлятися з труднощами? (Виберіть один або кілька варіантів):",
+        "en": "What helps you cope with difficulties? (Select one or more):",
+        "hi": "कठिनाइयों से निपटने में आपकी क्या मदद करता है? (एक या अधिक चुनें):"
+      },
+      "options": {
+        "uk": [
+          "Підтримка друзів і сім'ї",
+          "Внутрішня мотивація",
+          "Пошук альтернативних рішень",
+          "Аналіз і планування"
+        ],
+        "en": [
+          "Support from friends and family",
+          "Inner motivation",
+          "Finding alternative solutions",
+          "Analysis and planning"
+        ],
+        "hi": [
+          "मित्रों और परिवार का समर्थन",
+          "आंतरिक प्रेरणा",
+          "विकल्पों की खोज",
+          "विश्लेषण और योजना"
+        ]
+      }
+    },
+    {
+      "id": "serious_obstacle_example",
+      "type": "textarea",
+      "text": {
+        "uk": "Наведіть приклад ситуації, коли вам довелося подолати серйозну перешкоду. Як ви діяли?",
+        "en": "Give an example of a situation when you had to overcome a serious obstacle. How did you act?",
+        "hi": "ऐसी स्थिति का उदाहरण दें जब आपको गंभीर बाधा पार करनी पड़ी। आपने क्या किया?"
+      }
+    },
+    {
+      "id": "comfortable_meeting_new_people",
+      "type": "select",
+      "text": {
+        "uk": "Чи комфортно вам знайомитися з новими людьми?",
+        "en": "Are you comfortable meeting new people?",
+        "hi": "क्या आप नए लोगों से मिलने में सहज हैं?"
+      },
+      "options": {
+        "uk": ["Так", "Ні"],
+        "en": ["Yes", "No"],
+        "hi": ["हाँ", "नहीं"]
+      }
+    },
+    {
+      "id": "conflict_resolution",
+      "type": "multiselect",
+      "text": {
+        "uk": "Як ви зазвичай вирішуєте конфліктні ситуації? (Виберіть один або кілька варіантів):",
+        "en": "How do you usually resolve conflicts? (Select one or more):",
+        "hi": "आप आमतौर पर संघर्षों को कैसे सुलझाते हैं? (एक या अधिक चुनें):"
+      },
+      "options": {
+        "uk": [
+          "Відкрито обговорюю проблему",
+          "Намагаюся уникати конфліктів",
+          "Шукаю компроміс",
+          "Очікую, поки ситуація вирішиться сама"
+        ],
+        "en": [
+          "Openly discuss the problem",
+          "Try to avoid conflicts",
+          "Look for a compromise",
+          "Wait for the situation to resolve itself"
+        ],
+        "hi": [
+          "समस्या को खुलकर चर्चा करना",
+          "संघर्षों से बचने की कोशिश करना",
+          "समझौता ढूंढना",
+          "स्थिति के अपने आप सुलझने की प्रतीक्षा करना"
+        ]
+      }
+    },
+    {
+      "id": "group_interaction_example",
+      "type": "textarea",
+      "text": {
+        "uk": "Опишіть ситуацію, коли вам вдалося ефективно взаємодіяти з групою людей (виступ на учнівському самоурядуванні, гра в команді, інші активності в групі). Що допомогло вам у цьому?",
+        "en": "Describe a situation when you successfully interacted with a group (student council, team game, other group activities). What helped you?",
+        "hi": "ऐसी स्थिति का वर्णन करें जब आपने समूह के साथ सफलतापूर्वक बातचीत की (छात्र परिषद, टीम खेल, अन्य गतिविधियाँ)। इसमें आपकी क्या मदद की?"
+      }
+    },
+    {
+      "id": "responsible_person",
+      "type": "select",
+      "text": {
+        "uk": "Чи вважаєте ви себе відповідальною людиною?",
+        "en": "Do you consider yourself a responsible person?",
+        "hi": "क्या आप खुद को जिम्मेदार व्यक्ति मानते हैं?"
+      },
+      "options": {
+        "uk": ["Так", "Ні"],
+        "en": ["Yes", "No"],
+        "hi": ["हाँ", "नहीं"]
+      }
+    },
+    {
+      "id": "most_important_in_life",
+      "type": "multiselect",
+      "text": {
+        "uk": "Що для вас найважливіше у житті? (Виберіть один або кілька варіантів):",
+        "en": "What is most important to you in life? (Select one or more):",
+        "hi": "आपके लिए जीवन में सबसे महत्वपूर्ण क्या है? (एक या अधिक चुनें):"
+      },
+      "options": {
+        "uk": [
+          "Успіх у роботі",
+          "Дружба і сім'я",
+          "Самореалізація",
+          "Заробляння грошей"
+        ],
+        "en": [
+          "Success at work",
+          "Friendship and family",
+          "Self-realization",
+          "Earning money"
+        ],
+        "hi": [
+          "काम में सफलता",
+          "दोस्ती और परिवार",
+          "आत्म-साक्षात्कार",
+          "पैसे कमाना"
+        ]
+      }
+    },
+    {
+      "id": "main_principles",
+      "type": "textarea",
+      "text": {
+        "uk": "Які ваші головні принципи або життєві цінності? Як вони впливають на ваші рішення?",
+        "en": "What are your main principles or life values? How do they affect your decisions?",
+        "hi": "आपके मुख्य सिद्धांत या जीवन मूल्य क्या हैं? वे आपके निर्णयों को कैसे प्रभावित करते हैं?"
+      }
+    },
+    {
+      "id": "physically_active_3x_week",
+      "type": "select",
+      "text": {
+        "uk": "Чи займаєтесь ви фізичною активністю (спорт, прогулянки тощо) хоча б 3 рази на тиждень?",
+        "en": "Do you do physical activity (sports, walks, etc.) at least 3 times a week?",
+        "hi": "क्या आप सप्ताह में कम से कम 3 बार शारीरिक गतिविधि (खेल, सैर आदि) करते हैं?"
+      },
+      "options": {
+        "uk": ["Так", "Ні"],
+        "en": ["Yes", "No"],
+        "hi": ["हाँ", "नहीं"]
+      }
+    },
+    {
+      "id": "physical_health_methods",
+      "type": "multiselect",
+      "text": {
+        "uk": "Як ви зазвичай підтримуєте свій фізичний стан? (Виберіть один або кілька варіантів):",
+        "en": "How do you usually maintain your physical health? (Select one or more):",
+        "hi": "आप आमतौर पर अपने शारीरिक स्वास्थ्य को कैसे बनाए रखते हैं? (एक या अधिक चुनें):"
+      },
+      "options": {
+        "uk": [
+          "Регулярні фізичні вправи",
+          "Правильне харчування",
+          "Достатній сон",
+          "Відмова від шкідливих звичок"
+        ],
+        "en": [
+          "Regular exercise",
+          "Healthy eating",
+          "Enough sleep",
+          "Avoiding bad habits"
+        ],
+        "hi": [
+          "नियमित व्यायाम",
+          "स्वस्थ भोजन",
+          "पर्याप्त नींद",
+          "बुरी आदतों से बचना"
+        ]
+      }
+    },
+    {
+      "id": "physical_activity_feeling",
+      "type": "textarea",
+      "text": {
+        "uk": "Опишіть, як фізична активність впливає на ваше самопочуття та настрій.",
+        "en": "Describe how physical activity affects your well-being and mood.",
+        "hi": "वर्णन करें कि शारीरिक गतिविधि आपके स्वास्थ्य और मूड को कैसे प्रभावित करती है।"
+      }
+    },
+    {
+      "id": "creative_person",
+      "type": "select",
+      "text": {
+        "uk": "Чи вважаєте ви себе креативною особистістю?",
+        "en": "Do you consider yourself a creative person?",
+        "hi": "क्या आप खुद को रचनात्मक व्यक्ति मानते हैं?"
+      },
+      "options": {
+        "uk": ["Так", "Ні"],
+        "en": ["Yes", "No"],
+        "hi": ["हाँ", "नहीं"]
+      }
+    },
+    {
+      "id": "creativity_situations",
+      "type": "multiselect",
+      "text": {
+        "uk": "У яких ситуаціях ви найчастіше проявляєте креативність? (Виберіть один або кілька варіантів):",
+        "en": "In which situations do you most often show creativity? (Select one or more):",
+        "hi": "आप किन परिस्थितियों में सबसे अधिक रचनात्मकता दिखाते हैं? (एक या अधिक चुनें):"
+      },
+      "options": {
+        "uk": [
+          "Під час навчання",
+          "У повсякденному житті",
+          "У спілкуванні з людьми",
+          "У вирішенні проблем"
+        ],
+        "en": [
+          "During learning",
+          "In everyday life",
+          "In communication with people",
+          "In problem solving"
+        ],
+        "hi": [
+          "सीखने के दौरान",
+          "दैनिक जीवन में",
+          "लोगों के साथ बातचीत में",
+          "समस्याओं को हल करने में"
+        ]
+      }
+    },
+    {
+      "id": "nonstandard_solution_example",
+      "type": "textarea",
+      "text": {
+        "uk": "Наведіть приклад нестандартного рішення, яке ви знайшли у складній ситуації.",
+        "en": "Give an example of a non-standard solution you found in a difficult situation.",
+        "hi": "कठिन परिस्थिति में आपने जो अनूठा समाधान निकाला उसका उदाहरण दें।"
+      }
+    },
+    {
+      "id": "control_emotions_stress",
+      "type": "select",
+      "text": {
+        "uk": "Чи легко вам контролювати свої емоції у стресових ситуаціях?",
+        "en": "Is it easy for you to control your emotions in stressful situations?",
+        "hi": "क्या आप तनावपूर्ण परिस्थितियों में अपनी भावनाओं को आसानी से नियंत्रित कर लेते हैं?"
+      },
+      "options": {
+        "uk": ["Так", "Ні"],
+        "en": ["Yes", "No"],
+        "hi": ["हाँ", "नहीं"]
+      }
+    },
+    {
+      "id": "handle_negative_emotions",
+      "type": "multiselect",
+      "text": {
+        "uk": "Як ви зазвичай справляєтесь із негативними емоціями? (Виберіть один або кілька варіантів):",
+        "en": "How do you usually handle negative emotions? (Select one or more):",
+        "hi": "आप आमतौर पर नकारात्मक भावनाओं से कैसे निपटते हैं? (एक या अधिक चुनें):"
+      },
+      "options": {
+        "uk": [
+          "Говорю про них із близькими",
+          "Виконую фізичні вправи",
+          "Медитую або використовую техніки релаксації",
+          "Ігнорую або пригнічую свої емоції"
+        ],
+        "en": [
+          "Talk about them with loved ones",
+          "Do physical exercises",
+          "Meditate or use relaxation techniques",
+          "Ignore or suppress my emotions"
+        ],
+        "hi": [
+          "करीबी लोगों से बात करना",
+          "व्यायाम करना",
+          "मेडिटेशन या विश्राम तकनीकें",
+          "अपनी भावनाओं को अनदेखा या दबाना"
+        ]
+      }
+    },
+    {
+      "id": "emotions_success_example",
+      "type": "textarea",
+      "text": {
+        "uk": "Опишіть випадок, коли вам вдалося ефективно впоратися з емоціями в складній ситуації.",
+        "en": "Describe a case when you successfully managed your emotions in a difficult situation.",
+        "hi": "ऐसी स्थिति का वर्णन करें जब आपने कठिन परिस्थिति में अपनी भावनाओं को सफलतापूर्वक संभाला।"
+      }
+    }
+  ],
+  "systemPrompt": "You are an expert career psychologist continuing the analysis.",
+  "userPromptTemplate": "Previous aggregated results (if any):\n\n<prev_results>\n{{prev_results}}\n</prev_results>\n\nNow analyze current step answers: building the psychological profile further.\n\n<answers>\n{{answers}}\n</answers>\n\nRefine the profession list by:\n1) Confirm which previous professions still fit,\n2) Adjust match percentages,\n3) Add any new professions that emerge,\n4) Provide deeper psychological reasoning.\n\nProvide exactly 3 professions.",
+  "model": {
+    "provider": "openai",
+    "name": "gpt-5-nano",
+    "reasoning": {
+      "effort": "medium"
+    },
+    "text": {
+      "verbosity": "medium"
+    }
+  },
+  "outputFormat": {
+    "type": "structured",
+    "mode": "short",
+    "formatFile": "/formats/short-profession.json"
+  }
+}

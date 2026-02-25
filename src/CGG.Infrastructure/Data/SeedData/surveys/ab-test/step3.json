@@ -1,0 +1,97 @@
+{
+  "$schema": "../schemas/step.schema.json",
+  "step": 3,
+  "name": "career_roadmap",
+  "title": {
+    "uk": "Крок 3: Спробуй магію",
+    "en": "Step 3: Try Magic",
+    "hi": "चरण 3: जादू आज़माएं"
+  },
+  "description": {
+    "uk": "Фокус на здібностях та напрямках розвитку для персональних рекомендацій",
+    "en": "Focus on abilities and growth directions for personalized recommendations",
+    "hi": "व्यक्तिगत सिफारिशों के लिए क्षमताओं और विकास दिशाओं पर ध्यान केंद्रित करें"
+  },
+  "questions": [
+    {
+      "id": "q36",
+      "type": "input",
+      "text": {
+        "uk": "Яку професію ти хочеш дослідити далі?",
+        "en": "Which profession do you want to explore next?",
+        "hi": "आप अगला कौन सा पेशा अन्वेषण करना चाहते हैं?"
+      },
+      "placeholder": {
+        "uk": "Введи професію...",
+        "en": "Enter a profession...",
+        "hi": "पेशा दर्ज करें..."
+      }
+    },
+    {
+      "id": "q37",
+      "type": "multiselect",
+      "text": {
+        "uk": "Які 2–3 навички ти хочеш покращити найбільше?",
+        "en": "Which 2–3 skills do you most want to improve?",
+        "hi": "आप किन 2–3 कौशलों को सबसे अधिक सुधारना चाहते हैं?"
+      },
+      "options": {
+        "uk": [
+          "Комунікація",
+          "Креативність",
+          "Аналітика",
+          "Командна робота",
+          "Емоційний інтелект",
+          "Організація"
+        ],
+        "en": [
+          "Communication",
+          "Creativity",
+          "Analytics",
+          "Teamwork",
+          "Emotional intelligence",
+          "Organization"
+        ],
+        "hi": [
+          "संचार",
+          "रचनात्मकता",
+          "विश्लेषण",
+          "टीमवर्क",
+          "भावनात्मक बुद्धिमत्ता",
+          "संगठन"
+        ]
+      },
+      "maxSelections": 3
+    },
+    {
+      "id": "q38",
+      "type": "textarea",
+      "text": {
+        "uk": "Опиши один конкретний крок, який ти зробиш цього тижня для розвитку.",
+        "en": "Describe one concrete step you will take this week for development.",
+        "hi": "इस सप्ताह विकास के लिए आप एक ठोस कदम क्या उठाएंगे उसका वर्णन करें।"
+      }
+    }
+  ],
+  "aiPrompt": {
+    "systemPrompt": "You are an expert career psychologist providing the final comprehensive analysis.",
+    "userPromptTemplate": "Aggregated previous results:\n\n<prev_results>\n{{prev_results}}\n</prev_results>\n\nNow analyze final step answers to complete the psychological profile.\n\n<answers>\n{{answers}}\n</answers>\n\nProvide exactly 3 professions representing the most accurate recommendations.",
+    "maxTokens": 600,
+    "temperature": 0.7
+  },
+  "model": {
+    "provider": "openai",
+    "name": "gpt-5-mini",
+    "reasoning": {
+      "effort": "medium"
+    },
+    "text": {
+      "verbosity": "medium"
+    }
+  },
+  "outputFormat": {
+    "type": "structured",
+    "mode": "full",
+    "formatFile": "/formats/short-profession.json"
+  }
+}
