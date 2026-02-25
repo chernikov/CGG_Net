@@ -2,7 +2,7 @@ FROM node:20-alpine AS build
 WORKDIR /app
 
 COPY CGG.WebClient/package*.json ./
-RUN npm ci
+RUN npm ci --legacy-peer-deps
 
 COPY CGG.WebClient/ ./
 RUN npm run build -- --output-path=dist-app

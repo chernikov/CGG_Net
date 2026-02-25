@@ -711,15 +711,29 @@ chore: update dependencies
 - `environments/environment.ts`: Development
 - `environments/environment.prod.ts`: Production
 
-## Docker Support
+## Docker & Deployment (Деплой)
 
+### Локальний запуск (Development)
 ```bash
-# Development
 docker-compose up
-
-# Production
-docker-compose -f docker-compose.prod.yml up
 ```
+
+### Деплой на сервер (Production)
+Для деплою проєкту на сервер виконайте наступні кроки:
+
+1. Переконайтеся, що **Docker Desktop** запущений на вашому комп'ютері.
+2. Виконайте скрипт для збірки та відправки образів у Docker Hub:
+   ```powershell
+   .\build-and-push.ps1
+   ```
+3. Підключіться до сервера по SSH:
+   ```bash
+   ssh root@46.101.247.177
+   ```
+4. На сервері перейдіть у папку деплою та запустіть скрипт оновлення:
+   ```bash
+   cd /home/deploy && ./deploy-server.sh
+   ```
 
 ## Migration Notes
 

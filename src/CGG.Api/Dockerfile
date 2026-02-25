@@ -2,6 +2,7 @@ FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
 
 COPY src/Directory.Build.props ./src/Directory.Build.props
+COPY src/Directory.Packages.props ./src/Directory.Packages.props
 COPY src/CGG.Api/CGG.Api.csproj ./src/CGG.Api/
 COPY src/CGG.Application/CGG.Application.csproj ./src/CGG.Application/
 COPY src/CGG.Infrastructure/CGG.Infrastructure.csproj ./src/CGG.Infrastructure/
