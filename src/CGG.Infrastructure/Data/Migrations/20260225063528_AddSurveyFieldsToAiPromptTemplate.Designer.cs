@@ -4,6 +4,7 @@ using CGG.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CGG.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260225063528_AddSurveyFieldsToAiPromptTemplate")]
+    partial class AddSurveyFieldsToAiPromptTemplate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -178,8 +181,8 @@ namespace CGG.Infrastructure.Data.Migrations
                     b.Property<int?>("MaxTokens")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Model")
-                        .HasColumnType("int");
+                    b.Property<string>("Model")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("OutputFormat")
                         .HasColumnType("nvarchar(max)");
@@ -187,6 +190,10 @@ namespace CGG.Infrastructure.Data.Migrations
                     b.Property<string>("PromptText")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PromptType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int?>("StepNumber")
                         .HasColumnType("int");
@@ -199,6 +206,9 @@ namespace CGG.Infrastructure.Data.Migrations
 
                     b.Property<string>("Tags")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<double?>("Temperature")
+                        .HasColumnType("float");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -215,6 +225,10 @@ namespace CGG.Infrastructure.Data.Migrations
                     b.HasIndex("IsActive");
 
                     b.HasIndex("IsDefault");
+
+                    b.HasIndex("PromptType");
+
+                    b.HasIndex("PromptType", "Version");
 
                     b.ToTable("AiPromptTemplates");
                 });

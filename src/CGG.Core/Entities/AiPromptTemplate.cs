@@ -1,19 +1,24 @@
+using CGG.Core.Enums;
+
 namespace CGG.Core.Entities
 {
     public class AiPromptTemplate
     {
         public Guid Id { get; set; }
-        public string PromptType { get; set; } = string.Empty; // 'classic_step1', 'gaming_step2', 'ai-recommendation', etc.
         public string Category { get; set; } = string.Empty; // 'survey', 'recommendation', 'preview', 'feedback'
         
+        // Survey specific fields
+        public string? SurveyType { get; set; } // 'classic', 'gaming', 'ab-test', etc.
+        public int? StepNumber { get; set; } // 1, 2, 3...
+        public string? OutputFormat { get; set; } // 'short', 'full', etc.
+
         // Prompt content
         public string PromptText { get; set; } = string.Empty;
         public string? SystemPrompt { get; set; } // System message for AI
         public string? Description { get; set; } // What this prompt does
         
         // Configuration
-        public string? Model { get; set; } // 'gpt-4', 'gpt-3.5-turbo', etc.
-        public double? Temperature { get; set; }
+        public AiModelType? Model { get; set; }
         public int? MaxTokens { get; set; }
         
         // Versioning

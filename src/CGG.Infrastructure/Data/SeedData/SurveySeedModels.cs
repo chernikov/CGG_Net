@@ -18,6 +18,39 @@ namespace CGG.Infrastructure.Data.SeedData
 
         [JsonPropertyName("questions")]
         public List<SurveyQuestionSeedModel> Questions { get; set; } = new();
+
+        [JsonPropertyName("systemPrompt")]
+        public string? SystemPrompt { get; set; }
+
+        [JsonPropertyName("userPromptTemplate")]
+        public string? UserPromptTemplate { get; set; }
+
+        [JsonPropertyName("aiPrompt")]
+        public AiPromptSeedModel? AiPrompt { get; set; }
+
+        [JsonPropertyName("outputFormat")]
+        public OutputFormatSeedModel? OutputFormat { get; set; }
+    }
+
+    public class OutputFormatSeedModel
+    {
+        [JsonPropertyName("type")]
+        public string? Type { get; set; }
+
+        [JsonPropertyName("mode")]
+        public string? Mode { get; set; }
+
+        [JsonPropertyName("formatFile")]
+        public string? FormatFile { get; set; }
+    }
+
+    public class AiPromptSeedModel
+    {
+        [JsonPropertyName("systemPrompt")]
+        public string? SystemPrompt { get; set; }
+
+        [JsonPropertyName("userPromptTemplate")]
+        public string? UserPromptTemplate { get; set; }
     }
 
     public class SurveyQuestionSeedModel

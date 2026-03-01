@@ -97,7 +97,7 @@ namespace CGG.Infrastructure.Data
                 {
                     var json = await File.ReadAllTextAsync(stepFile);
                     var stepData = JsonSerializer.Deserialize<SurveyStepSeedModel>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-                    
+
                     if (stepData == null) continue;
 
                     var surveyStep = new SurveyStep
@@ -108,6 +108,25 @@ namespace CGG.Infrastructure.Data
                         IsRequired = true,
                         CreatedAt = DateTime.UtcNow
                     };
+
+                    // Save AI Prompts if they exist
+                    var sysPrompt = stepData.SystemPrompt ?? stepData.AiPrompt?.SystemPrompt;
+                    var usrPrompt = stepData.UserPromptTemplate ?? stepData.AiPrompt?.UserPromptTemplate;
+
+                    if (!string.IsNullOrEmpty(sysPrompt) || !string.IsNullOrEmpty(usrPrompt))
+                    {
+                        var promptTemplate = new AiPromptTemplate
+                        {
+                            Id = Guid.NewGuid(),
+                            Category = "survey",
+                              SurveyType = surveyType,
+                              StepNumber = stepData.Step,
+                              OutputFormat = stepData.OutputFormat?.Mode,
+                        };
+                        
+                        _context.AiPromptTemplates.Add(promptTemplate);
+                        surveyStep.AiPromptTemplateId = promptTemplate.Id;
+                    }
 
                     _context.SurveySteps.Add(surveyStep);
 
