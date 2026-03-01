@@ -1,6 +1,6 @@
 import {
-  Component, Input, Output, EventEmitter, OnChanges, inject, signal, computed,
-  ChangeDetectionStrategy,
+  Component, Input, Output, EventEmitter, OnChanges, SimpleChanges, inject, signal, computed,
+  ChangeDetectionStrategy, ChangeDetectorRef
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SurveyStepDef } from '../../models/question.model';
@@ -83,9 +83,10 @@ export class SurveyStepComponent implements OnChanges {
   @Input() step!: SurveyStepDef;
   @Input() totalSteps: number = 1;
   @Input() isLastStep: boolean = false;
-  /** Pre-fill with existing session answers */
   @Input() existingAnswers: StepAnswer[] = [];
   @Output() stepComplete = new EventEmitter<StepAnswer[]>();
+
+  private cdr = inject(ChangeDetectorRef);
 
   questionIndex = signal(0);
   answers = signal<Record<string, string>>({});
@@ -95,8 +96,7 @@ export class SurveyStepComponent implements OnChanges {
   canAdvanceQuestion = computed(() => {
     const q = this.currentQuestion();
     if (!q) return false;
-    const val = this.answers()[q.id] ?? '';
-    return val.trim().length > 0;
+    return (this.answers()[q.id] ?? '').trim().length > 0;
   });
   canProceed = computed(() => {
     const required = this.step?.questions?.filter(q => q.type !== 'feedback') ?? [];
@@ -107,18 +107,21 @@ export class SurveyStepComponent implements OnChanges {
     return ((this.step.stepNumber - 1) / this.totalSteps) * 100;
   }
 
-  ngOnChanges(): void {
-    // Restore previous answers if user navigated back
-    const restored: Record<string, string> = {};
-    for (const a of (this.existingAnswers ?? [])) {
-      restored[a.questionId] = a.answer;
+  ngOnChanges(changes: SimpleChanges): void {
+    // Only reset when the step itself changes, NOT when existingAnswers gets a new reference
+    if (changes['step']) {
+      const restored: Record<string, string> = {};
+      for (const a of (this.existingAnswers ?? [])) {
+        restored[a.questionId] = a.answer;
+      }
+      this.answers.set(restored);
+      this.questionIndex.set(0);
     }
-    this.answers.set(restored);
-    this.questionIndex.set(0);
   }
 
   onAnswer(questionId: string, value: string): void {
-    this.answers.update(prev => ({ ...prev, [questionId]: value }));
+    this.answers.set({ ...this.answers(), [questionId]: value });
+    this.cdr.markForCheck();
   }
 
   nextQuestion(): void {
