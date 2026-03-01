@@ -130,6 +130,7 @@ namespace CGG.Infrastructure.Data
 
                     _context.SurveySteps.Add(surveyStep);
 
+                    int questionSortOrder = 1;
                     foreach (var qData in stepData.Questions)
                     {
                         var question = new SurveyQuestion
@@ -138,14 +139,13 @@ namespace CGG.Infrastructure.Data
                             QuestionType = MapQuestionType(qData.Type),
                             RequiresAiAnalysis = true,
                             IsActive = true,
+                            StepId = surveyStep.Id,
+                            SortOrder = questionSortOrder++,
                             CreatedAt = DateTime.UtcNow,
                             UpdatedAt = DateTime.UtcNow
                         };
 
                         _context.SurveyQuestions.Add(question);
-
-                        // Link question to step
-                        surveyStep.QuestionId = question.Id;
 
                         // Add translations
                         foreach (var (langCode, text) in qData.Text)

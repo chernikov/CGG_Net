@@ -19,7 +19,7 @@ public class SurveyStepDto
     public Guid Id { get; set; }
     public int StepNumber { get; set; }
     public bool IsRequired { get; set; }
-    public SurveyQuestionDto Question { get; set; } = null!;
+    public List<SurveyQuestionDto> Questions { get; set; } = new();
 }
 
 public class SurveyQuestionDto
@@ -27,7 +27,8 @@ public class SurveyQuestionDto
     public Guid Id { get; set; }
     public string QuestionType { get; set; } = string.Empty;
     public string? PurposeCategory { get; set; }
-    
+    public int SortOrder { get; set; }
+
     public List<SurveyTranslationDto> Translations { get; set; } = new();
     public List<SurveyQuestionOptionDto> Options { get; set; } = new();
 }

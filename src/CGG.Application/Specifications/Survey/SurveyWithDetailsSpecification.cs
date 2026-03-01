@@ -21,11 +21,11 @@ public class SurveyWithDetailsSpecification : BaseSpecification<CGG.Core.Entitie
     private void AddIncludes()
     {
         AddInclude("Steps");
-        AddInclude("Steps.Question");
-        AddInclude("Steps.Question.Translations");
-        AddInclude("Steps.Question.Translations.Language");
-        AddInclude("Steps.Question.Options");
-        AddInclude("Steps.Question.Options.Translations");
-        AddInclude("Steps.Question.Options.Translations.Language");
+        AddInclude("Steps.Questions");
+        AddInclude("Steps.Questions.Translations");
+        AddInclude("Steps.Questions.Translations.Language");
+        AddInclude("Steps.Questions.Options");
+        AddInclude("Steps.Questions.Options.Translations");
+        AddInclude("Steps.Questions.Options.Translations.Language");
     }
 }

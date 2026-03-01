@@ -16,10 +16,10 @@ namespace CGG.Infrastructure.Data.Configurations
                 .HasForeignKey(e => e.SurveyId)
                 .OnDelete(DeleteBehavior.Cascade);
                 
-            builder.HasOne(e => e.Question)
-                .WithMany(q => q.Steps)
-                .HasForeignKey(e => e.QuestionId)
-                .OnDelete(DeleteBehavior.Restrict);
+            builder.HasMany(e => e.Questions)
+                .WithOne(q => q.Step)
+                .HasForeignKey(q => q.StepId)
+                .OnDelete(DeleteBehavior.Cascade);
                 
             builder.HasOne(e => e.AiPromptTemplate)
                 .WithMany(pt => pt.SurveySteps)

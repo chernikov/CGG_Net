@@ -15,6 +15,7 @@
             "matchCommandLine": true
         },
         "New-Object": true,
-        "?": true
+        "?": true,
+        "Receive-Job": true
     }
 }

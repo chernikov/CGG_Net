@@ -7,8 +7,9 @@ namespace CGG.Core.Entities
         public Survey Survey { get; set; } = null!;
         
         public int StepNumber { get; set; } // 1, 2, 3...
-        public Guid QuestionId { get; set; }
-        public SurveyQuestion Question { get; set; } = null!;
+
+        // Collections
+        public ICollection<SurveyQuestion> Questions { get; set; } = new List<SurveyQuestion>();
         
         // AI Configuration
         public string? AiPrompt { get; set; } // AI prompt for this step (if RequiresAiAnalysis)

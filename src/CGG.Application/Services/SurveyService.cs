@@ -65,9 +65,10 @@ public class SurveyService : ISurveyService
         
         foreach (var step in dto.Steps)
         {
-            if (step.Question != null && step.Question.Options != null)
+            step.Questions = step.Questions.OrderBy(q => q.SortOrder).ToList();
+            foreach (var question in step.Questions)
             {
-                step.Question.Options = step.Question.Options.OrderBy(o => o.SortOrder).ToList();
+                question.Options = question.Options.OrderBy(o => o.SortOrder).ToList();
             }
         }
         

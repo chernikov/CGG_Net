@@ -13,8 +13,12 @@ namespace CGG.Core.Entities
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 
+        // Step relationship (many questions per step)
+        public Guid? StepId { get; set; }
+        public int SortOrder { get; set; } = 1;
+        public SurveyStep? Step { get; set; }
+
         // Collections
-        public ICollection<SurveyStep> Steps { get; set; } = new List<SurveyStep>();
         public ICollection<SurveyQuestionOption> Options { get; set; } = new List<SurveyQuestionOption>();
         public ICollection<SurveyQuestionTranslation> Translations { get; set; } = new List<SurveyQuestionTranslation>();
     }
