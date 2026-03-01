@@ -104,7 +104,10 @@
   <!-- Tab Content -->
   <div class="tab-content">
     @if (activeTab === 'surveyTab') {
-      <app-survey-tab [hasResults]="hasResults" />
+      <app-survey-tab
+        [isChild]="profile()?.isChild ?? false"
+        [userRole]="currentUser()?.role ?? ''"
+        [childId]="routeId" />
     }
     @if (activeTab === 'observations') {
       <app-observations-tab />

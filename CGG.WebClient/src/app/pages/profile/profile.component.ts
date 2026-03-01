@@ -7,6 +7,7 @@ import { selectUser } from '../../store/auth/auth.selectors';
 import { selectChildById, selectChildrenLoaded } from '../../store/family/family.selectors';
 import { loadChildren } from '../../store/family/family.actions';
 import { SurveyTabComponent } from './tabs/survey-tab/survey-tab';
+import { SurveySessionService } from '../../features/survey/services/survey-session.service';
 import { ObservationsTabComponent } from './tabs/observations-tab/observations-tab';
 import { LocalRequestTabComponent } from './tabs/local-request-tab/local-request-tab';
 
@@ -33,6 +34,7 @@ export class ProfileComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private store = inject(Store);
+  private sessionSvc = inject(SurveySessionService);
 
   // If there's an ID in the route, we are viewing a specific child/user
   routeId = this.route.snapshot.paramMap.get('id');
@@ -75,8 +77,15 @@ export class ProfileComponent implements OnInit {
     }
   });
 
-  // Will be true once the results feature is implemented
-  hasResults = false;
+  /** True if the relevant survey for this profile context has a completed session in localStorage. */
+  get hasResults(): boolean {
+    const isChild = this.profile()?.isChild ?? false;
+    const role = this.currentUser()?.role ?? '';
+    const surveyType = isChild
+      ? 'parent-child-talents'
+      : role === 'UserParent' ? 'parent' : 'ab-test';
+    return this.sessionSvc.hasCompletedSession(surveyType);
+  }
 
   activeTab: Tab = 'surveyTab';
 

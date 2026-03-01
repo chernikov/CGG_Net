@@ -1,36 +1,41 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 import { SurveyDef } from '../../models/question.model';
+
+const SURVEY_TYPE_TO_KEY: Record<string, string> = {
+  'ab-test':              'abTest',
+  'parent':               'parent',
+  'parent-child-talents': 'parentChildTalents',
+};
 
 @Component({
   selector: 'app-survey-intro',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslateModule],
   template: `
     <div class="flex flex-col items-center justify-center min-h-[60vh] text-center px-4 py-12">
       <div class="max-w-2xl w-full">
         <div class="text-6xl mb-6">🎯</div>
         <h1 class="text-3xl md:text-4xl font-bold text-slate-800 mb-4">
-          {{ survey.title }}
+          {{ titleKey | translate }}
         </h1>
-        @if (survey.description) {
-          <p class="text-slate-500 text-base md:text-lg mb-8 leading-relaxed">
-            {{ survey.description }}
-          </p>
-        }
+        <p class="text-slate-500 text-base md:text-lg mb-8 leading-relaxed">
+          {{ descriptionKey | translate }}
+        </p>
 
         <div class="flex items-center justify-center gap-6 mb-10 text-sm text-slate-500">
           <div class="flex items-center gap-2">
             <span class="text-blue-500 text-xl">📝</span>
-            <span>{{ survey.steps.length }} кроків</span>
+            <span>{{ survey.steps.length }} {{ 'surveys.intro.steps' | translate }}</span>
           </div>
           <div class="flex items-center gap-2">
             <span class="text-blue-500 text-xl">🤖</span>
-            <span>AI аналіз після кожного кроку</span>
+            <span>{{ 'surveys.intro.aiAnalysis' | translate }}</span>
           </div>
           <div class="flex items-center gap-2">
             <span class="text-blue-500 text-xl">⏱</span>
-            <span>~10 хвилин</span>
+            <span>{{ 'surveys.intro.duration' | translate }}</span>
           </div>
         </div>
 
@@ -39,7 +44,7 @@ import { SurveyDef } from '../../models/question.model';
           class="px-10 py-4 bg-blue-600 hover:bg-blue-700 text-white text-lg font-semibold rounded-2xl shadow-md hover:shadow-lg transition-all duration-200 active:scale-95"
           (click)="start.emit()"
         >
-          Розпочати опитувальник →
+          {{ 'surveys.intro.start' | translate }}
         </button>
       </div>
     </div>
@@ -48,4 +53,14 @@ import { SurveyDef } from '../../models/question.model';
 export class SurveyIntroComponent {
   @Input() survey!: SurveyDef;
   @Output() start = new EventEmitter<void>();
+
+  get titleKey(): string {
+    const k = SURVEY_TYPE_TO_KEY[this.survey?.surveyType] ?? 'abTest';
+    return `surveys.${k}.title`;
+  }
+
+  get descriptionKey(): string {
+    const k = SURVEY_TYPE_TO_KEY[this.survey?.surveyType] ?? 'abTest';
+    return `surveys.${k}.description`;
+  }
 }

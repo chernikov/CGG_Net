@@ -1,5 +1,6 @@
 import {
-  Component, Input, Output, EventEmitter, OnChanges, inject, signal,
+  Component, Input, Output, EventEmitter, OnChanges, inject, signal, computed,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SurveyStepDef } from '../../models/question.model';
@@ -14,6 +15,7 @@ import { QuestionRendererComponent } from '../question-renderer/question-rendere
 @Component({
   selector: 'app-survey-step',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, QuestionRendererComponent],
   template: `
     <div class="w-full max-w-2xl mx-auto px-4 py-8">
@@ -88,6 +90,19 @@ export class SurveyStepComponent implements OnChanges {
   questionIndex = signal(0);
   answers = signal<Record<string, string>>({});
 
+  currentQuestion = computed(() => this.step?.questions?.[this.questionIndex()] ?? null);
+  isLastQuestion = computed(() => this.questionIndex() === (this.step?.questions?.length ?? 1) - 1);
+  canAdvanceQuestion = computed(() => {
+    const q = this.currentQuestion();
+    if (!q) return false;
+    const val = this.answers()[q.id] ?? '';
+    return val.trim().length > 0;
+  });
+  canProceed = computed(() => {
+    const required = this.step?.questions?.filter(q => q.type !== 'feedback') ?? [];
+    return required.every(q => (this.answers()[q.id] ?? '').trim().length > 0);
+  });
+
   get progressPct(): number {
     return ((this.step.stepNumber - 1) / this.totalSteps) * 100;
   }
@@ -102,29 +117,8 @@ export class SurveyStepComponent implements OnChanges {
     this.questionIndex.set(0);
   }
 
-  currentQuestion() {
-    return this.step?.questions?.[this.questionIndex()] ?? null;
-  }
-
-  isLastQuestion(): boolean {
-    return this.questionIndex() === (this.step?.questions?.length ?? 1) - 1;
-  }
-
   onAnswer(questionId: string, value: string): void {
     this.answers.update(prev => ({ ...prev, [questionId]: value }));
-  }
-
-  /** Current question has a non-empty answer */
-  canAdvanceQuestion(): boolean {
-    const q = this.currentQuestion();
-    if (!q) return false;
-    const val = this.answers()[q.id] ?? '';
-    return val.trim().length > 0;
-  }
-
-  canProceed(): boolean {
-    const required = this.step.questions.filter(q => q.type !== 'feedback');
-    return required.every(q => (this.answers()[q.id] ?? '').trim().length > 0);
   }
 
   nextQuestion(): void {

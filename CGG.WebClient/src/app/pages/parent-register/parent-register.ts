@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -14,7 +14,7 @@ import { Observable } from 'rxjs';
   templateUrl: './parent-register.html',
   styleUrl: './parent-register.scss'
 })
-export class ParentRegisterComponent {
+export class ParentRegisterComponent implements OnInit {
   formData = {
     email: '',
     password: '',
@@ -33,6 +33,11 @@ export class ParentRegisterComponent {
   ) {
     this.loading$ = this.store.select(selectAuthLoading);
     this.error$ = this.store.select(selectAuthError);
+  }
+
+  ngOnInit() {
+    this.validationError = null;
+    this.store.dispatch(AuthActions.clearError());
   }
 
   onSubmit() {

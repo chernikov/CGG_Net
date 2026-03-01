@@ -44,6 +44,32 @@
     "observationsEmpty": "No observations yet",
     "localRequestEmpty": "No local requests yet"
   },
+  "surveys": {
+    "abTest": {
+      "title": "Career Orientation Test",
+      "description": "Discover which profession suits you best through AI-powered analysis of your interests and strengths."
+    },
+    "parent": {
+      "title": "Parent Assessment",
+      "description": "Identify your child support style and receive personalized advice."
+    },
+    "parentChildTalents": {
+      "title": "Child Talents Survey",
+      "description": "Help uncover your child's unique abilities and talents."
+    },
+    "intro": {
+      "steps": "steps",
+      "aiAnalysis": "AI analysis after each step",
+      "duration": "~10 minutes",
+      "start": "Start survey →"
+    },
+    "start": "Take the test",
+    "retake": "Retake",
+    "viewResults": "View results",
+    "topMatches": "Top matches",
+    "noResults": "No results yet",
+    "minutes": "min"
+  },
   "addChild": {
     "title": "LET'S ADD YOUR KID",
     "subtitle": "Fill name and email address of your kid",

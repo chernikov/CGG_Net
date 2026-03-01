@@ -255,8 +255,8 @@ export class SurveyPageComponent implements OnInit {
 
   onRestart(): void {
     if (this.survey()) {
-      this.sessionSvc.clearSession();
       const def = this.survey()!;
+      this.sessionSvc.clearSession(def.surveyType);
       const sess = this.sessionSvc.getOrCreateSession(
         def.surveyType, def.id, def.steps.length, this.locale.currentLang
       );
