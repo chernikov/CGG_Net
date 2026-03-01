@@ -50,7 +50,7 @@ namespace CGG.Infrastructure.Data
             
             var languages = await _context.Languages.ToDictionaryAsync(l => l.Code, l => l.Id);
 
-            var surveyTypes = new[] { "classic", "gaming", "ab-test", "intro", "parent-child-talents" };
+            var surveyTypes = new[] { "ab-test", "intro", "parent-child-talents", "parent" };
             var basePath = Path.Combine(AppContext.BaseDirectory, "Data", "SeedData", "surveys");
 
             // If running from source, adjust path
@@ -228,11 +228,10 @@ namespace CGG.Infrastructure.Data
         {
             return type switch
             {
-                "classic" => "Classic Survey",
-                "gaming" => "Gamified Survey",
                 "ab-test" => "A/B Test Survey",
                 "intro" => "Parent Trial: My Career Orientation",
                 "parent-child-talents" => "Parent View of Child's Talents",
+                "parent" => "Parent Survey (Full Version)",
                 _ => "Survey"
             };
         }
@@ -241,11 +240,10 @@ namespace CGG.Infrastructure.Data
         {
             return type switch
             {
-                "classic" => "Discover your future professions step by step, unlock badges, and get personalized advice powered by AI.",
-                "gaming" => "Experience an advanced career guidance journey with AI-powered insights, step-by-step exploration, and personalized recommendations.",
                 "ab-test" => "Discover your future professions with our new question set, unlock badges, and get personalized advice powered by AI.",
                 "intro" => "Short survey for parents. Learn more about your career orientation, motives, and expectations.",
                 "parent-child-talents" => "Describe your child's talents, interests, and characteristics for personalized career recommendations.",
+                "parent" => "Comprehensive survey for parents: parent profile, attitude towards child, expectations from the tool.",
                 _ => ""
             };
         }
