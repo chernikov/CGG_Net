@@ -1,0 +1,25 @@
+{
+  "name": "parent",
+  "title": {
+    "uk": "Опитування для батьків (Повний варіант)",
+    "en": "Parent Survey (Full Version)",
+    "hi": "माता-पिता का सर्वेक्षण (पूर्ण संस्करण)"
+  },
+  "description": {
+    "uk": "Комплексне опитування для батьків: профіль батьків, ставлення до дитини, очікування від інструменту.",
+    "en": "Comprehensive survey for parents: parent profile, attitude towards child, expectations from the tool.",
+    "hi": "माता-पिता के लिए व्यापक सर्वेक्षण: माता-पिता की प्रोफ़ाइल, बच्चे के प्रति दृष्टिकोण, उपकरण से अपेक्षाएं।"
+  },
+  "version": "1.0",
+  "totalSteps": 8,
+  "languages": ["uk", "en", "hi"],
+  "defaultLanguage": "uk",
+  "creditCost": 0,
+  "metadata": {
+    "category": "career-guidance",
+    "targetAudience": "parents",
+    "subjectType": "parent",
+    "estimatedDuration": "20-30 minutes",
+    "insightType": "parent-survey"
+  }
+}

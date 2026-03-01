@@ -1,0 +1,221 @@
+{
+  "step": 3,
+  "name": "own_career_experience",
+  "title": {
+    "uk": "Частина 3: Власний професійний досвід батьків",
+    "en": "Part 3: Own professional experience of parents",
+    "hi": "भाग 3: माता-पिता का अपना पेशेवर अनुभव"
+  },
+  "description": {
+    "uk": "Можливо, ви знайдете щось корисне у своєму досвіді, щоб передати дитині.",
+    "en": "Perhaps you will find something useful in your experience to pass on to your child.",
+    "hi": "शायद आपको अपने अनुभव में कुछ उपयोगी मिलेगा जो आप अपने बच्चे को दे सकते हैं।"
+  },
+  "questions": [
+    {
+      "id": "q1_profession",
+      "type": "text",
+      "text": {
+        "uk": "Яку професію ви маєте (або мали впродовж життя)?",
+        "en": "What profession do you have (or had throughout your life)?",
+        "hi": "आपके पास (या आपके जीवन भर में) कौन सा पेशा है?"
+      },
+      "maxLength": 100
+    },
+    {
+      "id": "q2_choice_reason",
+      "type": "select",
+      "text": {
+        "uk": "Як ви обирали свою професію?",
+        "en": "How did you choose your profession?",
+        "hi": "आपने अपना पेशा कैसे चुना?"
+      },
+      "options": {
+        "uk": [
+          "За покликанням",
+          "За порадою батьків",
+          "Через обставини (випадково)",
+          "Через матеріальні міркування",
+          "Інше"
+        ],
+        "en": [
+          "By vocation",
+          "By parents' advice",
+          "Through circumstances (accidentally)",
+          "Due to material considerations",
+          "Other"
+        ],
+        "hi": [
+          "पेशे से",
+          "माता-पिता की सलाह से",
+          "परिस्थितियों के माध्यम से (अचानक)",
+          "भौतिक विचारों के कारण",
+          "अन्य"
+        ]
+      },
+      "optionCodes": [
+        "VOCATION",
+        "PARENTS_ADVICE",
+        "CIRCUMSTANCES",
+        "MATERIAL",
+        "OTHER"
+      ]
+    },
+    {
+      "id": "q3_satisfaction",
+      "type": "number",
+      "text": {
+        "uk": "Наскільки ви задоволені своїм професійним шляхом? (1-10)",
+        "en": "How satisfied are you with your career path? (1-10)",
+        "hi": "आप अपने करियर के रास्ते से कितने संतुष्ट हैं? (1-10)"
+      },
+      "min": 1,
+      "max": 10
+    },
+    {
+      "id": "q4_pass_on",
+      "type": "select",
+      "text": {
+        "uk": "Що б ви хотіли передати дитині зі свого професійного досвіду?",
+        "en": "What would you like to pass on to your child from your professional experience?",
+        "hi": "आप अपने पेशेवर अनुभव से अपने बच्चे को क्या देना चाहेंगे?"
+      },
+      "options": {
+        "uk": [
+          "Розуміння важливості стабільності",
+          "Уроки помилок",
+          "Вміння адаптуватися",
+          "Бажання шукати власне",
+          "Мені складно відповісти"
+        ],
+        "en": [
+          "Understanding the importance of stability",
+          "Lessons from mistakes",
+          "Ability to adapt",
+          "Desire to seek one's own path",
+          "Hard to answer"
+        ],
+        "hi": [
+          "स्थिरता के महत्व को समझना",
+          "ग़लतियों से सबक",
+          "अनुकूलित करने की क्षमता",
+          "अपना रास्ता खुद खोजने की इच्छा",
+          "जवाब देना मुश्किल है"
+        ]
+      },
+      "optionCodes": [
+        "STABILITY_IMPORTANCE",
+        "MISTAKE_LESSONS",
+        "ADAPTABILITY",
+        "SEEK_OWN_PATH",
+        "HARD_TO_ANSWER"
+      ]
+    },
+    {
+      "id": "q5_child_professions_ideas",
+      "type": "select",
+      "text": {
+        "uk": "Чи є у вас уявлення про професії, які можуть підійти дитині?",
+        "en": "Do you have ideas about professions that might suit your child?",
+        "hi": "क्या आपके पास ऐसे व्यवसायों के बारे में विचार हैं जो आपके बच्चे के अनुरूप हो सकते हैं?"
+      },
+      "options": {
+        "uk": [
+          "Так, є конкретні ідеї",
+          "Є загальні міркування",
+          "Поки що ні",
+          "Не хочу нав’язувати свою думку"
+        ],
+        "en": [
+          "Yes, specific ideas",
+          "Some general thoughts",
+          "Not yet",
+          "I don't want to impose my opinion"
+        ],
+        "hi": [
+          "हाँ, विशिष्ट विचार हैं",
+          "कुछ सामान्य विचार हैं",
+          "अभी नहीं",
+          "मैं अपनी राय नहीं थोपना चाहता"
+        ]
+      },
+      "optionCodes": [
+        "SPECIFIC_IDEAS",
+        "GENERAL_THOUGHTS",
+        "NOT_YET",
+        "NO_IMPOSITION"
+      ]
+    },
+    {
+      "id": "q6_influence_level",
+      "type": "number",
+      "text": {
+        "uk": "Якою мірою ви хочете впливати на вибір професії дитини? (Оцінка 1–10)",
+        "en": "To what extent do you want to influence your child's choice of profession? (Score 1-10)",
+        "hi": "आप अपने बच्चे के পেশा चुनने को किस हद तक प्रभावित करना चाहते हैं? (स्कोर 1-10)"
+      },
+      "min": 1,
+      "max": 10
+    },
+    {
+      "id": "q7_market_knowledge",
+      "type": "select",
+      "text": {
+        "uk": "Наскільки добре ви орієнтуєтесь у сучасному ринку професій?",
+        "en": "How well do you navigate the modern job market?",
+        "hi": "आप आधुनिक नौकरी बाजार को कितनी अच्छी तरह नेविगेट करते हैं?"
+      },
+      "options": {
+        "uk": [
+          "Дуже добре",
+          "В основному орієнтуюсь",
+          "Погано",
+          "Взагалі не орієнтуюсь"
+        ],
+        "en": ["Very well", "Mostly navigate well", "Poorly", "Not at all"],
+        "hi": [
+          "बहुत अच्छी तरह से",
+          "ज्यादातर अच्छी तरह नेविगेट करता हूँ",
+          "खराब रूप से",
+          "बिल्कुल नहीं"
+        ]
+      },
+      "optionCodes": ["VERY_WELL", "MOSTLY", "POORLY", "NOT_AT_ALL"]
+    },
+    {
+      "id": "q8_tools_trust",
+      "type": "select",
+      "text": {
+        "uk": "Чи довіряєте ви сучасним інструментам для профорієнтації (тестам, платформам, алгоритмам)?",
+        "en": "Do you trust modern career guidance tools (tests, platforms, algorithms)?",
+        "hi": "क्या आप आधुनिक कैरियर मार्गदर्शन उपकरणों (परीक्षणों, प्लेटफ़ॉर्मों, एल्गोरिदम) पर भरोसा करते हैं?"
+      },
+      "options": {
+        "uk": [
+          "Так, це корисно",
+          "Частково — з експертним супроводом",
+          "Ні — довіряю лише фахівцям або собі",
+          "Поки не маю сформованої думки"
+        ],
+        "en": [
+          "Yes, it is useful",
+          "Partially — with expert guidance",
+          "No — I only trust experts or myself",
+          "Haven't formed an opinion yet"
+        ],
+        "hi": [
+          "हाँ, यह उपयोगी है",
+          "आंशिक रूप से — विशेषज्ञ मार्गदर्शन के साथ",
+          "नहीं — मैं केवल विशेषज्ञों या खुद पर भरोसा करता हूँ",
+          "अभी तक कोई राय नहीं बनी है"
+        ]
+      },
+      "optionCodes": [
+        "YES_USEFUL",
+        "PARTIALLY",
+        "NO_TRUST_EXPERTS",
+        "NO_OPINION"
+      ]
+    }
+  ]
+}

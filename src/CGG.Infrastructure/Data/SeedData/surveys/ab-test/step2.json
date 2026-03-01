@@ -143,16 +143,34 @@
     },
     {
       "id": "q24",
-      "type": "textarea",
+      "type": "select",
       "text": {
         "uk": "Як ти поводишся у конфлікті?",
         "en": "How do you behave in conflict?",
         "hi": "संघर्ष में आप कैसे व्यवहार करते हैं?"
       },
-      "placeholder": {
-        "uk": "Опиши свою поведінку в конфліктних ситуаціях...",
-        "en": "Describe your behavior in conflict situations...",
-        "hi": "संघर्ष की स्थितियों में अपने व्यवहार का वर्णन करें..."
+      "options": {
+        "uk": [
+          "Відкрите обговорення",
+          "Уникнення",
+          "Пошук компромісу",
+          "Чекаю, поки вирішиться",
+          "Наполягаю на своєму"
+        ],
+        "en": [
+          "Open discussion",
+          "Avoidance",
+          "Looking for compromise",
+          "Waiting for it to resolve",
+          "Insisting on my own"
+        ],
+        "hi": [
+          "खुली चर्चा",
+          "बचाव",
+          "समझौते की तलाश",
+          "इसके सुलझने का इंतजार",
+          "अपनी बात पर अड़े रहना"
+        ]
       }
     },
     {
@@ -171,16 +189,31 @@
     },
     {
       "id": "q26",
-      "type": "textarea",
+      "type": "select",
       "text": {
         "uk": "Чого ти хочеш досягнути у житті?",
         "en": "What do you want to achieve in life?",
         "hi": "जीवन में आप क्या हासिल करना चाहते हैं?"
       },
-      "placeholder": {
-        "uk": "Опиши свої життєві цілі та мрії...",
-        "en": "Describe your life goals and dreams...",
-        "hi": "अपने जीवन लक्ष्यों और सपनों का वर्णन करें..."
+      "options": {
+        "uk": [
+          "Кар’єра",
+          "Дружба і сім’я",
+          "Самореалізація",
+          "Фінансова стабільність"
+        ],
+        "en": [
+          "Career",
+          "Friendship and family",
+          "Self-realization",
+          "Financial stability"
+        ],
+        "hi": [
+          "करियर",
+          "दोस्ती और परिवार",
+          "आत्म-साक्षात्कार",
+          "वित्तीय स्थिरता"
+        ]
       }
     },
     {
@@ -213,16 +246,26 @@
     },
     {
       "id": "q29",
-      "type": "textarea",
+      "type": "select",
       "text": {
         "uk": "Як ти підтримуєш свою фізичну форму?",
         "en": "How do you maintain your physical fitness?",
         "hi": "आप अपनी शारीरिक फिटनेस कैसे बनाए रखते हैं?"
       },
-      "placeholder": {
-        "uk": "Опиши свої фізичні активності...",
-        "en": "Describe your physical activities...",
-        "hi": "अपनी शारीरिक गतिविधियों का वर्णन करें..."
+      "options": {
+        "uk": [
+          "Регулярні тренування",
+          "Харчування",
+          "Сон",
+          "Відмова від шкідливих звичок"
+        ],
+        "en": [
+          "Regular workouts",
+          "Nutrition",
+          "Sleep",
+          "Giving up bad habits"
+        ],
+        "hi": ["नियमित कसरत", "पोषण", "नींद", "बुरी आदतें छोड़ना"]
       }
     },
     {
@@ -255,16 +298,31 @@
     },
     {
       "id": "q32",
-      "type": "textarea",
+      "type": "select",
       "text": {
-        "uk": "У яких ситуаціях проявляється твоя креативність найчастіше?",
+        "uk": "У яких ситуаціях найчастіше проявляється твоя креативність?",
         "en": "In which situations does your creativity manifest most often?",
         "hi": "किन स्थितियों में आपकी रचनात्मकता सबसे अधिक प्रकट होती है?"
       },
-      "placeholder": {
-        "uk": "Опиши коли ти найбільш креативний...",
-        "en": "Describe when you are most creative...",
-        "hi": "वर्णन करें कि आप कब सबसे अधिक रचनात्मक हैं..."
+      "options": {
+        "uk": [
+          "Під час навчання",
+          "У повсякденному житті",
+          "У спілкуванні",
+          "У вирішенні проблем"
+        ],
+        "en": [
+          "During studies",
+          "In everyday life",
+          "In communication",
+          "In problem-solving"
+        ],
+        "hi": [
+          "पढ़ाई के दौरान",
+          "रोजमर्रा के जीवन में",
+          "संचार में",
+          "समस्या समाधान में"
+        ]
       }
     },
     {
@@ -297,16 +355,16 @@
     },
     {
       "id": "q35",
-      "type": "textarea",
+      "type": "select",
       "text": {
         "uk": "Як ти справляєшся із негативними емоціями?",
         "en": "How do you cope with negative emotions?",
         "hi": "आप नकारात्मक भावनाओं से कैसे निपटते हैं?"
       },
-      "placeholder": {
-        "uk": "Опиши свої методи подолання негативу...",
-        "en": "Describe your methods of overcoming negativity...",
-        "hi": "नकारात्मकता को दूर करने के अपने तरीकों का वर्णन करें..."
+      "options": {
+        "uk": ["Розмова з близькими", "Спорт", "Медитація", "Ігнорування"],
+        "en": ["Talking with loved ones", "Sports", "Meditation", "Ignoring"],
+        "hi": ["प्रियजनों के साथ बात करना", "खेल", "ध्यान", "अनदेखा करना"]
       }
     }
   ],

@@ -37,39 +37,44 @@
       },
       "options": {
         "uk": [
+          "Творчість",
           "Комунікація",
-          "Креативність",
-          "Аналітика",
-          "Командна робота",
+          "Організаційні навички",
+          "Логічне мислення",
           "Емоційний інтелект",
-          "Організація"
+          "Інші"
         ],
         "en": [
-          "Communication",
           "Creativity",
-          "Analytics",
-          "Teamwork",
+          "Communication",
+          "Organizational skills",
+          "Logical thinking",
           "Emotional intelligence",
-          "Organization"
+          "Other"
         ],
         "hi": [
-          "संचार",
           "रचनात्मकता",
-          "विश्लेषण",
-          "टीमवर्क",
+          "संचार",
+          "संगठनात्मक कौशल",
+          "तार्किक सोच",
           "भावनात्मक बुद्धिमत्ता",
-          "संगठन"
+          "अन्य"
         ]
       },
       "maxSelections": 3
     },
     {
       "id": "q38",
-      "type": "textarea",
+      "type": "input",
       "text": {
-        "uk": "Опиши один конкретний крок, який ти зробиш цього тижня для розвитку.",
-        "en": "Describe one concrete step you will take this week for development.",
-        "hi": "इस सप्ताह विकास के लिए आप एक ठोस कदम क्या उठाएंगे उसका वर्णन करें।"
+        "uk": "Введи одну додаткову здібність, яку ти хочеш розвинути.",
+        "en": "Enter one additional ability you want to develop.",
+        "hi": "एक अतिरिक्त क्षमता दर्ज करें जिसे आप विकसित करना चाहते हैं।"
+      },
+      "placeholder": {
+        "uk": "Введи здібність...",
+        "en": "Enter ability...",
+        "hi": "क्षमता दर्ज करें..."
       }
     }
   ],
