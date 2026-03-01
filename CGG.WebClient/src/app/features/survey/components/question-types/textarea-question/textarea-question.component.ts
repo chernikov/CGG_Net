@@ -1,0 +1,29 @@
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-textarea-question',
+  standalone: true,
+  imports: [FormsModule],
+  template: `
+    <textarea
+      class="w-full px-4 py-3 rounded-xl border-2 border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none text-base text-slate-800 bg-white transition resize-none"
+      rows="5"
+      [placeholder]="placeholder"
+      [maxlength]="maxLength"
+      [(ngModel)]="value"
+      (ngModelChange)="valueChange.emit($event)"
+    ></textarea>
+    @if (maxLength) {
+      <p class="text-right text-xs text-slate-400 mt-1">
+        {{ value.length }} / {{ maxLength }}
+      </p>
+    }
+  `,
+})
+export class TextareaQuestionComponent {
+  @Input() value: string = '';
+  @Input() placeholder: string = '';
+  @Input() maxLength: number = 400;
+  @Output() valueChange = new EventEmitter<string>();
+}

@@ -1,0 +1,31 @@
+{
+  "description": "Short format – intermediate steps (steps 1 to N-1). Returns essential match info only.",
+  "format": {
+    "type": "object",
+    "properties": {
+      "matches": {
+        "type": "array",
+        "minItems": 1,
+        "maxItems": 10,
+        "items": {
+          "type": "object",
+          "required": ["title", "matchPercentage"],
+          "additionalProperties": false,
+          "properties": {
+            "title": {
+              "type": "string",
+              "description": "Profession name"
+            },
+            "matchPercentage": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100,
+              "description": "Match score (0-100)"
+            }
+          }
+        }
+      }
+    },
+    "required": ["matches"]
+  }
+}

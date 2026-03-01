@@ -1,3 +1,4 @@
+using CGG.Application.Interfaces;
 using CGG.Core.Interfaces;
 using CGG.Infrastructure.Data;
 using CGG.Infrastructure.Services;
@@ -34,6 +35,10 @@ public static class Dependencies
         // Infrastructure Services
         services.AddScoped<SurveySeeder>();
         services.AddScoped<ISurveyManagementService, SurveyManagementService>();
+
+        // AI Services
+        services.AddScoped<IAiPromptLoaderService, AiPromptLoaderService>();
+        services.AddScoped<IAiSurveyService, AiSurveyService>();
 
         return services;
     }

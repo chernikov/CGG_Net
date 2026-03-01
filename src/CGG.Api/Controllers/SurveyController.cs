@@ -1,5 +1,7 @@
 using System;
 using System.Threading.Tasks;
+using CGG.Application.DTOs.Survey;
+using CGG.Application.Features.Survey.Commands.AnalyzeSurveyStep;
 using CGG.Application.Features.Survey.Commands.ReloadSurveys;
 using CGG.Application.Features.Survey.Queries.GetAllSurveys;
 using CGG.Application.Features.Survey.Queries.GetSurveyById;
@@ -64,6 +66,25 @@ namespace CGG.Api.Controllers
             }
 
             return Ok(new { Success = true, Message = "Surveys successfully reloaded." });
+        }
+
+        /// <summary>
+        /// Analyse a completed survey step using AI.
+        /// Loads the appropriate prompt template, calls OpenAI, and returns the result JSON.
+        /// The frontend stores the result in localStorage and passes it as context to subsequent steps.
+        /// </summary>
+        [HttpPost("analyze-step")]
+        public async Task<IActionResult> AnalyzeStep([FromBody] SubmitSurveyStepDto dto)
+        {
+            if (dto == null || string.IsNullOrWhiteSpace(dto.SurveyType) || dto.StepNumber < 1)
+                return BadRequest(new { Error = "Invalid payload. SurveyType and StepNumber are required." });
+
+            var result = await _mediator.Send(new AnalyzeSurveyStepCommand(dto));
+
+            if (!result.Success)
+                return StatusCode(500, result);
+
+            return Ok(result);
         }
     }
 }
