@@ -4,6 +4,7 @@ using CGG.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CGG.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260303071739_AddUserSurveyAndAnswers")]
+    partial class AddUserSurveyAndAnswers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -127,9 +130,6 @@ namespace CGG.Infrastructure.Data.Migrations
                     b.Property<string>("UserInput")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("UserSurveyId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CreatedAt");
@@ -145,8 +145,6 @@ namespace CGG.Infrastructure.Data.Migrations
                     b.HasIndex("SurveyResultId");
 
                     b.HasIndex("UserId");
-
-                    b.HasIndex("UserSurveyId");
 
                     b.HasIndex("MemberId", "CreatedAt");
 
@@ -961,11 +959,6 @@ namespace CGG.Infrastructure.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("CGG.Core.Entities.UserSurvey", "UserSurvey")
-                        .WithMany("AiLogs")
-                        .HasForeignKey("UserSurveyId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
                     b.Navigation("Member");
 
                     b.Navigation("PromptTemplate");
@@ -973,8 +966,6 @@ namespace CGG.Infrastructure.Data.Migrations
                     b.Navigation("SurveyResult");
 
                     b.Navigation("User");
-
-                    b.Navigation("UserSurvey");
                 });
 
             modelBuilder.Entity("CGG.Core.Entities.AiPromptTemplate", b =>
@@ -1301,8 +1292,6 @@ namespace CGG.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("CGG.Core.Entities.UserSurvey", b =>
                 {
-                    b.Navigation("AiLogs");
-
                     b.Navigation("Answers");
                 });
 #pragma warning restore 612, 618

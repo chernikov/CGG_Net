@@ -1,12 +1,16 @@
 using System;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using CGG.Application.DTOs.Survey;
 using CGG.Application.Features.Survey.Commands.AnalyzeSurveyStep;
 using CGG.Application.Features.Survey.Commands.ReloadSurveys;
+using CGG.Application.Features.Survey.Commands.SaveSurveyAnswer;
+using CGG.Application.Features.Survey.Commands.StartSurvey;
 using CGG.Application.Features.Survey.Queries.GetAllSurveys;
 using CGG.Application.Features.Survey.Queries.GetSurveyById;
 using CGG.Application.Features.Survey.Queries.GetSurveyByName;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CGG.Api.Controllers
@@ -33,12 +37,7 @@ namespace CGG.Api.Controllers
         public async Task<IActionResult> GetSurveyById(Guid id)
         {
             var survey = await _mediator.Send(new GetSurveyByIdQuery(id));
-
-            if (survey == null)
-            {
-                return NotFound();
-            }
-
+            if (survey == null) return NotFound();
             return Ok(survey);
         }
 
@@ -46,12 +45,7 @@ namespace CGG.Api.Controllers
         public async Task<IActionResult> GetSurveyByName([FromQuery] string name)
         {
             var survey = await _mediator.Send(new GetSurveyByNameQuery(name));
-
-            if (survey == null)
-            {
-                return NotFound();
-            }
-
+            if (survey == null) return NotFound();
             return Ok(survey);
         }
 
@@ -59,19 +53,50 @@ namespace CGG.Api.Controllers
         public async Task<IActionResult> ReloadSurveys()
         {
             var result = await _mediator.Send(new ReloadSurveysCommand());
-
             if (!result)
-            {
                 return StatusCode(500, new { Success = false, Error = "Failed to reload surveys. Check logs for details." });
-            }
-
             return Ok(new { Success = true, Message = "Surveys successfully reloaded." });
         }
 
         /// <summary>
+        /// Start a new survey pass for the authenticated user.
+        /// All previous InProgress/Completed surveys of the same type are marked Outdated.
+        /// Returns the new UserSurveyId to be used in subsequent save-answer calls.
+        /// </summary>
+        [Authorize]
+        [HttpPost("start")]
+        public async Task<IActionResult> StartSurvey([FromBody] StartSurveyDto dto)
+        {
+            if (dto == null || string.IsNullOrWhiteSpace(dto.SurveyType))
+                return BadRequest(new { Error = "SurveyType is required." });
+
+            var userId = GetUserId();
+            if (userId == null) return Unauthorized();
+
+            var result = await _mediator.Send(new StartSurveyCommand(dto, userId.Value));
+            if (!result.Success) return StatusCode(500, result);
+
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Persist answers for a survey step (idempotent — safe to call on every "Наступне" click).
+        /// </summary>
+        [Authorize]
+        [HttpPost("save-answer")]
+        public async Task<IActionResult> SaveAnswer([FromBody] SaveSurveyAnswerDto dto)
+        {
+            if (dto == null || dto.UserSurveyId == Guid.Empty || dto.StepNumber < 1)
+                return BadRequest(new { Error = "UserSurveyId and StepNumber are required." });
+
+            var result = await _mediator.Send(new SaveSurveyAnswerCommand(dto));
+            if (!result.Success) return StatusCode(500, result);
+
+            return Ok(result);
+        }
+
+        /// <summary>
         /// Analyse a completed survey step using AI.
-        /// Loads the appropriate prompt template, calls OpenAI, and returns the result JSON.
-        /// The frontend stores the result in localStorage and passes it as context to subsequent steps.
         /// </summary>
         [HttpPost("analyze-step")]
         public async Task<IActionResult> AnalyzeStep([FromBody] SubmitSurveyStepDto dto)
@@ -80,11 +105,17 @@ namespace CGG.Api.Controllers
                 return BadRequest(new { Error = "Invalid payload. SurveyType and StepNumber are required." });
 
             var result = await _mediator.Send(new AnalyzeSurveyStepCommand(dto));
-
-            if (!result.Success)
-                return StatusCode(500, result);
+            if (!result.Success) return StatusCode(500, result);
 
             return Ok(result);
+        }
+
+        // ────────────────────────────────────────────────────────────────────
+        private Guid? GetUserId()
+        {
+            var claim = User.FindFirstValue(ClaimTypes.NameIdentifier)
+                     ?? User.FindFirstValue("sub");
+            return Guid.TryParse(claim, out var id) ? id : null;
         }
     }
 }

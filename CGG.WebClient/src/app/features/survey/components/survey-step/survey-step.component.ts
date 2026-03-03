@@ -85,6 +85,8 @@ export class SurveyStepComponent implements OnChanges {
   @Input() isLastStep: boolean = false;
   @Input() existingAnswers: StepAnswer[] = [];
   @Output() stepComplete = new EventEmitter<StepAnswer[]>();
+  /** Emitted on every "Наступне" click with all answers collected so far in this step. */
+  @Output() questionAnswered = new EventEmitter<StepAnswer[]>();
 
   private cdr = inject(ChangeDetectorRef);
 
@@ -126,6 +128,7 @@ export class SurveyStepComponent implements OnChanges {
 
   nextQuestion(): void {
     if (!this.isLastQuestion()) {
+      this.questionAnswered.emit(this.currentAnswersAsStepAnswers());
       this.questionIndex.update(i => i + 1);
     }
   }
@@ -137,11 +140,14 @@ export class SurveyStepComponent implements OnChanges {
   }
 
   submitStep(): void {
-    const stepAnswers: StepAnswer[] = this.step.questions.map(q => ({
+    this.stepComplete.emit(this.currentAnswersAsStepAnswers());
+  }
+
+  private currentAnswersAsStepAnswers(): StepAnswer[] {
+    return this.step.questions.map(q => ({
       questionId: q.id,
       questionText: '', // filled by parent from locale
       answer: this.answers()[q.id] ?? '',
     }));
-    this.stepComplete.emit(stepAnswers);
   }
 }

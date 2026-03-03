@@ -31,6 +31,8 @@ public static class Dependencies
         // Domain-specific repositories
         services.AddScoped<IUserRepository, Repositories.UserRepository>();
         services.AddScoped<ISurveyRepository, Repositories.SurveyRepository>();
+        services.AddScoped<IUserSurveyRepository, Repositories.UserSurveyRepository>();
+        services.AddScoped<IUserSurveyAnswerRepository, Repositories.UserSurveyAnswerRepository>();
 
         // Infrastructure Services
         services.AddScoped<SurveySeeder>();

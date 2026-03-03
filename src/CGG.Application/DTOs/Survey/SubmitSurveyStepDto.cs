@@ -9,6 +9,9 @@ namespace CGG.Application.DTOs.Survey;
 /// </summary>
 public class SubmitSurveyStepDto
 {
+    /// <summary>UserSurvey.Id — used to link the AI log to the survey pass.</summary>
+    public Guid? UserSurveyId { get; set; }
+
     /// <summary>Survey type identifier: "classic", "gaming", "ab-test", etc.</summary>
     public string SurveyType { get; set; } = string.Empty;
 

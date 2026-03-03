@@ -51,6 +51,8 @@ export interface SurveySession {
   steps: CompletedStep[];
   /** Accumulates AI results per step */
   results: AiStepResult[];
+  /** UserSurvey.Id returned by POST /api/survey/start — null until started */
+  userSurveyId: string | null;
   startedAt: string;
   updatedAt: string;
 }
@@ -71,6 +73,7 @@ export function createEmptySession(
     totalSteps,
     steps: [],
     results: [],
+    userSurveyId: null,
     startedAt: now,
     updatedAt: now,
   };

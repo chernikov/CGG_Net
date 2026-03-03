@@ -75,6 +75,7 @@ type PageView = 'loading' | 'error' | 'intro' | 'step' | 'analyzing' | 'feedback
           [totalSteps]="survey()!.steps.length"
           [isLastStep]="currentStepDef()!.stepNumber >= survey()!.steps.length"
           [existingAnswers]="getExistingAnswers()"
+          (questionAnswered)="onQuestionAnswered($event)"
           (stepComplete)="onStepComplete($event)"
         />
       }
@@ -174,12 +175,58 @@ export class SurveyPageComponent implements OnInit {
   // ─── Events ───────────────────────────────────────────────────────────────
 
   onStart(): void {
-    this.view.set('step');
+    const def = this.survey()!;
+    const sess = this.session()!;
+
+    // Call backend to start a new survey pass (marks previous ones Outdated)
+    this.api.startSurvey({
+      surveyId: def.id,
+      surveyType: def.surveyType,
+      language: sess.language,
+    }).pipe(
+      takeUntilDestroyed(this.destroyRef),
+      catchError(err => {
+        console.warn('Could not start survey on backend:', err);
+        return of(null);
+      })
+    ).subscribe(res => {
+      if (res?.success && res.userSurveyId) {
+        const updated = this.sessionSvc.saveSession({ ...sess, userSurveyId: res.userSurveyId });
+        this.session.set(updated);
+      }
+      this.view.set('step');
+    });
+  }
+
+  /** Called on every "Наступне" click — saves partial answers for the current step. */
+  onQuestionAnswered(answers: StepAnswer[]): void {
+    const sess = this.session()!;
+    if (!sess.userSurveyId) return; // not started yet
+
+    const stepDef = this.currentStepDef()!;
+    const enriched = answers
+      .filter(a => a.answer?.trim())
+      .map(a => {
+        const q = stepDef.questions.find(q => q.id === a.questionId);
+        return { ...a, questionText: q ? this.locale.resolve(q.translations) : '' };
+      });
+
+    if (!enriched.length) return;
+
+    this.api.saveAnswer({
+      userSurveyId: sess.userSurveyId,
+      stepNumber: stepDef.stepNumber,
+      answers: enriched,
+    }).pipe(
+      takeUntilDestroyed(this.destroyRef),
+      catchError(err => { console.warn('Could not persist partial answers:', err); return of(null); })
+    ).subscribe();
   }
 
   onStepComplete(answers: StepAnswer[]): void {
     const def = this.survey()!;
     const stepDef = this.currentStepDef()!;
+    const sess = this.session()!;
 
     // Enrich answers with localized question text for AI context
     const enriched: StepAnswer[] = answers.map(a => {
@@ -191,27 +238,40 @@ export class SurveyPageComponent implements OnInit {
     });
 
     // Save answers and advance session step pointer
-    let sess = this.sessionSvc.completeStep(this.session()!, stepDef.stepNumber, enriched);
-    this.session.set(sess);
+    let updatedSess = this.sessionSvc.completeStep(sess, stepDef.stepNumber, enriched);
+    this.session.set(updatedSess);
+
+    // ── Persist all answers for this step ────────────────────────────────
+    if (updatedSess.userSurveyId) {
+      this.api.saveAnswer({
+        userSurveyId: updatedSess.userSurveyId,
+        stepNumber: stepDef.stepNumber,
+        answers: enriched,
+      }).pipe(
+        takeUntilDestroyed(this.destroyRef),
+        catchError(err => { console.warn('Could not persist step answers:', err); return of(null); })
+      ).subscribe();
+    }
 
     const skipAi = stepDef.questions.every(q => q.type === 'feedback');
     if (skipAi) {
-      this.advanceAfterStep(sess);
+      this.advanceAfterStep(updatedSess);
       return;
     }
 
     // Show AI loading screen
     this.view.set('analyzing');
 
-    const prevResults = this.sessionSvc.getPreviousResults(sess, stepDef.stepNumber);
+    const prevResults = this.sessionSvc.getPreviousResults(updatedSess, stepDef.stepNumber);
 
     this.api.analyzeStep({
       surveyType: def.surveyType,
       stepNumber: stepDef.stepNumber,
       totalSteps: def.steps.length,
-      language: sess.language,
+      language: updatedSess.language,
       answers: enriched,
       previousResults: prevResults,
+      userSurveyId: updatedSess.userSurveyId,
     }).pipe(
       takeUntilDestroyed(this.destroyRef),
       catchError(err => {
@@ -227,9 +287,9 @@ export class SurveyPageComponent implements OnInit {
         tokensUsed: res.tokensUsed ?? undefined,
         analyzedAt: new Date().toISOString(),
       };
-      sess = this.sessionSvc.saveAiResult(sess, aiResult);
-      this.session.set(sess);
-      this.advanceAfterStep(sess);
+      updatedSess = this.sessionSvc.saveAiResult(updatedSess, aiResult);
+      this.session.set(updatedSess);
+      this.advanceAfterStep(updatedSess);
     });
   }
 

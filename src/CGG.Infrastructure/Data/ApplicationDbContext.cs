@@ -19,6 +19,8 @@ namespace CGG.Infrastructure.Data
         // Survey-related tables
         public DbSet<Language> Languages { get; set; }
         public DbSet<Survey> Surveys { get; set; }
+        public DbSet<UserSurvey> UserSurveys { get; set; }
+        public DbSet<UserSurveyAnswer> UserSurveyAnswers { get; set; }
         public DbSet<SurveyStep> SurveySteps { get; set; }
         public DbSet<SurveyQuestion> SurveyQuestions { get; set; }
         public DbSet<SurveyQuestionTranslation> SurveyQuestionTranslations { get; set; }
@@ -52,6 +54,8 @@ namespace CGG.Infrastructure.Data
             builder.ApplyConfiguration(new SurveyQuestionOptionConfiguration());
             builder.ApplyConfiguration(new SurveyQuestionOptionTranslationConfiguration());
             builder.ApplyConfiguration(new SurveyResultConfiguration());
+            builder.ApplyConfiguration(new UserSurveyConfiguration());
+            builder.ApplyConfiguration(new UserSurveyAnswerConfiguration());
             builder.ApplyConfiguration(new AIRecommendationConfiguration());
             builder.ApplyConfiguration(new AiPromptTemplateConfiguration());
             builder.ApplyConfiguration(new AiLogConfiguration());

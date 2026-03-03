@@ -15,6 +15,7 @@ export interface AnalyzeStepRequest {
   language: string;
   answers: StepAnswer[];
   previousResults: { step: number; resultJson: string }[];
+  userSurveyId?: string | null;
 }
 
 export interface AnalyzeStepResponse {
@@ -22,6 +23,29 @@ export interface AnalyzeStepResponse {
   resultJson: string;
   outputFormat: string;
   tokensUsed: number | null;
+  success: boolean;
+  error: string | null;
+}
+
+export interface SaveStepRequest {
+  userSurveyId: string;
+  stepNumber: number;
+  answers: StepAnswer[];
+}
+
+export interface SaveStepResponse {
+  success: boolean;
+  error: string | null;
+}
+
+export interface StartSurveyRequest {
+  surveyId: string;
+  surveyType: string;
+  language: string;
+}
+
+export interface StartSurveyResponse {
+  userSurveyId: string;
   success: boolean;
   error: string | null;
 }
@@ -53,6 +77,21 @@ export class SurveyApiService {
       `${this.api}/survey/analyze-step`,
       request
     );
+  }
+
+  /**
+   * Start a new survey pass — marks previous ones of the same type as Outdated.
+   * Returns the UserSurveyId to pass to saveAnswer.
+   */
+  startSurvey(request: StartSurveyRequest): Observable<StartSurveyResponse> {
+    return this.http.post<StartSurveyResponse>(`${this.api}/survey/start`, request);
+  }
+
+  /**
+   * Idempotent upsert of answers for a step. Safe to call on every "Наступне" click.
+   */
+  saveAnswer(request: SaveStepRequest): Observable<SaveStepResponse> {
+    return this.http.post<SaveStepResponse>(`${this.api}/survey/save-answer`, request);
   }
 
   // ─── Normalization helpers ────────────────────────────────────────────────
