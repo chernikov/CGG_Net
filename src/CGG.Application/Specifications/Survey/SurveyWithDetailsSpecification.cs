@@ -20,6 +20,7 @@ public class SurveyWithDetailsSpecification : BaseSpecification<CGG.Core.Entitie
 
     private void AddIncludes()
     {
+        UseSplitQuery();
         AddInclude("Steps");
         AddInclude("Steps.Questions");
         AddInclude("Steps.Questions.Translations");

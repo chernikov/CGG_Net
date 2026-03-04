@@ -26,6 +26,9 @@ public static class SpecificationEvaluator<T> where T : class
         if (spec.IsPagingEnabled)
             query = query.Skip(spec.Skip).Take(spec.Take);
 
+        if (spec.IsSplitQuery)
+            query = query.AsSplitQuery();
+
         return query;
     }
 }
