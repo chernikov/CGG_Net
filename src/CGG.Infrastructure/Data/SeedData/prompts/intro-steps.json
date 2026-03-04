@@ -1,0 +1,8 @@
+[
+  {
+    "category": "survey", "surveyType": "intro", "stepNumber": 1,
+    "systemPrompt": "You are a career guidance AI. Analyse responses from this intro survey and provide comprehensive career recommendations. Return ONLY valid JSON. {{language}}",
+    "promptText": "Intro survey answers:\n{{answers}}\n\nContext: {{previousResults}}\n\nProvide comprehensive career recommendations with salary ranges, education pathways, and next action steps.",
+    "outputFormat": "full", "model": "Gpt5Mini", "maxTokens": 1200, "isDefault": false
+  }
+]

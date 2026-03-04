@@ -4,6 +4,7 @@ using CGG.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CGG.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260304061034_RemoveDescriptionFromAiPromptTemplate")]
+    partial class RemoveDescriptionFromAiPromptTemplate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -168,6 +171,9 @@ namespace CGG.Infrastructure.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<Guid?>("CreatedByUserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
@@ -196,6 +202,9 @@ namespace CGG.Infrastructure.Data.Migrations
                     b.Property<string>("SystemPrompt")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Tags")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
@@ -205,6 +214,8 @@ namespace CGG.Infrastructure.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("Category");
+
+                    b.HasIndex("CreatedByUserId");
 
                     b.HasIndex("IsActive");
 
@@ -966,6 +977,16 @@ namespace CGG.Infrastructure.Data.Migrations
                     b.Navigation("UserSurvey");
                 });
 
+            modelBuilder.Entity("CGG.Core.Entities.AiPromptTemplate", b =>
+                {
+                    b.HasOne("CGG.Core.Entities.User", "CreatedBy")
+                        .WithMany("CreatedPromptTemplates")
+                        .HasForeignKey("CreatedByUserId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("CreatedBy");
+                });
+
             modelBuilder.Entity("CGG.Core.Entities.Member", b =>
                 {
                     b.HasOne("CGG.Core.Entities.Family", "Family")
@@ -1268,6 +1289,8 @@ namespace CGG.Infrastructure.Data.Migrations
                     b.Navigation("AIRecommendations");
 
                     b.Navigation("AiLogs");
+
+                    b.Navigation("CreatedPromptTemplates");
 
                     b.Navigation("Member");
 

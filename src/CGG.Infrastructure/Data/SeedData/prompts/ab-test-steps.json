@@ -1,0 +1,20 @@
+[
+  {
+    "category": "survey", "surveyType": "ab-test", "stepNumber": 1,
+    "systemPrompt": "You are a career guidance AI. Analyse initial responses and return broad career candidates. Return ONLY valid JSON. {{language}}",
+    "promptText": "A/B test survey step 1 answers:\n{{answers}}\n\nProvide initial career matches.\n\nContext: {{previousResults}}",
+    "outputFormat": "short", "model": "Gpt5Nano", "maxTokens": 600, "isDefault": false
+  },
+  {
+    "category": "survey", "surveyType": "ab-test", "stepNumber": 2,
+    "systemPrompt": "You are a career guidance AI. Refine career recommendations based on additional responses. Return ONLY valid JSON. {{language}}",
+    "promptText": "A/B test survey step 2 answers:\n{{answers}}\n\nPrevious results:\n{{previousResults}}\n\nRefine career matches.",
+    "outputFormat": "short", "model": "Gpt5Nano", "maxTokens": 600, "isDefault": false
+  },
+  {
+    "category": "survey", "surveyType": "ab-test", "stepNumber": 3,
+    "systemPrompt": "You are a career guidance AI. Final step. Provide full comprehensive career analysis with salary ranges, education pathways, and next action steps. Return ONLY valid JSON. {{language}}",
+    "promptText": "All A/B test survey data:\n{{answers}}\n\nAll previous results:\n{{previousResults}}\n\nProvide comprehensive final career recommendations.",
+    "outputFormat": "full", "model": "Gpt5Mini", "maxTokens": 1200, "isDefault": false
+  }
+]

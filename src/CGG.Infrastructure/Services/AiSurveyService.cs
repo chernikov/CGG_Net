@@ -54,11 +54,16 @@ public class AiSurveyService : IAiSurveyService
             var template = await _promptLoader.LoadPromptForStepAsync(
                 dto.SurveyType, dto.StepNumber, cancellationToken);
 
-            var systemPrompt = template?.SystemPrompt
-                ?? BuildDefaultSystemPrompt(dto.StepNumber);
+            if (template is null)
+                throw new InvalidOperationException(
+                    $"No prompt template found for survey '{dto.SurveyType}' step {dto.StepNumber}");
 
-            var userTemplate = template?.PromptText
-                ?? BuildDefaultUserTemplate(dto.StepNumber);
+            var systemPrompt = (template.SystemPrompt
+                ?? throw new InvalidOperationException(
+                    $"Prompt template for '{dto.SurveyType}' step {dto.StepNumber} has no SystemPrompt"))
+                .Replace("{{language}}", GetLanguageInstruction(dto.Language));
+
+            var userTemplate = template.PromptText;
 
             // ── 2. Build user message ──────────────────────────────────────────
             var answersJson = JsonSerializer.Serialize(dto.Answers, _json);
@@ -77,7 +82,6 @@ public class AiSurveyService : IAiSurveyService
                 .Replace("{{surveyType}}", dto.SurveyType);
 
             userMessage += $"\n\n---\nIMPORTANT: Respond ONLY with valid JSON that strictly matches this schema:\n{outputFormatJson}";
-            userMessage += $"\n\n{GetLanguageInstruction(dto.Language)}";
 
             // ── 3. Call OpenAI ─────────────────────────────────────────────────
             var model = GetModel(isFinalStep);
@@ -182,13 +186,4 @@ public class AiSurveyService : IAiSurveyService
         _    => "Respond in English only."
     };
 
-    private static string BuildDefaultSystemPrompt(int step) =>
-        $"You are a career guidance AI assistant. " +
-        $"You analyse survey responses (step {step}) and return structured career recommendations. " +
-        "Return ONLY valid JSON as specified in the user message. Do not include explanations outside the JSON.";
-
-    private static string BuildDefaultUserTemplate(int step) =>
-        $"Step {step} answers:\n{{{{answers}}}}\n\n" +
-        "Previous step results (for context):\n{{previousResults}}\n\n" +
-        "Analyse the responses and return career profession matches in the required JSON format.";
 }

@@ -1,0 +1,50 @@
+[
+  {
+    "category": "survey", "surveyType": "parent", "stepNumber": 1,
+    "systemPrompt": "You are a career guidance AI. Step 1: family intro. Provide broad initial profession candidates. Return ONLY valid JSON. {{language}}",
+    "promptText": "Parent survey step 1 answers:\n{{answers}}\n\nProvide diverse initial career matches for the child.\n\nContext: {{previousResults}}",
+    "outputFormat": "short", "model": "Gpt5Nano", "maxTokens": 600, "isDefault": false
+  },
+  {
+    "category": "survey", "surveyType": "parent", "stepNumber": 2,
+    "systemPrompt": "You are a career guidance AI. Step 2: parenting style and attitudes. Refine career matches based on parenting approach. Return ONLY valid JSON. {{language}}",
+    "promptText": "Parent survey step 2 answers:\n{{answers}}\n\nPrevious results:\n{{previousResults}}\n\nRefine career matches based on parenting style and attitudes.",
+    "outputFormat": "short", "model": "Gpt5Nano", "maxTokens": 600, "isDefault": false
+  },
+  {
+    "category": "survey", "surveyType": "parent", "stepNumber": 3,
+    "systemPrompt": "You are a career guidance AI. Step 3: child interests and hobbies. Update career recommendations. Return ONLY valid JSON. {{language}}",
+    "promptText": "Parent survey step 3 answers:\n{{answers}}\n\nPrevious results:\n{{previousResults}}\n\nUpdate career matches based on child's interests and hobbies.",
+    "outputFormat": "short", "model": "Gpt5Nano", "maxTokens": 600, "isDefault": false
+  },
+  {
+    "category": "survey", "surveyType": "parent", "stepNumber": 4,
+    "systemPrompt": "You are a career guidance AI. Step 4: child strengths and academic performance. Refine recommendations. Return ONLY valid JSON. {{language}}",
+    "promptText": "Parent survey step 4 answers:\n{{answers}}\n\nPrevious results:\n{{previousResults}}\n\nRefine career matches based on academic strengths and performance.",
+    "outputFormat": "short", "model": "Gpt5Nano", "maxTokens": 600, "isDefault": false
+  },
+  {
+    "category": "survey", "surveyType": "parent", "stepNumber": 5,
+    "systemPrompt": "You are a career guidance AI. Step 5: social skills and personality traits. Adjust career recommendations. Return ONLY valid JSON. {{language}}",
+    "promptText": "Parent survey step 5 answers:\n{{answers}}\n\nPrevious results:\n{{previousResults}}\n\nAdjust career matches based on social skills and personality.",
+    "outputFormat": "short", "model": "Gpt5Nano", "maxTokens": 600, "isDefault": false
+  },
+  {
+    "category": "survey", "surveyType": "parent", "stepNumber": 6,
+    "systemPrompt": "You are a career guidance AI. Step 6: family values and priorities. Refine career recommendations. Return ONLY valid JSON. {{language}}",
+    "promptText": "Parent survey step 6 answers:\n{{answers}}\n\nPrevious results:\n{{previousResults}}\n\nRefine career matches considering family values and priorities.",
+    "outputFormat": "short", "model": "Gpt5Nano", "maxTokens": 600, "isDefault": false
+  },
+  {
+    "category": "survey", "surveyType": "parent", "stepNumber": 7,
+    "systemPrompt": "You are a career guidance AI. Step 7: expectations and goals. Finalize shortlist of career candidates. Return ONLY valid JSON. {{language}}",
+    "promptText": "Parent survey step 7 answers:\n{{answers}}\n\nPrevious results:\n{{previousResults}}\n\nFinalize shortlist of career candidates based on expectations and goals.",
+    "outputFormat": "short", "model": "Gpt5Nano", "maxTokens": 600, "isDefault": false
+  },
+  {
+    "category": "survey", "surveyType": "parent", "stepNumber": 8,
+    "systemPrompt": "You are a career guidance AI. Final step. Provide full comprehensive career analysis with salary ranges, education pathways, and next action steps. Return ONLY valid JSON. {{language}}",
+    "promptText": "All survey data:\n{{answers}}\n\nAll previous results:\n{{previousResults}}\n\nProvide comprehensive final career recommendations with salary, education, and next steps.",
+    "outputFormat": "full", "model": "Gpt5Mini", "maxTokens": 1200, "isDefault": false
+  }
+]

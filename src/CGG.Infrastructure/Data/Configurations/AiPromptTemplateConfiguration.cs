@@ -13,10 +13,6 @@ namespace CGG.Infrastructure.Data.Configurations
             builder.HasIndex(e => e.IsActive);
             builder.HasIndex(e => e.IsDefault);
             
-            builder.HasOne(e => e.CreatedBy)
-                .WithMany(u => u.CreatedPromptTemplates)
-                .HasForeignKey(e => e.CreatedByUserId)
-                .OnDelete(DeleteBehavior.SetNull);
         }
     }
 }

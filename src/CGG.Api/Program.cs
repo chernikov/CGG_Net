@@ -36,6 +36,12 @@ using (var scope = app.Services.CreateScope())
         var seeder = new DataSeeder(context, services.GetRequiredService<IPasswordHasher>());
         await seeder.SeedAsync();
         app.Logger.LogInformation("Database seeding completed successfully");
+
+        var surveySeeder = services.GetRequiredService<SurveySeeder>();
+        await surveySeeder.SeedAsync();
+
+        var promptSeeder = services.GetRequiredService<PromptSeeder>();
+        await promptSeeder.SeedAsync();
     }
     catch (Exception ex)
     {

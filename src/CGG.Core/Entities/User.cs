@@ -31,6 +31,5 @@ namespace CGG.Core.Entities
         public ICollection<SurveyResult> SurveyResults { get; set; } = new List<SurveyResult>();
         public ICollection<AIRecommendation> AIRecommendations { get; set; } = new List<AIRecommendation>();
         public ICollection<AiLog> AiLogs { get; set; } = new List<AiLog>();
-        public ICollection<AiPromptTemplate> CreatedPromptTemplates { get; set; } = new List<AiPromptTemplate>();
     }
 }
