@@ -1,6 +1,6 @@
 import {
   Component, Input, Output, EventEmitter, OnChanges, SimpleChanges, inject, signal, computed,
-  ChangeDetectionStrategy, ChangeDetectorRef
+  ChangeDetectionStrategy, ChangeDetectorRef, HostListener
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SurveyStepDef } from '../../models/question.model';
@@ -137,6 +137,20 @@ export class SurveyStepComponent implements OnChanges {
     if (this.questionIndex() > 0) {
       this.questionIndex.update(i => i - 1);
     }
+  }
+
+  @HostListener('window:debugAutofill', ['$event'])
+  onDebugAutofill(event: Event): void {
+    const data = (event as CustomEvent<Record<string, unknown>>).detail;
+    const filled: Record<string, string> = { ...this.answers() };
+    for (const q of this.step.questions) {
+      if (!q.purpose) continue;
+      const val = data[q.purpose];
+      if (val === undefined || val === null) continue;
+      filled[q.id] = Array.isArray(val) ? JSON.stringify(val) : String(val);
+    }
+    this.answers.set(filled);
+    this.cdr.markForCheck();
   }
 
   submitStep(): void {

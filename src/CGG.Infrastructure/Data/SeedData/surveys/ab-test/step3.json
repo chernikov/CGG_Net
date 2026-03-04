@@ -25,7 +25,8 @@
         "uk": "Введи професію...",
         "en": "Enter a profession...",
         "hi": "पेशा दर्ज करें..."
-      }
+      },
+      "purpose": "next_profession"
     },
     {
       "id": "q37",
@@ -61,7 +62,8 @@
           "अन्य"
         ]
       },
-      "maxSelections": 3
+      "maxSelections": 3,
+      "purpose": "skills_to_improve"
     },
     {
       "id": "q38",
@@ -75,7 +77,8 @@
         "uk": "Введи здібність...",
         "en": "Enter ability...",
         "hi": "क्षमता दर्ज करें..."
-      }
+      },
+      "purpose": "additional_ability"
     }
   ],
   "aiPrompt": {

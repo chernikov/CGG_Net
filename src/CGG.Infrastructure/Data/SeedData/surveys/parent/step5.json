@@ -21,7 +21,8 @@
         "hi": "आपके लिए अपने बच्चे को भविष्य के पेशे पर निर्णय लेने में मदद करना कितना महत्वपूर्ण है? (स्कोर 1-10)"
       },
       "min": 1,
-      "max": 10
+      "max": 10,
+      "purpose": "importance"
     },
     {
       "id": "q2_desired_features",
@@ -69,7 +70,8 @@
         "GUIDELINES",
         "OTHER"
       ],
-      "maxSelections": 5
+      "maxSelections": 5,
+      "purpose": "desired_features"
     },
     {
       "id": "q3_max_value",
@@ -79,7 +81,8 @@
         "en": "What would make the product most valuable to you?",
         "hi": "उत्पाद को आपके लिए सबसे मूल्यवान क्या बनाएगा?"
       },
-      "maxLength": 500
+      "maxLength": 500,
+      "purpose": "max_value"
     },
     {
       "id": "q4_purchase_readiness",
@@ -109,7 +112,13 @@
           "नहीं"
         ]
       },
-      "optionCodes": ["YES_ABSOLUTELY", "MAYBE", "DOUBT", "NO"]
+      "optionCodes": [
+        "YES_ABSOLUTELY",
+        "MAYBE",
+        "DOUBT",
+        "NO"
+      ],
+      "purpose": "purchase_readiness"
     },
     {
       "id": "q5_motivation",
@@ -152,7 +161,8 @@
         "GUARANTEE",
         "REVIEWS",
         "DISCOUNT"
-      ]
+      ],
+      "purpose": "motivation"
     },
     {
       "id": "q6_format",
@@ -185,7 +195,14 @@
           "वीडियो प्रस्तुति"
         ]
       },
-      "optionCodes": ["PDF", "DASHBOARD", "BROCHURE", "APP", "VIDEO"]
+      "optionCodes": [
+        "PDF",
+        "DASHBOARD",
+        "BROCHURE",
+        "APP",
+        "VIDEO"
+      ],
+      "purpose": "format"
     },
     {
       "id": "q7_price",
@@ -224,7 +241,8 @@
         "500_1000",
         "MORE_1000",
         "NOT_READY"
-      ]
+      ],
+      "purpose": "price"
     }
   ]
 }

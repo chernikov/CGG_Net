@@ -7,7 +7,7 @@ namespace CGG.Core.Entities
         
         // AI Processing
         public bool RequiresAiAnalysis { get; set; } = true; // false for UI/UX feedback questions
-        public string? PurposeCategory { get; set; } // 'career-analysis', 'ui-feedback', 'a-b-test', 'user-satisfaction'
+        public string? Purpose { get; set; } // Single-word key for autofill mapping: 'gender', 'hobby', etc.
         
         public bool IsActive { get; set; } = true;
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;

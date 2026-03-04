@@ -25,7 +25,8 @@
         "uk": "Україна",
         "en": "Ukraine",
         "hi": "यूक्रेन"
-      }
+      },
+      "purpose": "country_of_birth"
     },
     {
       "id": "q2",
@@ -39,7 +40,8 @@
         "uk": "Україна",
         "en": "Ukraine",
         "hi": "यूक्रेन"
-      }
+      },
+      "purpose": "current_country"
     },
     {
       "id": "q3",
@@ -53,7 +55,8 @@
         "uk": "Опиши свій настрій і причину...",
         "en": "Describe your mood and the reason...",
         "hi": "अपने मूड और कारण का वर्णन करें..."
-      }
+      },
+      "purpose": "current_mood"
     },
     {
       "id": "q4",
@@ -67,7 +70,8 @@
         "uk": "Чим ти любиш займатися у вільний час?",
         "en": "What do you like to do in your free time?",
         "hi": "आप अपने खाली समय में क्या करना पसंद करते हैं?"
-      }
+      },
+      "purpose": "hobby"
     },
     {
       "id": "q5",
@@ -81,7 +85,8 @@
         "uk": "Які твої повсякденні звички?",
         "en": "What are your daily habits?",
         "hi": "आपकी दैनिक आदतें क्या हैं?"
-      }
+      },
+      "purpose": "habits"
     },
     {
       "id": "q6",
@@ -95,7 +100,8 @@
         "uk": "Наприклад: комунікація, творчість, логіка...",
         "en": "For example: communication, creativity, logic...",
         "hi": "उदाहरण के लिए: संचार, रचनात्मकता, तर्क..."
-      }
+      },
+      "purpose": "best_abilities"
     },
     {
       "id": "q7",
@@ -109,7 +115,8 @@
         "uk": "Які навички ти хочеш покращити?",
         "en": "Which skills do you want to improve?",
         "hi": "आप किन कौशल को सुधारना चाहते हैं?"
-      }
+      },
+      "purpose": "abilities_to_develop"
     },
     {
       "id": "q8",
@@ -123,7 +130,8 @@
         "uk": "Наприклад: дизайнер, програміст, лікар...",
         "en": "For example: designer, programmer, doctor...",
         "hi": "उदाहरण के लिए: डिजाइनर, प्रोग्रामर, डॉक्टर..."
-      }
+      },
+      "purpose": "chosen_profession"
     },
     {
       "id": "q9",
@@ -137,7 +145,8 @@
         "uk": "Опиши персонажа і чому він тобі імпонує...",
         "en": "Describe the character and why they appeal to you...",
         "hi": "चरित्र का वर्णन करें और वे आपको क्यों आकर्षित करते हैं..."
-      }
+      },
+      "purpose": "fav_character"
     },
     {
       "id": "q10",
@@ -151,7 +160,8 @@
         "uk": "Опиши персонажа і що тобі в ньому не подобається...",
         "en": "Describe the character and what you don't like about them...",
         "hi": "चरित्र का वर्णन करें और आपको उनके बारे में क्या पसंद नहीं है..."
-      }
+      },
+      "purpose": "antihero"
     },
     {
       "id": "q11",
@@ -165,7 +175,8 @@
         "uk": "Розкажи про родича, яким ти захоплюєшся...",
         "en": "Tell us about a relative you admire...",
         "hi": "उस रिश्तेदार के बारे में बताएं जिसकी आप प्रशंसा करते हैं..."
-      }
+      },
+      "purpose": "admired_relative"
     },
     {
       "id": "q12",
@@ -179,7 +190,8 @@
         "uk": "Опиши що саме тобі не подобається...",
         "en": "Describe what exactly you don't like...",
         "hi": "वर्णन करें कि आपको वास्तव में क्या पसंद नहीं है..."
-      }
+      },
+      "purpose": "disliked_relative"
     },
     {
       "id": "q13",
@@ -193,7 +205,8 @@
         "uk": "Розкажи ще щось важливе про себе...",
         "en": "Tell us something else important about yourself...",
         "hi": "अपने बारे में कुछ और महत्वपूर्ण बताएं..."
-      }
+      },
+      "purpose": "bonus_info"
     }
   ],
   "aiPrompt": {

@@ -1,0 +1,26 @@
+{
+  "slug": "unique-versatile",
+  "icon": "✨",
+  "nameUk": "Унікальна різностороння дитина",
+  "nameEn": "Unique Versatile Child",
+  "sortOrder": 4,
+  "answers": {
+    "child_type": "OTHER",
+    "child_type_other": "Допитлива і непередбачувана",
+    "child_hobbies": "Кулінарія, іноземні мови, наука, мандри",
+    "child_career_dreams": "Ще не визначилась, цікавлять багато напрямків",
+    "parent_support_priority": "Допомогти знайти себе і свій шлях",
+    "parent_career_opinion": "Ще не визначились — дитина цікавиться багатьма сферами",
+    "family_traditions": "Немає чіткої традиції — кожен обирає свій шлях",
+    "child_talents": "Допитливість, мови, кулінарія, адаптивність",
+    "child_dev_areas": "Цілеспрямованість, вибір пріоритетів",
+    "child_job_conditions": ["CREATIVITY", "HELPING", "FLEXTIME"],
+    "child_fav_character": "Хаяо Міядзакі — поєднує мистецтво і глибокий зміст",
+    "child_antihero": "Білла Шифр з Gravity Falls — маніпулює і сіє хаос",
+    "child_admired_relative": "Дядько-мандрівник — пізнав багато культур",
+    "child_disliked_relative": "Тітка — нав'язує свою думку",
+    "child_lookalike_hero": "Мауї — різносторонній і непередбачуваний",
+    "extra_observations": "Дитина швидко вчиться всього нового",
+    "local_request": "Як допомогти визначитись з напрямком розвитку?"
+  }
+}

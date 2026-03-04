@@ -66,5 +66,8 @@ namespace CGG.Infrastructure.Data.SeedData
 
         [JsonPropertyName("options")]
         public Dictionary<string, List<string>>? Options { get; set; }
+
+        [JsonPropertyName("purpose")]
+        public string? Purpose { get; set; }
     }
 }

@@ -1,9 +1,10 @@
-import { Component, signal, OnInit, OnDestroy, HostListener } from '@angular/core';
+import { Component, signal, OnInit, OnDestroy, HostListener, isDevMode } from '@angular/core';
 import { Router, RouterOutlet, NavigationEnd } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { filter, map } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { HeaderComponent } from './shared/components/header/header';
+import { SurveyDebugPanelComponent } from './shared/components/survey-debug-panel/survey-debug-panel.component';
 import * as AuthActions from './store/auth/auth.actions';
 import { LanguageService } from './core/services/language.service';
 
@@ -11,7 +12,7 @@ const DESKTOP_BREAKPOINT = 768;
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, CommonModule, HeaderComponent],
+  imports: [RouterOutlet, CommonModule, HeaderComponent, SurveyDebugPanelComponent],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
@@ -19,6 +20,7 @@ export class App implements OnInit, OnDestroy {
   protected readonly title = signal('CGG.WebClient');
   protected readonly isAdminRoute = signal(false);
   protected readonly isDesktop = signal(window.innerWidth >= DESKTOP_BREAKPOINT);
+  protected readonly isDevMode = isDevMode();
 
   constructor(
     private router: Router,

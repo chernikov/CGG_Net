@@ -22,7 +22,8 @@
       },
       "optional": true,
       "min": 18,
-      "max": 100
+      "max": 100,
+      "purpose": "age"
     },
     {
       "id": "q2_gender",
@@ -33,12 +34,33 @@
         "hi": "लिंग"
       },
       "options": {
-        "uk": ["Чоловіча", "Жіноча", "Інше", "Не хочу вказувати"],
-        "en": ["Male", "Female", "Other", "Prefer not to say"],
-        "hi": ["पुरुष", "महिला", "अन्य", "कहना नहीं चाहता"]
+        "uk": [
+          "Чоловіча",
+          "Жіноча",
+          "Інше",
+          "Не хочу вказувати"
+        ],
+        "en": [
+          "Male",
+          "Female",
+          "Other",
+          "Prefer not to say"
+        ],
+        "hi": [
+          "पुरुष",
+          "महिला",
+          "अन्य",
+          "कहना नहीं चाहता"
+        ]
       },
-      "optionCodes": ["MALE", "FEMALE", "OTHER", "PREFER_NOT_TO_SAY"],
-      "optional": true
+      "optionCodes": [
+        "MALE",
+        "FEMALE",
+        "OTHER",
+        "PREFER_NOT_TO_SAY"
+      ],
+      "optional": true,
+      "purpose": "gender"
     },
     {
       "id": "q3_country",
@@ -49,7 +71,8 @@
         "hi": "देश"
       },
       "optional": true,
-      "maxLength": 100
+      "maxLength": 100,
+      "purpose": "country"
     },
     {
       "id": "q4_education",
@@ -89,7 +112,8 @@
         "HIGHER",
         "DEGREE"
       ],
-      "optional": true
+      "optional": true,
+      "purpose": "education"
     },
     {
       "id": "q5_job_field",
@@ -100,7 +124,8 @@
         "hi": "कार्य क्षेत्र"
       },
       "optional": true,
-      "maxLength": 100
+      "maxLength": 100,
+      "purpose": "job_field"
     },
     {
       "id": "q6_job_position",
@@ -111,7 +136,8 @@
         "hi": "पद"
       },
       "optional": true,
-      "maxLength": 100
+      "maxLength": 100,
+      "purpose": "job_position"
     },
     {
       "id": "q7_experience_years",
@@ -123,7 +149,8 @@
       },
       "optional": true,
       "min": 0,
-      "max": 80
+      "max": 80,
+      "purpose": "experience_years"
     },
     {
       "id": "q8_professional_skills",
@@ -134,7 +161,8 @@
         "hi": "मुख्य व्यावसायिक कौशल (5 तक)"
       },
       "optional": true,
-      "maxLength": 200
+      "maxLength": 200,
+      "purpose": "professional_skills"
     },
     {
       "id": "q9_skills_to_develop",
@@ -145,7 +173,8 @@
         "hi": "विकसित करने के कौशल / ताकत"
       },
       "optional": true,
-      "maxLength": 200
+      "maxLength": 200,
+      "purpose": "skills_to_develop"
     },
     {
       "id": "q10_leisure_hobbies",
@@ -156,7 +185,8 @@
         "hi": "पसंदीदा अवकाश / शौक जिसे आप मुद्रीकृत करना चाहेंगे"
       },
       "optional": true,
-      "maxLength": 200
+      "maxLength": 200,
+      "purpose": "leisure_hobbies"
     },
     {
       "id": "q11_work_priorities",
@@ -167,7 +197,8 @@
         "hi": "पेशे में प्राथमिकताएं (आय, संतुलन, आदि)"
       },
       "optional": true,
-      "maxLength": 200
+      "maxLength": 200,
+      "purpose": "work_priorities"
     },
     {
       "id": "q12_comfortable_format",
@@ -178,12 +209,29 @@
         "hi": "आरामदायक कार्य प्रारूप"
       },
       "options": {
-        "uk": ["Офіс", "Віддалено", "Гібрид"],
-        "en": ["Office", "Remote", "Hybrid"],
-        "hi": ["कार्यालय", "दूरस्थ", "हाइब्रिड"]
+        "uk": [
+          "Офіс",
+          "Віддалено",
+          "Гібрид"
+        ],
+        "en": [
+          "Office",
+          "Remote",
+          "Hybrid"
+        ],
+        "hi": [
+          "कार्यालय",
+          "दूरस्थ",
+          "हाइब्रिड"
+        ]
       },
-      "optionCodes": ["OFFICE", "REMOTE", "HYBRID"],
-      "optional": true
+      "optionCodes": [
+        "OFFICE",
+        "REMOTE",
+        "HYBRID"
+      ],
+      "optional": true,
+      "purpose": "comfortable_format"
     },
     {
       "id": "q13_team_or_individual",
@@ -194,12 +242,25 @@
         "hi": "टीम या व्यक्तिगत कार्य"
       },
       "options": {
-        "uk": ["Команда", "Індивідуальна"],
-        "en": ["Team", "Individual"],
-        "hi": ["टीम", "व्यक्तिगत"]
+        "uk": [
+          "Команда",
+          "Індивідуальна"
+        ],
+        "en": [
+          "Team",
+          "Individual"
+        ],
+        "hi": [
+          "टीम",
+          "व्यक्तिगत"
+        ]
       },
-      "optionCodes": ["TEAM", "INDIVIDUAL"],
-      "optional": true
+      "optionCodes": [
+        "TEAM",
+        "INDIVIDUAL"
+      ],
+      "optional": true,
+      "purpose": "team_or_individual"
     },
     {
       "id": "q14_work_satisfaction",
@@ -210,7 +271,8 @@
         "hi": "आप काम में किस बात से संतुष्ट हैं / किस बात से संतुष्ट नहीं हैं"
       },
       "optional": true,
-      "maxLength": 300
+      "maxLength": 300,
+      "purpose": "work_satisfaction"
     },
     {
       "id": "q15_achievements",
@@ -221,7 +283,8 @@
         "hi": "आपका गौरव और उपलब्धियां (जिसके लिए आपको अपनी प्रशंसा करनी चाहिए)"
       },
       "optional": true,
-      "maxLength": 300
+      "maxLength": 300,
+      "purpose": "achievements"
     },
     {
       "id": "q16_additional_features",
@@ -232,7 +295,8 @@
         "hi": "अतिरिक्त विशेषताएं जिन्हें हमें ध्यान में रखना चाहिए।"
       },
       "optional": true,
-      "maxLength": 300
+      "maxLength": 300,
+      "purpose": "additional_features"
     }
   ]
 }

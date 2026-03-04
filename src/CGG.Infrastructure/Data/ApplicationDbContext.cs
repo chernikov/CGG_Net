@@ -28,6 +28,10 @@ namespace CGG.Infrastructure.Data
         public DbSet<SurveyQuestionOptionTranslation> SurveyQuestionOptionTranslations { get; set; }
         public DbSet<SurveyResult> SurveyResults { get; set; }
         
+        // Survey example profiles (debug autofill)
+        public DbSet<SurveyExampleProfile> SurveyExampleProfiles { get; set; }
+        public DbSet<SurveyExampleAnswer> SurveyExampleAnswers { get; set; }
+
         // AI-related tables
         public DbSet<AiPromptTemplate> AiPromptTemplates { get; set; }
         public DbSet<AiLog> AiLogs { get; set; }
@@ -57,6 +61,8 @@ namespace CGG.Infrastructure.Data
             builder.ApplyConfiguration(new UserSurveyConfiguration());
             builder.ApplyConfiguration(new UserSurveyAnswerConfiguration());
             builder.ApplyConfiguration(new AIRecommendationConfiguration());
+            builder.ApplyConfiguration(new SurveyExampleProfileConfiguration());
+            builder.ApplyConfiguration(new SurveyExampleAnswerConfiguration());
             builder.ApplyConfiguration(new AiPromptTemplateConfiguration());
             builder.ApplyConfiguration(new AiLogConfiguration());
             builder.ApplyConfiguration(new RoleConfiguration());

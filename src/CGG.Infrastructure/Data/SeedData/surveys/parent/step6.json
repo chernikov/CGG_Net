@@ -34,7 +34,11 @@
           "वीडियो देखता है, खेलता है, अधिक सामग्री का उपभोग करता है"
         ]
       },
-      "optionCodes": ["CREATES", "CONSUMES"]
+      "optionCodes": [
+        "CREATES",
+        "CONSUMES"
+      ],
+      "purpose": "freetime"
     },
     {
       "id": "q2_new_situations",
@@ -49,13 +53,20 @@
           "Вступає в контакт, задає питання",
           "Спостерігає, тримається осторонь"
         ],
-        "en": ["Makes contact, asks questions", "Observes, stays away"],
+        "en": [
+          "Makes contact, asks questions",
+          "Observes, stays away"
+        ],
         "hi": [
           "संपर्क बनाता है, प्रश्न पूछता है",
           "निरीक्षण करता है, दूर रहता है"
         ]
       },
-      "optionCodes": ["CONTACTS", "OBSERVES"]
+      "optionCodes": [
+        "CONTACTS",
+        "OBSERVES"
+      ],
+      "purpose": "new_situations"
     },
     {
       "id": "q3_traits",
@@ -79,7 +90,11 @@
           "लचीलापन, सुधार, योजनाओं में आसान बदलाव"
         ]
       },
-      "optionCodes": ["STRUCTURED", "FLEXIBLE"]
+      "optionCodes": [
+        "STRUCTURED",
+        "FLEXIBLE"
+      ],
+      "purpose": "traits"
     },
     {
       "id": "q4_failures",
@@ -94,13 +109,20 @@
           "Спробує ще раз або звернеться по допомогу",
           "Засмучується, може втратити інтерес"
         ],
-        "en": ["Tries again or asks for help", "Gets upset, may lose interest"],
+        "en": [
+          "Tries again or asks for help",
+          "Gets upset, may lose interest"
+        ],
         "hi": [
           "फिर से कोशिश करता है या मदद मांगता है",
           "परेशान हो जाता है, रुचि खो सकता है"
         ]
       },
-      "optionCodes": ["TRIES_AGAIN", "LOSES_INTEREST"]
+      "optionCodes": [
+        "TRIES_AGAIN",
+        "LOSES_INTEREST"
+      ],
+      "purpose": "failures"
     },
     {
       "id": "q5_environment",
@@ -124,7 +146,11 @@
           "जहां शांत है, स्पष्ट है, कुछ बदलाव हैं"
         ]
       },
-      "optionCodes": ["DYNAMIC", "CALM"]
+      "optionCodes": [
+        "DYNAMIC",
+        "CALM"
+      ],
+      "purpose": "environment"
     },
     {
       "id": "q6_learning",
@@ -148,7 +174,11 @@
           "अवलोकन, पुनरावृत्ति, विचारशील प्रतिबिंब"
         ]
       },
-      "optionCodes": ["PRACTICAL", "THEORETICAL"]
+      "optionCodes": [
+        "PRACTICAL",
+        "THEORETICAL"
+      ],
+      "purpose": "learning"
     },
     {
       "id": "q7_motivation_source",
@@ -172,7 +202,11 @@
           "उसे प्रक्रिया से अपनी संतुष्टि में अधिक रुचि है"
         ]
       },
-      "optionCodes": ["APPROVAL", "SATISFACTION"]
+      "optionCodes": [
+        "APPROVAL",
+        "SATISFACTION"
+      ],
+      "purpose": "motivation_source"
     },
     {
       "id": "q8_reaction_failures",
@@ -196,7 +230,11 @@
           "बहुत परेशान हो जाता है और ठीक होने में लंबा समय लेता है"
         ]
       },
-      "optionCodes": ["CHALLENGE", "UPSET"]
+      "optionCodes": [
+        "CHALLENGE",
+        "UPSET"
+      ],
+      "purpose": "reaction_failures"
     },
     {
       "id": "q9_motivation",
@@ -220,7 +258,11 @@
           "'मैं आंका या डांटा नहीं जाना चाहता'"
         ]
       },
-      "optionCodes": ["BETTER", "AVOID_JUDGMENT"]
+      "optionCodes": [
+        "BETTER",
+        "AVOID_JUDGMENT"
+      ],
+      "purpose": "motivation"
     },
     {
       "id": "q10_choice",
@@ -244,7 +286,11 @@
           "पहले से ज्ञात और सत्यापित को दोहराएं"
         ]
       },
-      "optionCodes": ["NEW", "KNOWN"]
+      "optionCodes": [
+        "NEW",
+        "KNOWN"
+      ],
+      "purpose": "choice"
     }
   ]
 }

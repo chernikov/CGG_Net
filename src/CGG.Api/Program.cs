@@ -42,6 +42,9 @@ using (var scope = app.Services.CreateScope())
 
         var promptSeeder = services.GetRequiredService<PromptSeeder>();
         await promptSeeder.SeedAsync();
+
+        var exampleSeeder = services.GetRequiredService<SurveyExampleSeeder>();
+        await exampleSeeder.SeedAsync();
     }
     catch (Exception ex)
     {

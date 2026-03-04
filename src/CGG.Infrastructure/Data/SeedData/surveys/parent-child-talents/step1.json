@@ -22,11 +22,36 @@
         "hi": "आप अपने बच्चे के स्वभाव का वर्णन कैसे करेंगे?"
       },
       "options": {
-        "uk": ["Спокійна", "Емоційна", "Активна", "Замкнена", "Інше"],
-        "en": ["Calm", "Emotional", "Active", "Reserved", "Other"],
-        "hi": ["शांत", "भावुक", "सक्रिय", "संकोची", "अन्य"]
+        "uk": [
+          "Спокійна",
+          "Емоційна",
+          "Активна",
+          "Замкнена",
+          "Інше"
+        ],
+        "en": [
+          "Calm",
+          "Emotional",
+          "Active",
+          "Reserved",
+          "Other"
+        ],
+        "hi": [
+          "शांत",
+          "भावुक",
+          "सक्रिय",
+          "संकोची",
+          "अन्य"
+        ]
       },
-      "optionCodes": ["CALM", "EMO", "ACTIVE", "WITHDRAWN", "OTHER"]
+      "optionCodes": [
+        "CALM",
+        "EMO",
+        "ACTIVE",
+        "WITHDRAWN",
+        "OTHER"
+      ],
+      "purpose": "child_type"
     },
     {
       "id": "q1_other",
@@ -45,7 +70,8 @@
       "visibleIf": {
         "field": "q1_child_type",
         "equals": "OTHER"
-      }
+      },
+      "purpose": "child_type_other"
     },
     {
       "id": "q2_hobbies",
@@ -60,7 +86,8 @@
         "en": "Example: reading, drawing, sports, music, computer games...",
         "hi": "उदाहरण: पढ़ना, ड्राइंग, खेल, संगीत, कंप्यूटर गेम..."
       },
-      "maxLength": 400
+      "maxLength": 400,
+      "purpose": "child_hobbies"
     },
     {
       "id": "q3_dreams",
@@ -75,7 +102,8 @@
         "en": "If none — write 'None' or 'Not decided yet'",
         "hi": "यदि कोई नहीं — 'कोई नहीं' या 'अभी तक निर्णय नहीं' लिखें"
       },
-      "maxLength": 400
+      "maxLength": 400,
+      "purpose": "child_career_dreams"
     },
     {
       "id": "q4_support",
@@ -90,7 +118,8 @@
         "en": "Example: developing talent, financial stability, child's happiness...",
         "hi": "उदाहरण: प्रतिभा का विकास, वित्तीय स्थिरता, बच्चे की खुशी..."
       },
-      "maxLength": 400
+      "maxLength": 400,
+      "purpose": "parent_support_priority"
     },
     {
       "id": "q5_parent_opinion",
@@ -105,7 +134,8 @@
         "en": "Briefly describe or write 'Not decided yet'",
         "hi": "संक्षेप में वर्णन करें या 'अभी तक निर्णय नहीं' लिखें"
       },
-      "maxLength": 280
+      "maxLength": 280,
+      "purpose": "parent_career_opinion"
     },
     {
       "id": "q6_family_traditions",
@@ -120,7 +150,8 @@
         "en": "Example: dynasty of doctors, teachers, entrepreneurs...",
         "hi": "उदाहरण: डॉक्टरों, शिक्षकों, उद्यमियों का वंश..."
       },
-      "maxLength": 400
+      "maxLength": 400,
+      "purpose": "family_traditions"
     },
     {
       "id": "q7_talents_three",
@@ -136,7 +167,8 @@
         "hi": "अल्पविराम से अलग: रचनात्मकता, तार्किक सोच, संचार..."
       },
       "maxLength": 400,
-      "minItemsHint": 3
+      "minItemsHint": 3,
+      "purpose": "child_talents"
     },
     {
       "id": "q8_dev_areas",
@@ -151,7 +183,8 @@
         "en": "Name 2-3 areas: concentration, self-organization, communication...",
         "hi": "2-3 क्षेत्रों का नाम बताएं: एकाग्रता, आत्म-संगठन, संचार..."
       },
-      "maxLength": 300
+      "maxLength": 300,
+      "purpose": "child_dev_areas"
     },
     {
       "id": "q9_happy_job_conditions",
@@ -162,12 +195,45 @@
         "hi": "आपके बच्चे के खुशहाल जीवन के लिए भविष्य की नौकरी में कौन सी शर्तें सबसे महत्वपूर्ण हैं? (3 तक चुनें)"
       },
       "options": {
-        "uk": ["Стабільність", "Творчість", "Престиж", "Допомога іншим", "Високий дохід", "Вільний графік", "Інше"],
-        "en": ["Stability", "Creativity", "Prestige", "Helping others", "High income", "Flexible schedule", "Other"],
-        "hi": ["स्थिरता", "रचनात्मकता", "प्रतिष्ठा", "दूसरों की मदद", "उच्च आय", "लचीला समय", "अन्य"]
+        "uk": [
+          "Стабільність",
+          "Творчість",
+          "Престиж",
+          "Допомога іншим",
+          "Високий дохід",
+          "Вільний графік",
+          "Інше"
+        ],
+        "en": [
+          "Stability",
+          "Creativity",
+          "Prestige",
+          "Helping others",
+          "High income",
+          "Flexible schedule",
+          "Other"
+        ],
+        "hi": [
+          "स्थिरता",
+          "रचनात्मकता",
+          "प्रतिष्ठा",
+          "दूसरों की मदद",
+          "उच्च आय",
+          "लचीला समय",
+          "अन्य"
+        ]
       },
-      "optionCodes": ["STABILITY", "CREATIVITY", "PRESTIGE", "HELPING", "INCOME", "FLEXTIME", "OTHER"],
-      "maxSelections": 3
+      "optionCodes": [
+        "STABILITY",
+        "CREATIVITY",
+        "PRESTIGE",
+        "HELPING",
+        "INCOME",
+        "FLEXTIME",
+        "OTHER"
+      ],
+      "maxSelections": 3,
+      "purpose": "child_job_conditions"
     },
     {
       "id": "q9_other",
@@ -186,7 +252,8 @@
       "visibleIf": {
         "field": "q9_happy_job_conditions",
         "contains": "OTHER"
-      }
+      },
+      "purpose": "child_job_conditions_other"
     },
     {
       "id": "q10_fav_character",
@@ -201,7 +268,8 @@
         "en": "Character and why they like them...",
         "hi": "पात्र और वे उन्हें क्यों पसंद करते हैं..."
       },
-      "maxLength": 300
+      "maxLength": 300,
+      "purpose": "child_fav_character"
     },
     {
       "id": "q11_antihero",
@@ -216,7 +284,8 @@
         "en": "Character and what they dislike...",
         "hi": "पात्र और क्या पसंद नहीं है..."
       },
-      "maxLength": 300
+      "maxLength": 300,
+      "purpose": "child_antihero"
     },
     {
       "id": "q12_admired_relative",
@@ -231,7 +300,8 @@
         "en": "Person and reason for admiration...",
         "hi": "व्यक्ति और प्रशंसा का कारण..."
       },
-      "maxLength": 300
+      "maxLength": 300,
+      "purpose": "child_admired_relative"
     },
     {
       "id": "q13_not_like_relative",
@@ -246,7 +316,8 @@
         "en": "Person and traits they dislike...",
         "hi": "व्यक्ति और नापसंद गुण..."
       },
-      "maxLength": 300
+      "maxLength": 300,
+      "purpose": "child_disliked_relative"
     },
     {
       "id": "q14_lookalike_hero",
@@ -261,7 +332,8 @@
         "en": "Character and similarity...",
         "hi": "पात्र और समानता..."
       },
-      "maxLength": 300
+      "maxLength": 300,
+      "purpose": "child_lookalike_hero"
     },
     {
       "id": "q15_extra",
@@ -277,7 +349,8 @@
         "hi": "कोई भी महत्वपूर्ण विवरण..."
       },
       "maxLength": 400,
-      "optional": true
+      "optional": true,
+      "purpose": "extra_observations"
     },
     {
       "id": "q16_local_request",
@@ -292,7 +365,8 @@
         "en": "Example: how to help with concentration, how to develop communication, how to motivate for learning...",
         "hi": "उदाहरण: एकाग्रता में कैसे मदद करें, संचार कैसे विकसित करें, सीखने के लिए कैसे प्रेरित करें..."
       },
-      "maxLength": 300
+      "maxLength": 300,
+      "purpose": "local_request"
     }
   ],
   "aiPrompt": {
@@ -306,7 +380,10 @@
           "q1_child_type": "ACTIVE",
           "q2_hobbies": "Малювання, танці, створення відео для TikTok",
           "q7_talents_three": "креативність, комунікабельність, артистизм",
-          "q9_happy_job_conditions": ["CREATIVITY", "FLEXTIME"],
+          "q9_happy_job_conditions": [
+            "CREATIVITY",
+            "FLEXTIME"
+          ],
           "q16_local_request": "Як допомогти з концентрацією?"
         },
         "output": {
@@ -320,7 +397,10 @@
           "q1_child_type": "CALM",
           "q2_hobbies": "Читання, шахи, програмування",
           "q7_talents_three": "логічне мислення, терпіння, аналітика",
-          "q9_happy_job_conditions": ["STABILITY", "INCOME"],
+          "q9_happy_job_conditions": [
+            "STABILITY",
+            "INCOME"
+          ],
           "q10_fav_character": "Шерлок Холмс — подобається логіка"
         },
         "output": {

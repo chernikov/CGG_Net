@@ -3,7 +3,14 @@
     "allow": [
       "Bash(sqlcmd:*)",
       "Bash(dotnet build:*)",
-      "Bash(dotnet ef:*)"
+      "Bash(dotnet ef:*)",
+      "Bash(xargs wc:*)",
+      "Bash(grep:*)",
+      "Bash(npx tsc:*)",
+      "Bash(rm:*)",
+      "mcp__ide__getDiagnostics",
+      "Bash(ls not:*)",
+      "Bash(cat:*)"
     ]
   }
 }

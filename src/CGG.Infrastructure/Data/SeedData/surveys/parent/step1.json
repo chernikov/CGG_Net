@@ -21,7 +21,8 @@
         "hi": "हम आपको कैसे संबोधित कर सकते हैं - आपका नाम या उपनाम (वैकल्पिक):"
       },
       "optional": true,
-      "maxLength": 100
+      "maxLength": 100,
+      "purpose": "parent_name"
     },
     {
       "id": "q2_expectations",
@@ -31,7 +32,8 @@
         "en": "What results do you expect from using our application for your child?",
         "hi": "आप अपने बच्चे के लिए हमारे एप्लिकेशन का उपयोग करके किन परिणामों की उम्मीद करते हैं?"
       },
-      "maxLength": 500
+      "maxLength": 500,
+      "purpose": "expectations"
     },
     {
       "id": "q3_important_info",
@@ -41,7 +43,8 @@
         "en": "Is there anything important we need to know while researching your expectations?",
         "hi": "क्या आपकी अम्मीदों पर शोध करते समये कुछ महत्वपूर्ण है जिसे हमें जानना चाहिए?"
       },
-      "maxLength": 500
+      "maxLength": 500,
+      "purpose": "important_info"
     },
     {
       "id": "q4_children_count",
@@ -52,7 +55,8 @@
         "hi": "आपके कितने बच्चे हैं?"
       },
       "min": 1,
-      "max": 10
+      "max": 10,
+      "purpose": "children_count"
     },
     {
       "id": "q5_children_ages",
@@ -62,7 +66,8 @@
         "en": "What is the age of each child? (comma separated)",
         "hi": "प्रत्येक बच्चे की आयु क्या है? (अल्पविराम से अलग करें)"
       },
-      "maxLength": 100
+      "maxLength": 100,
+      "purpose": "children_ages"
     },
     {
       "id": "q6_target_child",
@@ -72,7 +77,8 @@
         "en": "For which child do you want to provide information for career guidance? (Specify age or name)",
         "hi": "आप किस बच्चे के लिए करियर मार्गदर्शन की जानकारी देना चाहते हैं? (उम्र या नाम बताएं)"
       },
-      "maxLength": 100
+      "maxLength": 100,
+      "purpose": "target_child"
     }
   ]
 }

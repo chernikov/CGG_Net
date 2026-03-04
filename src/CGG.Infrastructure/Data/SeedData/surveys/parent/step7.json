@@ -21,7 +21,8 @@
         "hi": "संज्ञानात्मक क्षमताएं: सीखने की गति (1-10)"
       },
       "min": 1,
-      "max": 10
+      "max": 10,
+      "purpose": "cognitive_speed"
     },
     {
       "id": "q2_memorization_method",
@@ -32,11 +33,32 @@
         "hi": "संज्ञानात्मक क्षमताएं: संस्मरण विधि"
       },
       "options": {
-        "uk": ["Повторення", "Приклади", "Малюнки", "Гра"],
-        "en": ["Repetition", "Examples", "Drawings", "Game"],
-        "hi": ["पुनरावृत्ति", "उदाहरण", "चित्र", "खेल"]
+        "uk": [
+          "Повторення",
+          "Приклади",
+          "Малюнки",
+          "Гра"
+        ],
+        "en": [
+          "Repetition",
+          "Examples",
+          "Drawings",
+          "Game"
+        ],
+        "hi": [
+          "पुनरावृत्ति",
+          "उदाहरण",
+          "चित्र",
+          "खेल"
+        ]
       },
-      "optionCodes": ["REPETITION", "EXAMPLES", "DRAWINGS", "GAME"]
+      "optionCodes": [
+        "REPETITION",
+        "EXAMPLES",
+        "DRAWINGS",
+        "GAME"
+      ],
+      "purpose": "memorization_method"
     },
     {
       "id": "q3_thinking_description",
@@ -46,7 +68,8 @@
         "en": "Cognitive abilities: Thinking description",
         "hi": "संज्ञानात्मक क्षमताएं: सोच विवरण"
       },
-      "maxLength": 500
+      "maxLength": 500,
+      "purpose": "thinking_description"
     },
     {
       "id": "q4_independence",
@@ -57,7 +80,8 @@
         "hi": "व्यक्तिगत गुण: स्वतंत्रता (1-10)"
       },
       "min": 1,
-      "max": 10
+      "max": 10,
+      "purpose": "independence"
     },
     {
       "id": "q5_main_traits",
@@ -67,7 +91,8 @@
         "en": "Personal qualities: Main traits (Persistence, Responsibility, etc.)",
         "hi": "व्यक्तिगत गुण: मुख्य लक्षण (दृढ़ता, जिम्मेदारी, आदि)"
       },
-      "maxLength": 200
+      "maxLength": 200,
+      "purpose": "main_traits"
     },
     {
       "id": "q6_traits_to_develop",
@@ -77,7 +102,8 @@
         "en": "Personal qualities: Which ones you want to develop",
         "hi": "व्यक्तिगत गुण: जिन्हें आप विकसित करना चाहते हैं"
       },
-      "maxLength": 200
+      "maxLength": 200,
+      "purpose": "traits_to_develop"
     },
     {
       "id": "q7_acquaintance_ease",
@@ -88,7 +114,8 @@
         "hi": "सामाजिक कौशल: परिचित होने में आसानी (1-10)"
       },
       "min": 1,
-      "max": 10
+      "max": 10,
+      "purpose": "acquaintance_ease"
     },
     {
       "id": "q8_comfortable_environment",
@@ -99,11 +126,28 @@
         "hi": "सामाजिक कौशल: आरामदायक वातावरण"
       },
       "options": {
-        "uk": ["Компанія", "Пара", "Наодинці"],
-        "en": ["Company", "Pair", "Alone"],
-        "hi": ["कंपनी", "जोड़ी", "अकेले"]
+        "uk": [
+          "Компанія",
+          "Пара",
+          "Наодинці"
+        ],
+        "en": [
+          "Company",
+          "Pair",
+          "Alone"
+        ],
+        "hi": [
+          "कंपनी",
+          "जोड़ी",
+          "अकेले"
+        ]
       },
-      "optionCodes": ["COMPANY", "PAIR", "ALONE"]
+      "optionCodes": [
+        "COMPANY",
+        "PAIR",
+        "ALONE"
+      ],
+      "purpose": "comfortable_environment"
     },
     {
       "id": "q9_conflict_resolution",
@@ -113,7 +157,8 @@
         "en": "Social skills: Conflict resolution",
         "hi": "सामाजिक कौशल: संघर्ष समाधान"
       },
-      "maxLength": 300
+      "maxLength": 300,
+      "purpose": "conflict_resolution"
     },
     {
       "id": "q10_rule_following",
@@ -124,7 +169,8 @@
         "hi": "मनोवैज्ञानिक दृष्टिकोण: नियमों का पालन (1-10)"
       },
       "min": 1,
-      "max": 10
+      "max": 10,
+      "purpose": "rule_following"
     },
     {
       "id": "q11_main_value",
@@ -135,11 +181,36 @@
         "hi": "मनोवैज्ञानिक दृष्टिकोण: मुख्य मूल्य"
       },
       "options": {
-        "uk": ["Дружба", "Успіх", "Родина", "Комфорт", "Інше"],
-        "en": ["Friendship", "Success", "Family", "Comfort", "Other"],
-        "hi": ["दोस्ती", "सफलता", "परिवार", "आराम", "अन्य"]
+        "uk": [
+          "Дружба",
+          "Успіх",
+          "Родина",
+          "Комфорт",
+          "Інше"
+        ],
+        "en": [
+          "Friendship",
+          "Success",
+          "Family",
+          "Comfort",
+          "Other"
+        ],
+        "hi": [
+          "दोस्ती",
+          "सफलता",
+          "परिवार",
+          "आराम",
+          "अन्य"
+        ]
       },
-      "optionCodes": ["FRIENDSHIP", "SUCCESS", "FAMILY", "COMFORT", "OTHER"]
+      "optionCodes": [
+        "FRIENDSHIP",
+        "SUCCESS",
+        "FAMILY",
+        "COMFORT",
+        "OTHER"
+      ],
+      "purpose": "main_value"
     },
     {
       "id": "q12_endurance",
@@ -150,7 +221,8 @@
         "hi": "शारीरिक विशेषताएं: धीरज (1-10)"
       },
       "min": 1,
-      "max": 10
+      "max": 10,
+      "purpose": "endurance"
     },
     {
       "id": "q13_favorite_activity",
@@ -161,11 +233,32 @@
         "hi": "शारीरिक विशेषताएं: पसंदीदा गतिविधि"
       },
       "options": {
-        "uk": ["Спорт", "Прогулянки", "Тихі ігри", "Інше"],
-        "en": ["Sports", "Walks", "Quiet games", "Other"],
-        "hi": ["खेल", "सैर", "शांत खेल", "अन्य"]
+        "uk": [
+          "Спорт",
+          "Прогулянки",
+          "Тихі ігри",
+          "Інше"
+        ],
+        "en": [
+          "Sports",
+          "Walks",
+          "Quiet games",
+          "Other"
+        ],
+        "hi": [
+          "खेल",
+          "सैर",
+          "शांत खेल",
+          "अन्य"
+        ]
       },
-      "optionCodes": ["SPORTS", "WALKS", "QUIET_GAMES", "OTHER"]
+      "optionCodes": [
+        "SPORTS",
+        "WALKS",
+        "QUIET_GAMES",
+        "OTHER"
+      ],
+      "purpose": "favorite_activity"
     },
     {
       "id": "q14_fantasy_level",
@@ -176,7 +269,8 @@
         "hi": "रचनात्मकता: फंतासी स्तर (1-10)"
       },
       "min": 1,
-      "max": 10
+      "max": 10,
+      "purpose": "fantasy_level"
     },
     {
       "id": "q15_creativity_forms",
@@ -187,11 +281,32 @@
         "hi": "रचनात्मकता: रचनात्मकता अभिव्यक्ति के रूप"
       },
       "options": {
-        "uk": ["Малювання", "Пісні", "Винаходи", "Інше"],
-        "en": ["Drawing", "Songs", "Inventions", "Other"],
-        "hi": ["ड्राइंग", "गाने", "आविष्कार", "अन्य"]
+        "uk": [
+          "Малювання",
+          "Пісні",
+          "Винаходи",
+          "Інше"
+        ],
+        "en": [
+          "Drawing",
+          "Songs",
+          "Inventions",
+          "Other"
+        ],
+        "hi": [
+          "ड्राइंग",
+          "गाने",
+          "आविष्कार",
+          "अन्य"
+        ]
       },
-      "optionCodes": ["DRAWING", "SONGS", "INVENTIONS", "OTHER"]
+      "optionCodes": [
+        "DRAWING",
+        "SONGS",
+        "INVENTIONS",
+        "OTHER"
+      ],
+      "purpose": "creativity_forms"
     },
     {
       "id": "q16_calming_ability",
@@ -202,7 +317,8 @@
         "hi": "भावनात्मक विनियमन: शांत होने की क्षमता (1-10)"
       },
       "min": 1,
-      "max": 10
+      "max": 10,
+      "purpose": "calming_ability"
     },
     {
       "id": "q17_overcoming_emotions",
@@ -213,11 +329,36 @@
         "hi": "भावनात्मक विनियमन: भावनाओं को दूर करने के तरीके"
       },
       "options": {
-        "uk": ["Спілкування", "Самотність", "Гра", "Сльози", "Інше"],
-        "en": ["Communication", "Loneliness", "Game", "Tears", "Other"],
-        "hi": ["संचार", "अकेलापन", "खेल", "आंसू", "अन्य"]
+        "uk": [
+          "Спілкування",
+          "Самотність",
+          "Гра",
+          "Сльози",
+          "Інше"
+        ],
+        "en": [
+          "Communication",
+          "Loneliness",
+          "Game",
+          "Tears",
+          "Other"
+        ],
+        "hi": [
+          "संचार",
+          "अकेलापन",
+          "खेल",
+          "आंसू",
+          "अन्य"
+        ]
       },
-      "optionCodes": ["COMMUNICATION", "LONELINESS", "GAME", "TEARS", "OTHER"]
+      "optionCodes": [
+        "COMMUNICATION",
+        "LONELINESS",
+        "GAME",
+        "TEARS",
+        "OTHER"
+      ],
+      "purpose": "overcoming_emotions"
     }
   ]
 }

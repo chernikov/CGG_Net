@@ -1,0 +1,14 @@
+{
+  "slug": "creative-seeker",
+  "icon": "🎨",
+  "nameUk": "Творчий шукач",
+  "nameEn": "Creative Seeker",
+  "sortOrder": 3,
+  "answers": {
+    "early_career_dream": "Q1_IDEA",
+    "career_now_matters": "Q2_GROW",
+    "work_motivation": "Q3_CREAT",
+    "career_change_openness": "Q4_YES",
+    "self_in_2_years": "Q5_NEW"
+  }
+}

@@ -21,11 +21,36 @@
         "hi": "बच्चे के प्रति आपकी पारिवारिक स्थिति क्या है?"
       },
       "options": {
-        "uk": ["Мама", "Тато", "Інший родич", "Опікун", "Інше"],
-        "en": ["Mother", "Father", "Other relative", "Guardian", "Other"],
-        "hi": ["माँ", "पिता", "अन्य रिश्तेदार", "अभिभावक", "अन्य"]
+        "uk": [
+          "Мама",
+          "Тато",
+          "Інший родич",
+          "Опікун",
+          "Інше"
+        ],
+        "en": [
+          "Mother",
+          "Father",
+          "Other relative",
+          "Guardian",
+          "Other"
+        ],
+        "hi": [
+          "माँ",
+          "पिता",
+          "अन्य रिश्तेदार",
+          "अभिभावक",
+          "अन्य"
+        ]
       },
-      "optionCodes": ["MOTHER", "FATHER", "RELATIVE", "GUARDIAN", "OTHER"]
+      "optionCodes": [
+        "MOTHER",
+        "FATHER",
+        "RELATIVE",
+        "GUARDIAN",
+        "OTHER"
+      ],
+      "purpose": "family_status"
     },
     {
       "id": "q2_upbringing_principles",
@@ -58,7 +83,14 @@
           "कहना मुश्किल है"
         ]
       },
-      "optionCodes": ["PARTNERSHIP", "CONTROL", "FREEDOM", "MIXED", "DONT_KNOW"]
+      "optionCodes": [
+        "PARTNERSHIP",
+        "CONTROL",
+        "FREEDOM",
+        "MIXED",
+        "DONT_KNOW"
+      ],
+      "purpose": "upbringing_principles"
     },
     {
       "id": "q3_career_guidance_meaning",
@@ -97,7 +129,8 @@
         "PREPARATION",
         "NATURAL",
         "OTHER"
-      ]
+      ],
+      "purpose": "career_guidance_meaning"
     },
     {
       "id": "q4_freedom_readiness",
@@ -108,7 +141,8 @@
         "hi": "आप अपने बच्चे को उसके करियर मार्गदर्शन में कितनी स्वतंत्रता देने के लिए तैयार हैं? (1 = पूर्ण स्वतंत्रता, 10 = मुझे उसका पेशा पहले से ही पता है)"
       },
       "min": 1,
-      "max": 10
+      "max": 10,
+      "purpose": "freedom_readiness"
     },
     {
       "id": "q5_involvement_format",
@@ -147,7 +181,8 @@
         "MENTOR",
         "NO_INTERVENTION",
         "DONT_KNOW"
-      ]
+      ],
+      "purpose": "involvement_format"
     },
     {
       "id": "q6_important_development",
@@ -157,7 +192,8 @@
         "en": "What is most important to you in your child's development, so we can consider it?",
         "hi": "आपके बच्चे के विकास में आपके लिए सबसे महत्वपूर्ण क्या है, ताकि हम उस पर विचार कर सकें?"
       },
-      "maxLength": 500
+      "maxLength": 500,
+      "purpose": "important_development"
     },
     {
       "id": "q7_important_future_career",
@@ -168,7 +204,13 @@
         "hi": "अपने बच्चे के भविष्य के करियर की दिशा चुनने में आपके लिए सबसे महत्वपूर्ण क्या है?"
       },
       "options": {
-        "uk": ["Стабільність", "Розвиток талантів", "Престиж", "Дохід", "Інше"],
+        "uk": [
+          "Стабільність",
+          "Розвиток талантів",
+          "Престиж",
+          "Дохід",
+          "Інше"
+        ],
         "en": [
           "Stability",
           "Development of talents",
@@ -176,9 +218,22 @@
           "Income",
           "Other"
         ],
-        "hi": ["स्थिरता", "प्रतिभाओं का विकास", "प्रतिष्ठा", "आय", "अन्य"]
+        "hi": [
+          "स्थिरता",
+          "प्रतिभाओं का विकास",
+          "प्रतिष्ठा",
+          "आय",
+          "अन्य"
+        ]
       },
-      "optionCodes": ["STABILITY", "TALENTS", "PRESTIGE", "INCOME", "OTHER"]
+      "optionCodes": [
+        "STABILITY",
+        "TALENTS",
+        "PRESTIGE",
+        "INCOME",
+        "OTHER"
+      ],
+      "purpose": "important_future_career"
     }
   ]
 }

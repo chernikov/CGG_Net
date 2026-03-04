@@ -1,0 +1,14 @@
+{
+  "slug": "balanced-parent",
+  "icon": "⚖️",
+  "nameUk": "Збалансований батько",
+  "nameEn": "Balanced Parent",
+  "sortOrder": 2,
+  "answers": {
+    "early_career_dream": "Q1_HELP",
+    "career_now_matters": "Q2_BAL",
+    "work_motivation": "Q3_RECOG",
+    "career_change_openness": "Q4_MAYBE",
+    "self_in_2_years": "Q5_STAB"
+  }
+}

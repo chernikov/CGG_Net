@@ -53,7 +53,7 @@ export interface SurveyQuestion {
   id: string;
   questionType: string;         // raw string from API
   type: QuestionType;           // normalized
-  purposeCategory: string | null;
+  purpose: string | null;
   sortOrder: number;
   translations: TranslationEntry[];
   options: QuestionOption[];

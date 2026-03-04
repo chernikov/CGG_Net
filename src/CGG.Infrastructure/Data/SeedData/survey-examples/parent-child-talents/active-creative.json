@@ -1,0 +1,25 @@
+{
+  "slug": "active-creative",
+  "icon": "🌟",
+  "nameUk": "Активна творча дитина",
+  "nameEn": "Active Creative Child",
+  "sortOrder": 1,
+  "answers": {
+    "child_type": "ACTIVE",
+    "child_hobbies": "Малювання, танці, створення відео для TikTok, рукоділля",
+    "child_career_dreams": "Хоче бути блогером або дизайнером",
+    "parent_support_priority": "Розвиток таланту і щастя дитини",
+    "parent_career_opinion": "Творчі професії, де є свобода самовираження",
+    "family_traditions": "Мама — вчителька мистецтва, дідусь — архітектор",
+    "child_talents": "Творчість, комунікабельність, артистизм",
+    "child_dev_areas": "Концентрація, самоорганізація",
+    "child_job_conditions": ["CREATIVITY", "FLEXTIME"],
+    "child_fav_character": "Рапунцель — любить малювати і мріє про пригоди",
+    "child_antihero": "Стервелла — жорстокість і байдужість до інших",
+    "child_admired_relative": "Мама — творча і завжди підтримує",
+    "child_disliked_relative": "Дядько — занадто суворий і не розуміє дітей",
+    "child_lookalike_hero": "Мауї з Моани — артистичний і харизматичний",
+    "extra_observations": "Дитина легко знайомиться з іншими дітьми",
+    "local_request": "Як допомогти з концентрацією під час навчання?"
+  }
+}

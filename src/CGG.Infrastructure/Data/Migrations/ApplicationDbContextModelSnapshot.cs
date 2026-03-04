@@ -459,6 +459,82 @@ namespace CGG.Infrastructure.Data.Migrations
                     b.ToTable("Surveys");
                 });
 
+            modelBuilder.Entity("CGG.Core.Entities.SurveyExampleAnswer", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ProfileId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Purpose")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("ValueJson")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProfileId", "Purpose")
+                        .IsUnique();
+
+                    b.ToTable("SurveyExampleAnswers");
+                });
+
+            modelBuilder.Entity("CGG.Core.Entities.SurveyExampleProfile", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Icon")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("NameEn")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("NameUk")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("Slug")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SurveyType")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SurveyType");
+
+                    b.HasIndex("SurveyType", "Slug")
+                        .IsUnique();
+
+                    b.ToTable("SurveyExampleProfiles");
+                });
+
             modelBuilder.Entity("CGG.Core.Entities.SurveyQuestion", b =>
                 {
                     b.Property<Guid>("Id")
@@ -471,7 +547,7 @@ namespace CGG.Infrastructure.Data.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
-                    b.Property<string>("PurposeCategory")
+                    b.Property<string>("Purpose")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("QuestionType")
@@ -494,7 +570,7 @@ namespace CGG.Infrastructure.Data.Migrations
 
                     b.HasIndex("IsActive");
 
-                    b.HasIndex("PurposeCategory");
+                    b.HasIndex("Purpose");
 
                     b.HasIndex("QuestionType");
 
@@ -1015,6 +1091,17 @@ namespace CGG.Infrastructure.Data.Migrations
                     b.Navigation("DefaultLanguage");
                 });
 
+            modelBuilder.Entity("CGG.Core.Entities.SurveyExampleAnswer", b =>
+                {
+                    b.HasOne("CGG.Core.Entities.SurveyExampleProfile", "Profile")
+                        .WithMany("Answers")
+                        .HasForeignKey("ProfileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Profile");
+                });
+
             modelBuilder.Entity("CGG.Core.Entities.SurveyQuestion", b =>
                 {
                     b.HasOne("CGG.Core.Entities.SurveyStep", "Step")
@@ -1239,6 +1326,11 @@ namespace CGG.Infrastructure.Data.Migrations
                     b.Navigation("Steps");
 
                     b.Navigation("SurveyResults");
+                });
+
+            modelBuilder.Entity("CGG.Core.Entities.SurveyExampleProfile", b =>
+                {
+                    b.Navigation("Answers");
                 });
 
             modelBuilder.Entity("CGG.Core.Entities.SurveyQuestion", b =>

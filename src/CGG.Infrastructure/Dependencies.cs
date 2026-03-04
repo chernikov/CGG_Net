@@ -37,6 +37,7 @@ public static class Dependencies
         // Infrastructure Services
         services.AddScoped<SurveySeeder>();
         services.AddScoped<PromptSeeder>();
+        services.AddScoped<SurveyExampleSeeder>();
         services.AddScoped<ISurveyManagementService, SurveyManagementService>();
 
         // AI Services

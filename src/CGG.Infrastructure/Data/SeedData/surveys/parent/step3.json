@@ -20,7 +20,8 @@
         "en": "What profession do you have (or had throughout your life)?",
         "hi": "आपके पास (या आपके जीवन भर में) कौन सा पेशा है?"
       },
-      "maxLength": 100
+      "maxLength": 100,
+      "purpose": "profession"
     },
     {
       "id": "q2_choice_reason",
@@ -59,7 +60,8 @@
         "CIRCUMSTANCES",
         "MATERIAL",
         "OTHER"
-      ]
+      ],
+      "purpose": "choice_reason"
     },
     {
       "id": "q3_satisfaction",
@@ -70,7 +72,8 @@
         "hi": "आप अपने करियर के रास्ते से कितने संतुष्ट हैं? (1-10)"
       },
       "min": 1,
-      "max": 10
+      "max": 10,
+      "purpose": "satisfaction"
     },
     {
       "id": "q4_pass_on",
@@ -109,7 +112,8 @@
         "ADAPTABILITY",
         "SEEK_OWN_PATH",
         "HARD_TO_ANSWER"
-      ]
+      ],
+      "purpose": "pass_on"
     },
     {
       "id": "q5_child_professions_ideas",
@@ -144,7 +148,8 @@
         "GENERAL_THOUGHTS",
         "NOT_YET",
         "NO_IMPOSITION"
-      ]
+      ],
+      "purpose": "child_professions_ideas"
     },
     {
       "id": "q6_influence_level",
@@ -155,7 +160,8 @@
         "hi": "आप अपने बच्चे के পেশा चुनने को किस हद तक प्रभावित करना चाहते हैं? (स्कोर 1-10)"
       },
       "min": 1,
-      "max": 10
+      "max": 10,
+      "purpose": "influence_level"
     },
     {
       "id": "q7_market_knowledge",
@@ -172,7 +178,12 @@
           "Погано",
           "Взагалі не орієнтуюсь"
         ],
-        "en": ["Very well", "Mostly navigate well", "Poorly", "Not at all"],
+        "en": [
+          "Very well",
+          "Mostly navigate well",
+          "Poorly",
+          "Not at all"
+        ],
         "hi": [
           "बहुत अच्छी तरह से",
           "ज्यादातर अच्छी तरह नेविगेट करता हूँ",
@@ -180,7 +191,13 @@
           "बिल्कुल नहीं"
         ]
       },
-      "optionCodes": ["VERY_WELL", "MOSTLY", "POORLY", "NOT_AT_ALL"]
+      "optionCodes": [
+        "VERY_WELL",
+        "MOSTLY",
+        "POORLY",
+        "NOT_AT_ALL"
+      ],
+      "purpose": "market_knowledge"
     },
     {
       "id": "q8_tools_trust",
@@ -215,7 +232,8 @@
         "PARTIALLY",
         "NO_TRUST_EXPERTS",
         "NO_OPINION"
-      ]
+      ],
+      "purpose": "tools_trust"
     }
   ]
 }

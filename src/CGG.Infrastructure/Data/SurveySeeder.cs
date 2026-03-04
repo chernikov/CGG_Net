@@ -122,6 +122,7 @@ namespace CGG.Infrastructure.Data
                             IsActive = true,
                             StepId = surveyStep.Id,
                             SortOrder = questionSortOrder++,
+                            Purpose = qData.Purpose,
                             CreatedAt = DateTime.UtcNow,
                             UpdatedAt = DateTime.UtcNow
                         };
