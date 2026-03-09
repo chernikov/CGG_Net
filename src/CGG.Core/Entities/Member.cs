@@ -14,6 +14,5 @@ namespace CGG.Core.Entities
         // Collections
         public ICollection<MemberRole> MemberRoles { get; set; } = new List<MemberRole>();
         public ICollection<SurveyResult> SurveyResults { get; set; } = new List<SurveyResult>();
-        public ICollection<AiLog> AiLogs { get; set; } = new List<AiLog>();
     }
 }

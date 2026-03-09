@@ -105,7 +105,7 @@ namespace CGG.Api.Controllers
             if (dto == null || string.IsNullOrWhiteSpace(dto.SurveyType) || dto.StepNumber < 1)
                 return BadRequest(new { Error = "Invalid payload. SurveyType and StepNumber are required." });
 
-            var result = await _mediator.Send(new AnalyzeSurveyStepCommand(dto));
+            var result = await _mediator.Send(new AnalyzeSurveyStepCommand(dto, GetUserId()));
             if (!result.Success) return StatusCode(500, result);
 
             return Ok(result);

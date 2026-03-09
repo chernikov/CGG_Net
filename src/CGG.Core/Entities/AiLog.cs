@@ -8,12 +8,6 @@ namespace CGG.Core.Entities
         public Guid? UserId { get; set; }
         public User? User { get; set; }
         
-        public Guid? MemberId { get; set; }
-        public Member? Member { get; set; }
-        
-        public Guid? SurveyResultId { get; set; }
-        public SurveyResult? SurveyResult { get; set; }
-        
         public Guid? UserSurveyId { get; set; }
         public UserSurvey? UserSurvey { get; set; }
         

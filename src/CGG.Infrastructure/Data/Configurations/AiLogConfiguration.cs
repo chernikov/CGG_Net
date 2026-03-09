@@ -17,16 +17,6 @@ namespace CGG.Infrastructure.Data.Configurations
                 .HasForeignKey(e => e.UserId)
                 .OnDelete(DeleteBehavior.NoAction);
                 
-            builder.HasOne(e => e.Member)
-                .WithMany(m => m.AiLogs)
-                .HasForeignKey(e => e.MemberId)
-                .OnDelete(DeleteBehavior.NoAction);
-                
-            builder.HasOne(e => e.SurveyResult)
-                .WithMany(sr => sr.AiLogs)
-                .HasForeignKey(e => e.SurveyResultId)
-                .OnDelete(DeleteBehavior.NoAction);
-                
             builder.HasOne(e => e.UserSurvey)
                 .WithMany(us => us.AiLogs)
                 .HasForeignKey(e => e.UserSurveyId)
@@ -39,15 +29,12 @@ namespace CGG.Infrastructure.Data.Configurations
             
             // Indexes
             builder.HasIndex(e => e.UserId);
-            builder.HasIndex(e => e.MemberId);
-            builder.HasIndex(e => e.SurveyResultId);
             builder.HasIndex(e => e.UserSurveyId);
             builder.HasIndex(e => e.PromptTemplateId);
             builder.HasIndex(e => e.RequestType);
             builder.HasIndex(e => e.Status);
             builder.HasIndex(e => e.CreatedAt);
             builder.HasIndex(e => new { e.UserId, e.CreatedAt });
-            builder.HasIndex(e => new { e.MemberId, e.CreatedAt });
             
             // Decimal precision
             builder.Property(e => e.CostUsd).HasColumnType("decimal(18,6)");

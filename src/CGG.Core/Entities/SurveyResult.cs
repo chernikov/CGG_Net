@@ -42,6 +42,5 @@ namespace CGG.Core.Entities
         public DateTime? CompletedAt { get; set; } // When CurrentStep = 'done'
 
         // Collections
-        public ICollection<AiLog> AiLogs { get; set; } = new List<AiLog>();
     }
 }
