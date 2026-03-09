@@ -51,6 +51,11 @@
 - Fine-tuning ❌
 - Distillation ❌
 
+### Обмеження параметрів
+
+- `temperature` — **не підтримується** (тільки default = 1)
+- `top_p` — не підтримується
+
 ### Tools (Responses API)
 
 - Web search ✅
@@ -131,6 +136,11 @@
 - Structured outputs ✅
 - Fine-tuning ❌
 - Distillation ❌
+
+### Обмеження параметрів
+
+- `temperature` — **не підтримується** (тільки default = 1)
+- `top_p` — не підтримується
 
 ### Tools (Responses API)
 

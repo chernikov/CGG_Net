@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using CGG.Application.DTOs.Survey;
 using CGG.Application.Features.Survey.Commands.AnalyzeSurveyStep;
 using CGG.Application.Features.Survey.Commands.ReloadSurveys;
+using CGG.Application.Features.Survey.Commands.SaveFeedback;
 using CGG.Application.Features.Survey.Commands.SaveSurveyAnswer;
 using CGG.Application.Features.Survey.Commands.StartSurvey;
 using CGG.Application.Features.Survey.Queries.GetAllSurveys;
@@ -105,6 +106,22 @@ namespace CGG.Api.Controllers
                 return BadRequest(new { Error = "Invalid payload. SurveyType and StepNumber are required." });
 
             var result = await _mediator.Send(new AnalyzeSurveyStepCommand(dto));
+            if (!result.Success) return StatusCode(500, result);
+
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Save user feedback (rating + comment) for a completed survey.
+        /// </summary>
+        [Authorize]
+        [HttpPost("feedback")]
+        public async Task<IActionResult> SaveFeedback([FromBody] SaveFeedbackDto dto)
+        {
+            if (dto == null || dto.UserSurveyId == Guid.Empty)
+                return BadRequest(new { Error = "UserSurveyId is required." });
+
+            var result = await _mediator.Send(new SaveFeedbackCommand(dto));
             if (!result.Success) return StatusCode(500, result);
 
             return Ok(result);

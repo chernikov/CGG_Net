@@ -12,7 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { interval } from 'rxjs';
 import { SurveySessionService } from '../../../features/survey/services/survey-session.service';
-import { SurveySession } from '../../../features/survey/models/survey-session.model';
+import { SurveySession, AiStepResult } from '../../../features/survey/models/survey-session.model';
 
 type DebugTab = 'overview' | 'raw' | 'autofill';
 
@@ -75,8 +75,8 @@ export interface AutofillProfileEntry {
                   <tr><td>AI results</td><td>{{ session()!.results.length }}</td></tr>
                   @for (r of session()!.results; track r.step) {
                     <tr>
-                      <td>step {{ r.step }} tokens</td>
-                      <td>{{ r.tokensUsed ?? '—' }}</td>
+                      <td>step {{ r.step }} result</td>
+                      <td>{{ formatStepResult(r) }}</td>
                     </tr>
                   }
                   <tr><td>sessionId</td><td class="debug-mono">{{ session()!.sessionId.slice(0, 8) }}…</td></tr>
@@ -314,6 +314,22 @@ export class SurveyDebugPanelComponent implements OnInit {
       next: () => { this.loadProfiles(this.surveyType()); },
       error: () => {},
     });
+  }
+
+  formatStepResult(r: AiStepResult): string {
+    try {
+      const parsed = JSON.parse(r.resultJson ?? '{}');
+      const matches: { title: string; matchPercentage: number }[] = parsed.matches ?? [];
+      const top = matches
+        .sort((a, b) => b.matchPercentage - a.matchPercentage)
+        .slice(0, 3)
+        .map(m => `${m.title} ${m.matchPercentage}%`)
+        .join(', ');
+      const tok = r.tokensUsed ?? '—';
+      return top ? `${top} (${r.outputFormat}, ${tok} tok)` : `(no matches, ${tok} tok)`;
+    } catch {
+      return `(parse error, ${r.tokensUsed ?? '—'} tok)`;
+    }
   }
 
   applyAutofill(): void {

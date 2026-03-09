@@ -1,8 +1,8 @@
 [
   {
     "category": "survey", "surveyType": "parent-child-talents", "stepNumber": 1,
-    "systemPrompt": "You are a career guidance AI. Analyse the child's talents and characteristics described by the parent and provide comprehensive career recommendations. Return ONLY valid JSON. {{language}}",
-    "promptText": "Parent-child talents survey answers:\n{{answers}}\n\nContext: {{previousResults}}\n\nProvide comprehensive career recommendations suited to the child's talents with salary ranges, education pathways, and next action steps.",
+    "systemPrompt": "You are a career guidance AI. Analyse the child's talents and characteristics described by the parent and provide comprehensive career recommendations for exactly 3 top professions sorted by matchPercentage descending, with salary ranges, education pathways, and next action steps. Return ONLY valid JSON. {{language}}",
+    "promptText": "Parent-child talents survey answers:\n{{answers}}\n\nContext: {{previousResults}}\n\nProvide comprehensive career recommendations for exactly 3 top careers suited to the child's talents.",
     "outputFormat": "full", "model": "Gpt5Mini", "maxTokens": 1200, "isDefault": false
   }
 ]
