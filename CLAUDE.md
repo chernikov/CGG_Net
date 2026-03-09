@@ -51,6 +51,7 @@ Manual: `cd src/CGG.Api && dotnet run` | `cd CGG.WebClient && npm start`
 - **Effect conventions**: `switchMap` for reads, `exhaustMap` for writes, `{ dispatch: false }` for navigation-only
 - **API proxy**: Dev uses `/api` path proxied to `https://localhost:7070`. Never use absolute URLs in services
 - **Styling**: TailwindCSS utility classes + SCSS
+- **Component files**: Always use external files — `templateUrl: './{name}.component.html'` and `styleUrl: './{name}.component.scss'`. Never use inline `template:` or `styles:` in `@Component`
 
 ## Coding Conventions
 
