@@ -19,6 +19,7 @@ import { SurveyStepComponent } from '../../components/survey-step/survey-step.co
 import { FeedbackStepComponent } from '../../components/feedback-step/feedback-step.component';
 import { SurveyResultComponent } from '../../components/survey-result/survey-result.component';
 import { StepResultComponent } from '../../components/step-result/step-result.component';
+import { BackHeaderComponent } from '../../../../shared/components/back-header/back-header.component';
 
 type PageView = 'loading' | 'error' | 'intro' | 'step' | 'analyzing' | 'step-result' | 'ai-error' | 'feedback' | 'result';
 
@@ -32,6 +33,7 @@ type PageView = 'loading' | 'error' | 'intro' | 'step' | 'analyzing' | 'step-res
     FeedbackStepComponent,
     SurveyResultComponent,
     StepResultComponent,
+    BackHeaderComponent,
   ],
   templateUrl: './survey-page.component.html',
 })
@@ -53,9 +55,18 @@ export class SurveyPageComponent implements OnInit {
   stepResult = signal<AiStepResult | null>(null);
   aiErrorMsg = signal('');
 
+  /** Where the back button navigates — child profile if childId is in URL, else dashboard. */
+  backUrl = signal('/dashboard');
+  backLabel = signal('На головну');
+
   // ─── Lifecycle ────────────────────────────────────────────────────────────
 
   ngOnInit(): void {
+    const childId = this.route.snapshot.queryParamMap.get('childId');
+    if (childId) {
+      this.backUrl.set(`/child/${childId}`);
+      this.backLabel.set('На профіль');
+    }
     this.route.queryParamMap
       .pipe(
         takeUntilDestroyed(this.destroyRef),
