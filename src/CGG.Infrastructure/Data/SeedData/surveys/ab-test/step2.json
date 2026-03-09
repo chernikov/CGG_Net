@@ -1,0 +1,485 @@
+{
+  "$schema": "../schemas/step.schema.json",
+  "step": 2,
+  "name": "deep_analysis",
+  "title": {
+    "uk": "Крок 2: Поглиблений аналіз",
+    "en": "Step 2: Deep Dive",
+    "hi": "चरण 2: गहरी खुदाई"
+  },
+  "description": {
+    "uk": "Дізнаймося більше про твою особистість та здібності",
+    "en": "Let's learn more about your personality and abilities",
+    "hi": "आइए आपके व्यक्तित्व और क्षमताओं के बारे में और जानें"
+  },
+  "questions": [
+    {
+      "id": "q17",
+      "type": "select",
+      "text": {
+        "uk": "Чи легко тобі вивчати нове?",
+        "en": "Is it easy for you to learn new things?",
+        "hi": "क्या आपके लिए नई चीजें सीखना आसान है?"
+      },
+      "options": {
+        "uk": [
+          "Так",
+          "Ні"
+        ],
+        "en": [
+          "Yes",
+          "No"
+        ],
+        "hi": [
+          "हाँ",
+          "नहीं"
+        ]
+      },
+      "purpose": "learning_easy"
+    },
+    {
+      "id": "q18",
+      "type": "select",
+      "text": {
+        "uk": "Який метод навчання вдається тобі найлегше?",
+        "en": "Which learning method works best for you?",
+        "hi": "कौन सी सीखने की विधि आपके लिए सबसे अच्छी है?"
+      },
+      "options": {
+        "uk": [
+          "Читання і конспектування",
+          "Прослуховування пояснень",
+          "Практичне виконання завдань",
+          "Обговорення з іншими людьми"
+        ],
+        "en": [
+          "Reading and note-taking",
+          "Listening to explanations",
+          "Practical task completion",
+          "Discussion with other people"
+        ],
+        "hi": [
+          "पढ़ना और नोट्स लेना",
+          "स्पष्टीकरण सुनना",
+          "व्यावहारिक कार्य पूरा करना",
+          "अन्य लोगों के साथ चर्चा"
+        ]
+      },
+      "purpose": "learning_method"
+    },
+    {
+      "id": "q19",
+      "type": "textarea",
+      "text": {
+        "uk": "Пригадай ситуацію, коли тобі треба було швидко вивчити щось нове. Як тобі вдалося це зробити?",
+        "en": "Recall a situation when you had to quickly learn something new. How did you manage to do it?",
+        "hi": "एक ऐसी स्थिति याद करें जब आपको जल्दी कुछ नया सीखना पड़ा था। आपने इसे कैसे किया?"
+      },
+      "placeholder": {
+        "uk": "Опиши ситуацію та твій підхід...",
+        "en": "Describe the situation and your approach...",
+        "hi": "स्थिति और अपने दृष्टिकोण का वर्णन करें..."
+      },
+      "purpose": "learning_story"
+    },
+    {
+      "id": "q20",
+      "type": "select",
+      "text": {
+        "uk": "Чи готовий ти прикладати багато зусиль для досягнення бажаного результату?",
+        "en": "Are you ready to put in a lot of effort to achieve your desired result?",
+        "hi": "क्या आप अपने वांछित परिणाम को प्राप्त करने के लिए बहुत प्रयास करने के लिए तैयार हैं?"
+      },
+      "options": {
+        "uk": [
+          "Так",
+          "Ні"
+        ],
+        "en": [
+          "Yes",
+          "No"
+        ],
+        "hi": [
+          "हाँ",
+          "नहीं"
+        ]
+      },
+      "purpose": "effort_readiness"
+    },
+    {
+      "id": "q21",
+      "type": "select",
+      "text": {
+        "uk": "Що допомагає тобі долати труднощі?",
+        "en": "What helps you overcome difficulties?",
+        "hi": "कठिनाइयों को दूर करने में आपकी क्या मदद करता है?"
+      },
+      "options": {
+        "uk": [
+          "Підтримка друзів і сім'ї",
+          "Внутрішня мотивація, опора на себе",
+          "Пошук альтернативних, нестандартних рішень",
+          "Аналіз і систематичні зусилля"
+        ],
+        "en": [
+          "Support from friends and family",
+          "Internal motivation, self-reliance",
+          "Looking for alternative, non-standard solutions",
+          "Analysis and systematic efforts"
+        ],
+        "hi": [
+          "दोस्तों और परिवार का समर्थन",
+          "आंतरिक प्रेरणा, खुद पर भरोसा",
+          "वैकल्पिक, गैर-मानक समाधान तलाशना",
+          "विश्लेषण और व्यवस्थित प्रयास"
+        ]
+      },
+      "purpose": "difficulty_strategy"
+    },
+    {
+      "id": "q22",
+      "type": "textarea",
+      "text": {
+        "uk": "Опиши приклад коли ти впорався з важкою ситуацією? Як тобі це вдалось?",
+        "en": "Describe an example when you coped with a difficult situation? How did you manage it?",
+        "hi": "एक उदाहरण बताएं जब आपने कठिन स्थिति से निपटा? आपने इसे कैसे संभाला?"
+      },
+      "placeholder": {
+        "uk": "Розкажи про складну ситуацію та її вирішення...",
+        "en": "Tell about a difficult situation and its solution...",
+        "hi": "कठिन स्थिति और उसके समाधान के बारे में बताएं..."
+      },
+      "purpose": "difficult_situation_story"
+    },
+    {
+      "id": "q23",
+      "type": "select",
+      "text": {
+        "uk": "Чи любиш ти заводити знайомства з новими людьми?",
+        "en": "Do you like making new friends?",
+        "hi": "क्या आप नए लोगों से दोस्ती करना पसंद करते हैं?"
+      },
+      "options": {
+        "uk": [
+          "Так",
+          "Ні"
+        ],
+        "en": [
+          "Yes",
+          "No"
+        ],
+        "hi": [
+          "हाँ",
+          "नहीं"
+        ]
+      },
+      "purpose": "social_openness"
+    },
+    {
+      "id": "q24",
+      "type": "select",
+      "text": {
+        "uk": "Як ти поводишся у конфлікті?",
+        "en": "How do you behave in conflict?",
+        "hi": "संघर्ष में आप कैसे व्यवहार करते हैं?"
+      },
+      "options": {
+        "uk": [
+          "Відкрите обговорення",
+          "Уникнення",
+          "Пошук компромісу",
+          "Чекаю, поки вирішиться",
+          "Наполягаю на своєму"
+        ],
+        "en": [
+          "Open discussion",
+          "Avoidance",
+          "Looking for compromise",
+          "Waiting for it to resolve",
+          "Insisting on my own"
+        ],
+        "hi": [
+          "खुली चर्चा",
+          "बचाव",
+          "समझौते की तलाश",
+          "इसके सुलझने का इंतजार",
+          "अपनी बात पर अड़े रहना"
+        ]
+      },
+      "purpose": "conflict_style"
+    },
+    {
+      "id": "q25",
+      "type": "textarea",
+      "text": {
+        "uk": "Згадай ситуацію, коли ти був в центрі уваги в компанії. Якими були твої відчуття?",
+        "en": "Recall a situation when you were the center of attention in a group. What were your feelings?",
+        "hi": "एक ऐसी स्थिति याद करें जब आप समूह में ध्यान के केंद्र में थे। आपकी भावनाएं क्या थीं?"
+      },
+      "placeholder": {
+        "uk": "Опиши ситуацію і свої емоції...",
+        "en": "Describe the situation and your emotions...",
+        "hi": "स्थिति और अपनी भावनाओं का वर्णन करें..."
+      },
+      "purpose": "social_attention_story"
+    },
+    {
+      "id": "q26",
+      "type": "select",
+      "text": {
+        "uk": "Чого ти хочеш досягнути у житті?",
+        "en": "What do you want to achieve in life?",
+        "hi": "जीवन में आप क्या हासिल करना चाहते हैं?"
+      },
+      "options": {
+        "uk": [
+          "Кар’єра",
+          "Дружба і сім’я",
+          "Самореалізація",
+          "Фінансова стабільність"
+        ],
+        "en": [
+          "Career",
+          "Friendship and family",
+          "Self-realization",
+          "Financial stability"
+        ],
+        "hi": [
+          "करियर",
+          "दोस्ती और परिवार",
+          "आत्म-साक्षात्कार",
+          "वित्तीय स्थिरता"
+        ]
+      },
+      "purpose": "life_goals"
+    },
+    {
+      "id": "q27",
+      "type": "textarea",
+      "text": {
+        "uk": "Що для тебе важливо, коли ти хочеш досягти своєї мети? Чому саме це?",
+        "en": "What is important to you when you want to achieve your goal? Why exactly this?",
+        "hi": "जब आप अपना लक्ष्य हासिल करना चाहते हैं तो आपके लिए क्या महत्वपूर्ण है? ठीक यह क्यों?"
+      },
+      "placeholder": {
+        "uk": "Що допомагає тобі досягати цілей?",
+        "en": "What helps you achieve your goals?",
+        "hi": "अपने लक्ष्यों को प्राप्त करने में आपकी क्या मदद करता है?"
+      },
+      "purpose": "goal_achievement"
+    },
+    {
+      "id": "q28",
+      "type": "select",
+      "text": {
+        "uk": "Ти ведеш активний спосіб життя (спорт, прогулянки тощо) хоча б 3 рази на тиждень?",
+        "en": "Do you lead an active lifestyle (sports, walks, etc.) at least 3 times a week?",
+        "hi": "क्या आप सप्ताह में कम से कम 3 बार सक्रिय जीवनशैली (खेल, सैर आदि) का नेतृत्व करते हैं?"
+      },
+      "options": {
+        "uk": [
+          "Так",
+          "Ні"
+        ],
+        "en": [
+          "Yes",
+          "No"
+        ],
+        "hi": [
+          "हाँ",
+          "नहीं"
+        ]
+      },
+      "purpose": "active_lifestyle"
+    },
+    {
+      "id": "q29",
+      "type": "select",
+      "text": {
+        "uk": "Як ти підтримуєш свою фізичну форму?",
+        "en": "How do you maintain your physical fitness?",
+        "hi": "आप अपनी शारीरिक फिटनेस कैसे बनाए रखते हैं?"
+      },
+      "options": {
+        "uk": [
+          "Регулярні тренування",
+          "Харчування",
+          "Сон",
+          "Відмова від шкідливих звичок"
+        ],
+        "en": [
+          "Regular workouts",
+          "Nutrition",
+          "Sleep",
+          "Giving up bad habits"
+        ],
+        "hi": [
+          "नियमित कसरत",
+          "पोषण",
+          "नींद",
+          "बुरी आदतें छोड़ना"
+        ]
+      },
+      "purpose": "fitness_method"
+    },
+    {
+      "id": "q30",
+      "type": "textarea",
+      "text": {
+        "uk": "Як ти почуваєшся після фізичної активності?",
+        "en": "How do you feel after physical activity?",
+        "hi": "शारीरिक गतिविधि के बाद आप कैसा महसूस करते हैं?"
+      },
+      "placeholder": {
+        "uk": "Опиши свої відчуття та емоції...",
+        "en": "Describe your feelings and emotions...",
+        "hi": "अपनी भावनाओं और भावनाओं का वर्णन करें..."
+      },
+      "purpose": "exercise_feeling"
+    },
+    {
+      "id": "q31",
+      "type": "select",
+      "text": {
+        "uk": "Ти креативна особистість?",
+        "en": "Are you a creative personality?",
+        "hi": "क्या आप एक रचनात्मक व्यक्तित्व हैं?"
+      },
+      "options": {
+        "uk": [
+          "Так",
+          "Ні"
+        ],
+        "en": [
+          "Yes",
+          "No"
+        ],
+        "hi": [
+          "हाँ",
+          "नहीं"
+        ]
+      },
+      "purpose": "is_creative"
+    },
+    {
+      "id": "q32",
+      "type": "select",
+      "text": {
+        "uk": "У яких ситуаціях найчастіше проявляється твоя креативність?",
+        "en": "In which situations does your creativity manifest most often?",
+        "hi": "किन स्थितियों में आपकी रचनात्मकता सबसे अधिक प्रकट होती है?"
+      },
+      "options": {
+        "uk": [
+          "Під час навчання",
+          "У повсякденному житті",
+          "У спілкуванні",
+          "У вирішенні проблем"
+        ],
+        "en": [
+          "During studies",
+          "In everyday life",
+          "In communication",
+          "In problem-solving"
+        ],
+        "hi": [
+          "पढ़ाई के दौरान",
+          "रोजमर्रा के जीवन में",
+          "संचार में",
+          "समस्या समाधान में"
+        ]
+      },
+      "purpose": "creativity_contexts"
+    },
+    {
+      "id": "q33",
+      "type": "textarea",
+      "text": {
+        "uk": "Згадай, коли ти придумав щось незвичайне, щоб вирішити складну ситуацію. Як це було?",
+        "en": "Recall when you came up with something unusual to solve a difficult situation. How was it?",
+        "hi": "याद करें जब आपने कठिन स्थिति को हल करने के लिए कुछ असामान्य सोचा। यह कैसा था?"
+      },
+      "placeholder": {
+        "uk": "Розкажи про креативне рішення проблеми...",
+        "en": "Tell about a creative problem solution...",
+        "hi": "रचनात्मक समस्या समाधान के बारे में बताएं..."
+      },
+      "purpose": "creative_solution_story"
+    },
+    {
+      "id": "q34",
+      "type": "select",
+      "text": {
+        "uk": "Чи легко тобі контролювати свої емоції у стресових ситуаціях?",
+        "en": "Is it easy for you to control your emotions in stressful situations?",
+        "hi": "क्या तनावपूर्ण स्थितियों में अपनी भावनाओं को नियंत्रित करना आपके लिए आसान है?"
+      },
+      "options": {
+        "uk": [
+          "Так",
+          "Ні"
+        ],
+        "en": [
+          "Yes",
+          "No"
+        ],
+        "hi": [
+          "हाँ",
+          "नहीं"
+        ]
+      },
+      "purpose": "emotion_control"
+    },
+    {
+      "id": "q35",
+      "type": "select",
+      "text": {
+        "uk": "Як ти справляєшся із негативними емоціями?",
+        "en": "How do you cope with negative emotions?",
+        "hi": "आप नकारात्मक भावनाओं से कैसे निपटते हैं?"
+      },
+      "options": {
+        "uk": [
+          "Розмова з близькими",
+          "Спорт",
+          "Медитація",
+          "Ігнорування"
+        ],
+        "en": [
+          "Talking with loved ones",
+          "Sports",
+          "Meditation",
+          "Ignoring"
+        ],
+        "hi": [
+          "प्रियजनों के साथ बात करना",
+          "खेल",
+          "ध्यान",
+          "अनदेखा करना"
+        ]
+      },
+      "purpose": "negative_emotions_strategy"
+    }
+  ],
+  "aiPrompt": {
+    "systemPrompt": "You are an expert career psychologist continuing the analysis.",
+    "userPromptTemplate": "Previous aggregated results (if any):\n\n<prev_results>\n{{prev_results}}\n</prev_results>\n\nNow analyze current step answers: building the psychological profile further.\n\n<answers>\n{{answers}}\n</answers>\n\nRefine the profession list by:\n1) Confirm which previous professions still fit,\n2) Adjust match percentages,\n3) Add any new professions that emerge,\n4) Provide deeper psychological reasoning.\n\nProvide exactly 3 professions.",
+    "maxTokens": 600,
+    "temperature": 0.7
+  },
+  "model": {
+    "provider": "openai",
+    "name": "gpt-5-nano",
+    "reasoning": {
+      "effort": "medium"
+    },
+    "text": {
+      "verbosity": "medium"
+    }
+  },
+  "outputFormat": {
+    "type": "structured",
+    "mode": "short",
+    "formatFile": "/formats/short-profession.json"
+  }
+}

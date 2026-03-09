@@ -1,0 +1,296 @@
+{
+  "step": 6,
+  "name": "short_ab_choices",
+  "title": {
+    "uk": "Частина 6: Скорочений варіант опитувальника для батьків (А/В вибір)",
+    "en": "Part 6: Short version of the questionnaire for parents (A/B choice)",
+    "hi": "भाग 6: माता-पिता के लिए प्रश्नावली का संक्षिप्त संस्करण (A/B विकल्प)"
+  },
+  "description": {
+    "uk": "Оберіть варіант, який найбільше відповідає поведінці вашої дитини.",
+    "en": "Choose the option that best matches your child's behavior.",
+    "hi": "वह विकल्प चुनें जो आपके बच्चे के व्यवहार से सबसे करीब से मेल खाता हो।"
+  },
+  "questions": [
+    {
+      "id": "q1_freetime",
+      "type": "select",
+      "text": {
+        "uk": "Як дитина зазвичай проводить вільний час?",
+        "en": "How does the child usually spend their free time?",
+        "hi": "बच्चा आमतौर पर अपना खाली समय कैसे बिताता है?"
+      },
+      "options": {
+        "uk": [
+          "Винаходить, майструє, творить, малює",
+          "Дивиться відео, грає, більше споживає контент"
+        ],
+        "en": [
+          "Invents, crafts, creates, draws",
+          "Watches videos, plays, consumes more content"
+        ],
+        "hi": [
+          "आविष्कार करता है, शिल्प बनाता है, निर्माण करता है, चित्र बनाता है",
+          "वीडियो देखता है, खेलता है, अधिक सामग्री का उपभोग करता है"
+        ]
+      },
+      "optionCodes": [
+        "CREATES",
+        "CONSUMES"
+      ],
+      "purpose": "freetime"
+    },
+    {
+      "id": "q2_new_situations",
+      "type": "select",
+      "text": {
+        "uk": "У нових ситуаціях ваша дитина швидше:",
+        "en": "In new situations, your child is more likely to:",
+        "hi": "नई स्थितियों में, आपका बच्चा अधिक संभावना है:"
+      },
+      "options": {
+        "uk": [
+          "Вступає в контакт, задає питання",
+          "Спостерігає, тримається осторонь"
+        ],
+        "en": [
+          "Makes contact, asks questions",
+          "Observes, stays away"
+        ],
+        "hi": [
+          "संपर्क बनाता है, प्रश्न पूछता है",
+          "निरीक्षण करता है, दूर रहता है"
+        ]
+      },
+      "optionCodes": [
+        "CONTACTS",
+        "OBSERVES"
+      ],
+      "purpose": "new_situations"
+    },
+    {
+      "id": "q3_traits",
+      "type": "select",
+      "text": {
+        "uk": "Що більше притаманне вашій дитині?",
+        "en": "What is more characteristic of your child?",
+        "hi": "आपके बच्चे की अधिक विशेषता क्या है?"
+      },
+      "options": {
+        "uk": [
+          "Чіткість, послідовність, структурованість",
+          "Гнучкість, імпровізація, легка зміна планів"
+        ],
+        "en": [
+          "Clarity, consistency, structuredness",
+          "Flexibility, improvisation, easy change of plans"
+        ],
+        "hi": [
+          "स्पष्टता, निरंतरता, संरचितता",
+          "लचीलापन, सुधार, योजनाओं में आसान बदलाव"
+        ]
+      },
+      "optionCodes": [
+        "STRUCTURED",
+        "FLEXIBLE"
+      ],
+      "purpose": "traits"
+    },
+    {
+      "id": "q4_failures",
+      "type": "select",
+      "text": {
+        "uk": "Коли щось не виходить, дитина:",
+        "en": "When something doesn't work out, the child:",
+        "hi": "जब कुछ ठीक नहीं होता है, तो बच्चा:"
+      },
+      "options": {
+        "uk": [
+          "Спробує ще раз або звернеться по допомогу",
+          "Засмучується, може втратити інтерес"
+        ],
+        "en": [
+          "Tries again or asks for help",
+          "Gets upset, may lose interest"
+        ],
+        "hi": [
+          "फिर से कोशिश करता है या मदद मांगता है",
+          "परेशान हो जाता है, रुचि खो सकता है"
+        ]
+      },
+      "optionCodes": [
+        "TRIES_AGAIN",
+        "LOSES_INTEREST"
+      ],
+      "purpose": "failures"
+    },
+    {
+      "id": "q5_environment",
+      "type": "select",
+      "text": {
+        "uk": "Яке середовище найбільш підходить вашій дитині?",
+        "en": "Which environment is most suitable for your child?",
+        "hi": "आपके बच्चे के लिए कौन सा वातावरण सबसे उपयुक्त है?"
+      },
+      "options": {
+        "uk": [
+          "Там, де багато людей, динаміка, обмін думками",
+          "Там, де спокійно, зрозуміло, мало змін"
+        ],
+        "en": [
+          "Where there are many people, dynamics, exchange of opinions",
+          "Where it is calm, clear, few changes"
+        ],
+        "hi": [
+          "जहां कई लोग हैं, गतिशीलता, विचारों का आदान-प्रदान",
+          "जहां शांत है, स्पष्ट है, कुछ बदलाव हैं"
+        ]
+      },
+      "optionCodes": [
+        "DYNAMIC",
+        "CALM"
+      ],
+      "purpose": "environment"
+    },
+    {
+      "id": "q6_learning",
+      "type": "select",
+      "text": {
+        "uk": "Який підхід у навчанні дає кращий результат?",
+        "en": "Which learning approach yields better results?",
+        "hi": "कौन सा शिक्षण दृष्टिकोण बेहतर परिणाम देता है?"
+      },
+      "options": {
+        "uk": [
+          "Практичне застосування, «навчання через дію»",
+          "Спостереження, повторення, вдумливе розмірковування"
+        ],
+        "en": [
+          "Practical application, 'learning by doing'",
+          "Observation, repetition, thoughtful reflection"
+        ],
+        "hi": [
+          "व्यावहारिक अनुप्रयोग, 'करके सीखना'",
+          "अवलोकन, पुनरावृत्ति, विचारशील प्रतिबिंब"
+        ]
+      },
+      "optionCodes": [
+        "PRACTICAL",
+        "THEORETICAL"
+      ],
+      "purpose": "learning"
+    },
+    {
+      "id": "q7_motivation_source",
+      "type": "select",
+      "text": {
+        "uk": "Що з цього точніше про дитину?",
+        "en": "Which of these is more accurate about the child?",
+        "hi": "बच्चे के बारे में इनमें से कौन अधिक सटीक है?"
+      },
+      "options": {
+        "uk": [
+          "Їй важлива оцінка інших, вона шукає схвалення",
+          "Її більше цікавить власне задоволення від процесу"
+        ],
+        "en": [
+          "Evaluation of others is important to her, she seeks approval",
+          "She is more interested in her own satisfaction from the process"
+        ],
+        "hi": [
+          "दूसरों का मूल्यांकन उसके लिए महत्वपूर्ण है, वह स्वीकृति चाहती है",
+          "उसे प्रक्रिया से अपनी संतुष्टि में अधिक रुचि है"
+        ]
+      },
+      "optionCodes": [
+        "APPROVAL",
+        "SATISFACTION"
+      ],
+      "purpose": "motivation_source"
+    },
+    {
+      "id": "q8_reaction_failures",
+      "type": "select",
+      "text": {
+        "uk": "Як дитина реагує на невдачі?",
+        "en": "How does the child react to failures?",
+        "hi": "बच्चा विफलताओं पर कैसे प्रतिक्रिया करता है?"
+      },
+      "options": {
+        "uk": [
+          "Переживає, але бере це як виклик",
+          "Сильно засмучується і довго відходить"
+        ],
+        "en": [
+          "Worries, but takes it as a challenge",
+          "Gets very upset and takes a long time to recover"
+        ],
+        "hi": [
+          "चिंता करता है, लेकिन इसे एक चुनौती के रूप में लेता है",
+          "बहुत परेशान हो जाता है और ठीक होने में लंबा समय लेता है"
+        ]
+      },
+      "optionCodes": [
+        "CHALLENGE",
+        "UPSET"
+      ],
+      "purpose": "reaction_failures"
+    },
+    {
+      "id": "q9_motivation",
+      "type": "select",
+      "text": {
+        "uk": "Яка мотивація для дитини сильніша?",
+        "en": "Which motivation is stronger for the child?",
+        "hi": "बच्चे के लिए कौन सी प्रेरणा अधिक मजबूत है?"
+      },
+      "options": {
+        "uk": [
+          "«Я хочу бути кращою, ніж учора»",
+          "«Я не хочу, щоб мене засудили або сварили»"
+        ],
+        "en": [
+          "'I want to be better than yesterday'",
+          "'I don't want to be judged or scolded'"
+        ],
+        "hi": [
+          "'मैं कल की तुलना में बेहतर होना चाहता हूँ'",
+          "'मैं आंका या डांटा नहीं जाना चाहता'"
+        ]
+      },
+      "optionCodes": [
+        "BETTER",
+        "AVOID_JUDGMENT"
+      ],
+      "purpose": "motivation"
+    },
+    {
+      "id": "q10_choice",
+      "type": "select",
+      "text": {
+        "uk": "Якщо є вибір — що скоріше обере ваша дитина?",
+        "en": "If there is a choice — what is your child more likely to choose?",
+        "hi": "यदि कोई विकल्प है - तो आपका बच्चा क्या चुनने की अधिक संभावना रखता है?"
+      },
+      "options": {
+        "uk": [
+          "Створити щось нове, навіть ризиковане",
+          "Повторити вже відоме і перевірене"
+        ],
+        "en": [
+          "Create something new, even if risky",
+          "Repeat the already known and verified"
+        ],
+        "hi": [
+          "कुछ नया बनाएं, भले ही जोखिम भरा हो",
+          "पहले से ज्ञात और सत्यापित को दोहराएं"
+        ]
+      },
+      "optionCodes": [
+        "NEW",
+        "KNOWN"
+      ],
+      "purpose": "choice"
+    }
+  ]
+}

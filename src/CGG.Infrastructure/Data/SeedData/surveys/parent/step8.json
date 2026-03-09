@@ -1,0 +1,302 @@
+{
+  "step": 8,
+  "name": "demographic_profile",
+  "title": {
+    "uk": "Частина 8: Демографічний профіль батьків (Додатково)",
+    "en": "Part 8: Demographic profile of parents (Optional)",
+    "hi": "भाग 8: माता-पिता की जनसांख्यिकीय प्रोफ़ाइल (वैकल्पिक)"
+  },
+  "description": {
+    "uk": "Додаткова інформація для кращого розуміння вашого контексту.",
+    "en": "Additional information to better understand your context.",
+    "hi": "आपके संदर्भ को बेहतर ढंग से समझने के लिए अतिरिक्त जानकारी।"
+  },
+  "questions": [
+    {
+      "id": "q1_age",
+      "type": "number",
+      "text": {
+        "uk": "Вік",
+        "en": "Age",
+        "hi": "उम्र"
+      },
+      "optional": true,
+      "min": 18,
+      "max": 100,
+      "purpose": "age"
+    },
+    {
+      "id": "q2_gender",
+      "type": "select",
+      "text": {
+        "uk": "Стать",
+        "en": "Gender",
+        "hi": "लिंग"
+      },
+      "options": {
+        "uk": [
+          "Чоловіча",
+          "Жіноча",
+          "Інше",
+          "Не хочу вказувати"
+        ],
+        "en": [
+          "Male",
+          "Female",
+          "Other",
+          "Prefer not to say"
+        ],
+        "hi": [
+          "पुरुष",
+          "महिला",
+          "अन्य",
+          "कहना नहीं चाहता"
+        ]
+      },
+      "optionCodes": [
+        "MALE",
+        "FEMALE",
+        "OTHER",
+        "PREFER_NOT_TO_SAY"
+      ],
+      "optional": true,
+      "purpose": "gender"
+    },
+    {
+      "id": "q3_country",
+      "type": "text",
+      "text": {
+        "uk": "Країна",
+        "en": "Country",
+        "hi": "देश"
+      },
+      "optional": true,
+      "maxLength": 100,
+      "purpose": "country"
+    },
+    {
+      "id": "q4_education",
+      "type": "select",
+      "text": {
+        "uk": "Рівень освіти",
+        "en": "Education level",
+        "hi": "शिक्षा का स्तर"
+      },
+      "options": {
+        "uk": [
+          "Середня",
+          "Середня спеціальна",
+          "Незакінчена вища",
+          "Вища",
+          "Науковий ступінь"
+        ],
+        "en": [
+          "Secondary",
+          "Specialized secondary",
+          "Incomplete higher",
+          "Higher",
+          "Academic degree"
+        ],
+        "hi": [
+          "माध्यमिक",
+          "विशेष माध्यमिक",
+          "अपूर्ण उच्च",
+          "उच्च",
+          "शैक्षणिक डिग्री"
+        ]
+      },
+      "optionCodes": [
+        "SECONDARY",
+        "SPECIALIZED",
+        "INCOMPLETE_HIGHER",
+        "HIGHER",
+        "DEGREE"
+      ],
+      "optional": true,
+      "purpose": "education"
+    },
+    {
+      "id": "q5_job_field",
+      "type": "text",
+      "text": {
+        "uk": "Сфера роботи",
+        "en": "Work field",
+        "hi": "कार्य क्षेत्र"
+      },
+      "optional": true,
+      "maxLength": 100,
+      "purpose": "job_field"
+    },
+    {
+      "id": "q6_job_position",
+      "type": "text",
+      "text": {
+        "uk": "Посада",
+        "en": "Position",
+        "hi": "पद"
+      },
+      "optional": true,
+      "maxLength": 100,
+      "purpose": "job_position"
+    },
+    {
+      "id": "q7_experience_years",
+      "type": "number",
+      "text": {
+        "uk": "Років досвіду",
+        "en": "Years of experience",
+        "hi": "अनुभव के वर्ष"
+      },
+      "optional": true,
+      "min": 0,
+      "max": 80,
+      "purpose": "experience_years"
+    },
+    {
+      "id": "q8_professional_skills",
+      "type": "textarea",
+      "text": {
+        "uk": "Основні професійні навички (до 5)",
+        "en": "Main professional skills (up to 5)",
+        "hi": "मुख्य व्यावसायिक कौशल (5 तक)"
+      },
+      "optional": true,
+      "maxLength": 200,
+      "purpose": "professional_skills"
+    },
+    {
+      "id": "q9_skills_to_develop",
+      "type": "textarea",
+      "text": {
+        "uk": "Навички для розвитку / Сильні сторони",
+        "en": "Skills to develop / Strengths",
+        "hi": "विकसित करने के कौशल / ताकत"
+      },
+      "optional": true,
+      "maxLength": 200,
+      "purpose": "skills_to_develop"
+    },
+    {
+      "id": "q10_leisure_hobbies",
+      "type": "textarea",
+      "text": {
+        "uk": "Улюблене дозвілля / Хобі, яке хотіли б монетизувати",
+        "en": "Favorite leisure / Hobby you'd like to monetize",
+        "hi": "पसंदीदा अवकाश / शौक जिसे आप मुद्रीकृत करना चाहेंगे"
+      },
+      "optional": true,
+      "maxLength": 200,
+      "purpose": "leisure_hobbies"
+    },
+    {
+      "id": "q11_work_priorities",
+      "type": "textarea",
+      "text": {
+        "uk": "Пріоритети в професії (дохід, баланс тощо)",
+        "en": "Priorities in profession (income, balance, etc.)",
+        "hi": "पेशे में प्राथमिकताएं (आय, संतुलन, आदि)"
+      },
+      "optional": true,
+      "maxLength": 200,
+      "purpose": "work_priorities"
+    },
+    {
+      "id": "q12_comfortable_format",
+      "type": "select",
+      "text": {
+        "uk": "Комфортний формат роботи",
+        "en": "Comfortable work format",
+        "hi": "आरामदायक कार्य प्रारूप"
+      },
+      "options": {
+        "uk": [
+          "Офіс",
+          "Віддалено",
+          "Гібрид"
+        ],
+        "en": [
+          "Office",
+          "Remote",
+          "Hybrid"
+        ],
+        "hi": [
+          "कार्यालय",
+          "दूरस्थ",
+          "हाइब्रिड"
+        ]
+      },
+      "optionCodes": [
+        "OFFICE",
+        "REMOTE",
+        "HYBRID"
+      ],
+      "optional": true,
+      "purpose": "comfortable_format"
+    },
+    {
+      "id": "q13_team_or_individual",
+      "type": "select",
+      "text": {
+        "uk": "Команда чи індивідуальна робота",
+        "en": "Team or individual work",
+        "hi": "टीम या व्यक्तिगत कार्य"
+      },
+      "options": {
+        "uk": [
+          "Команда",
+          "Індивідуальна"
+        ],
+        "en": [
+          "Team",
+          "Individual"
+        ],
+        "hi": [
+          "टीम",
+          "व्यक्तिगत"
+        ]
+      },
+      "optionCodes": [
+        "TEAM",
+        "INDIVIDUAL"
+      ],
+      "optional": true,
+      "purpose": "team_or_individual"
+    },
+    {
+      "id": "q14_work_satisfaction",
+      "type": "textarea",
+      "text": {
+        "uk": "Чим задоволені в роботі / Чим не задоволені",
+        "en": "What you are satisfied with in work / What you are not satisfied with",
+        "hi": "आप काम में किस बात से संतुष्ट हैं / किस बात से संतुष्ट नहीं हैं"
+      },
+      "optional": true,
+      "maxLength": 300,
+      "purpose": "work_satisfaction"
+    },
+    {
+      "id": "q15_achievements",
+      "type": "textarea",
+      "text": {
+        "uk": "Ваші гордості й досягнення (за що варто себе похвалити)",
+        "en": "Your pride and achievements (what you should praise yourself for)",
+        "hi": "आपका गौरव और उपलब्धियां (जिसके लिए आपको अपनी प्रशंसा करनी चाहिए)"
+      },
+      "optional": true,
+      "maxLength": 300,
+      "purpose": "achievements"
+    },
+    {
+      "id": "q16_additional_features",
+      "type": "textarea",
+      "text": {
+        "uk": "Додаткові особливості, які ми маємо враховувати.",
+        "en": "Additional features we should take into account.",
+        "hi": "अतिरिक्त विशेषताएं जिन्हें हमें ध्यान में रखना चाहिए।"
+      },
+      "optional": true,
+      "maxLength": 300,
+      "purpose": "additional_features"
+    }
+  ]
+}

@@ -7,14 +7,19 @@ namespace CGG.Core.Entities
         
         // AI Processing
         public bool RequiresAiAnalysis { get; set; } = true; // false for UI/UX feedback questions
-        public string? PurposeCategory { get; set; } // 'career-analysis', 'ui-feedback', 'a-b-test', 'user-satisfaction'
+        public string? Purpose { get; set; } // Single-word key for autofill mapping: 'gender', 'hobby', etc.
+        public string? VisibleIfJson { get; set; } // Nullable JSON: { "field": "<purpose>", "equals"/"contains": "<value>" }
         
         public bool IsActive { get; set; } = true;
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 
+        // Step relationship (many questions per step)
+        public Guid? StepId { get; set; }
+        public int SortOrder { get; set; } = 1;
+        public SurveyStep? Step { get; set; }
+
         // Collections
-        public ICollection<SurveyStep> Steps { get; set; } = new List<SurveyStep>();
         public ICollection<SurveyQuestionOption> Options { get; set; } = new List<SurveyQuestionOption>();
         public ICollection<SurveyQuestionTranslation> Translations { get; set; } = new List<SurveyQuestionTranslation>();
     }

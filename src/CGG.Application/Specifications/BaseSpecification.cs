@@ -20,6 +20,9 @@ public abstract class BaseSpecification<T> : ISpecification<T>
     public int Take { get; private set; }
     public int Skip { get; private set; }
     public bool IsPagingEnabled { get; private set; }
+    public bool IsSplitQuery { get; private set; }
+
+    protected void UseSplitQuery() => IsSplitQuery = true;
 
     protected void AddInclude(Expression<Func<T, object>> includeExpression)
         => Includes.Add(includeExpression);

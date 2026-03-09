@@ -1,0 +1,71 @@
+{
+  "description": "Full format – final step. Returns comprehensive profession match details.",
+  "format": {
+    "type": "object",
+    "properties": {
+      "matches": {
+        "type": "array",
+        "minItems": 1,
+        "maxItems": 10,
+        "items": {
+          "type": "object",
+          "required": ["title", "matchPercentage", "fitReasons", "strongSkills", "skillsToImprove", "salaryRange", "education", "nextSteps", "personalityInsights"],
+          "additionalProperties": false,
+          "properties": {
+            "title": { "type": "string", "description": "Profession name" },
+            "matchPercentage": { "type": "number", "minimum": 0, "maximum": 100 },
+            "fitReasons": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Why this career fits the respondent"
+            },
+            "strongSkills": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Skills the respondent already demonstrates"
+            },
+            "skillsToImprove": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Skills to develop for this profession"
+            },
+            "salaryRange": {
+              "type": "object",
+              "required": ["junior", "mid", "senior"],
+              "additionalProperties": false,
+              "properties": {
+                "junior": { "type": "string" },
+                "mid": { "type": "string" },
+                "senior": { "type": "string" }
+              }
+            },
+            "education": {
+              "type": "object",
+              "required": ["offline", "online"],
+              "additionalProperties": false,
+              "properties": {
+                "offline": { "type": "array", "items": { "type": "string" } },
+                "online": { "type": "array", "items": { "type": "string" } }
+              }
+            },
+            "nextSteps": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Concrete next actions to pursue this career"
+            },
+            "personalityInsights": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Personality traits that align with this profession"
+            }
+          }
+        }
+      },
+      "overallPersonalityProfile": {
+        "type": "string",
+        "description": "2-3 sentence summary of the respondent's personality and career orientation"
+      }
+    },
+    "required": ["matches", "overallPersonalityProfile"]
+  }
+}

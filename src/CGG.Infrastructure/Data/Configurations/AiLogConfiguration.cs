@@ -27,6 +27,11 @@ namespace CGG.Infrastructure.Data.Configurations
                 .HasForeignKey(e => e.SurveyResultId)
                 .OnDelete(DeleteBehavior.NoAction);
                 
+            builder.HasOne(e => e.UserSurvey)
+                .WithMany(us => us.AiLogs)
+                .HasForeignKey(e => e.UserSurveyId)
+                .OnDelete(DeleteBehavior.NoAction);
+                
             builder.HasOne(e => e.PromptTemplate)
                 .WithMany(pt => pt.AiLogs)
                 .HasForeignKey(e => e.PromptTemplateId)
@@ -36,6 +41,7 @@ namespace CGG.Infrastructure.Data.Configurations
             builder.HasIndex(e => e.UserId);
             builder.HasIndex(e => e.MemberId);
             builder.HasIndex(e => e.SurveyResultId);
+            builder.HasIndex(e => e.UserSurveyId);
             builder.HasIndex(e => e.PromptTemplateId);
             builder.HasIndex(e => e.RequestType);
             builder.HasIndex(e => e.Status);

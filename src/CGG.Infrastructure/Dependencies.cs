@@ -1,5 +1,7 @@
+using CGG.Application.Interfaces;
 using CGG.Core.Interfaces;
 using CGG.Infrastructure.Data;
+using CGG.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,6 +30,20 @@ public static class Dependencies
 
         // Domain-specific repositories
         services.AddScoped<IUserRepository, Repositories.UserRepository>();
+        services.AddScoped<ISurveyRepository, Repositories.SurveyRepository>();
+        services.AddScoped<IUserSurveyRepository, Repositories.UserSurveyRepository>();
+        services.AddScoped<IUserSurveyAnswerRepository, Repositories.UserSurveyAnswerRepository>();
+
+        // Infrastructure Services
+        services.AddScoped<SurveySeeder>();
+        services.AddScoped<PromptSeeder>();
+        services.AddScoped<SurveyExampleSeeder>();
+        services.AddScoped<ISurveyManagementService, SurveyManagementService>();
+
+        // AI Services
+        services.AddHttpClient();
+        services.AddScoped<IAiPromptLoaderService, AiPromptLoaderService>();
+        services.AddScoped<IAiSurveyService, AiSurveyService>();
 
         return services;
     }

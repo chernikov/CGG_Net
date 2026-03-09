@@ -1,0 +1,187 @@
+import {
+  Component, Input, Output, EventEmitter, OnChanges, SimpleChanges, inject, signal, computed,
+  ChangeDetectionStrategy, ChangeDetectorRef, HostListener
+} from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { SurveyStepDef, SurveyQuestion } from '../../models/question.model';
+import { StepAnswer } from '../../models/survey-session.model';
+import { QuestionRendererComponent } from '../question-renderer/question-renderer.component';
+
+/**
+ * Renders all questions of a single survey step.
+ * The user navigates question by question within the step.
+ * Emits `stepComplete` when all required questions are answered.
+ */
+@Component({
+  selector: 'app-survey-step',
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [CommonModule, QuestionRendererComponent],
+  template: `
+    <div class="w-full max-w-2xl mx-auto px-4 py-8">
+
+      <!-- Progress header -->
+      <div class="flex items-center justify-between mb-6">
+        <span class="text-sm font-medium text-slate-500">
+          Крок {{ step.stepNumber }} / {{ totalSteps }}
+        </span>
+        <div class="flex-1 mx-4 h-2 bg-slate-100 rounded-full overflow-hidden">
+          <div
+            class="h-full bg-blue-500 rounded-full transition-all duration-500"
+            [style.width.%]="progressPct"
+          ></div>
+        </div>
+        <span class="text-sm font-medium text-slate-500">
+          Питання {{ questionIndex() + 1 }}/{{ visibleQuestions().length }}
+        </span>
+      </div>
+
+      <!-- Current question -->
+      @if (currentQuestion(); as q) {
+        <app-question-renderer
+          [question]="q"
+          [value]="answers()[q.id] || ''"
+          (valueChange)="onAnswer(q.id, $event)"
+        />
+      }
+
+      <!-- Navigation -->
+      <div class="flex justify-between mt-8">
+        <button
+          type="button"
+          class="px-6 py-3 rounded-xl border-2 border-slate-200 text-slate-600 font-medium hover:bg-slate-50 transition disabled:opacity-40 disabled:cursor-not-allowed"
+          [disabled]="questionIndex() === 0"
+          (click)="prevQuestion()"
+        >
+          ← Назад
+        </button>
+
+        @if (isLastQuestion()) {
+          <button
+            type="button"
+            class="px-8 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold transition disabled:opacity-40 disabled:cursor-not-allowed"
+            [disabled]="!canProceed()"
+            (click)="submitStep()"
+          >
+            {{ isLastStep ? 'Завершити →' : 'Далі →' }}
+          </button>
+        } @else {
+          <button
+            type="button"
+            class="px-8 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold transition disabled:opacity-40 disabled:cursor-not-allowed"
+            [disabled]="!canAdvanceQuestion()"
+            (click)="nextQuestion()"
+          >
+            Наступне →
+          </button>
+        }
+      </div>
+    </div>
+  `,
+})
+export class SurveyStepComponent implements OnChanges {
+  @Input() step!: SurveyStepDef;
+  @Input() totalSteps: number = 1;
+  @Input() isLastStep: boolean = false;
+  @Input() existingAnswers: StepAnswer[] = [];
+  @Output() stepComplete = new EventEmitter<StepAnswer[]>();
+  /** Emitted on every "Наступне" click with all answers collected so far in this step. */
+  @Output() questionAnswered = new EventEmitter<StepAnswer[]>();
+  /** Emitted after debug autofill — allows parent to persist partial answers in session. */
+  @Output() autofillApplied = new EventEmitter<StepAnswer[]>();
+
+  private cdr = inject(ChangeDetectorRef);
+
+  questionIndex = signal(0);
+  answers = signal<Record<string, string>>({});
+
+  visibleQuestions = computed(() =>
+    (this.step?.questions ?? []).filter(q => this.isVisible(q))
+  );
+
+  currentQuestion = computed(() => this.visibleQuestions()[this.questionIndex()] ?? null);
+  isLastQuestion = computed(() => this.questionIndex() === (this.visibleQuestions().length || 1) - 1);
+  canAdvanceQuestion = computed(() => {
+    const q = this.currentQuestion();
+    if (!q) return false;
+    return (this.answers()[q.id] ?? '').trim().length > 0;
+  });
+  canProceed = computed(() => {
+    const required = this.visibleQuestions().filter(q => q.type !== 'feedback');
+    return required.every(q => (this.answers()[q.id] ?? '').trim().length > 0);
+  });
+
+  get progressPct(): number {
+    return ((this.step.stepNumber - 1) / this.totalSteps) * 100;
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    // Only reset when the step itself changes, NOT when existingAnswers gets a new reference
+    if (changes['step']) {
+      const restored: Record<string, string> = {};
+      for (const a of (this.existingAnswers ?? [])) {
+        restored[a.questionId] = a.answer;
+      }
+      this.answers.set(restored);
+      this.questionIndex.set(0);
+    }
+  }
+
+  onAnswer(questionId: string, value: string): void {
+    this.answers.set({ ...this.answers(), [questionId]: value });
+    this.cdr.markForCheck();
+  }
+
+  nextQuestion(): void {
+    if (!this.isLastQuestion()) {
+      this.questionAnswered.emit(this.currentAnswersAsStepAnswers());
+      this.questionIndex.update(i => i + 1);
+    }
+  }
+
+  private isVisible(q: SurveyQuestion): boolean {
+    if (!q.visibleIf) return true;
+    const { field, equals, contains } = q.visibleIf;
+    const sourceQ = this.step.questions.find(qq => qq.purpose === field);
+    const val = sourceQ ? (this.answers()[sourceQ.id] ?? '') : '';
+    if (equals !== undefined) return val === equals;
+    if (contains !== undefined) {
+      try { return (JSON.parse(val) as string[]).includes(contains); }
+      catch { return val.includes(contains); }
+    }
+    return true;
+  }
+
+  prevQuestion(): void {
+    if (this.questionIndex() > 0) {
+      this.questionIndex.update(i => i - 1);
+    }
+  }
+
+  @HostListener('window:debugAutofill', ['$event'])
+  onDebugAutofill(event: Event): void {
+    const data = (event as CustomEvent<Record<string, unknown>>).detail;
+    const filled: Record<string, string> = { ...this.answers() };
+    for (const q of this.step.questions) {
+      if (!q.purpose) continue;
+      const val = data[q.purpose];
+      if (val === undefined || val === null) continue;
+      filled[q.id] = Array.isArray(val) ? JSON.stringify(val) : String(val);
+    }
+    this.answers.set(filled);
+    this.cdr.markForCheck();
+    this.autofillApplied.emit(this.currentAnswersAsStepAnswers());
+  }
+
+  submitStep(): void {
+    this.stepComplete.emit(this.currentAnswersAsStepAnswers());
+  }
+
+  private currentAnswersAsStepAnswers(): StepAnswer[] {
+    return this.visibleQuestions().map(q => ({
+      questionId: q.id,
+      questionText: '', // filled by parent from locale
+      answer: this.answers()[q.id] ?? '',
+    }));
+  }
+}

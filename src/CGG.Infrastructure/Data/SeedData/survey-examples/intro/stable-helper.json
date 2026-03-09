@@ -1,0 +1,14 @@
+{
+  "slug": "stable-helper",
+  "icon": "🤝",
+  "nameUk": "Стабільний помічник",
+  "nameEn": "Stable Helper",
+  "sortOrder": 4,
+  "answers": {
+    "early_career_dream": "Q1_HELP",
+    "career_now_matters": "Q2_STAB",
+    "work_motivation": "Q3_RECOG",
+    "career_change_openness": "Q4_NO",
+    "self_in_2_years": "Q5_STAB"
+  }
+}

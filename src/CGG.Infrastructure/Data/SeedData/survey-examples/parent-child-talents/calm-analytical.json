@@ -1,0 +1,25 @@
+{
+  "slug": "calm-analytical",
+  "icon": "🧠",
+  "nameUk": "Спокійна аналітична дитина",
+  "nameEn": "Calm Analytical Child",
+  "sortOrder": 2,
+  "answers": {
+    "child_type": "CALM",
+    "child_hobbies": "Читання, шахи, програмування, конструктори Lego",
+    "child_career_dreams": "Хоче бути програмістом або вченим",
+    "parent_support_priority": "Розвиток аналітичних здібностей і гарна освіта",
+    "parent_career_opinion": "IT або наука — відповідає здібностям дитини",
+    "family_traditions": "Тато — інженер, дідусь — математик",
+    "child_talents": "Логічне мислення, терпіння, аналітика, увага до деталей",
+    "child_dev_areas": "Комунікація, впевненість у собі",
+    "child_job_conditions": ["STABILITY", "INCOME"],
+    "child_fav_character": "Шерлок Холмс — подобається логіка і спостережливість",
+    "child_antihero": "Джокер — безглуздий хаос",
+    "child_admired_relative": "Тато — завжди спокійний і знаходить рішення",
+    "child_disliked_relative": "Двоюрідна сестра — непостійна і шумна",
+    "child_lookalike_hero": "Герміона Грейнджер — розумна і відповідальна",
+    "extra_observations": "Дитина любить самостійно вирішувати завдання",
+    "local_request": "Як розвинути впевненість у спілкуванні з однолітками?"
+  }
+}

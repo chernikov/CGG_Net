@@ -1,0 +1,156 @@
+{
+  "name": "recommendation",
+  "metadata": {
+    "totalSteps": 1,
+    "languages": ["uk", "en", "hi"],
+    "version": "1.0",
+    "description": {
+      "uk": "Опитувальник для збору регулярних спостережень та створення персоналізованих AI-рекомендацій",
+      "en": "Survey for collecting regular observations and creating personalized AI recommendations",
+      "hi": "नियमित अवलोकन एकत्र करने और व्यक्तिगत AI सिफारिशें बनाने के लिए सर्वेक्षण"
+    }
+  },
+  "steps": [
+    {
+      "step": 1,
+      "title": {
+        "uk": "Спостереження та запит",
+        "en": "Observations and Request",
+        "hi": "अवलोकन और अनुरोध"
+      },
+      "description": {
+        "uk": "Поділіться своїми спостереженнями за тиждень. Заповнення хоча б однієї секції є обов'язковим.",
+        "en": "Share your weekly observations. Filling at least one section is required.",
+        "hi": "अपने साप्ताहिक अवलोकन साझा करें। कम से कम एक खंड भरना आवश्यक है।"
+      },
+      "questions": [
+        {
+          "id": "mood_and_wellbeing",
+          "type": "textarea",
+          "text": {
+            "uk": "Настрій і самопочуття: Який настрій переважав цього тижня? Що найбільше на нього вплинуло (школа, друзі, домашня атмосфера, інше)?",
+            "en": "Mood and Wellbeing: What mood prevailed this week? What influenced it the most (school, friends, home atmosphere, other)?",
+            "hi": "मनोदशा और कल्याण: इस सप्ताह कौन सी मनोदशा प्रमुख थी? इसे सबसे अधिक किसने प्रभावित किया (स्कूल, दोस्त, घर का माहौल, अन्य)?"
+          },
+          "placeholder": {
+            "uk": "Наприклад: Настрій був здебільшого позитивний, але швидко втомлюється після школи...",
+            "en": "Example: The mood was mostly positive, but gets tired quickly after school...",
+            "hi": "उदाहरण: मनोदशा अधिकतर सकारात्मक थी, लेकिन स्कूल के बाद जल्दी थक जाता है..."
+          },
+          "maxLength": 400,
+          "optional": true
+        },
+        {
+          "id": "relationships",
+          "type": "textarea",
+          "text": {
+            "uk": "Стосунки: Чи з'явилися нові друзі або конфлікти? Як реагує на поради або критику?",
+            "en": "Relationships: Have new friends or conflicts appeared? How does one react to advice or criticism?",
+            "hi": "संबंध: क्या नए दोस्त या संघर्ष सामने आए? सलाह या आलोचना पर कैसी प्रतिक्रिया होती है?"
+          },
+          "placeholder": {
+            "uk": "Наприклад: У класі з'явився новий друг, з яким добре ладнає...",
+            "en": "Example: A new friend appeared in class, with whom there is good rapport...",
+            "hi": "उदाहरण: कक्षा में एक नया दोस्त आया, जिसके साथ अच्छी समझ है..."
+          },
+          "maxLength": 400,
+          "optional": true
+        },
+        {
+          "id": "achievements_and_development",
+          "type": "textarea",
+          "text": {
+            "uk": "Досягнення і розвиток: Чим можна пишатися цього тижня? Що вдалося краще, ніж зазвичай?",
+            "en": "Achievements and Development: What can you be proud of this week? What went better than usual?",
+            "hi": "उपलब्धियाँ और विकास: इस सप्ताह किस बात पर गर्व हो सकता है? क्या सामान्य से बेहतर हुआ?"
+          },
+          "placeholder": {
+            "uk": "Наприклад: Цього тижня успішно виступила з проєктом на біології...",
+            "en": "Example: This week successfully presented a biology project...",
+            "hi": "उदाहरण: इस सप्ताह जीवविज्ञान परियोजना सफलतापूर्वक प्रस्तुत की..."
+          },
+          "maxLength": 400,
+          "optional": true
+        },
+        {
+          "id": "challenges_and_failures",
+          "type": "textarea",
+          "text": {
+            "uk": "Невдачі і виклики: Чи були труднощі або розчарування? Як відреагували? Як підтримали?",
+            "en": "Failures and Challenges: Were there difficulties or disappointments? How did you react? How did you support?",
+            "hi": "असफलताएँ और चुनौतियाँ: क्या कोई कठिनाई या निराशा थी? कैसी प्रतिक्रिया हुई? कैसे सहायता की?"
+          },
+          "placeholder": {
+            "uk": "Наприклад: Була складність з математикою, але намагався вирішити самостійно...",
+            "en": "Example: Had difficulty with math, but tried to solve independently...",
+            "hi": "उदाहरण: गणित में कठिनाई हुई, लेकिन स्वतंत्र रूप से हल करने की कोशिश की..."
+          },
+          "maxLength": 400,
+          "optional": true
+        },
+        {
+          "id": "new_interests_and_changes",
+          "type": "textarea",
+          "text": {
+            "uk": "Нові інтереси і зміни: Чи з'явилися нові захоплення, теми або мрії? Які риси прагне розвивати зараз?",
+            "en": "New Interests and Changes: Have new hobbies, topics or dreams appeared? What traits are you trying to develop now?",
+            "hi": "नई रुचियाँ और परिवर्तन: क्या नए शौक, विषय या सपने सामने आए? अभी कौन से गुण विकसित करने की कोशिश है?"
+          },
+          "placeholder": {
+            "uk": "Наприклад: Почав цікавитись програмуванням, хоче вивчати Python...",
+            "en": "Example: Started getting interested in programming, wants to learn Python...",
+            "hi": "उदाहरण: प्रोग्रामिंग में रुचि लेना शुरू किया, Python सीखना चाहता है..."
+          },
+          "maxLength": 400,
+          "optional": true
+        },
+        {
+          "id": "other_observations",
+          "type": "textarea",
+          "text": {
+            "uk": "Інше: Вільне поле для нотаток чи спостережень, які не підпадають під попередні категорії.",
+            "en": "Other: Free field for notes or observations that do not fall into previous categories.",
+            "hi": "अन्य: नोट्स या अवलोकनों के लिए मुक्त फ़ील्ड जो पिछली श्रेणियों में नहीं आते।"
+          },
+          "placeholder": {
+            "uk": "Додайте будь-які важливі спостереження...",
+            "en": "Add any important observations...",
+            "hi": "कोई महत्वपूर्ण अवलोकन जोड़ें..."
+          },
+          "maxLength": 400,
+          "optional": true
+        },
+        {
+          "id": "local_request",
+          "type": "textarea",
+          "text": {
+            "uk": "Локальний запит: Мій запит до системи (необов'язково, але пріоритизується в AI-відповіді)",
+            "en": "Local Request: My request to the system (optional, but prioritized in AI response)",
+            "hi": "स्थानीय अनुरोध: सिस्टम के लिए मेरा अनुरोध (वैकल्पिक, लेकिन AI प्रतिक्रिया में प्राथमिकता दी जाती है)"
+          },
+          "placeholder": {
+            "uk": "Наприклад: Хочу допомогти стати більш самостійним, покращити контакт, розвинути мотивацію до навчання...",
+            "en": "Example: Want to help become more independent, improve communication, develop study motivation...",
+            "hi": "उदाहरण: अधिक स्वतंत्र बनने में मदद करना चाहता हूँ, संचार में सुधार, अध्ययन प्रेरणा विकसित करना..."
+          },
+          "maxLength": 300,
+          "optional": true
+        }
+      ],
+      "validation": {
+        "minFilledSections": 1,
+        "errorMessage": {
+          "uk": "Будь ласка, заповніть хоча б одну секцію спостережень.",
+          "en": "Please fill at least one observation section.",
+          "hi": "कृपया कम से कम एक अवलोकन खंड भरें।"
+        }
+      },
+      "aiPrompt": {
+        "systemPrompt": "You are a psychologist, educator, and career counselor. Based on user observations, create a short, empathetic, and structured recommendation. Analyze short regular observations (weekly, monthly, and situational reminders) and update the student's development forecast. If a local request is present, prioritize it in your response, but always consider the child's career orientation as the main focus. Take into account all previous research, observations, and other input information when generating results.\n\nFormat your response exactly as follows:\n\n1. Hard Skills — practical tools for development\n2. Soft Skills — internal qualities that support growth\n3. Contact & Interaction — how to support development (for parents) or how to interact more effectively (for students)\n\nIf the user is a student, use a friendly, encouraging tone ('you can', 'try to', 'notice that').\nIf the user is a parent, use a calm, advisory tone ('support', 'help', 'encourage').\n\nDo not diagnose or use medical terms.\nAlways end positively: 'Each week is a step toward growth.'",
+        "userPromptTemplate": "User Type: {{userType}}\nLanguage: {{language}}\n\nObservations:\n{{observations}}\n\nLocal Request:\n{{localRequest}}\n\nPrevious Profile (if available):\n{{previousProfile}}\n\nPrevious Recommendations (if available):\n{{previousRecommendations}}\n\nGenerate a recommendation in the format:\n1. Hard Skills —\n2. Soft Skills —\n3. Contact & Interaction —",
+        "maxTokens": 500,
+        "temperature": 0.7
+      }
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "$schema": "./schemas/index.schema.json",
+  "name": "ab-test",
+  "title": {
+    "uk": "Тестовий опитувальник A/B",
+    "en": "A/B Test Survey",
+    "hi": "A/B परीक्षण सर्वेक्षण"
+  },
+  "description": {
+    "uk": "Експериментальний опитувальник для A/B тестування\nПорівняння різних підходів до кар'єрного консультування.",
+    "en": "Experimental survey for A/B testing\nComparing different approaches to career counseling.",
+    "hi": "A/B परीक्षण के लिए प्रयोगात्मक सर्वेक्षण\nकरियर परामर्श के विभिन्न दृष्टिकोणों की तुलना।"
+  },
+  "version": "1.0",
+  "totalSteps": 3,
+  "languages": ["uk", "en", "hi"],
+  "defaultLanguage": "uk",
+  "metadata": {
+    "category": "experimental",
+    "targetAudience": "test-users",
+    "estimatedDuration": "25-35 minutes"
+  }
+}

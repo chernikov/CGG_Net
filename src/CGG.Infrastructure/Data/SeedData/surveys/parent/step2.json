@@ -1,0 +1,239 @@
+{
+  "step": 2,
+  "name": "attitude_and_career",
+  "title": {
+    "uk": "Частина 2: Ставлення до ролі батьків та кар'єри дитини",
+    "en": "Part 2: Attitude to the role of parents and child's career",
+    "hi": "भाग 2: माता-पिता की भूमिका और बच्चे के करियर के प्रति दृष्टिकोण"
+  },
+  "description": {
+    "uk": "Ваші погляди на виховання та вплив на майбутнє дитини.",
+    "en": "Your views on upbringing and influence on the child's future.",
+    "hi": "पालन-पोषण और बच्चे के भविष्य पर प्रभाव के बारे में आपके विचार।"
+  },
+  "questions": [
+    {
+      "id": "q1_family_status",
+      "type": "select",
+      "text": {
+        "uk": "Який у вас родинний статус щодо дитини?",
+        "en": "What is your family status towards the child?",
+        "hi": "बच्चे के प्रति आपकी पारिवारिक स्थिति क्या है?"
+      },
+      "options": {
+        "uk": [
+          "Мама",
+          "Тато",
+          "Інший родич",
+          "Опікун",
+          "Інше"
+        ],
+        "en": [
+          "Mother",
+          "Father",
+          "Other relative",
+          "Guardian",
+          "Other"
+        ],
+        "hi": [
+          "माँ",
+          "पिता",
+          "अन्य रिश्तेदार",
+          "अभिभावक",
+          "अन्य"
+        ]
+      },
+      "optionCodes": [
+        "MOTHER",
+        "FATHER",
+        "RELATIVE",
+        "GUARDIAN",
+        "OTHER"
+      ],
+      "purpose": "family_status"
+    },
+    {
+      "id": "q2_upbringing_principles",
+      "type": "select",
+      "text": {
+        "uk": "Які принципи ви зазвичай застосовуєте у вихованні дитини?",
+        "en": "What principles do you usually apply in the upbringing of a child?",
+        "hi": "बच्चे की परवरिश में आप आमतौर पर किन सिद्धांतों को लागू करते हैं?"
+      },
+      "options": {
+        "uk": [
+          "Партнерство й діалог",
+          "Контроль і структура",
+          "Свобода та самовираження",
+          "Змішаний підхід",
+          "Важко сказати"
+        ],
+        "en": [
+          "Partnership and dialogue",
+          "Control and structure",
+          "Freedom and self-expression",
+          "Mixed approach",
+          "Hard to say"
+        ],
+        "hi": [
+          "साझेदारी और संवाद",
+          "नियंत्रण और संरचना",
+          "स्वतंत्रता और आत्म-अभिव्यक्ति",
+          "मिश्रित दृष्टिकोण",
+          "कहना मुश्किल है"
+        ]
+      },
+      "optionCodes": [
+        "PARTNERSHIP",
+        "CONTROL",
+        "FREEDOM",
+        "MIXED",
+        "DONT_KNOW"
+      ],
+      "purpose": "upbringing_principles"
+    },
+    {
+      "id": "q3_career_guidance_meaning",
+      "type": "select",
+      "text": {
+        "uk": "Чим для вас є карʼєрне спрямування дитини?",
+        "en": "What does career guidance for a child mean to you?",
+        "hi": "आपके लिए बच्चे के करियर मार्गदर्शन का क्या अर्थ है?"
+      },
+      "options": {
+        "uk": [
+          "Можливість розкрити таланти",
+          "Захист від помилкового вибору",
+          "Підготовка до дорослого життя",
+          "Те, що має відбутися природно",
+          "Інше"
+        ],
+        "en": [
+          "Opportunity to reveal talents",
+          "Protection from wrong choices",
+          "Preparation for adulthood",
+          "Something that should happen naturally",
+          "Other"
+        ],
+        "hi": [
+          "प्रतिभाओं को उजागर करने का अवसर",
+          "गलत विकल्पों से बचाव",
+          "वयस्कता के लिए तैयारी",
+          "कुछ ऐसा जो स्वाभाविक रूप से होना चाहिए",
+          "अन्य"
+        ]
+      },
+      "optionCodes": [
+        "REVEAL_TALENTS",
+        "PROTECTION",
+        "PREPARATION",
+        "NATURAL",
+        "OTHER"
+      ],
+      "purpose": "career_guidance_meaning"
+    },
+    {
+      "id": "q4_freedom_readiness",
+      "type": "number",
+      "text": {
+        "uk": "На скільки ви готові дати свободу дитині у її карʼєрному спрямуванні? (1 — повна свобода, 10 — вже знаю її професію)",
+        "en": "How ready are you to give your child freedom in their career guidance? (1 = full freedom, 10 = I already know their profession)",
+        "hi": "आप अपने बच्चे को उसके करियर मार्गदर्शन में कितनी स्वतंत्रता देने के लिए तैयार हैं? (1 = पूर्ण स्वतंत्रता, 10 = मुझे उसका पेशा पहले से ही पता है)"
+      },
+      "min": 1,
+      "max": 10,
+      "purpose": "freedom_readiness"
+    },
+    {
+      "id": "q5_involvement_format",
+      "type": "select",
+      "text": {
+        "uk": "Як би ви хотіли долучитися до процесу карʼєрного спрямування?",
+        "en": "How would you like to be involved in the career guidance process?",
+        "hi": "आप करियर मार्गदर्शन प्रक्रिया में कैसे शामिल होना चाहेंगे?"
+      },
+      "options": {
+        "uk": [
+          "Як спостерігач",
+          "Як активний учасник",
+          "Як натхненник і ментор",
+          "Не планую втручатись",
+          "Поки не вирішив(ла)"
+        ],
+        "en": [
+          "As an observer",
+          "As an active participant",
+          "As an inspirer and mentor",
+          "I don't plan to intervene",
+          "Haven't decided yet"
+        ],
+        "hi": [
+          "एक पर्यवेक्षक के रूप में",
+          "एक सक्रिय भागीदार के रूप में",
+          "एक प्रेरक और सलाहकार के रूप में",
+          "मैं हस्तक्षेप करने की योजना नहीं बना रहा हूँ",
+          "अभी तक तय नहीं किया है"
+        ]
+      },
+      "optionCodes": [
+        "OBSERVER",
+        "ACTIVE",
+        "MENTOR",
+        "NO_INTERVENTION",
+        "DONT_KNOW"
+      ],
+      "purpose": "involvement_format"
+    },
+    {
+      "id": "q6_important_development",
+      "type": "textarea",
+      "text": {
+        "uk": "Що для вас найважливіше у розвитку вашої дитини, щоб ми це врахували?",
+        "en": "What is most important to you in your child's development, so we can consider it?",
+        "hi": "आपके बच्चे के विकास में आपके लिए सबसे महत्वपूर्ण क्या है, ताकि हम उस पर विचार कर सकें?"
+      },
+      "maxLength": 500,
+      "purpose": "important_development"
+    },
+    {
+      "id": "q7_important_future_career",
+      "type": "select",
+      "text": {
+        "uk": "Що для вас є найбільш важливим у виборі майбутнього кар’єрного напряму дитини?",
+        "en": "What is most important to you in choosing your child's future career direction?",
+        "hi": "अपने बच्चे के भविष्य के करियर की दिशा चुनने में आपके लिए सबसे महत्वपूर्ण क्या है?"
+      },
+      "options": {
+        "uk": [
+          "Стабільність",
+          "Розвиток талантів",
+          "Престиж",
+          "Дохід",
+          "Інше"
+        ],
+        "en": [
+          "Stability",
+          "Development of talents",
+          "Prestige",
+          "Income",
+          "Other"
+        ],
+        "hi": [
+          "स्थिरता",
+          "प्रतिभाओं का विकास",
+          "प्रतिष्ठा",
+          "आय",
+          "अन्य"
+        ]
+      },
+      "optionCodes": [
+        "STABILITY",
+        "TALENTS",
+        "PRESTIGE",
+        "INCOME",
+        "OTHER"
+      ],
+      "purpose": "important_future_career"
+    }
+  ]
+}

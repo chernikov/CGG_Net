@@ -1,0 +1,195 @@
+{
+  "step": 4,
+  "name": "regular_observations",
+  "title": {
+    "uk": "Частина 4: Регулярні спостереження",
+    "en": "Part 4: Regular observations",
+    "hi": "भाग 4: नियमित अवलोकन"
+  },
+  "description": {
+    "uk": "Ваші регулярні спостереження (тижневі, місячні, ситуативні).",
+    "en": "Your regular observations (weekly, monthly, situational).",
+    "hi": "आपके नियमित अवलोकन (साप्ताहिक, मासिक, स्थितिजन्य)।"
+  },
+  "questions": [
+    {
+      "id": "q1_weekly_joy",
+      "type": "textarea",
+      "text": {
+        "uk": "Чим ваша дитина вас порадувала цього тижня?",
+        "en": "What made you happy about your child this week?",
+        "hi": "इस सप्ताह आपके बच्चे ने आपको क्या खुश किया?"
+      },
+      "maxLength": 500,
+      "purpose": "weekly_joy"
+    },
+    {
+      "id": "q2_weekly_new",
+      "type": "textarea",
+      "text": {
+        "uk": "Що нового або цікавого відбулося з дитиною за останні дні?",
+        "en": "What new or interesting things happened with your child in the last few days?",
+        "hi": "पिछले कुछ दिनों में आपके बच्चे के साथ क्या नया या दिलचस्प हुआ है?"
+      },
+      "maxLength": 500,
+      "purpose": "weekly_new"
+    },
+    {
+      "id": "q3_weekly_pride",
+      "type": "textarea",
+      "text": {
+        "uk": "Чи був момент, коли ви особливо пишалися дитиною цього тижня? (Так / Ні + короткий опис)",
+        "en": "Was there a moment when you were especially proud of your child this week? (Yes / No + brief description)",
+        "hi": "क्या कोई ऐसा क्षण था जब आपको इस सप्ताह अपने बच्चे पर विशेष रूप से गर्व हुआ? (हाँ / नहीं + संक्षिप्त विवरण)"
+      },
+      "maxLength": 500,
+      "purpose": "weekly_pride"
+    },
+    {
+      "id": "q4_monthly_pride",
+      "type": "textarea",
+      "text": {
+        "uk": "За що цього місяця ви найбільше горді за свою дитину?",
+        "en": "What are you most proud of about your child this month?",
+        "hi": "इस महीने आप अपने बच्चे के बारे में सबसे ज्यादा गर्व महसूस करते हैं?"
+      },
+      "maxLength": 500,
+      "purpose": "monthly_pride"
+    },
+    {
+      "id": "q5_monthly_surprise",
+      "type": "textarea",
+      "text": {
+        "uk": "Які події чи зміни у поведінці дитини вас приємно здивували?",
+        "en": "What events or changes in child's behavior pleasantly surprised you?",
+        "hi": "बच्चे के व्यवहार में किन घटनाओं या बदलावों ने आपको सुखद आश्चर्यचकित किया?"
+      },
+      "maxLength": 500,
+      "purpose": "monthly_surprise"
+    },
+    {
+      "id": "q6_monthly_concern",
+      "type": "textarea",
+      "text": {
+        "uk": "Чи було протягом місяця щось у стосунках чи поведінці дитини, що вас насторожило? (Так / Ні + уточнення)",
+        "en": "Was there anything in the relationship or child's behavior during the month that alerted you? (Yes / No + clarification)",
+        "hi": "क्या महीने के दौरान रिश्ते या बच्चे के व्यवहार में कुछ ऐसा था जिसने आपको सचेत किया? (हाँ / नहीं + स्पष्टीकरण)"
+      },
+      "maxLength": 500,
+      "purpose": "monthly_concern"
+    },
+    {
+      "id": "q7_monthly_warmth",
+      "type": "textarea",
+      "text": {
+        "uk": "Які моменти викликали у вас найбільше тепла й розчулення?",
+        "en": "What moments caused you the most warmth and emotion?",
+        "hi": "किन क्षणों ने आपमें सबसे अधिक गर्मी और भावना पैदा की?"
+      },
+      "maxLength": 500,
+      "purpose": "monthly_warmth"
+    },
+    {
+      "id": "q8_situational_success",
+      "type": "select",
+      "text": {
+        "uk": "Дитина досягла успіху (олімпіада, конкурс, спортивна перемога)",
+        "en": "The child achieved success (olympiad, competition, sports victory)",
+        "hi": "बच्चे ने सफलता हासिल की (ओलंपियाड, प्रतियोगिता, खेल जीत)"
+      },
+      "options": {
+        "uk": [
+          "Олімпіада",
+          "Конкурс",
+          "Спортивна перемога",
+          "Інше",
+          "Не було"
+        ],
+        "en": [
+          "Olympiad",
+          "Competition",
+          "Sports victory",
+          "Other",
+          "None"
+        ],
+        "hi": [
+          "ओलंपियाड",
+          "प्रतियोगिता",
+          "खेल जीत",
+          "अन्य",
+          "कोई नहीं"
+        ]
+      },
+      "optionCodes": [
+        "OLYMPIAD",
+        "COMPETITION",
+        "SPORTS",
+        "OTHER",
+        "NONE"
+      ],
+      "purpose": "situational_success"
+    },
+    {
+      "id": "q9_situational_conflict",
+      "type": "select",
+      "text": {
+        "uk": "Виникла складна чи конфліктна ситуація",
+        "en": "There was a difficult or conflict situation",
+        "hi": "एक कठिन या संघर्षपूर्ण स्थिति थी"
+      },
+      "options": {
+        "uk": [
+          "Навчання",
+          "Школа",
+          "Друзі",
+          "Сім’я",
+          "Не було"
+        ],
+        "en": [
+          "Learning",
+          "School",
+          "Friends",
+          "Family",
+          "None"
+        ],
+        "hi": [
+          "सीखना",
+          "स्कूल",
+          "दोस्त",
+          "परिवार",
+          "कोई नहीं"
+        ]
+      },
+      "optionCodes": [
+        "LEARNING",
+        "SCHOOL",
+        "FRIENDS",
+        "FAMILY",
+        "NONE"
+      ],
+      "purpose": "situational_conflict"
+    },
+    {
+      "id": "q10_situational_event",
+      "type": "textarea",
+      "text": {
+        "uk": "Сталася важлива подія для дитини (нове захоплення, знайомство, поїздка, нагорода)",
+        "en": "An important event for the child happened (new hobby, acquaintance, trip, award)",
+        "hi": "बच्चे के लिए एक महत्वपूर्ण घटना घटी (नया शौक, परिचित, यात्रा, पुरस्कार)"
+      },
+      "maxLength": 500,
+      "purpose": "situational_event"
+    },
+    {
+      "id": "q11_situational_mood_change",
+      "type": "textarea",
+      "text": {
+        "uk": "Ви помітили різкі зміни у настрої чи поведінці (Шкала змін (1–5) + поле для прикладу)",
+        "en": "You noticed sharp changes in mood or behavior (Scale 1-5 + field for example)",
+        "hi": "आपने मिजाज या व्यवहार में तेज बदलाव देखा (स्केल 1-5 + उदाहरण के लिए क्षेत्र)"
+      },
+      "maxLength": 500,
+      "purpose": "situational_mood_change"
+    }
+  ]
+}

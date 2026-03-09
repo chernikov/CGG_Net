@@ -1,0 +1,25 @@
+{
+  "slug": "emotional-artistic",
+  "icon": "🎭",
+  "nameUk": "Емоційна артистична дитина",
+  "nameEn": "Emotional Artistic Child",
+  "sortOrder": 3,
+  "answers": {
+    "child_type": "EMO",
+    "child_hobbies": "Театральний гурток, спів, читання романів, малювання",
+    "child_career_dreams": "Хоче стати актрисою або психологом",
+    "parent_support_priority": "Щастя дитини і розвиток емоційного інтелекту",
+    "parent_career_opinion": "Творчі або гуманітарні професії",
+    "family_traditions": "Бабуся — вчителька літератури, мама займалась театром",
+    "child_talents": "Артистизм, емпатія, виразна мова, творчість",
+    "child_dev_areas": "Самоорганізація, стресостійкість",
+    "child_job_conditions": ["CREATIVITY", "HELPING"],
+    "child_fav_character": "Белль з Красавиці і Чудовиська — добра, розумна, любить книги",
+    "child_antihero": "Урсула — маніпулятивна і зла",
+    "child_admired_relative": "Бабуся — мудра і завжди розуміє почуття",
+    "child_disliked_relative": "Брат — байдужий до емоцій інших",
+    "child_lookalike_hero": "Белль — чутлива і мрійлива",
+    "extra_observations": "Дитина дуже відчуває настрій оточуючих",
+    "local_request": "Як допомогти впоратись зі стресом перед виступами?"
+  }
+}

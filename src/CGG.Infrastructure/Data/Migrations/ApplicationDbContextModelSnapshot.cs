@@ -127,6 +127,9 @@ namespace CGG.Infrastructure.Data.Migrations
                     b.Property<string>("UserInput")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("UserSurveyId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CreatedAt");
@@ -142,6 +145,8 @@ namespace CGG.Infrastructure.Data.Migrations
                     b.HasIndex("SurveyResultId");
 
                     b.HasIndex("UserId");
+
+                    b.HasIndex("UserSurveyId");
 
                     b.HasIndex("MemberId", "CreatedAt");
 
@@ -163,12 +168,6 @@ namespace CGG.Infrastructure.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("CreatedByUserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
@@ -178,25 +177,24 @@ namespace CGG.Infrastructure.Data.Migrations
                     b.Property<int?>("MaxTokens")
                         .HasColumnType("int");
 
-                    b.Property<string>("Model")
+                    b.Property<int?>("Model")
+                        .HasColumnType("int");
+
+                    b.Property<string>("OutputFormat")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PromptText")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PromptType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int?>("StepNumber")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SurveyType")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SystemPrompt")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Tags")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double?>("Temperature")
-                        .HasColumnType("float");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -208,15 +206,9 @@ namespace CGG.Infrastructure.Data.Migrations
 
                     b.HasIndex("Category");
 
-                    b.HasIndex("CreatedByUserId");
-
                     b.HasIndex("IsActive");
 
                     b.HasIndex("IsDefault");
-
-                    b.HasIndex("PromptType");
-
-                    b.HasIndex("PromptType", "Version");
 
                     b.ToTable("AiPromptTemplates");
                 });
@@ -467,6 +459,82 @@ namespace CGG.Infrastructure.Data.Migrations
                     b.ToTable("Surveys");
                 });
 
+            modelBuilder.Entity("CGG.Core.Entities.SurveyExampleAnswer", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ProfileId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Purpose")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("ValueJson")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProfileId", "Purpose")
+                        .IsUnique();
+
+                    b.ToTable("SurveyExampleAnswers");
+                });
+
+            modelBuilder.Entity("CGG.Core.Entities.SurveyExampleProfile", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Icon")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("NameEn")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("NameUk")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("Slug")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SurveyType")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SurveyType");
+
+                    b.HasIndex("SurveyType", "Slug")
+                        .IsUnique();
+
+                    b.ToTable("SurveyExampleProfiles");
+                });
+
             modelBuilder.Entity("CGG.Core.Entities.SurveyQuestion", b =>
                 {
                     b.Property<Guid>("Id")
@@ -479,7 +547,7 @@ namespace CGG.Infrastructure.Data.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
-                    b.Property<string>("PurposeCategory")
+                    b.Property<string>("Purpose")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("QuestionType")
@@ -489,18 +557,29 @@ namespace CGG.Infrastructure.Data.Migrations
                     b.Property<bool>("RequiresAiAnalysis")
                         .HasColumnType("bit");
 
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("StepId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("VisibleIfJson")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("IsActive");
 
-                    b.HasIndex("PurposeCategory");
+                    b.HasIndex("Purpose");
 
                     b.HasIndex("QuestionType");
 
                     b.HasIndex("RequiresAiAnalysis");
+
+                    b.HasIndex("StepId");
 
                     b.ToTable("SurveyQuestions");
                 });
@@ -693,9 +772,6 @@ namespace CGG.Infrastructure.Data.Migrations
                     b.Property<bool>("IsRequired")
                         .HasColumnType("bit");
 
-                    b.Property<Guid>("QuestionId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<bool>("SkipAiProcessing")
                         .HasColumnType("bit");
 
@@ -708,8 +784,6 @@ namespace CGG.Infrastructure.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AiPromptTemplateId");
-
-                    b.HasIndex("QuestionId");
 
                     b.HasIndex("SurveyId", "StepNumber")
                         .IsUnique();
@@ -839,6 +913,89 @@ namespace CGG.Infrastructure.Data.Migrations
                     b.ToTable("Users", (string)null);
                 });
 
+            modelBuilder.Entity("CGG.Core.Entities.UserSurvey", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("CompletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Language")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<DateTime>("StartedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("SurveyId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("SurveyType")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StartedAt");
+
+                    b.HasIndex("Status");
+
+                    b.HasIndex("SurveyId");
+
+                    b.HasIndex("UserId", "SurveyType");
+
+                    b.ToTable("UserSurveys");
+                });
+
+            modelBuilder.Entity("CGG.Core.Entities.UserSurveyAnswer", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Answer")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("QuestionId")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("QuestionText")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("StepNumber")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UserSurveyId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserSurveyId", "StepNumber", "QuestionId")
+                        .IsUnique()
+                        .HasDatabaseName("IX_UserSurveyAnswers_Survey_Step_Question");
+
+                    b.ToTable("UserSurveyAnswers");
+                });
+
             modelBuilder.Entity("CGG.Core.Entities.AIRecommendation", b =>
                 {
                     b.HasOne("CGG.Core.Entities.User", "User")
@@ -872,6 +1029,11 @@ namespace CGG.Infrastructure.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction);
 
+                    b.HasOne("CGG.Core.Entities.UserSurvey", "UserSurvey")
+                        .WithMany("AiLogs")
+                        .HasForeignKey("UserSurveyId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
                     b.Navigation("Member");
 
                     b.Navigation("PromptTemplate");
@@ -879,16 +1041,8 @@ namespace CGG.Infrastructure.Data.Migrations
                     b.Navigation("SurveyResult");
 
                     b.Navigation("User");
-                });
 
-            modelBuilder.Entity("CGG.Core.Entities.AiPromptTemplate", b =>
-                {
-                    b.HasOne("CGG.Core.Entities.User", "CreatedBy")
-                        .WithMany("CreatedPromptTemplates")
-                        .HasForeignKey("CreatedByUserId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.Navigation("CreatedBy");
+                    b.Navigation("UserSurvey");
                 });
 
             modelBuilder.Entity("CGG.Core.Entities.Member", b =>
@@ -938,6 +1092,27 @@ namespace CGG.Infrastructure.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("DefaultLanguage");
+                });
+
+            modelBuilder.Entity("CGG.Core.Entities.SurveyExampleAnswer", b =>
+                {
+                    b.HasOne("CGG.Core.Entities.SurveyExampleProfile", "Profile")
+                        .WithMany("Answers")
+                        .HasForeignKey("ProfileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Profile");
+                });
+
+            modelBuilder.Entity("CGG.Core.Entities.SurveyQuestion", b =>
+                {
+                    b.HasOne("CGG.Core.Entities.SurveyStep", "Step")
+                        .WithMany("Questions")
+                        .HasForeignKey("StepId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Step");
                 });
 
             modelBuilder.Entity("CGG.Core.Entities.SurveyQuestionOption", b =>
@@ -1035,12 +1210,6 @@ namespace CGG.Infrastructure.Data.Migrations
                         .HasForeignKey("AiPromptTemplateId")
                         .OnDelete(DeleteBehavior.SetNull);
 
-                    b.HasOne("CGG.Core.Entities.SurveyQuestion", "Question")
-                        .WithMany("Steps")
-                        .HasForeignKey("QuestionId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("CGG.Core.Entities.Survey", "Survey")
                         .WithMany("Steps")
                         .HasForeignKey("SurveyId")
@@ -1048,8 +1217,6 @@ namespace CGG.Infrastructure.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("AiPromptTemplate");
-
-                    b.Navigation("Question");
 
                     b.Navigation("Survey");
                 });
@@ -1084,6 +1251,35 @@ namespace CGG.Infrastructure.Data.Migrations
                     b.Navigation("Family");
 
                     b.Navigation("School");
+                });
+
+            modelBuilder.Entity("CGG.Core.Entities.UserSurvey", b =>
+                {
+                    b.HasOne("CGG.Core.Entities.Survey", "Survey")
+                        .WithMany()
+                        .HasForeignKey("SurveyId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("CGG.Core.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Survey");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("CGG.Core.Entities.UserSurveyAnswer", b =>
+                {
+                    b.HasOne("CGG.Core.Entities.UserSurvey", "UserSurvey")
+                        .WithMany("Answers")
+                        .HasForeignKey("UserSurveyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("UserSurvey");
                 });
 
             modelBuilder.Entity("CGG.Core.Entities.AiPromptTemplate", b =>
@@ -1135,11 +1331,14 @@ namespace CGG.Infrastructure.Data.Migrations
                     b.Navigation("SurveyResults");
                 });
 
+            modelBuilder.Entity("CGG.Core.Entities.SurveyExampleProfile", b =>
+                {
+                    b.Navigation("Answers");
+                });
+
             modelBuilder.Entity("CGG.Core.Entities.SurveyQuestion", b =>
                 {
                     b.Navigation("Options");
-
-                    b.Navigation("Steps");
 
                     b.Navigation("Translations");
                 });
@@ -1154,19 +1353,29 @@ namespace CGG.Infrastructure.Data.Migrations
                     b.Navigation("AiLogs");
                 });
 
+            modelBuilder.Entity("CGG.Core.Entities.SurveyStep", b =>
+                {
+                    b.Navigation("Questions");
+                });
+
             modelBuilder.Entity("CGG.Core.Entities.User", b =>
                 {
                     b.Navigation("AIRecommendations");
 
                     b.Navigation("AiLogs");
 
-                    b.Navigation("CreatedPromptTemplates");
-
                     b.Navigation("Member");
 
                     b.Navigation("SurveyResults");
 
                     b.Navigation("Transactions");
+                });
+
+            modelBuilder.Entity("CGG.Core.Entities.UserSurvey", b =>
+                {
+                    b.Navigation("AiLogs");
+
+                    b.Navigation("Answers");
                 });
 #pragma warning restore 612, 618
         }

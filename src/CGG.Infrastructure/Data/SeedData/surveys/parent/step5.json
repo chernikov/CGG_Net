@@ -1,0 +1,248 @@
+{
+  "step": 5,
+  "name": "expectations_marketing",
+  "title": {
+    "uk": "Частина 5: Очікування від інструменту",
+    "en": "Part 5: Expectations from the tool",
+    "hi": "भाग 5: उपकरण से अपेक्षाएं"
+  },
+  "description": {
+    "uk": "Допоможіть нам зробити додаток кращим та зручнішим для вас.",
+    "en": "Help us make the application better and more convenient for you.",
+    "hi": "हमें आपके लिए एप्लिकेशन को बेहतर और अधिक सुविधाजनक बनाने में मदद करें।"
+  },
+  "questions": [
+    {
+      "id": "q1_importance",
+      "type": "number",
+      "text": {
+        "uk": "Наскільки для вас важливо допомогти дитині визначитися з майбутньою професією? (Оцінка 1–10)",
+        "en": "How important is it for you to help your child decide on a future profession? (Score 1-10)",
+        "hi": "आपके लिए अपने बच्चे को भविष्य के पेशे पर निर्णय लेने में मदद करना कितना महत्वपूर्ण है? (स्कोर 1-10)"
+      },
+      "min": 1,
+      "max": 10,
+      "purpose": "importance"
+    },
+    {
+      "id": "q2_desired_features",
+      "type": "multiselect",
+      "text": {
+        "uk": "Які функції профорієнтаційного інструменту є для вас найбільш бажаними?",
+        "en": "What features of a career guidance tool are most desirable for you?",
+        "hi": "कैरियर मार्गदर्शन उपकरण की कौन सी विशेषताएं आपके लिए सबसे वांछनीय हैं?"
+      },
+      "options": {
+        "uk": [
+          "Виявити сильні сторони",
+          "Показати відповідні професії",
+          "Скласти карту інтересів",
+          "Надати алгоритм дій",
+          "Зменшити тривожність",
+          "Дати орієнтири",
+          "Інше"
+        ],
+        "en": [
+          "Identify strengths",
+          "Show suitable professions",
+          "Create a map of interests",
+          "Provide an action algorithm",
+          "Reduce anxiety",
+          "Provide guidelines",
+          "Other"
+        ],
+        "hi": [
+          "ताकत को पहचानें",
+          "उपयुक्त पेशेवर दिखाएं",
+          "रुचियों का एक नक्शा बनाएं",
+          "एक कार्रवाई एल्गोरिथ्म प्रदान करें",
+          "चिंता कम करें",
+          "दिशानिर्देश प्रदान करें",
+          "अन्य"
+        ]
+      },
+      "optionCodes": [
+        "STRENGTHS",
+        "PROFESSIONS",
+        "INTERESTS_MAP",
+        "ACTION_ALGORITHM",
+        "REDUCE_ANXIETY",
+        "GUIDELINES",
+        "OTHER"
+      ],
+      "maxSelections": 5,
+      "purpose": "desired_features"
+    },
+    {
+      "id": "q3_max_value",
+      "type": "textarea",
+      "text": {
+        "uk": "Що б зробило продукт для вас максимально цінним?",
+        "en": "What would make the product most valuable to you?",
+        "hi": "उत्पाद को आपके लिए सबसे मूल्यवान क्या बनाएगा?"
+      },
+      "maxLength": 500,
+      "purpose": "max_value"
+    },
+    {
+      "id": "q4_purchase_readiness",
+      "type": "select",
+      "text": {
+        "uk": "Чи були б ви готові придбати такий сервіс для дитини?",
+        "en": "Would you be willing to purchase such a service for your child?",
+        "hi": "क्या आप अपने बच्चे के लिए ऐसी सेवा खरीदने के इच्छुक होंगे?"
+      },
+      "options": {
+        "uk": [
+          "Так, однозначно",
+          "Можливо (залежить від ціни)",
+          "Сумніваюсь",
+          "Ні"
+        ],
+        "en": [
+          "Yes, absolutely",
+          "Maybe (depends on price)",
+          "I doubt it",
+          "No"
+        ],
+        "hi": [
+          "हाँ, बिल्कुल",
+          "शायद (कीमत पर निर्भर करता है)",
+          "मुझे शक है",
+          "नहीं"
+        ]
+      },
+      "optionCodes": [
+        "YES_ABSOLUTELY",
+        "MAYBE",
+        "DOUBT",
+        "NO"
+      ],
+      "purpose": "purchase_readiness"
+    },
+    {
+      "id": "q5_motivation",
+      "type": "select",
+      "text": {
+        "uk": "Що б підштовхнуло вас спробувати продукт?",
+        "en": "What would push you to try the product?",
+        "hi": "आपको उत्पाद आज़माने के लिए क्या प्रेरित करेगा?"
+      },
+      "options": {
+        "uk": [
+          "Персоналізований звіт",
+          "Консультація",
+          "Демоверсія (безкоштовна)",
+          "Гарантія",
+          "Відгуки",
+          "Подарунок-знижка"
+        ],
+        "en": [
+          "Personalized report",
+          "Consultation",
+          "Demo version (free)",
+          "Guarantee",
+          "Reviews",
+          "Gift/Discount"
+        ],
+        "hi": [
+          "व्यक्तिगत रिपोर्ट",
+          "परामर्श",
+          "डेमो संस्करण (मुफ्त)",
+          "गारंटी",
+          "समीक्षाएँ",
+          "उपहार/छूट"
+        ]
+      },
+      "optionCodes": [
+        "REPORT",
+        "CONSULTATION",
+        "DEMO",
+        "GUARANTEE",
+        "REVIEWS",
+        "DISCOUNT"
+      ],
+      "purpose": "motivation"
+    },
+    {
+      "id": "q6_format",
+      "type": "select",
+      "text": {
+        "uk": "Який формат подачі результатів був би найзручнішим?",
+        "en": "What format for presenting results would be most convenient?",
+        "hi": "परिणाम प्रस्तुत करने के लिए कौन सा प्रारूप सबसे सुविधाजनक होगा?"
+      },
+      "options": {
+        "uk": [
+          "PDF-звіт",
+          "Онлайн-кабінет",
+          "Друкована брошура",
+          "Інтерактивний додаток",
+          "Відео-презентація"
+        ],
+        "en": [
+          "PDF report",
+          "Online dashboard",
+          "Printed brochure",
+          "Interactive app",
+          "Video presentation"
+        ],
+        "hi": [
+          "पीडीएफ रिपोर्ट",
+          "ऑनलाइन डैशबोर्ड",
+          "मुद्रित ब्रोशर",
+          "इंटरैक्टिव ऐप",
+          "वीडियो प्रस्तुति"
+        ]
+      },
+      "optionCodes": [
+        "PDF",
+        "DASHBOARD",
+        "BROCHURE",
+        "APP",
+        "VIDEO"
+      ],
+      "purpose": "format"
+    },
+    {
+      "id": "q7_price",
+      "type": "select",
+      "text": {
+        "uk": "Яку ціну ви вважаєте прийнятною?",
+        "en": "What price do you consider acceptable?",
+        "hi": "आप किस कीमत को स्वीकार्य मानते हैं?"
+      },
+      "options": {
+        "uk": [
+          "До 200 грн",
+          "200–500 грн",
+          "500–1000 грн",
+          "Більше 1000 грн",
+          "Поки не готовий платити"
+        ],
+        "en": [
+          "Up to 200 UAH",
+          "200–500 UAH",
+          "500–1000 UAH",
+          "More than 1000 UAH",
+          "Not ready to pay yet"
+        ],
+        "hi": [
+          "200 UAH तक",
+          "200–500 UAH",
+          "500–1000 UAH",
+          "1000 UAH से अधिक",
+          "अभी भुगतान करने के लिए तैयार नहीं है"
+        ]
+      },
+      "optionCodes": [
+        "UP_TO_200",
+        "200_500",
+        "500_1000",
+        "MORE_1000",
+        "NOT_READY"
+      ],
+      "purpose": "price"
+    }
+  ]
+}

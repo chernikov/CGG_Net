@@ -1,0 +1,25 @@
+{
+  "slug": "withdrawn-caring",
+  "icon": "🐢",
+  "nameUk": "Замкнена дбайлива дитина",
+  "nameEn": "Withdrawn Caring Child",
+  "sortOrder": 5,
+  "answers": {
+    "child_type": "WITHDRAWN",
+    "child_hobbies": "Догляд за тваринами, читання, малювання, прогулянки на природі",
+    "child_career_dreams": "Хоче бути ветеринаром або біологом",
+    "parent_support_priority": "Допомогти дитині розкритись і відчути підтримку",
+    "parent_career_opinion": "Професії пов'язані з природою або тваринами",
+    "family_traditions": "Немає династії, але є традиція допомагати тваринам",
+    "child_talents": "Спостережливість, терпіння, дбайливість, любов до природи",
+    "child_dev_areas": "Комунікація, впевненість у собі, соціальна взаємодія",
+    "child_job_conditions": ["HELPING", "STABILITY"],
+    "child_fav_character": "Флакі з Happy Tree Friends — добра і дбайлива",
+    "child_antihero": "Ліфтанант Де Вітт — жорстокий і байдужий",
+    "child_admired_relative": "Бабуся — завжди добра до всіх і любить тварин",
+    "child_disliked_relative": "Сусід — жорстоко поводиться з тваринами",
+    "child_lookalike_hero": "Флоренс Найтінгейл — дбайлива і тиха, але сильна духом",
+    "extra_observations": "Дитина дуже добра з тваринами, але соромиться людей",
+    "local_request": "Дитина соромиться спілкуватись — як допомогти розкритись?"
+  }
+}

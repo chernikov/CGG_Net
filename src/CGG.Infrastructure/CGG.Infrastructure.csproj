@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CGG.Core\CGG.Core.csproj" />
+    <ProjectReference Include="..\CGG.Application\CGG.Application.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -14,6 +15,15 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Http" />
     <PackageReference Include="MimeKit" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Data\SeedData\**\*.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Config\Formats\*.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

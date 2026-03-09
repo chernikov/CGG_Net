@@ -1,6 +1,6 @@
 @if (!isAdminRoute()) {
   <div class="app-container">
-    <div class="mobile-frame">
+    <div [class]="isDesktop() ? 'desktop-frame' : 'mobile-frame'">
       <app-header></app-header>
       <router-outlet></router-outlet>
     </div>
@@ -9,3 +9,6 @@
   <router-outlet></router-outlet>
 }
 
+@if (isDevMode) {
+  <app-survey-debug-panel />
+}

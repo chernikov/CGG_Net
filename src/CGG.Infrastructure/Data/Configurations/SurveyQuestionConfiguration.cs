@@ -12,7 +12,7 @@ namespace CGG.Infrastructure.Data.Configurations
             builder.HasIndex(e => e.QuestionType);
             builder.HasIndex(e => e.IsActive);
             builder.HasIndex(e => e.RequiresAiAnalysis);
-            builder.HasIndex(e => e.PurposeCategory);
+            builder.HasIndex(e => e.Purpose);
         }
     }
 }

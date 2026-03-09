@@ -1,0 +1,194 @@
+{
+  "$schema": "./schemas/step.schema.json",
+  "step": 1,
+  "name": "parent_orientation_trial",
+  "title": {
+    "uk": "Пробний тест для батьків: «Моя кар'єрна орієнтація»",
+    "en": "Parent Trial: My Career Orientation",
+    "hi": "अभिभावक परीक्षण: मेरा करियर अभिमुखीकरण"
+  },
+  "description": {
+    "uk": "Короткий опитник, щоб зрозуміти вашу професійну орієнтацію, мотиви та очікування.",
+    "en": "A short survey to understand your career orientation, motives, and expectations.",
+    "hi": "आपके करियर अभिमुखीकरण, प्रेरणाओं और अपेक्षाओं को समझने के लिए एक संक्षिप्त सर्वे।"
+  },
+  "questions": [
+    {
+      "id": "q1_early_dream",
+      "type": "select",
+      "text": {
+        "uk": "Ким ви мріяли стати на початку свого професійного шляху?",
+        "en": "At the beginning of your career journey, what did you dream of becoming?",
+        "hi": "अपने करियर की शुरुआत में आप क्या बनना चाहते थे?"
+      },
+      "options": {
+        "uk": [
+          "Тим, хто допомагає людям (лікар, вчитель, психолог тощо)",
+          "Тим, хто створює і будує (інженер, підприємець, майстер)",
+          "Тим, хто досліджує і розвиває ідеї (науковець, дизайнер, аналітик)"
+        ],
+        "en": [
+          "Someone who helps people (doctor, teacher, psychologist, etc.)",
+          "Someone who builds and creates (engineer, entrepreneur, craftsman)",
+          "Someone who explores and develops ideas (scientist, designer, analyst)"
+        ],
+        "hi": [
+          "लोगों की मदद करने वाला व्यक्ति (डॉक्टर, शिक्षक, मनोवैज्ञानिक आदि)",
+          "बनाने और निर्माण करने वाला व्यक्ति (इंजीनियर, उद्यमी, कारीगर)",
+          "विचारों का अन्वेषण और विकास करने वाला व्यक्ति (वैज्ञानिक, डिजाइनर, विश्लेषक)"
+        ]
+      },
+      "optionCodes": [
+        "Q1_HELP",
+        "Q1_BUILD",
+        "Q1_IDEA"
+      ],
+      "purpose": "early_career_dream"
+    },
+    {
+      "id": "q2_now_matters",
+      "type": "select",
+      "text": {
+        "uk": "Що для вас найважливіше у професії зараз?",
+        "en": "What matters most to you in your career right now?",
+        "hi": "इस समय आपके करियर में आपके लिए सबसे महत्वपूर्ण क्या है?"
+      },
+      "options": {
+        "uk": [
+          "Стабільність і дохід",
+          "Можливість розвитку й самореалізації",
+          "Баланс між роботою та особистим життям"
+        ],
+        "en": [
+          "Stability and income",
+          "Opportunity for growth and self-realization",
+          "Balance between work and personal life"
+        ],
+        "hi": [
+          "स्थिरता और आय",
+          "विकास और आत्म-सिद्धि का अवसर",
+          "काम और निजी जीवन के बीच संतुलन"
+        ]
+      },
+      "optionCodes": [
+        "Q2_STAB",
+        "Q2_GROW",
+        "Q2_BAL"
+      ],
+      "purpose": "career_now_matters"
+    },
+    {
+      "id": "q3_motivation",
+      "type": "select",
+      "text": {
+        "uk": "Що вас найбільше мотивує у роботі?",
+        "en": "What motivates you most at work?",
+        "hi": "काम में आपको सबसे ज़्यादा क्या प्रेरित करता है?"
+      },
+      "options": {
+        "uk": [
+          "Визнання та повага",
+          "Творчість і цікаві завдання",
+          "Кар'єрний ріст і нові можливості"
+        ],
+        "en": [
+          "Recognition and respect",
+          "Creativity and interesting tasks",
+          "Career growth and new opportunities"
+        ],
+        "hi": [
+          "मान्यता और सम्मान",
+          "रचनात्मकता और रोचक कार्य",
+          "करियर में उन्नति और नए अवसर"
+        ]
+      },
+      "optionCodes": [
+        "Q3_RECOG",
+        "Q3_CREAT",
+        "Q3_ADV"
+      ],
+      "purpose": "work_motivation"
+    },
+    {
+      "id": "q4_change_openness",
+      "type": "select",
+      "text": {
+        "uk": "Чи відкриті ви до зміни професії або сфери діяльності?",
+        "en": "Are you open to changing your profession or field of work?",
+        "hi": "क्या आप अपने पेशे या कार्य क्षेत्र को बदलने के लिए खुले हैं?"
+      },
+      "options": {
+        "uk": [
+          "Так, повністю",
+          "Можливо, якщо буде потреба",
+          "Ні, хочу залишитись у своїй сфері"
+        ],
+        "en": [
+          "Yes, completely",
+          "Maybe, if necessary",
+          "No, I prefer to stay in my field"
+        ],
+        "hi": [
+          "हाँ, पूरी तरह",
+          "शायद, यदि आवश्यकता हो",
+          "नहीं, मैं अपने क्षेत्र में रहना पसंद करता हूँ"
+        ]
+      },
+      "optionCodes": [
+        "Q4_YES",
+        "Q4_MAYBE",
+        "Q4_NO"
+      ],
+      "purpose": "career_change_openness"
+    },
+    {
+      "id": "q5_self_in_2y",
+      "type": "select",
+      "text": {
+        "uk": "Як ви уявляєте себе на роботі через два роки?",
+        "en": "How do you imagine yourself at work in two years?",
+        "hi": "आप खुद को दो साल बाद अपने काम में कैसे देखते हैं?"
+      },
+      "options": {
+        "uk": [
+          "Керую командою чи проектом",
+          "Працюю у стабільній сфері з передбачуваним доходом",
+          "Реалізовую себе у новій або більш творчій професії"
+        ],
+        "en": [
+          "Leading a team or project",
+          "Working in a stable field with predictable income",
+          "Expressing myself in a new or more creative profession"
+        ],
+        "hi": [
+          "एक टीम या परियोजना का नेतृत्व कर रहा/रही हूँ",
+          "एक स्थिर क्षेत्र में काम कर रहा/रही हूँ जहाँ आय पूर्वानुमेय है",
+          "एक नए या अधिक रचनात्मक पेशे में खुद को अभिव्यक्त कर रहा/रही हूँ"
+        ]
+      },
+      "optionCodes": [
+        "Q5_LEAD",
+        "Q5_STAB",
+        "Q5_NEW"
+      ],
+      "purpose": "self_in_2_years"
+    }
+  ],
+  "systemPrompt": "Ти — досвідчений психолог, педагог і кар'єрний консультант. На основі відповідей батьків проаналізуй їхню кар'єрну спрямованість та мотивацію. Твої завдання:\n\n1) Визнач їхній поточний тип кар'єрної орієнтації (наприклад: допомагаючий, творчий, аналітичний, стабільний)\n2) Опиши внутрішні мотиви, цінності та імпліцитні патерни (стабільність, творчість, автономія, визнання)\n3) Розкрий, як ця кар'єрна орієнтація може впливати на виховання дітей та сімейні цінності\n4) Додай коротку психологічну мікроінтерпретацію (1-2 речення) про темперамент, стиль мислення або мотивацію\n5) Завершуй м'якою рефлексійною порадою для особистісного зростання або балансу\n\nУникай клінічних або діагностичних термінів. Обсяг відповіді: до 1000 символів. Мова відповіді повинна відповідати мові інтерфейсу (за замовчуванням: українська).\n\nФормат відповіді:\nТип орієнтації: …\nПсихологічне ядро: …\nЗони розвитку: …\nРефлексивна порада: …",
+  "userPromptTemplate": "МОВА={{lang}}\nРОЛЬ=батьки\nОПИТУВАННЯ=parent_orientation_trial\n\nНапиши відповідь мовою інтерфейсу (за замовчуванням українська). Інтерпретуй відповіді нижче та витягни імпліцитні мотиви, а не лише явні вибори.\n\n<ВІДПОВІДІ>\n{{answerCodesJson}}\n</ВІДПОВІДІ>\n\nПідказки для інтерпретації:\nQ1_HELP → допомагаюча орієнтація; Q1_BUILD → будівельна/підприємницька; Q1_IDEA → аналітична/творча.\nQ2_STAB → стабільність; Q2_GROW → розвиток/самореалізація; Q2_BAL → баланс.\nQ3_RECOG → визнання; Q3_CREAT → творчість; Q3_ADV → просування.\nQ4_YES → висока відкритість; Q4_MAYBE → помірна відкритість; Q4_NO → низька відкритість.\nQ5_LEAD → лідерство; Q5_STAB → безпека; Q5_NEW → новизна/творчість.\n\nПоверни тільки чотири рядки з мітками у форматі, визначеному в systemPrompt.",
+  "model": {
+    "provider": "openai",
+    "name": "gpt-5-mini",
+    "reasoning": {
+      "effort": "medium"
+    },
+    "text": {
+      "verbosity": "medium"
+    }
+  },
+  "outputFormat": {
+    "type": "structured",
+    "mode": "short",
+    "formatFile": "/formats/parent-orientation-analysis.json"
+  }
+}

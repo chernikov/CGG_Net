@@ -1,0 +1,14 @@
+{
+  "slug": "ambitious-leader",
+  "icon": "🚀",
+  "nameUk": "Амбітний лідер",
+  "nameEn": "Ambitious Leader",
+  "sortOrder": 1,
+  "answers": {
+    "early_career_dream": "Q1_BUILD",
+    "career_now_matters": "Q2_GROW",
+    "work_motivation": "Q3_ADV",
+    "career_change_openness": "Q4_YES",
+    "self_in_2_years": "Q5_LEAD"
+  }
+}

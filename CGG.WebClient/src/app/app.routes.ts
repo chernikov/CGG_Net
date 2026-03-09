@@ -31,5 +31,12 @@ export const routes: Routes = [
   { path: 'profile', component: ProfileComponent, canActivate: [authGuard] },
   { path: 'child/edit/:id', component: EditChild, canActivate: [authGuard] },
   { path: 'child/:id', component: ProfileComponent, canActivate: [authGuard] },
+  {
+    path: 'survey',
+    loadComponent: () =>
+      import('./features/survey/pages/survey-page/survey-page.component').then(
+        m => m.SurveyPageComponent
+      ),
+  },
   { path: '**', redirectTo: '' }
 ];

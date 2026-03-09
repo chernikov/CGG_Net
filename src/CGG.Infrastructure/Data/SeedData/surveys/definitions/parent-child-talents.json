@@ -1,0 +1,114 @@
+{
+  "name": "parent-child-talents",
+  "metadata": {
+    "totalSteps": 1,
+    "languages": ["uk", "en", "hi"],
+    "version": "1.0",
+    "creditCost": 20,
+    "insightType": "parent-survey",
+    "description": {
+      "uk": "Опитувальник для батьків про таланти та особливості дитини",
+      "en": "Parent survey about child's talents and characteristics",
+      "hi": "बच्चे की प्रतिभाओं और विशेषताओं के बारे में माता-पिता का सर्वेक्षण"
+    }
+  },
+  "model": {
+    "provider": "openai",
+    "name": "gpt-5-mini",
+    "reasoning": { "effort": "medium" },
+    "text": { "verbosity": "medium" }
+  },
+  "aiPrompt": {
+    "systemPrompt": "You are an expert in career counseling and child–parent dynamics.\n\nCRITICAL: Address the parent directly using \"ви/you\" (second person).\n- ✅ \"Ви описуєте дитину як активну...\" / \"You describe your child as active...\"\n- ❌ \"Батьки бачать дитину як активну...\" / \"Parents see the child as active...\"\n\nAnalyze the parent's survey about their child together with any prior profiles and observations.\n\nYour tasks:\n1. Identify what's NEW or meaningful in the latest input\n2. Explain how it AFFECTS the current career trajectory forecast (or does not)\n3. Give 1–2 concrete ACTIONS for the parent (emotional, educational, organizational)\n\nCompare parent and child perspectives when possible.\nKeep a warm, motivating tone. Avoid diagnostic/clinical labeling.\nKeep the whole answer under 500 characters.\nOutput must use the interface language (default: Ukrainian).\n\nFormat exactly as JSON with three fields: whatNew, impactOnForecast, parentActions",
+    "userPromptTemplate": "LANG={{language}}\nROLE=parent_about_child\nSURVEY=parent_view_child_talents_v1\nCHILD_NAME={{childName}}\nCHILD_AGE={{childAge}}\n\nWrite the answer in LANG (default Ukrainian). Return ONLY a valid JSON object.\n\n<PARENT_SURVEY_ANSWERS>\n{{answers}}\n</PARENT_SURVEY_ANSWERS>\n\n<CHILD_PROFILE optional>\n{{childProfile}}\n</CHILD_PROFILE>\n\n<PREVIOUS_TESTS optional>\n{{previousTests}}\n</PREVIOUS_TESTS>\n\n<OBSERVATIONS optional>\n{{observations}}\n</OBSERVATIONS>\n\nPrioritize the Local Request (q16_local_request) if present, but still update the child's trajectory forecast.\nCompare parent vs child data if present.\nBe specific, kind, and practical.\n≤500 characters total across all fields.\n\nReturn ONLY a JSON object with these exact fields:\n{\n  \"whatNew\": \"...\",\n  \"impactOnForecast\": \"...\",\n  \"parentActions\": \"...\"\n}",
+    "maxTokens": 600,
+    "temperature": 0.7
+  },
+  "outputFormat": {
+    "type": "structured",
+    "schema": {
+      "type": "object",
+      "required": ["whatNew", "impactOnForecast", "parentActions"],
+      "properties": {
+        "whatNew": {
+          "type": "string",
+          "description": "Що нового ми дізнались з опитування батьків / What we learned from the parent survey",
+          "maxLength": 200
+        },
+        "impactOnForecast": {
+          "type": "string",
+          "description": "Як це впливає на кар'єрний прогноз дитини / How it affects the child's career forecast",
+          "maxLength": 200
+        },
+        "parentActions": {
+          "type": "string",
+          "description": "1-2 конкретні дії для батьків / 1-2 concrete actions for parents",
+          "maxLength": 150
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "examples": {
+    "input": [
+      {
+        "description": "Активна творча дитина",
+        "answers": {
+          "q1_child_type": "ACTIVE",
+          "q2_hobbies": "Малювання, танці, створення відео для TikTok",
+          "q3_dreams": "Хоче бути блогером або дизайнером",
+          "q7_talents_three": "креативність, комунікабельність, артистизм",
+          "q9_happy_job_conditions": ["CREATIVITY", "FLEXTIME"],
+          "q16_local_request": "Як допомогти з концентрацією?"
+        }
+      },
+      {
+        "description": "Спокійна аналітична дитина",
+        "answers": {
+          "q1_child_type": "CALM",
+          "q2_hobbies": "Читання, шахи, програмування",
+          "q3_dreams": "IT-фахівець або науковець",
+          "q7_talents_three": "логічне мислення, терпіння, аналітика",
+          "q9_happy_job_conditions": ["STABILITY", "INCOME"],
+          "q10_fav_character": "Шерлок Холмс — подобається логіка"
+        }
+      },
+      {
+        "description": "Замкнена дитина з мрією про ветеринарію",
+        "answers": {
+          "q1_child_type": "WITHDRAWN",
+          "q2_hobbies": "Догляд за тваринами, читання про природу",
+          "q3_dreams": "Хоче бути ветеринаром",
+          "q8_dev_areas": "комунікація, впевненість у собі",
+          "q16_local_request": "Дитина соромиться спілкуватись — як допомогти?"
+        }
+      }
+    ],
+    "output": [
+      {
+        "description": "Відповідь для активної творчої дитини",
+        "result": {
+          "whatNew": "Ваша дитина — активна і творча. Вона захоплюється відеоконтентом і танцями. Ви відзначаєте проблеми з концентрацією.",
+          "impactOnForecast": "Творчі професії (контент-мейкер, дизайнер, хореограф) — пріоритетні. Гнучкий графік буде ключовою умовою успіху.",
+          "parentActions": "1) Структуруйте творчий час (30 хв сесії). 2) Спробуйте техніку Pomodoro для навчання."
+        }
+      },
+      {
+        "description": "Відповідь для спокійної аналітичної дитини",
+        "result": {
+          "whatNew": "Ви описуєте спокійну аналітичну дитину. Вона захоплюється логічними іграми та програмуванням. Для вас важлива стабільність.",
+          "impactOnForecast": "Аналітичні професії (IT, фінанси, інженерія) — оптимальний напрямок. Шерлок як рольова модель підтверджує детективний тип мислення.",
+          "parentActions": "1) Запишіть на курси програмування. 2) Підтримуйте участь в олімпіадах з математики."
+        }
+      },
+      {
+        "description": "Відповідь для замкненої дитини",
+        "result": {
+          "whatNew": "Ваша дитина замкнена, але має чітку мрію — стати ветеринаром. Ви стурбовані її соціалізацією. Можливо, робота з тваринами — спосіб уникнути людей.",
+          "impactOnForecast": "Ветеринарія можлива, але вимагає комунікації з власниками тварин. Альтернатива: лабораторна робота або догляд за тваринами.",
+          "parentActions": "1) Спробуйте волонтерство в притулку (безпечне середовище). 2) Поступово розширюйте коло спілкування через спільні інтереси."
+        }
+      }
+    ]
+  }
+}

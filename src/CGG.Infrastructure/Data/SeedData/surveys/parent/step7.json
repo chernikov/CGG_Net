@@ -1,0 +1,364 @@
+{
+  "step": 7,
+  "name": "detailed_analysis",
+  "title": {
+    "uk": "Частина 7: Детальний аналіз особистості дитини",
+    "en": "Part 7: Detailed analysis of the child's personality",
+    "hi": "भाग 7: बच्चे के व्यक्तित्व का विस्तृत विश्लेषण"
+  },
+  "description": {
+    "uk": "Оцініть різні аспекти особистості вашої дитини.",
+    "en": "Evaluate various aspects of your child's personality.",
+    "hi": "अपने बच्चे के व्यक्तित्व के विभिन्न पहलुओं का मूल्यांकन करें।"
+  },
+  "questions": [
+    {
+      "id": "q1_cognitive_speed",
+      "type": "number",
+      "text": {
+        "uk": "Когнітивні здібності: Швидкість засвоєння (1-10)",
+        "en": "Cognitive abilities: Learning speed (1-10)",
+        "hi": "संज्ञानात्मक क्षमताएं: सीखने की गति (1-10)"
+      },
+      "min": 1,
+      "max": 10,
+      "purpose": "cognitive_speed"
+    },
+    {
+      "id": "q2_memorization_method",
+      "type": "select",
+      "text": {
+        "uk": "Когнітивні здібності: Метод запам'ятовування",
+        "en": "Cognitive abilities: Memorization method",
+        "hi": "संज्ञानात्मक क्षमताएं: संस्मरण विधि"
+      },
+      "options": {
+        "uk": [
+          "Повторення",
+          "Приклади",
+          "Малюнки",
+          "Гра"
+        ],
+        "en": [
+          "Repetition",
+          "Examples",
+          "Drawings",
+          "Game"
+        ],
+        "hi": [
+          "पुनरावृत्ति",
+          "उदाहरण",
+          "चित्र",
+          "खेल"
+        ]
+      },
+      "optionCodes": [
+        "REPETITION",
+        "EXAMPLES",
+        "DRAWINGS",
+        "GAME"
+      ],
+      "purpose": "memorization_method"
+    },
+    {
+      "id": "q3_thinking_description",
+      "type": "textarea",
+      "text": {
+        "uk": "Когнітивні здібності: Опис мислення",
+        "en": "Cognitive abilities: Thinking description",
+        "hi": "संज्ञानात्मक क्षमताएं: सोच विवरण"
+      },
+      "maxLength": 500,
+      "purpose": "thinking_description"
+    },
+    {
+      "id": "q4_independence",
+      "type": "number",
+      "text": {
+        "uk": "Особистісні якості: Самостійність (1-10)",
+        "en": "Personal qualities: Independence (1-10)",
+        "hi": "व्यक्तिगत गुण: स्वतंत्रता (1-10)"
+      },
+      "min": 1,
+      "max": 10,
+      "purpose": "independence"
+    },
+    {
+      "id": "q5_main_traits",
+      "type": "textarea",
+      "text": {
+        "uk": "Особистісні якості: Основні риси (Наполегливість, Відповідальність і т.д.)",
+        "en": "Personal qualities: Main traits (Persistence, Responsibility, etc.)",
+        "hi": "व्यक्तिगत गुण: मुख्य लक्षण (दृढ़ता, जिम्मेदारी, आदि)"
+      },
+      "maxLength": 200,
+      "purpose": "main_traits"
+    },
+    {
+      "id": "q6_traits_to_develop",
+      "type": "textarea",
+      "text": {
+        "uk": "Особистісні якості: Які хочете розвинути",
+        "en": "Personal qualities: Which ones you want to develop",
+        "hi": "व्यक्तिगत गुण: जिन्हें आप विकसित करना चाहते हैं"
+      },
+      "maxLength": 200,
+      "purpose": "traits_to_develop"
+    },
+    {
+      "id": "q7_acquaintance_ease",
+      "type": "number",
+      "text": {
+        "uk": "Соціальні навички: Легкість знайомств (1-10)",
+        "en": "Social skills: Ease of getting acquainted (1-10)",
+        "hi": "सामाजिक कौशल: परिचित होने में आसानी (1-10)"
+      },
+      "min": 1,
+      "max": 10,
+      "purpose": "acquaintance_ease"
+    },
+    {
+      "id": "q8_comfortable_environment",
+      "type": "select",
+      "text": {
+        "uk": "Соціальні навички: Комфортне середовище",
+        "en": "Social skills: Comfortable environment",
+        "hi": "सामाजिक कौशल: आरामदायक वातावरण"
+      },
+      "options": {
+        "uk": [
+          "Компанія",
+          "Пара",
+          "Наодинці"
+        ],
+        "en": [
+          "Company",
+          "Pair",
+          "Alone"
+        ],
+        "hi": [
+          "कंपनी",
+          "जोड़ी",
+          "अकेले"
+        ]
+      },
+      "optionCodes": [
+        "COMPANY",
+        "PAIR",
+        "ALONE"
+      ],
+      "purpose": "comfortable_environment"
+    },
+    {
+      "id": "q9_conflict_resolution",
+      "type": "textarea",
+      "text": {
+        "uk": "Соціальні навички: Вирішення конфліктів",
+        "en": "Social skills: Conflict resolution",
+        "hi": "सामाजिक कौशल: संघर्ष समाधान"
+      },
+      "maxLength": 300,
+      "purpose": "conflict_resolution"
+    },
+    {
+      "id": "q10_rule_following",
+      "type": "number",
+      "text": {
+        "uk": "Психологічні установки: Дотримання правил (1-10)",
+        "en": "Psychological attitudes: Adherence to rules (1-10)",
+        "hi": "मनोवैज्ञानिक दृष्टिकोण: नियमों का पालन (1-10)"
+      },
+      "min": 1,
+      "max": 10,
+      "purpose": "rule_following"
+    },
+    {
+      "id": "q11_main_value",
+      "type": "select",
+      "text": {
+        "uk": "Психологічні установки: Головна цінність",
+        "en": "Psychological attitudes: Main value",
+        "hi": "मनोवैज्ञानिक दृष्टिकोण: मुख्य मूल्य"
+      },
+      "options": {
+        "uk": [
+          "Дружба",
+          "Успіх",
+          "Родина",
+          "Комфорт",
+          "Інше"
+        ],
+        "en": [
+          "Friendship",
+          "Success",
+          "Family",
+          "Comfort",
+          "Other"
+        ],
+        "hi": [
+          "दोस्ती",
+          "सफलता",
+          "परिवार",
+          "आराम",
+          "अन्य"
+        ]
+      },
+      "optionCodes": [
+        "FRIENDSHIP",
+        "SUCCESS",
+        "FAMILY",
+        "COMFORT",
+        "OTHER"
+      ],
+      "purpose": "main_value"
+    },
+    {
+      "id": "q12_endurance",
+      "type": "number",
+      "text": {
+        "uk": "Фізіологічні особливості: Витривалість (1-10)",
+        "en": "Physiological features: Endurance (1-10)",
+        "hi": "शारीरिक विशेषताएं: धीरज (1-10)"
+      },
+      "min": 1,
+      "max": 10,
+      "purpose": "endurance"
+    },
+    {
+      "id": "q13_favorite_activity",
+      "type": "select",
+      "text": {
+        "uk": "Фізіологічні особливості: Улюблена активність",
+        "en": "Physiological features: Favorite activity",
+        "hi": "शारीरिक विशेषताएं: पसंदीदा गतिविधि"
+      },
+      "options": {
+        "uk": [
+          "Спорт",
+          "Прогулянки",
+          "Тихі ігри",
+          "Інше"
+        ],
+        "en": [
+          "Sports",
+          "Walks",
+          "Quiet games",
+          "Other"
+        ],
+        "hi": [
+          "खेल",
+          "सैर",
+          "शांत खेल",
+          "अन्य"
+        ]
+      },
+      "optionCodes": [
+        "SPORTS",
+        "WALKS",
+        "QUIET_GAMES",
+        "OTHER"
+      ],
+      "purpose": "favorite_activity"
+    },
+    {
+      "id": "q14_fantasy_level",
+      "type": "number",
+      "text": {
+        "uk": "Креативність: Рівень фантазії (1-10)",
+        "en": "Creativity: Fantasy level (1-10)",
+        "hi": "रचनात्मकता: फंतासी स्तर (1-10)"
+      },
+      "min": 1,
+      "max": 10,
+      "purpose": "fantasy_level"
+    },
+    {
+      "id": "q15_creativity_forms",
+      "type": "select",
+      "text": {
+        "uk": "Креативність: Форми прояву креативності",
+        "en": "Creativity: Forms of creativity manifestation",
+        "hi": "रचनात्मकता: रचनात्मकता अभिव्यक्ति के रूप"
+      },
+      "options": {
+        "uk": [
+          "Малювання",
+          "Пісні",
+          "Винаходи",
+          "Інше"
+        ],
+        "en": [
+          "Drawing",
+          "Songs",
+          "Inventions",
+          "Other"
+        ],
+        "hi": [
+          "ड्राइंग",
+          "गाने",
+          "आविष्कार",
+          "अन्य"
+        ]
+      },
+      "optionCodes": [
+        "DRAWING",
+        "SONGS",
+        "INVENTIONS",
+        "OTHER"
+      ],
+      "purpose": "creativity_forms"
+    },
+    {
+      "id": "q16_calming_ability",
+      "type": "number",
+      "text": {
+        "uk": "Емоційна регуляція: Здатність заспокоїтись (1-10)",
+        "en": "Emotional regulation: Ability to calm down (1-10)",
+        "hi": "भावनात्मक विनियमन: शांत होने की क्षमता (1-10)"
+      },
+      "min": 1,
+      "max": 10,
+      "purpose": "calming_ability"
+    },
+    {
+      "id": "q17_overcoming_emotions",
+      "type": "select",
+      "text": {
+        "uk": "Емоційна регуляція: Способи подолання емоцій",
+        "en": "Emotional regulation: Ways to overcome emotions",
+        "hi": "भावनात्मक विनियमन: भावनाओं को दूर करने के तरीके"
+      },
+      "options": {
+        "uk": [
+          "Спілкування",
+          "Самотність",
+          "Гра",
+          "Сльози",
+          "Інше"
+        ],
+        "en": [
+          "Communication",
+          "Loneliness",
+          "Game",
+          "Tears",
+          "Other"
+        ],
+        "hi": [
+          "संचार",
+          "अकेलापन",
+          "खेल",
+          "आंसू",
+          "अन्य"
+        ]
+      },
+      "optionCodes": [
+        "COMMUNICATION",
+        "LONELINESS",
+        "GAME",
+        "TEARS",
+        "OTHER"
+      ],
+      "purpose": "overcoming_emotions"
+    }
+  ]
+}

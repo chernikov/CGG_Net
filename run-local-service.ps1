@@ -38,9 +38,9 @@ foreach ($script in $scripts) {
 $ports = @(7070, 5296, 4200)
 foreach ($port in $ports) {
     $portPids = (Get-NetTCPConnection -LocalPort $port -ErrorAction SilentlyContinue).OwningProcess | Select-Object -Unique
-    foreach ($pid in $portPids) {
-        Stop-Process -Id $pid -Force -ErrorAction SilentlyContinue
-        Write-Host "Freed port $port (Killed PID: $pid)" -ForegroundColor DarkYellow
+    foreach ($procId in $portPids) {
+        Stop-Process -Id $procId -Force -ErrorAction SilentlyContinue
+        Write-Host "Freed port $port (Killed PID: $procId)" -ForegroundColor DarkYellow
     }
 }
 

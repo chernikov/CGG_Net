@@ -14,6 +14,9 @@ namespace CGG.Core.Entities
         public Guid? SurveyResultId { get; set; }
         public SurveyResult? SurveyResult { get; set; }
         
+        public Guid? UserSurveyId { get; set; }
+        public UserSurvey? UserSurvey { get; set; }
+        
         public Guid? PromptTemplateId { get; set; }
         public AiPromptTemplate? PromptTemplate { get; set; }
         
