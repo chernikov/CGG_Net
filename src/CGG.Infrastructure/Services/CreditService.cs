@@ -51,4 +51,27 @@ public class CreditService : ICreditService
 
         return user.Credits;
     }
+
+    public async Task<decimal> AddCreditsAsync(Guid userId, int credits, string description, CancellationToken ct)
+    {
+        var user = await _userRepo.GetByIdAsync(userId, ct)
+            ?? throw new InvalidOperationException($"User {userId} not found");
+
+        user.Credits += credits;
+        _userRepo.Update(user);
+
+        await _transactionRepo.AddAsync(new Transaction
+        {
+            Id = Guid.NewGuid(),
+            UserId = userId,
+            Amount = credits,
+            CreditsGranted = credits,
+            Type = "purchase",
+            Description = description,
+            Status = "completed",
+            CreatedAt = DateTime.UtcNow,
+        }, ct);
+
+        return user.Credits;
+    }
 }

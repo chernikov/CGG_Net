@@ -48,6 +48,9 @@ public static class Dependencies
         // Credit Service
         services.AddScoped<ICreditService, CreditService>();
 
+        // Monobank Payment
+        services.AddMonobank(configuration);
+
         return services;
     }
 }

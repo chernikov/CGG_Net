@@ -24,9 +24,13 @@ public class GetTransactionsQueryHandler : IRequestHandler<GetTransactionsQuery,
         {
             Id = t.Id,
             Amount = t.Amount,
+            AmountUAH = t.AmountUAH,
+            CreditsGranted = t.CreditsGranted,
             Type = t.Type,
             Description = t.Description,
             Status = t.Status,
+            OrderId = t.OrderId,
+            PaymentUrl = t.PaymentUrl,
             CreatedAt = t.CreatedAt,
         }).ToList();
     }
