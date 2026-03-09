@@ -65,4 +65,7 @@ public class AiAnalysisResponseDto
 
     /// <summary>Error code if Success == false (e.g. HTTP status code string).</summary>
     public string? ErrorCode { get; set; }
+
+    /// <summary>User's remaining credits balance after this analysis (null if no credits were charged).</summary>
+    public decimal? CreditsRemaining { get; set; }
 }

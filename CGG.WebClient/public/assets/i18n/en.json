@@ -73,6 +73,14 @@
     "noResults": "No results yet",
     "minutes": "min"
   },
+  "credits": {
+    "label": "credits",
+    "transactionsTitle": "Transaction History",
+    "noTransactions": "No transactions yet",
+    "loadMore": "Load more",
+    "backToDashboard": "Back to dashboard",
+    "insufficientCredits": "Insufficient credits"
+  },
   "addChild": {
     "title": "LET'S ADD YOUR KID",
     "subtitle": "Fill name and email address of your kid",

@@ -45,6 +45,9 @@ public static class Dependencies
         services.AddScoped<IAiPromptLoaderService, AiPromptLoaderService>();
         services.AddScoped<IAiSurveyService, AiSurveyService>();
 
+        // Credit Service
+        services.AddScoped<ICreditService, CreditService>();
+
         return services;
     }
 }

@@ -14,17 +14,20 @@ public class AnalyzeSurveyStepCommandHandler
     : IRequestHandler<AnalyzeSurveyStepCommand, AiAnalysisResponseDto>
 {
     private readonly IAiSurveyService _aiSurveyService;
+    private readonly ICreditService _creditService;
     private readonly IRepository<AiLog> _aiLogRepo;
     private readonly IUnitOfWork _uow;
     private readonly ILogger<AnalyzeSurveyStepCommandHandler> _logger;
 
     public AnalyzeSurveyStepCommandHandler(
         IAiSurveyService aiSurveyService,
+        ICreditService creditService,
         IRepository<AiLog> aiLogRepo,
         IUnitOfWork uow,
         ILogger<AnalyzeSurveyStepCommandHandler> logger)
     {
         _aiSurveyService = aiSurveyService;
+        _creditService = creditService;
         _aiLogRepo = aiLogRepo;
         _uow = uow;
         _logger = logger;
@@ -35,9 +38,25 @@ public class AnalyzeSurveyStepCommandHandler
         CancellationToken cancellationToken)
     {
         var dto = request.Payload;
-        var result = await _aiSurveyService.AnalyzeStepAsync(dto, cancellationToken);
+        decimal creditsCost = await _creditService.GetStepCreditsCostAsync(
+            dto.SurveyType, dto.StepNumber, cancellationToken);
 
-        // Persist AI log regardless of success/failure
+        decimal? creditsRemaining = null;
+
+        // Deduct credits BEFORE the AI call — if AI fails, SaveChangesAsync won't be called
+        if (creditsCost > 0 && request.UserId is not null)
+        {
+            creditsRemaining = await _creditService.DeductCreditsAsync(
+                request.UserId.Value,
+                creditsCost,
+                $"AI analysis: {dto.SurveyType} step {dto.StepNumber}",
+                cancellationToken);
+        }
+
+        var result = await _aiSurveyService.AnalyzeStepAsync(dto, cancellationToken);
+        result.CreditsRemaining = creditsRemaining;
+
+        // Persist AI log
         try
         {
             var log = new AiLog
@@ -62,19 +81,21 @@ public class AnalyzeSurveyStepCommandHandler
                 ErrorMessage     = result.Error,
                 ErrorCode        = result.ErrorCode,
                 CostUsd          = ComputeCostUsd(result.Model, result.PromptTokens, result.CompletionTokens),
+                CreditsCharged   = creditsCost > 0 ? creditsCost : null,
                 CreatedAt        = DateTime.UtcNow,
             };
 
             await _aiLogRepo.AddAsync(log, cancellationToken);
-            await _uow.SaveChangesAsync(cancellationToken);
         }
         catch (Exception ex)
         {
-            // Non-fatal: log but don't fail the request
             _logger.LogWarning(ex,
-                "Failed to persist AiLog for survey step {Step} / UserSurvey {UserSurveyId}",
+                "Failed to construct AiLog for survey step {Step} / UserSurvey {UserSurveyId}",
                 dto.StepNumber, dto.UserSurveyId);
         }
+
+        // Save atomically: credit deduction + transaction + AI log
+        await _uow.SaveChangesAsync(cancellationToken);
 
         return result;
     }
@@ -95,4 +116,5 @@ public class AnalyzeSurveyStepCommandHandler
 
         return (promptTokens.Value * inputPer1M + completionTokens.Value * outputPer1M)
                / 1_000_000m;
-    }}
+    }
+}

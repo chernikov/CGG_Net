@@ -41,6 +41,7 @@ namespace CGG.Core.Entities
         
         // Cost tracking
         public decimal? CostUsd { get; set; }
+        public decimal? CreditsCharged { get; set; }
         
         // Metadata
         public string? Metadata { get; set; } // JSON for additional data

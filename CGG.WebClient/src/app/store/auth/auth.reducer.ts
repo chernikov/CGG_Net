@@ -95,5 +95,11 @@ export const authReducer = createReducer(
   on(AuthActions.clearError, (state) => ({
     ...state,
     error: null
+  })),
+
+  // Update Credits
+  on(AuthActions.updateUserCredits, (state, { credits }) => ({
+    ...state,
+    user: state.user ? { ...state.user, credits } : null
   }))
 );

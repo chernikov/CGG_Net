@@ -69,6 +69,7 @@ public class PromptSeeder
                         ? modelEnum
                         : null,
                     MaxTokens = m.MaxTokens,
+                    CreditsCost = m.CreditsCost,
                     IsDefault = m.IsDefault,
                     IsActive = true,
                     Version = 1,
@@ -137,5 +138,8 @@ public class PromptSeeder
 
         [JsonPropertyName("isDefault")]
         public bool IsDefault { get; set; }
+
+        [JsonPropertyName("creditsCost")]
+        public decimal CreditsCost { get; set; } = 0;
     }
 }

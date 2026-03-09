@@ -25,6 +25,7 @@ export interface AnalyzeStepResponse {
   tokensUsed: number | null;
   success: boolean;
   error: string | null;
+  creditsRemaining: number | null;
 }
 
 export interface SaveStepRequest {

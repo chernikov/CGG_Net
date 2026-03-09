@@ -38,6 +38,7 @@ namespace CGG.Infrastructure.Data.Configurations
             
             // Decimal precision
             builder.Property(e => e.CostUsd).HasColumnType("decimal(18,6)");
+            builder.Property(e => e.CreditsCharged).HasColumnType("decimal(18,2)");
         }
     }
 }

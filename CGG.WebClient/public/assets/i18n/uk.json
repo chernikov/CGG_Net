@@ -73,6 +73,14 @@
     "noResults": "Результатів поки немає",
     "minutes": "хв"
   },
+  "credits": {
+    "label": "кредитів",
+    "transactionsTitle": "Історія транзакцій",
+    "noTransactions": "Транзакцій поки немає",
+    "loadMore": "Завантажити ще",
+    "backToDashboard": "На головну",
+    "insufficientCredits": "Недостатньо кредитів"
+  },
   "addChild": {
     "title": "ДОДАТИ ДИТИНУ",
     "subtitle": "Введіть ім'я та email вашої дитини",

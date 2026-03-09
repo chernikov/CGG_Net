@@ -62,3 +62,9 @@ export const loadUserFromStorageSuccess = createAction(
 
 // Clear Error
 export const clearError = createAction('[Auth] Clear Error');
+
+// Update Credits
+export const updateUserCredits = createAction(
+  '[Auth] Update User Credits',
+  props<{ credits: number }>()
+);

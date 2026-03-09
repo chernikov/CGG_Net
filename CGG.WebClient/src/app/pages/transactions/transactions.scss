@@ -1,0 +1,126 @@
+.transactions-page {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.transactions-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.transactions-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0;
+}
+
+.transactions-loading,
+.transactions-empty {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: #6b7280;
+  font-size: 0.9375rem;
+}
+
+.transactions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.transaction-card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  background: #f9fafb;
+  transition: background 0.15s ease;
+
+  &:hover {
+    background: #f3f4f6;
+  }
+
+  .transaction-icon {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    svg {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+
+  &.deduction .transaction-icon {
+    background: #fef2f2;
+    color: #ef4444;
+  }
+
+  &.topup .transaction-icon {
+    background: #f0fdf4;
+    color: #22c55e;
+  }
+
+  .transaction-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+
+    .transaction-description {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #1f2937;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .transaction-date {
+      font-size: 0.75rem;
+      color: #9ca3af;
+    }
+  }
+
+  .transaction-amount {
+    font-size: 0.9375rem;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  &.deduction .transaction-amount {
+    color: #ef4444;
+  }
+
+  &.topup .transaction-amount {
+    color: #22c55e;
+  }
+}
+
+.load-more-btn {
+  display: block;
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.625rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  background: white;
+  color: #374151;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s ease;
+
+  &:hover {
+    background: #f9fafb;
+  }
+}
