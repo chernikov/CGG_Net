@@ -77,14 +77,17 @@ export class ProfileComponent implements OnInit {
     }
   });
 
-  /** True if the relevant survey for this profile context has a completed session in localStorage. */
+  /** True if the relevant survey for this profile context has a completed session or any results in localStorage. */
   get hasResults(): boolean {
     const isChild = this.profile()?.isChild ?? false;
     const role = this.currentUser()?.role ?? '';
-    const surveyType = isChild
-      ? 'parent-child-talents'
-      : role === 'UserParent' ? 'parent' : 'ab-test';
-    return this.sessionSvc.hasCompletedSession(surveyType);
+    const hasResultsFor = (type: string) =>
+      this.sessionSvc.hasCompletedSession(type) || this.sessionSvc.hasAnyResults(type);
+    if (isChild) {
+      return hasResultsFor('parent-child-talents') || hasResultsFor('ab-test');
+    }
+    const surveyType = role === 'UserParent' ? 'parent' : 'ab-test';
+    return hasResultsFor(surveyType);
   }
 
   activeTab: Tab = 'surveyTab';

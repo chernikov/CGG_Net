@@ -1,9 +1,10 @@
 <div class="survey-tab">
   @for (ctx of surveyTypes(); track ctx.surveyType) {
-    @if (isCompleted(ctx.surveyType) && getSession(ctx.surveyType); as session) {
+    @if (hasResultsOrCompleted(ctx.surveyType) && getSession(ctx.surveyType); as session) {
       <app-survey-result-mini
         [session]="session"
         [surveyType]="ctx.surveyType"
+        [titleKey]="ctx.titleKey"
         (retake)="retakeSurvey(ctx.surveyType)"
         (viewResults)="viewFullResults(ctx.surveyType)" />
     } @else {

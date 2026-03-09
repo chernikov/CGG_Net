@@ -112,7 +112,7 @@
     <button
       type="button"
       class="px-6 py-3 border-2 border-slate-200 rounded-xl text-slate-600 font-medium hover:bg-slate-50 transition"
-      (click)="restart.emit()"
+      (click)="showConfirm.set(true)"
     >
       Пройти знову
     </button>
@@ -131,4 +131,25 @@
       На головну →
     </button>
   </div>
+
+  <!-- Retake confirmation -->
+  @if (showConfirm()) {
+    <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4">
+      <div class="bg-white rounded-2xl shadow-xl p-6 max-w-sm w-full flex flex-col gap-4">
+        <p class="text-base font-semibold text-slate-800 text-center">{{ 'surveys.retakeConfirm' | translate }}</p>
+        <div class="flex gap-3 justify-center">
+          <button
+            type="button"
+            class="px-5 py-2.5 border-2 border-slate-200 rounded-xl text-slate-600 font-medium hover:bg-slate-50 transition"
+            (click)="showConfirm.set(false)"
+          >{{ 'surveys.retakeCancel' | translate }}</button>
+          <button
+            type="button"
+            class="px-5 py-2.5 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-xl transition"
+            (click)="confirmRestart()"
+          >{{ 'surveys.retakeConfirmOk' | translate }}</button>
+        </div>
+      </div>
+    </div>
+  }
 </div>

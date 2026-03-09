@@ -52,10 +52,19 @@ export class SurveySessionService {
   getSession(surveyType: string): SurveySession | null {
     const session = this.loadAll()[surveyType] ?? null;
     if (!session) return null;
-    // Expire after 24 h
-    if (Date.now() - new Date(session.startedAt).getTime() > 24 * 60 * 60 * 1000) {
-      this.clearSession(surveyType);
-      return null;
+    const age = Date.now() - new Date(session.startedAt).getTime();
+    // Completed/feedback sessions: keep for 30 days
+    if (session.currentStep === 'done' || session.currentStep === 'feedback' || session.results.length > 0) {
+      if (age > 30 * 24 * 60 * 60 * 1000) {
+        this.clearSession(surveyType);
+        return null;
+      }
+    } else {
+      // In-progress sessions without results: expire after 24 h
+      if (age > 24 * 60 * 60 * 1000) {
+        this.clearSession(surveyType);
+        return null;
+      }
     }
     return session;
   }

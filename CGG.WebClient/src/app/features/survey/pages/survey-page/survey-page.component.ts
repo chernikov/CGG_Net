@@ -4,7 +4,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { switchMap, catchError } from 'rxjs/operators';
+import { switchMap, catchError, map } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 import { SurveyApiService } from '../../services/survey-api.service';
@@ -61,18 +61,36 @@ export class SurveyPageComponent implements OnInit {
         takeUntilDestroyed(this.destroyRef),
         switchMap(params => {
           const name = params.get('name') ?? 'classic';
+          const isRetake = params.get('retake') === 'true';
           return this.api.getSurveyByName(name).pipe(
             catchError(err => {
-              this.errorMsg.set(err?.error?.message ?? err?.message ?? 'Невідома помилка');
-              this.view.set('error');
+              // If the survey definition can't be loaded but we have existing results,
+              // show those results instead of the error screen.
+              const existingSession = this.sessionSvc.getSession(name);
+              if (existingSession && existingSession.results.length > 0) {
+                const last = this.sessionSvc.getLatestResult(existingSession);
+                this.session.set(existingSession);
+                this.finalResult.set(last);
+                this.view.set('result');
+              } else {
+                this.errorMsg.set(err?.error?.message ?? err?.message ?? 'Невідома помилка');
+                this.view.set('error');
+              }
               return of(null);
-            })
+            }),
+            map(def => def ? { def, isRetake } : null)
           );
         })
       )
-      .subscribe(def => {
-        if (!def) return;
+      .subscribe(payload => {
+        if (!payload) return;
+        const { def, isRetake } = payload;
         this.survey.set(def);
+
+        // If retake was requested, clear the old session now that we know the survey exists
+        if (isRetake) {
+          this.sessionSvc.clearSession(def.surveyType);
+        }
 
         // Restore or create session
         const existing = this.sessionSvc.getSession(def.surveyType);
@@ -331,16 +349,23 @@ export class SurveyPageComponent implements OnInit {
   }
 
   onRestart(): void {
-    if (this.survey()) {
-      const def = this.survey()!;
+    const def = this.survey();
+    const sess = this.session();
+    if (def) {
+      // Normal case: survey definition is loaded — clear and restart
       this.sessionSvc.clearSession(def.surveyType);
-      const sess = this.sessionSvc.getOrCreateSession(
+      const newSess = this.sessionSvc.getOrCreateSession(
         def.surveyType, def.id, def.steps.length, this.locale.currentLang
       );
-      this.session.set(sess);
+      this.session.set(newSess);
       this.currentStepNumber.set(1);
       this.finalResult.set(null);
       this.view.set('intro');
+    } else if (sess) {
+      // Fallback case: survey definition failed to load (404) but we showed cached results.
+      // Navigate to the survey page with retake=true so it tries to reload the definition.
+      // If it 404s again the cached results will be shown; if it succeeds the retake proceeds.
+      this.router.navigate(['/survey'], { queryParams: { name: sess.surveyType, retake: 'true' } });
     }
   }
 }
