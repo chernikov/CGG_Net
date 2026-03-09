@@ -1,0 +1,58 @@
+<div class="result-page">
+  <!-- Loading -->
+  @if (view === 'loading') {
+    <div class="result-card">
+      <div class="spinner"></div>
+      <p class="result-text">Перевіряємо статус оплати...</p>
+    </div>
+  }
+
+  <!-- Pending — waiting for Monobank webhook -->
+  @if (view === 'pending') {
+    <div class="result-card">
+      <div class="spinner"></div>
+      <h1 class="result-title">Очікуємо підтвердження</h1>
+      <p class="result-text">Оплата в обробці. Це може зайняти кілька секунд...</p>
+      @if (orderId) {
+        <p class="order-id">Замовлення: {{ orderId }}</p>
+      }
+      <a routerLink="/transactions" class="btn btn-secondary">Переглянути транзакції</a>
+    </div>
+  }
+
+  <!-- Success -->
+  @if (view === 'success') {
+    <div class="result-card success">
+      <div class="result-icon success-icon">✓</div>
+      <h1 class="result-title">Оплата успішна!</h1>
+      @if (transaction) {
+        <p class="result-text">
+          Ви отримали <strong>{{ transaction.creditsGranted }} кредитів</strong>
+          за {{ transaction.amountUAH }} ₴
+        </p>
+      }
+      <div class="btn-group">
+        <a routerLink="/dashboard" class="btn btn-primary">На головну</a>
+        <a routerLink="/transactions" class="btn btn-secondary">Транзакції</a>
+      </div>
+    </div>
+  }
+
+  <!-- Failure -->
+  @if (view === 'failure') {
+    <div class="result-card failure">
+      <div class="result-icon failure-icon">✕</div>
+      <h1 class="result-title">Оплата не вдалась</h1>
+      <p class="result-text">
+        Спробуйте ще раз або зверніться до підтримки.
+      </p>
+      @if (orderId) {
+        <p class="order-id">Замовлення: {{ orderId }}</p>
+      }
+      <div class="btn-group">
+        <a routerLink="/buy-credits" class="btn btn-primary">Спробувати знову</a>
+        <a routerLink="/dashboard" class="btn btn-secondary">На головну</a>
+      </div>
+    </div>
+  }
+</div>

@@ -7,6 +7,8 @@ services:
       - ACCEPT_EULA=Y
       - SA_PASSWORD=${DB_PASSWORD}
       - MSSQL_PID=Express
+    ports:
+      - "1443:1433"
     volumes:
       - cgg_sqlserver_data:/var/opt/mssql
     networks:
@@ -40,6 +42,7 @@ services:
       - Email__FromName=${EMAIL_FROM_NAME}
       - Monobank__Token=${MONOBANK_TOKEN}
       - Monobank__WebhookUrl=${MONOBANK_WEBHOOK_URL}
+      - Monobank__ReturnUrl=${MONOBANK_RETURN_URL}
     ports:
       - "5000:8080"
     depends_on:

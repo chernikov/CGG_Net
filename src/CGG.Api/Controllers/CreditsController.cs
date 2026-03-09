@@ -5,6 +5,7 @@ using CGG.Application.DTOs.Credits;
 using CGG.Application.Features.Credits.Commands.CreateMonobankPayment;
 using CGG.Application.Features.Credits.Commands.HandleMonobankWebhook;
 using CGG.Application.Features.Credits.Queries.GetCreditsBalance;
+using CGG.Application.Features.Credits.Queries.GetPaymentStatus;
 using CGG.Application.Features.Credits.Queries.GetTransactions;
 using CGG.Application.Interfaces;
 using MediatR;
@@ -71,6 +72,20 @@ namespace CGG.Api.Controllers
                 _logger.LogError(ex, "Failed to create Monobank payment for user {UserId}", userId);
                 return StatusCode(500, new { error = ex.Message });
             }
+        }
+
+        /// <summary>
+        /// Poll payment status by orderId. Used by the payment result page.
+        /// </summary>
+        [HttpGet("payment/status")]
+        public async Task<IActionResult> GetPaymentStatus([FromQuery] string orderId)
+        {
+            if (string.IsNullOrWhiteSpace(orderId))
+                return BadRequest(new { error = "orderId is required." });
+
+            var result = await _mediator.Send(new GetPaymentStatusQuery(orderId));
+            if (result is null) return NotFound(new { error = "Transaction not found." });
+            return Ok(result);
         }
 
         /// <summary>
