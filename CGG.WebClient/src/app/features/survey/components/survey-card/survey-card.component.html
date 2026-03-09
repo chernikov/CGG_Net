@@ -1,0 +1,13 @@
+<div class="survey-card">
+  <div class="survey-card__emoji">{{ emoji() }}</div>
+  <div class="survey-card__body">
+    <h3 class="survey-card__title">{{ titleKey() | translate }}</h3>
+    <p class="survey-card__desc">{{ descriptionKey() | translate }}</p>
+    <span class="survey-card__time">
+      ⏱ {{ estimatedMinutes() }} {{ 'surveys.minutes' | translate }}
+    </span>
+  </div>
+  <button class="survey-card__btn" (click)="start.emit()">
+    {{ 'surveys.start' | translate }}
+  </button>
+</div>

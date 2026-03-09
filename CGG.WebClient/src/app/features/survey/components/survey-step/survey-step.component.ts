@@ -17,67 +17,7 @@ import { QuestionRendererComponent } from '../question-renderer/question-rendere
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, QuestionRendererComponent],
-  template: `
-    <div class="w-full max-w-2xl mx-auto px-4 py-8">
-
-      <!-- Progress header -->
-      <div class="flex items-center justify-between mb-6">
-        <span class="text-sm font-medium text-slate-500">
-          Крок {{ step.stepNumber }} / {{ totalSteps }}
-        </span>
-        <div class="flex-1 mx-4 h-2 bg-slate-100 rounded-full overflow-hidden">
-          <div
-            class="h-full bg-blue-500 rounded-full transition-all duration-500"
-            [style.width.%]="progressPct"
-          ></div>
-        </div>
-        <span class="text-sm font-medium text-slate-500">
-          Питання {{ questionIndex() + 1 }}/{{ visibleQuestions().length }}
-        </span>
-      </div>
-
-      <!-- Current question -->
-      @if (currentQuestion(); as q) {
-        <app-question-renderer
-          [question]="q"
-          [value]="answers()[q.id] || ''"
-          (valueChange)="onAnswer(q.id, $event)"
-        />
-      }
-
-      <!-- Navigation -->
-      <div class="flex justify-between mt-8">
-        <button
-          type="button"
-          class="px-6 py-3 rounded-xl border-2 border-slate-200 text-slate-600 font-medium hover:bg-slate-50 transition disabled:opacity-40 disabled:cursor-not-allowed"
-          [disabled]="questionIndex() === 0"
-          (click)="prevQuestion()"
-        >
-          ← Назад
-        </button>
-
-        @if (isLastQuestion()) {
-          <button
-            type="button"
-            class="px-8 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold transition disabled:opacity-40 disabled:cursor-not-allowed"
-            [disabled]="!canProceed()"
-            (click)="submitStep()"
-          >
-            {{ isLastStep ? 'Завершити →' : 'Далі →' }}
-          </button>
-        } @else {
-          <button
-            type="button"
-            class="px-8 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold transition disabled:opacity-40 disabled:cursor-not-allowed"
-            [disabled]="!canAdvanceQuestion()"
-            (click)="nextQuestion()"
-          >
-            Наступне →
-          </button>
-        }
-      </div>
-    </div>
-  `,
+  templateUrl: './survey-step.component.html',
 })
 export class SurveyStepComponent implements OnChanges {
   @Input() step!: SurveyStepDef;

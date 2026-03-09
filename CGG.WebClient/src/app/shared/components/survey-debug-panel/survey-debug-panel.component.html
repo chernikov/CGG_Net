@@ -1,0 +1,99 @@
+<!-- Floating toggle button (when panel is hidden) -->
+@if (!isVisible()) {
+  <button
+    (click)="isVisible.set(true)"
+    class="debug-fab"
+    title="Debug panel (Ctrl+~)"
+  >🛠️</button>
+}
+
+<!-- Overlay for Raw tab -->
+@if (isVisible() && activeTab() === 'raw') {
+  <div class="debug-overlay" (click)="activeTab.set('overview')"></div>
+}
+
+<!-- Panel -->
+@if (isVisible()) {
+  <div [class]="'debug-panel' + (activeTab() === 'raw' ? ' debug-panel--full' : '')">
+    <!-- Header -->
+    <div class="debug-header">
+      <span class="debug-title">🛠️ Debug</span>
+      <div class="debug-tabs">
+        @for (tab of tabs; track tab.id) {
+          <button
+            [class]="'debug-tab' + (activeTab() === tab.id ? ' debug-tab--active' : '')"
+            (click)="setTab(tab.id)"
+          >{{ tab.label }}</button>
+        }
+      </div>
+      <button class="debug-close" (click)="isVisible.set(false)">✕</button>
+    </div>
+
+    <!-- Overview tab -->
+    @if (activeTab() === 'overview') {
+      <div class="debug-body">
+        @if (session()) {
+          <table class="debug-table">
+            <tbody>
+              <tr><td>surveyType</td><td>{{ session()!.surveyType }}</td></tr>
+              <tr><td>language</td><td>{{ session()!.language }}</td></tr>
+              <tr><td>currentStep</td><td>{{ session()!.currentStep }}</td></tr>
+              <tr><td>steps done</td><td>{{ session()!.steps.length }} / {{ session()!.totalSteps }}</td></tr>
+              <tr><td>AI results</td><td>{{ session()!.results.length }}</td></tr>
+              @for (r of session()!.results; track r.step) {
+                <tr>
+                  <td>step {{ r.step }} result</td>
+                  <td>{{ formatStepResult(r) }}</td>
+                </tr>
+              }
+              <tr><td>sessionId</td><td class="debug-mono">{{ session()!.sessionId.slice(0, 8) }}…</td></tr>
+            </tbody>
+          </table>
+        } @else {
+          <p class="debug-empty">No session for <b>{{ surveyType() || '(unknown)' }}</b></p>
+        }
+      </div>
+    }
+
+    <!-- Raw tab -->
+    @if (activeTab() === 'raw') {
+      <div class="debug-body debug-body--raw">
+        <pre class="debug-pre">{{ rawJson() }}</pre>
+      </div>
+    }
+
+    <!-- Autofill tab -->
+    @if (activeTab() === 'autofill') {
+      <div class="debug-body">
+        <div class="debug-autofill">
+          <button class="debug-btn debug-btn--reload" (click)="reloadSurveys()">
+            ↺ Reload Surveys
+          </button>
+        </div>
+        @if (profiles().length) {
+          <div class="debug-autofill">
+            <select
+              class="debug-select"
+              [value]="selectedProfileId()"
+              (change)="onProfileChange($event)"
+            >
+              <option value="">— Select profile —</option>
+              @for (p of profiles(); track p.id) {
+                <option [value]="p.slug">{{ p.icon }} {{ p.nameUk }}</option>
+              }
+            </select>
+            <button
+              class="debug-btn"
+              [disabled]="!selectedProfileId()"
+              (click)="applyAutofill()"
+            >Заповнити</button>
+          </div>
+        } @else {
+          <p class="debug-empty">No profiles for <b>{{ surveyType() || '(unknown)' }}</b></p>
+        }
+      </div>
+    }
+
+    <div class="debug-footer">Ctrl+~ toggle</div>
+  </div>
+}

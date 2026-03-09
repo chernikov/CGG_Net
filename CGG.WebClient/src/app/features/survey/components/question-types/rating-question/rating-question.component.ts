@@ -7,22 +7,7 @@ const STARS = [1, 2, 3, 4, 5];
   selector: 'app-rating-question',
   standalone: true,
   imports: [CommonModule],
-  template: `
-    <div class="flex gap-3 justify-center">
-      @for (star of stars; track star) {
-        <button
-          type="button"
-          class="text-4xl transition-transform duration-150 hover:scale-110 focus:outline-none"
-          [class.opacity-30]="selected !== null && selected < star"
-          (click)="select(star)"
-          [title]="star + ' / 5'"
-        >⭐</button>
-      }
-    </div>
-    @if (selected) {
-      <p class="text-center text-sm text-slate-500 mt-2">{{ selected }} / 5</p>
-    }
-  `,
+  templateUrl: './rating-question.component.html',
 })
 export class RatingQuestionComponent implements OnChanges {
   @Input() value: string = '';
