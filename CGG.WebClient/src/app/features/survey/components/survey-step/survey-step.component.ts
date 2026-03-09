@@ -106,7 +106,19 @@ export class SurveyStepComponent implements OnChanges {
       if (!q.purpose) continue;
       const val = data[q.purpose];
       if (val === undefined || val === null) continue;
-      filled[q.id] = Array.isArray(val) ? JSON.stringify(val) : String(val);
+      let strVal = Array.isArray(val) ? JSON.stringify(val) : String(val);
+
+      // For single-choice: resolve label text → option value
+      // Profile data may store Ukrainian labels (e.g. "Так") while DB stores
+      // snake_case codes (e.g. "yes"). Match by translation text as fallback.
+      if (q.type === 'single-choice' && q.options.length > 0) {
+        const match = q.options.find(
+          o => o.value === strVal || o.translations.some(t => t.text === strVal)
+        );
+        if (match?.value) strVal = match.value;
+      }
+
+      filled[q.id] = strVal;
     }
     this.answers.set(filled);
     this.cdr.markForCheck();

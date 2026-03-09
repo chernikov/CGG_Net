@@ -4,11 +4,12 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { selectUser } from '../../../../store/auth/auth.selectors';
 import { FamilyComponent } from '../family-component/family-component';
+import { TakeCareerTestCardComponent } from '../take-career-test-card/take-career-test-card.component';
 
 @Component({
   selector: 'app-parent-component',
   standalone: true,
-  imports: [CommonModule, FamilyComponent],
+  imports: [CommonModule, FamilyComponent, TakeCareerTestCardComponent],
   templateUrl: './parent-component.html',
   styleUrl: './parent-component.scss',
 })
@@ -29,9 +30,5 @@ export class ParentComponent implements OnInit {
 
   goToProfile() {
     this.router.navigate(['/profile']);
-  }
-
-  takeSurvey() {
-    this.router.navigate(['/survey']);
   }
 }
