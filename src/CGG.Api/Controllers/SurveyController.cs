@@ -2,6 +2,7 @@ using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using CGG.Application.DTOs.Survey;
+using CGG.Application.Exceptions;
 using CGG.Application.Features.Survey.Commands.AnalyzeSurveyStep;
 using CGG.Application.Features.Survey.Commands.ReloadSurveys;
 using CGG.Application.Features.Survey.Commands.SaveFeedback;
@@ -105,10 +106,17 @@ namespace CGG.Api.Controllers
             if (dto == null || string.IsNullOrWhiteSpace(dto.SurveyType) || dto.StepNumber < 1)
                 return BadRequest(new { Error = "Invalid payload. SurveyType and StepNumber are required." });
 
-            var result = await _mediator.Send(new AnalyzeSurveyStepCommand(dto, GetUserId()));
-            if (!result.Success) return StatusCode(500, result);
+            try
+            {
+                var result = await _mediator.Send(new AnalyzeSurveyStepCommand(dto, GetUserId()));
+                if (!result.Success) return StatusCode(500, result);
 
-            return Ok(result);
+                return Ok(result);
+            }
+            catch (InsufficientCreditsException ex)
+            {
+                return StatusCode(402, new { Error = ex.Message, Required = ex.Required, Available = ex.Available });
+            }
         }
 
         /// <summary>

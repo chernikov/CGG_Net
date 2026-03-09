@@ -3,6 +3,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { switchMap, catchError, map } from 'rxjs/operators';
 import { of } from 'rxjs';
@@ -10,6 +11,7 @@ import { of } from 'rxjs';
 import { SurveyApiService } from '../../services/survey-api.service';
 import { SurveySessionService } from '../../services/survey-session.service';
 import { SurveyLocaleService } from '../../services/survey-locale.service';
+import { updateUserCredits } from '../../../../store/auth/auth.actions';
 
 import { SurveyDef } from '../../models/question.model';
 import { SurveySession, StepAnswer, AiStepResult } from '../../models/survey-session.model';
@@ -40,6 +42,7 @@ type PageView = 'loading' | 'error' | 'intro' | 'step' | 'analyzing' | 'step-res
 export class SurveyPageComponent implements OnInit {
   private route = inject(ActivatedRoute);
   readonly router = inject(Router);
+  private store = inject(Store);
   private api = inject(SurveyApiService);
   private sessionSvc = inject(SurveySessionService);
   private locale = inject(SurveyLocaleService);
@@ -271,7 +274,13 @@ export class SurveyPageComponent implements OnInit {
       takeUntilDestroyed(this.destroyRef),
       catchError(err => {
         console.error('[AI] Error step', stepDef.stepNumber, err);
-        this.aiErrorMsg.set(err?.error?.message ?? err?.message ?? 'Невідома помилка');
+        if (err?.status === 402) {
+          const required = err.error?.required ?? '?';
+          const available = err.error?.available ?? '?';
+          this.aiErrorMsg.set(`Недостатньо кредитів. Необхідно: ${required}, доступно: ${available}`);
+        } else {
+          this.aiErrorMsg.set(err?.error?.message ?? err?.message ?? 'Невідома помилка');
+        }
         this.view.set('ai-error');
         return of(null);
       })
@@ -287,6 +296,10 @@ export class SurveyPageComponent implements OnInit {
         tokensUsed: res.tokensUsed,
         resultJson: parsed,
       });
+
+      if (res.creditsRemaining != null) {
+        this.store.dispatch(updateUserCredits({ credits: res.creditsRemaining }));
+      }
 
       if (res.success === false) {
         this.aiErrorMsg.set(res.error ?? 'AI аналіз не вдався');

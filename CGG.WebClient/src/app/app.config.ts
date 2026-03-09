@@ -13,6 +13,8 @@ import { authReducer } from './store/auth/auth.reducer';
 import { AuthEffects } from './store/auth/auth.effects';
 import { familyReducer } from './store/family/family.reducer';
 import { FamilyEffects } from './store/family/family.effects';
+import { creditsReducer } from './store/credits/credits.reducer';
+import { CreditsEffects } from './store/credits/credits.effects';
 import { jwtInterceptor } from './core/interceptors/jwt-interceptor';
 
 export const appConfig: ApplicationConfig = {
@@ -21,8 +23,8 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(withInterceptors([jwtInterceptor])),
     provideAnimations(),
-    provideStore({ auth: authReducer, family: familyReducer }),
-    provideEffects([AuthEffects, FamilyEffects]),
+    provideStore({ auth: authReducer, family: familyReducer, credits: creditsReducer }),
+    provideEffects([AuthEffects, FamilyEffects, CreditsEffects]),
     provideStoreDevtools({
       maxAge: 25,
       logOnly: !isDevMode(),

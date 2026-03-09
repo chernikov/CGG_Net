@@ -19,7 +19,8 @@ namespace CGG.Core.Entities
         // Configuration
         public AiModelType? Model { get; set; }
         public int? MaxTokens { get; set; }
-        
+        public decimal CreditsCost { get; set; } = 0;
+
         // Versioning
         public int Version { get; set; } = 1;
         public bool IsActive { get; set; } = true;

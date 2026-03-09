@@ -68,6 +68,9 @@ namespace CGG.Infrastructure.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<decimal?>("CreditsCharged")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<string>("ErrorCode")
                         .HasColumnType("nvarchar(max)");
 
@@ -155,6 +158,11 @@ namespace CGG.Infrastructure.Data.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<decimal>("CreditsCost")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
@@ -788,8 +796,14 @@ namespace CGG.Infrastructure.Data.Migrations
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<decimal>("AmountUAH")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("CreditsGranted")
+                        .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -797,8 +811,20 @@ namespace CGG.Infrastructure.Data.Migrations
                     b.Property<Guid?>("FamilyId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("InvoiceId")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("OrderId")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
                     b.Property<string>("PaymentId")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaymentUrl")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("Status")
                         .IsRequired()
@@ -814,6 +840,8 @@ namespace CGG.Infrastructure.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("FamilyId");
+
+                    b.HasIndex("OrderId");
 
                     b.HasIndex("UserId");
 

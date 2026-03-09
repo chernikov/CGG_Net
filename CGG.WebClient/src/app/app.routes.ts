@@ -12,6 +12,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard';
 import { AddChild } from './pages/add-child/add-child';
 import { EditChild } from './pages/child/edit-child/edit-child';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { TransactionsComponent } from './pages/transactions/transactions';
 import { authGuard } from './core/guards/auth-guard';
 import { homeGuard } from './core/guards/home-guard';
 
@@ -31,6 +32,8 @@ export const routes: Routes = [
   { path: 'profile', component: ProfileComponent, canActivate: [authGuard] },
   { path: 'child/edit/:id', component: EditChild, canActivate: [authGuard] },
   { path: 'child/:id', component: ProfileComponent, canActivate: [authGuard] },
+  { path: 'transactions', component: TransactionsComponent, canActivate: [authGuard] },
+  { path: 'buy-credits', loadComponent: () => import('./pages/buy-credits/buy-credits').then(m => m.BuyCreditsComponent), canActivate: [authGuard] },
   {
     path: 'survey',
     loadComponent: () =>

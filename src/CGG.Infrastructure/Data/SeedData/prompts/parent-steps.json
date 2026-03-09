@@ -3,48 +3,48 @@
     "category": "survey", "surveyType": "parent", "stepNumber": 1,
     "systemPrompt": "You are a career guidance AI. Step 1: family intro. Provide exactly 3 broad initial profession candidates sorted by matchPercentage descending. Return ONLY valid JSON. {{language}}",
     "promptText": "Parent survey step 1 answers:\n{{answers}}\n\nProvide exactly 3 diverse initial career matches for the child.\n\nContext: {{previousResults}}",
-    "outputFormat": "short", "model": "Gpt5Nano", "maxTokens": 600, "isDefault": false
+    "outputFormat": "short", "model": "Gpt5Nano", "maxTokens": 600, "isDefault": false, "creditsCost": 0
   },
   {
     "category": "survey", "surveyType": "parent", "stepNumber": 2,
     "systemPrompt": "You are a career guidance AI. Step 2: parenting style and attitudes. Refine to exactly 3 career matches sorted by matchPercentage descending. Return ONLY valid JSON. {{language}}",
     "promptText": "Parent survey step 2 answers:\n{{answers}}\n\nPrevious results:\n{{previousResults}}\n\nRefine to exactly 3 career matches based on parenting style and attitudes.",
-    "outputFormat": "short", "model": "Gpt5Nano", "maxTokens": 600, "isDefault": false
+    "outputFormat": "short", "model": "Gpt5Nano", "maxTokens": 600, "isDefault": false, "creditsCost": 0
   },
   {
     "category": "survey", "surveyType": "parent", "stepNumber": 3,
     "systemPrompt": "You are a career guidance AI. Step 3: child interests and hobbies. Update to exactly 3 career recommendations sorted by matchPercentage descending. Return ONLY valid JSON. {{language}}",
     "promptText": "Parent survey step 3 answers:\n{{answers}}\n\nPrevious results:\n{{previousResults}}\n\nUpdate to exactly 3 career matches based on child's interests and hobbies.",
-    "outputFormat": "short", "model": "Gpt5Nano", "maxTokens": 600, "isDefault": false
+    "outputFormat": "short", "model": "Gpt5Nano", "maxTokens": 600, "isDefault": false, "creditsCost": 0
   },
   {
     "category": "survey", "surveyType": "parent", "stepNumber": 4,
     "systemPrompt": "You are a career guidance AI. Step 4: child strengths and academic performance. Refine to exactly 3 recommendations sorted by matchPercentage descending. Return ONLY valid JSON. {{language}}",
     "promptText": "Parent survey step 4 answers:\n{{answers}}\n\nPrevious results:\n{{previousResults}}\n\nRefine to exactly 3 career matches based on academic strengths and performance.",
-    "outputFormat": "short", "model": "Gpt5Nano", "maxTokens": 600, "isDefault": false
+    "outputFormat": "short", "model": "Gpt5Nano", "maxTokens": 600, "isDefault": false, "creditsCost": 0
   },
   {
     "category": "survey", "surveyType": "parent", "stepNumber": 5,
     "systemPrompt": "You are a career guidance AI. Step 5: social skills and personality traits. Adjust to exactly 3 career recommendations sorted by matchPercentage descending. Return ONLY valid JSON. {{language}}",
     "promptText": "Parent survey step 5 answers:\n{{answers}}\n\nPrevious results:\n{{previousResults}}\n\nAdjust to exactly 3 career matches based on social skills and personality.",
-    "outputFormat": "short", "model": "Gpt5Nano", "maxTokens": 600, "isDefault": false
+    "outputFormat": "short", "model": "Gpt5Nano", "maxTokens": 600, "isDefault": false, "creditsCost": 0
   },
   {
     "category": "survey", "surveyType": "parent", "stepNumber": 6,
     "systemPrompt": "You are a career guidance AI. Step 6: family values and priorities. Refine to exactly 3 career recommendations sorted by matchPercentage descending. Return ONLY valid JSON. {{language}}",
     "promptText": "Parent survey step 6 answers:\n{{answers}}\n\nPrevious results:\n{{previousResults}}\n\nRefine to exactly 3 career matches considering family values and priorities.",
-    "outputFormat": "short", "model": "Gpt5Nano", "maxTokens": 600, "isDefault": false
+    "outputFormat": "short", "model": "Gpt5Nano", "maxTokens": 600, "isDefault": false, "creditsCost": 0
   },
   {
     "category": "survey", "surveyType": "parent", "stepNumber": 7,
     "systemPrompt": "You are a career guidance AI. Step 7: expectations and goals. Finalize exactly 3 top career candidates sorted by matchPercentage descending. Return ONLY valid JSON. {{language}}",
     "promptText": "Parent survey step 7 answers:\n{{answers}}\n\nPrevious results:\n{{previousResults}}\n\nFinalize exactly 3 top career candidates based on expectations and goals.",
-    "outputFormat": "short", "model": "Gpt5Nano", "maxTokens": 600, "isDefault": false
+    "outputFormat": "short", "model": "Gpt5Nano", "maxTokens": 600, "isDefault": false, "creditsCost": 0
   },
   {
     "category": "survey", "surveyType": "parent", "stepNumber": 8,
     "systemPrompt": "You are a career guidance AI. Final step. Provide full comprehensive career analysis for exactly 3 top professions sorted by matchPercentage descending, with salary ranges, education pathways, and next action steps. Return ONLY valid JSON. {{language}}",
     "promptText": "All survey data:\n{{answers}}\n\nAll previous results:\n{{previousResults}}\n\nProvide comprehensive final recommendations for exactly 3 top careers with salary, education, and next steps.",
-    "outputFormat": "full", "model": "Gpt5Mini", "maxTokens": 1200, "isDefault": false
+    "outputFormat": "full", "model": "Gpt5Mini", "maxTokens": 1200, "isDefault": false, "creditsCost": 40
   }
 ]

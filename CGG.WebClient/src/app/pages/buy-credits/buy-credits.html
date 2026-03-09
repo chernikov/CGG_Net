@@ -1,0 +1,73 @@
+<div class="topup-page">
+  <app-back-header [backUrl]="'/transactions'" [backLabel]="'credits.backToDashboard' | translate"></app-back-header>
+
+  <h1 class="topup-title">{{ 'buyCredits.title' | translate }}</h1>
+  <p class="topup-subtitle">{{ 'buyCredits.subtitle' | translate }}</p>
+
+  <!-- Presets -->
+  <div class="presets">
+    @for (p of presets; track p) {
+      <button
+        class="preset-btn"
+        [class.active]="amountUAH === p"
+        (click)="selectPreset(p)">
+        {{ p }} ₴
+      </button>
+    }
+  </div>
+
+  <!-- Custom amount -->
+  <div class="amount-field">
+    <label class="amount-label" for="amountInput">{{ 'buyCredits.amountLabel' | translate }}</label>
+    <div class="amount-input-wrap">
+      <input
+        id="amountInput"
+        type="number"
+        class="amount-input"
+        [(ngModel)]="amountUAH"
+        [placeholder]="'buyCredits.amountPlaceholder' | translate"
+        min="1"
+        step="1"
+      />
+      <span class="amount-currency">₴</span>
+    </div>
+  </div>
+
+  <!-- Credits preview -->
+  @if (amountUAH && amountUAH >= 1) {
+    <div class="credits-preview" [class.bonus]="hasBonus(amountUAH)">
+      <div class="credits-preview-row">
+        <span class="credits-preview-label">{{ 'buyCredits.youGet' | translate }}</span>
+        <span class="credits-preview-value">{{ calculateCredits(amountUAH) }} {{ 'credits.label' | translate }}</span>
+      </div>
+
+      @if (hasBonus(amountUAH)) {
+        <div class="bonus-badge">
+          🎉 {{ 'buyCredits.bonusLabel' | translate }}
+        </div>
+      } @else {
+        <p class="bonus-hint">{{ 'buyCredits.bonusHint' | translate : { threshold: bonusThreshold } }}</p>
+      }
+    </div>
+  }
+
+  <!-- Error -->
+  @if (error()) {
+    <div class="topup-error">{{ error() }}</div>
+  }
+
+  <!-- Submit -->
+  <button
+    class="pay-btn"
+    [disabled]="loading() || !amountUAH || amountUAH < 1"
+    (click)="submit()">
+    @if (loading()) {
+      <span class="spinner"></span>
+      {{ 'buyCredits.processing' | translate }}
+    } @else {
+      {{ 'buyCredits.payBtn' | translate }}
+    }
+  </button>
+
+  <p class="topup-note">{{ 'buyCredits.note' | translate }}</p>
+</div>

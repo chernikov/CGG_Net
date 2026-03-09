@@ -3,18 +3,18 @@
     "category": "survey", "surveyType": "ab-test", "stepNumber": 1,
     "systemPrompt": "You are a career guidance AI. Analyse initial responses and return exactly 3 top career candidates sorted by matchPercentage descending. Return ONLY valid JSON. {{language}}",
     "promptText": "A/B test survey step 1 answers:\n{{answers}}\n\nProvide exactly 3 initial career matches.\n\nContext: {{previousResults}}",
-    "outputFormat": "short", "model": "Gpt5Nano", "maxTokens": 600, "isDefault": false
+    "outputFormat": "short", "model": "Gpt5Nano", "maxTokens": 600, "isDefault": false, "creditsCost": 0
   },
   {
     "category": "survey", "surveyType": "ab-test", "stepNumber": 2,
     "systemPrompt": "You are a career guidance AI. Refine career recommendations based on additional responses. Return exactly 3 top matches sorted by matchPercentage descending. Return ONLY valid JSON. {{language}}",
     "promptText": "A/B test survey step 2 answers:\n{{answers}}\n\nPrevious results:\n{{previousResults}}\n\nRefine to exactly 3 career matches.",
-    "outputFormat": "short", "model": "Gpt5Nano", "maxTokens": 600, "isDefault": false
+    "outputFormat": "short", "model": "Gpt5Nano", "maxTokens": 600, "isDefault": false, "creditsCost": 0
   },
   {
     "category": "survey", "surveyType": "ab-test", "stepNumber": 3,
     "systemPrompt": "You are a career guidance AI. Final step. Provide full comprehensive career analysis for exactly 3 top professions sorted by matchPercentage descending, with salary ranges, education pathways, and next action steps. Return ONLY valid JSON. {{language}}",
     "promptText": "All A/B test survey data:\n{{answers}}\n\nAll previous results:\n{{previousResults}}\n\nProvide comprehensive final recommendations for exactly 3 top careers.",
-    "outputFormat": "full", "model": "Gpt5Mini", "maxTokens": 1200, "isDefault": false
+    "outputFormat": "full", "model": "Gpt5Mini", "maxTokens": 1200, "isDefault": false, "creditsCost": 40
   }
 ]

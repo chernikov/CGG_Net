@@ -73,6 +73,27 @@
     "noResults": "No results yet",
     "minutes": "min"
   },
+  "credits": {
+    "label": "credits",
+    "transactionsTitle": "Transaction History",
+    "noTransactions": "No transactions yet",
+    "loadMore": "Load more",
+    "backToDashboard": "Back to dashboard",
+    "insufficientCredits": "Insufficient credits",
+    "buyCredits": "Top up"
+  },
+  "buyCredits": {
+    "title": "Buy Credits",
+    "subtitle": "Choose an amount or enter your own. From 300 ₴ — get +40% bonus credits.",
+    "amountLabel": "Amount",
+    "amountPlaceholder": "e.g. 150",
+    "youGet": "You will receive",
+    "bonusLabel": "+40% bonus credits",
+    "bonusHint": "Top up from {{threshold}} ₴ and get +40% bonus credits!",
+    "payBtn": "Pay via Monobank",
+    "processing": "Redirecting...",
+    "note": "Secure payment. Credits are added automatically after successful payment."
+  },
   "addChild": {
     "title": "LET'S ADD YOUR KID",
     "subtitle": "Fill name and email address of your kid",

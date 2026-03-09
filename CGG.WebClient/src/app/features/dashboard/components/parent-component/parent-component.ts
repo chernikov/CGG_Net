@@ -5,11 +5,12 @@ import { Store } from '@ngrx/store';
 import { selectUser } from '../../../../store/auth/auth.selectors';
 import { FamilyComponent } from '../family-component/family-component';
 import { TakeCareerTestCardComponent } from '../take-career-test-card/take-career-test-card.component';
+import { CreditsBalanceComponent } from '../credits-balance/credits-balance';
 
 @Component({
   selector: 'app-parent-component',
   standalone: true,
-  imports: [CommonModule, FamilyComponent, TakeCareerTestCardComponent],
+  imports: [CommonModule, FamilyComponent, TakeCareerTestCardComponent, CreditsBalanceComponent],
   templateUrl: './parent-component.html',
   styleUrl: './parent-component.scss',
 })
@@ -30,5 +31,9 @@ export class ParentComponent implements OnInit {
 
   goToProfile() {
     this.router.navigate(['/profile']);
+  }
+
+  goToBuyCredits() {
+    this.router.navigate(['/buy-credits']);
   }
 }

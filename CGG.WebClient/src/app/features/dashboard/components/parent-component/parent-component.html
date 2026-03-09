@@ -9,6 +9,10 @@
       <h2 class="profile-name">{{ parentName }}</h2>
       <span class="profile-status">Остання активність нещодавно</span>
     </div>
+    <div class="credits-actions">
+      <app-credits-balance></app-credits-balance>
+      <button class="topup-btn" (click)="goToBuyCredits(); $event.stopPropagation()">Поповнити</button>
+    </div>
   </div>
 
   <app-take-career-test-card></app-take-career-test-card>
