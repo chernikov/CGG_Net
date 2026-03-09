@@ -1,0 +1,216 @@
+.topup-page {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 1rem 1rem 2rem;
+}
+
+.topup-title {
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 1.25rem 0 0.25rem;
+}
+
+.topup-subtitle {
+  font-size: 0.9375rem;
+  color: #6b7280;
+  margin: 0 0 1.5rem;
+}
+
+// ── Presets ───────────────────────────────────────────────────────────────────
+
+.presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.preset-btn {
+  flex: 1 1 calc(33% - 0.5rem);
+  min-width: 72px;
+  padding: 0.625rem 0;
+  border-radius: 0.75rem;
+  border: 1.5px solid #e5e7eb;
+  background: #f9fafb;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #374151;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+
+  &:hover {
+    border-color: #6366f1;
+    background: #eef2ff;
+    color: #4338ca;
+  }
+
+  &.active {
+    border-color: #6366f1;
+    background: #6366f1;
+    color: #fff;
+  }
+}
+
+// ── Amount field ──────────────────────────────────────────────────────────────
+
+.amount-field {
+  margin-bottom: 1.25rem;
+}
+
+.amount-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 0.375rem;
+}
+
+.amount-input-wrap {
+  position: relative;
+
+  .amount-currency {
+    position: absolute;
+    right: 0.875rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    font-weight: 600;
+    color: #9ca3af;
+    pointer-events: none;
+  }
+}
+
+.amount-input {
+  width: 100%;
+  padding: 0.75rem 2.5rem 0.75rem 1rem;
+  font-size: 1rem;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 0.75rem;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.15s;
+  appearance: textfield;
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+
+  &:focus {
+    border-color: #6366f1;
+  }
+}
+
+// ── Credits preview ───────────────────────────────────────────────────────────
+
+.credits-preview {
+  background: #f0fdf4;
+  border: 1.5px solid #bbf7d0;
+  border-radius: 0.875rem;
+  padding: 0.875rem 1rem;
+  margin-bottom: 1.25rem;
+  transition: border-color 0.2s, background 0.2s;
+
+  &.bonus {
+    background: #fdf4ff;
+    border-color: #e9d5ff;
+  }
+}
+
+.credits-preview-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.375rem;
+}
+
+.credits-preview-label {
+  font-size: 0.875rem;
+  color: #374151;
+}
+
+.credits-preview-value {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #16a34a;
+
+  .bonus & {
+    color: #7c3aed;
+  }
+}
+
+.bonus-badge {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #7c3aed;
+}
+
+.bonus-hint {
+  font-size: 0.8125rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+// ── Error ─────────────────────────────────────────────────────────────────────
+
+.topup-error {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 0.75rem;
+  color: #dc2626;
+  font-size: 0.875rem;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+}
+
+// ── Button ────────────────────────────────────────────────────────────────────
+
+.pay-btn {
+  width: 100%;
+  padding: 0.875rem;
+  background: #6366f1;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 0.875rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: background 0.15s;
+
+  &:hover:not(:disabled) {
+    background: #4f46e5;
+  }
+
+  &:disabled {
+    background: #d1d5db;
+    cursor: not-allowed;
+  }
+}
+
+.spinner {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+// ── Note ──────────────────────────────────────────────────────────────────────
+
+.topup-note {
+  text-align: center;
+  font-size: 0.8125rem;
+  color: #9ca3af;
+  margin-top: 0.875rem;
+}

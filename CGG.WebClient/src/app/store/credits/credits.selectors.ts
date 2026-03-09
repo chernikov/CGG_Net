@@ -27,3 +27,19 @@ export const selectCreditsPage = createSelector(
   selectCreditsState,
   (state) => state.page
 );
+
+// Topup selectors
+export const selectTopupLoading = createSelector(
+  selectCreditsState,
+  (state) => state.topupLoading
+);
+
+export const selectTopupResult = createSelector(
+  selectCreditsState,
+  (state) => state.topupResult
+);
+
+export const selectTopupError = createSelector(
+  selectCreditsState,
+  (state) => state.topupError
+);

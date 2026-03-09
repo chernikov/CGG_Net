@@ -1,11 +1,12 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { switchMap, catchError, map, withLatestFrom } from 'rxjs/operators';
+import { switchMap, catchError, map, withLatestFrom, exhaustMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import * as CreditsActions from './credits.actions';
 import { selectCreditsPage } from './credits.selectors';
 import { CreditsApiService } from '../../core/services/credits-api.service';
+import { Transaction, TopupResult } from './credits.state';
 
 export class CreditsEffects {
   private actions$ = inject(Actions);
@@ -17,12 +18,12 @@ export class CreditsEffects {
       ofType(CreditsActions.loadTransactions),
       switchMap(() =>
         this.creditsApi.getTransactions(1, 20).pipe(
-          map((transactions) =>
+          map((transactions: Transaction[]) =>
             CreditsActions.loadTransactionsSuccess({ transactions, page: 1 })
           ),
           catchError((error) =>
             of(CreditsActions.loadTransactionsFailure({
-              error: error.error?.message || 'Failed to load transactions'
+              error: error.error?.message || 'Failed to load transactions',
             }))
           )
         )
@@ -37,16 +38,32 @@ export class CreditsEffects {
       switchMap(([, currentPage]) => {
         const nextPage = currentPage + 1;
         return this.creditsApi.getTransactions(nextPage, 20).pipe(
-          map((transactions) =>
+          map((transactions: Transaction[]) =>
             CreditsActions.loadTransactionsSuccess({ transactions, page: nextPage })
           ),
           catchError((error) =>
             of(CreditsActions.loadTransactionsFailure({
-              error: error.error?.message || 'Failed to load transactions'
+              error: error.error?.message || 'Failed to load transactions',
             }))
           )
         );
       })
+    )
+  );
+
+  createPayment$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(CreditsActions.createPayment),
+      exhaustMap(({ amountUAH }) =>
+        this.creditsApi.createPayment(amountUAH).pipe(
+          map((result: TopupResult) => CreditsActions.createPaymentSuccess({ result })),
+          catchError((error) =>
+            of(CreditsActions.createPaymentFailure({
+              error: error.error?.error || error.error?.message || 'Помилка оплати',
+            }))
+          )
+        )
+      )
     )
   );
 }

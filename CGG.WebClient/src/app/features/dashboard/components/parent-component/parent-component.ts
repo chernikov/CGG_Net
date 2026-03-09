@@ -32,4 +32,8 @@ export class ParentComponent implements OnInit {
   goToProfile() {
     this.router.navigate(['/profile']);
   }
+
+  goToBuyCredits() {
+    this.router.navigate(['/buy-credits']);
+  }
 }

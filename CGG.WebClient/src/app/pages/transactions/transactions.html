@@ -3,7 +3,10 @@
 
   <div class="transactions-header">
     <h1 class="transactions-title">{{ 'credits.transactionsTitle' | translate }}</h1>
-    <app-credits-balance></app-credits-balance>
+    <div class="transactions-header-actions">
+      <a class="buy-credits-btn" routerLink="/buy-credits">{{ 'credits.buyCredits' | translate }}</a>
+      <app-credits-balance></app-credits-balance>
+    </div>
   </div>
 
   @if (loading() && transactions().length === 0) {

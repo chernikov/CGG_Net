@@ -1,5 +1,6 @@
 import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
 import { BackHeaderComponent } from '../../shared/components/back-header/back-header.component';
@@ -14,7 +15,7 @@ import {
 @Component({
   selector: 'app-transactions',
   standalone: true,
-  imports: [CommonModule, TranslateModule, BackHeaderComponent, CreditsBalanceComponent],
+  imports: [CommonModule, RouterLink, TranslateModule, BackHeaderComponent, CreditsBalanceComponent],
   templateUrl: './transactions.html',
   styleUrl: './transactions.scss',
 })

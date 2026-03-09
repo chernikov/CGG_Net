@@ -33,6 +33,7 @@ export const routes: Routes = [
   { path: 'child/edit/:id', component: EditChild, canActivate: [authGuard] },
   { path: 'child/:id', component: ProfileComponent, canActivate: [authGuard] },
   { path: 'transactions', component: TransactionsComponent, canActivate: [authGuard] },
+  { path: 'buy-credits', loadComponent: () => import('./pages/buy-credits/buy-credits').then(m => m.BuyCreditsComponent), canActivate: [authGuard] },
   {
     path: 'survey',
     loadComponent: () =>

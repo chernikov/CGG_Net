@@ -41,4 +41,32 @@ export const creditsReducer = createReducer(
     ...state,
     error: null,
   })),
+
+  // Topup
+  on(CreditsActions.createPayment, (state) => ({
+    ...state,
+    topupLoading: true,
+    topupResult: null,
+    topupError: null,
+  })),
+
+  on(CreditsActions.createPaymentSuccess, (state, { result }) => ({
+    ...state,
+    topupLoading: false,
+    topupResult: result,
+    topupError: null,
+  })),
+
+  on(CreditsActions.createPaymentFailure, (state, { error }) => ({
+    ...state,
+    topupLoading: false,
+    topupError: error,
+  })),
+
+  on(CreditsActions.clearTopupState, (state) => ({
+    ...state,
+    topupLoading: false,
+    topupResult: null,
+    topupError: null,
+  })),
 );
