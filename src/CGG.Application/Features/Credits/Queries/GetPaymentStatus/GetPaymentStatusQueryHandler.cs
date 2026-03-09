@@ -25,6 +25,7 @@ public class GetPaymentStatusQueryHandler : IRequestHandler<GetPaymentStatusQuer
         return new PaymentStatusDto
         {
             OrderId = transaction.OrderId ?? request.OrderId,
+            InvoiceId = transaction.InvoiceId,
             Status = transaction.Status,
             AmountUAH = transaction.AmountUAH,
             CreditsGranted = transaction.CreditsGranted,

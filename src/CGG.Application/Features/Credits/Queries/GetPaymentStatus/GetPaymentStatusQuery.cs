@@ -7,6 +7,7 @@ public record GetPaymentStatusQuery(string OrderId) : IRequest<PaymentStatusDto?
 public class PaymentStatusDto
 {
     public string OrderId { get; set; } = string.Empty;
+    public string? InvoiceId { get; set; }
     public string Status { get; set; } = string.Empty;
     public decimal AmountUAH { get; set; }
     public int CreditsGranted { get; set; }
