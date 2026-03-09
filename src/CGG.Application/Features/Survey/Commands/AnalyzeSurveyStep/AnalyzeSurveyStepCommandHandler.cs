@@ -42,15 +42,27 @@ public class AnalyzeSurveyStepCommandHandler
         {
             var log = new AiLog
             {
-                Id            = Guid.NewGuid(),
-                RequestType   = "survey_step",
-                UserSurveyId  = dto.UserSurveyId,
-                StepNumber    = dto.StepNumber,
-                Response      = result.ResultJson,
-                TokensUsed    = result.TokensUsed,
-                Status        = result.Success ? "success" : "error",
-                ErrorMessage  = result.Error,
-                CreatedAt     = DateTime.UtcNow,
+                Id               = Guid.NewGuid(),
+                RequestType      = "survey_step",
+                UserId           = request.UserId,
+                UserSurveyId     = dto.UserSurveyId,
+                PromptTemplateId = result.PromptTemplateId,
+                StepNumber       = dto.StepNumber,
+                Provider         = result.Provider,
+                Model            = result.Model,
+                SystemPrompt     = result.SystemPrompt,
+                PromptText       = result.PromptText,
+                UserInput        = result.UserInput,
+                Response         = result.ResultJson,
+                TokensUsed       = result.TokensUsed,
+                PromptTokens     = result.PromptTokens,
+                CompletionTokens = result.CompletionTokens,
+                ProcessingTimeMs = result.ProcessingTimeMs,
+                Status           = result.Success ? "success" : "error",
+                ErrorMessage     = result.Error,
+                ErrorCode        = result.ErrorCode,
+                CostUsd          = ComputeCostUsd(result.Model, result.PromptTokens, result.CompletionTokens),
+                CreatedAt        = DateTime.UtcNow,
             };
 
             await _aiLogRepo.AddAsync(log, cancellationToken);
@@ -66,4 +78,21 @@ public class AnalyzeSurveyStepCommandHandler
 
         return result;
     }
-}
+
+    /// <summary>Estimates cost in USD based on model pricing.</summary>
+    private static decimal? ComputeCostUsd(string? model, int? promptTokens, int? completionTokens)
+    {
+        if (model is null || promptTokens is null || completionTokens is null)
+            return null;
+
+        // Prices per 1M tokens (input / output)
+        var (inputPer1M, outputPer1M) = model switch
+        {
+            var m when m.Contains("nano") => (0.05m, 0.40m),
+            var m when m.Contains("mini") => (0.25m, 2.00m),
+            _                            => (0.25m, 2.00m)
+        };
+
+        return (promptTokens.Value * inputPer1M + completionTokens.Value * outputPer1M)
+               / 1_000_000m;
+    }}

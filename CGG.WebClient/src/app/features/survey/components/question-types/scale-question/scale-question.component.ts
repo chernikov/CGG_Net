@@ -5,30 +5,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-scale-question',
   standalone: true,
   imports: [CommonModule],
-  template: `
-    <div class="w-full">
-      <div class="flex flex-wrap gap-2 justify-center">
-        @for (n of buttons; track n) {
-          <button
-            type="button"
-            class="w-12 h-12 rounded-xl border-2 text-base font-bold transition-all duration-200"
-            [class.border-blue-600]="selected === n"
-            [class.bg-blue-600]="selected === n"
-            [class.text-white]="selected === n"
-            [class.border-slate-200]="selected !== n"
-            [class.bg-white]="selected !== n"
-            [class.text-slate-700]="selected !== n"
-            [class.hover:bg-slate-100]="selected !== n"
-            (click)="select(n)"
-          >{{ n }}</button>
-        }
-      </div>
-      <div class="flex justify-between text-xs text-slate-400 mt-2 px-1">
-        <span>{{ min }}</span>
-        <span>{{ max }}</span>
-      </div>
-    </div>
-  `,
+  templateUrl: './scale-question.component.html',
 })
 export class ScaleQuestionComponent implements OnChanges {
   @Input() value: string = '';

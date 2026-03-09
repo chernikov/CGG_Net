@@ -6,11 +6,12 @@ import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { addChild, clearAddChildError } from '../../store/family/family.actions';
 import { selectAddingChild, selectAddChildError } from '../../store/family/family.selectors';
+import { BackHeaderComponent } from '../../shared/components/back-header/back-header.component';
 
 @Component({
   selector: 'app-add-child',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, TranslateModule],
+  imports: [CommonModule, ReactiveFormsModule, TranslateModule, BackHeaderComponent],
   templateUrl: './add-child.html',
   styleUrl: './add-child.scss',
 })

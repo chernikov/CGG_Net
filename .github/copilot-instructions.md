@@ -54,6 +54,7 @@ Config path: `appsettings.json` → `OpenAI:MiniModel` / `OpenAI:NanoModel`
 - API proxy: always use `/api/...` — never absolute URLs
 - On `OnDestroy`: dispatch `clearXxxError` to clear stale NgRx errors
 - Signals: `store.selectSignal(selector)` for reactive state
+- **External component files only**: use `templateUrl: './{name}.component.html'` and `styleUrl: './{name}.component.scss'` — never inline `template:` or `styles:` in `@Component`
 
 ## File Naming
 

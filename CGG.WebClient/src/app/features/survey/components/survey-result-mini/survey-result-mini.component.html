@@ -1,0 +1,46 @@
+<div class="result-mini">
+  @if (titleKey()) {
+    <p class="result-mini__survey-name">{{ titleKey() | translate }}</p>
+  }
+  <h4 class="result-mini__heading">{{ 'surveys.topMatches' | translate }}</h4>
+
+  <ul class="result-mini__list">
+    @for (match of topMatches(); track match.title) {
+      <li class="result-mini__item">
+        <span class="result-mini__label">{{ match.title }}</span>
+        <div class="result-mini__bar-wrap">
+          <div class="result-mini__bar" [style.width.%]="match.matchPercentage"></div>
+        </div>
+        <span class="result-mini__pct">{{ match.matchPercentage }}%</span>
+      </li>
+    }
+    @empty {
+      <li class="result-mini__empty">{{ 'surveys.noResults' | translate }}</li>
+    }
+  </ul>
+
+  <div class="result-mini__actions">
+    <button class="result-mini__btn result-mini__btn--secondary" (click)="showConfirm.set(true)">
+      {{ 'surveys.retake' | translate }}
+    </button>
+    <button class="result-mini__btn result-mini__btn--primary" (click)="viewResults.emit()">
+      {{ 'surveys.viewResults' | translate }}
+    </button>
+  </div>
+
+  @if (showConfirm()) {
+    <div class="result-mini__confirm-overlay">
+      <div class="result-mini__confirm-box">
+        <p class="result-mini__confirm-text">{{ 'surveys.retakeConfirm' | translate }}</p>
+        <div class="result-mini__confirm-actions">
+          <button class="result-mini__btn result-mini__btn--secondary" (click)="showConfirm.set(false)">
+            {{ 'surveys.retakeCancel' | translate }}
+          </button>
+          <button class="result-mini__btn result-mini__btn--danger" (click)="confirmRetake()">
+            {{ 'surveys.retakeConfirmOk' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+</div>

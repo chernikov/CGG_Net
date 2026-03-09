@@ -74,9 +74,6 @@ namespace CGG.Infrastructure.Data.Migrations
                     b.Property<string>("ErrorMessage")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("MemberId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Metadata")
                         .HasColumnType("nvarchar(max)");
 
@@ -112,9 +109,6 @@ namespace CGG.Infrastructure.Data.Migrations
                     b.Property<int?>("StepNumber")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("SurveyResultId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("SystemPrompt")
                         .HasColumnType("nvarchar(max)");
 
@@ -134,21 +128,15 @@ namespace CGG.Infrastructure.Data.Migrations
 
                     b.HasIndex("CreatedAt");
 
-                    b.HasIndex("MemberId");
-
                     b.HasIndex("PromptTemplateId");
 
                     b.HasIndex("RequestType");
 
                     b.HasIndex("Status");
 
-                    b.HasIndex("SurveyResultId");
-
                     b.HasIndex("UserId");
 
                     b.HasIndex("UserSurveyId");
-
-                    b.HasIndex("MemberId", "CreatedAt");
 
                     b.HasIndex("UserId", "CreatedAt");
 
@@ -1015,19 +1003,9 @@ namespace CGG.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("CGG.Core.Entities.AiLog", b =>
                 {
-                    b.HasOne("CGG.Core.Entities.Member", "Member")
-                        .WithMany("AiLogs")
-                        .HasForeignKey("MemberId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
                     b.HasOne("CGG.Core.Entities.AiPromptTemplate", "PromptTemplate")
                         .WithMany("AiLogs")
                         .HasForeignKey("PromptTemplateId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.HasOne("CGG.Core.Entities.SurveyResult", "SurveyResult")
-                        .WithMany("AiLogs")
-                        .HasForeignKey("SurveyResultId")
                         .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("CGG.Core.Entities.User", "User")
@@ -1040,11 +1018,7 @@ namespace CGG.Infrastructure.Data.Migrations
                         .HasForeignKey("UserSurveyId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.Navigation("Member");
-
                     b.Navigation("PromptTemplate");
-
-                    b.Navigation("SurveyResult");
 
                     b.Navigation("User");
 
@@ -1313,8 +1287,6 @@ namespace CGG.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("CGG.Core.Entities.Member", b =>
                 {
-                    b.Navigation("AiLogs");
-
                     b.Navigation("MemberRoles");
 
                     b.Navigation("SurveyResults");
@@ -1352,11 +1324,6 @@ namespace CGG.Infrastructure.Data.Migrations
             modelBuilder.Entity("CGG.Core.Entities.SurveyQuestionOption", b =>
                 {
                     b.Navigation("Translations");
-                });
-
-            modelBuilder.Entity("CGG.Core.Entities.SurveyResult", b =>
-                {
-                    b.Navigation("AiLogs");
                 });
 
             modelBuilder.Entity("CGG.Core.Entities.SurveyStep", b =>

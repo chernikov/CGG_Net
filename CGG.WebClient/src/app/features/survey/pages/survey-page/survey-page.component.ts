@@ -4,7 +4,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { switchMap, catchError } from 'rxjs/operators';
+import { switchMap, catchError, map } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 import { SurveyApiService } from '../../services/survey-api.service';
@@ -19,6 +19,7 @@ import { SurveyStepComponent } from '../../components/survey-step/survey-step.co
 import { FeedbackStepComponent } from '../../components/feedback-step/feedback-step.component';
 import { SurveyResultComponent } from '../../components/survey-result/survey-result.component';
 import { StepResultComponent } from '../../components/step-result/step-result.component';
+import { BackHeaderComponent } from '../../../../shared/components/back-header/back-header.component';
 
 type PageView = 'loading' | 'error' | 'intro' | 'step' | 'analyzing' | 'step-result' | 'ai-error' | 'feedback' | 'result';
 
@@ -32,99 +33,9 @@ type PageView = 'loading' | 'error' | 'intro' | 'step' | 'analyzing' | 'step-res
     FeedbackStepComponent,
     SurveyResultComponent,
     StepResultComponent,
+    BackHeaderComponent,
   ],
-  template: `
-    <div class="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
-
-      <!-- Loading state -->
-      @if (view() === 'loading' || view() === 'analyzing') {
-        <div class="flex flex-col items-center justify-center min-h-screen gap-4">
-          <div class="w-12 h-12 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin"></div>
-          <p class="text-slate-500 text-base font-medium">
-            {{ view() === 'analyzing' ? '🤖 AI аналізує ваші відповіді...' : 'Завантаження...' }}
-          </p>
-          @if (view() === 'analyzing') {
-            <p class="text-slate-400 text-sm">Зазвичай займає 10–20 секунд</p>
-          }
-        </div>
-      }
-
-      <!-- Error state -->
-      @if (view() === 'error') {
-        <div class="flex flex-col items-center justify-center min-h-screen gap-6 px-4">
-          <span class="text-5xl">😕</span>
-          <h2 class="text-xl font-bold text-slate-800">Не вдалося завантажити опитувальник</h2>
-          <p class="text-slate-500 text-center">{{ errorMsg() }}</p>
-          <button
-            class="px-6 py-3 bg-blue-600 text-white rounded-xl font-medium hover:bg-blue-700 transition"
-            (click)="router.navigate(['/'])"
-          >На головну</button>
-        </div>
-      }
-
-      <!-- AI Error state -->
-      @if (view() === 'ai-error') {
-        <div class="flex flex-col items-center justify-center min-h-screen gap-6 px-4">
-          <span class="text-5xl">🤖</span>
-          <h2 class="text-xl font-bold text-slate-800">Помилка AI аналізу</h2>
-          <p class="text-slate-500 text-center max-w-sm">{{ aiErrorMsg() }}</p>
-          <button
-            class="px-6 py-3 bg-blue-600 text-white rounded-xl font-medium hover:bg-blue-700 transition"
-            (click)="onRetryAi()"
-          >Спробувати знову</button>
-        </div>
-      }
-
-      <!-- Intro -->
-      @if (view() === 'intro' && survey()) {
-        <app-survey-intro
-          [survey]="survey()!"
-          (start)="onStart()"
-        />
-      }
-
-      <!-- Step -->
-      @if (view() === 'step' && survey() && currentStepDef()) {
-        <app-survey-step
-          [step]="currentStepDef()!"
-          [totalSteps]="survey()!.steps.length"
-          [isLastStep]="currentStepDef()!.stepNumber >= survey()!.steps.length"
-          [existingAnswers]="getExistingAnswers()"
-          (questionAnswered)="onQuestionAnswered($event)"
-          (autofillApplied)="onAutofillApplied($event)"
-          (stepComplete)="onStepComplete($event)"
-        />
-      }
-
-      <!-- Step Result (intermediate AI result) -->
-      @if (view() === 'step-result' && stepResult()) {
-        <app-step-result
-          [aiResult]="stepResult()!"
-          [stepNumber]="stepResult()!.step"
-          [totalSteps]="survey()!.steps.length"
-          (continue)="onStepResultContinue()"
-        />
-      }
-
-      <!-- Result -->
-      @if (view() === 'result' && finalResult()) {
-        <app-survey-result
-          [aiResult]="finalResult()!"
-          (restart)="onRestart()"
-          (leaveFeedback)="onLeaveFeedback()"
-          (toDashboard)="router.navigate(['/dashboard'])"
-        />
-      }
-
-      <!-- Feedback (after result) -->
-      @if (view() === 'feedback') {
-        <app-feedback-step
-          (feedbackComplete)="onFeedbackComplete($event)"
-          (back)="view.set('result')"
-        />
-      }
-    </div>
-  `,
+  templateUrl: './survey-page.component.html',
 })
 export class SurveyPageComponent implements OnInit {
   private route = inject(ActivatedRoute);
@@ -144,26 +55,53 @@ export class SurveyPageComponent implements OnInit {
   stepResult = signal<AiStepResult | null>(null);
   aiErrorMsg = signal('');
 
+  /** Where the back button navigates — child profile if childId is in URL, else dashboard. */
+  backUrl = signal('/dashboard');
+  backLabel = signal('На головну');
+
   // ─── Lifecycle ────────────────────────────────────────────────────────────
 
   ngOnInit(): void {
+    const childId = this.route.snapshot.queryParamMap.get('childId');
+    if (childId) {
+      this.backUrl.set(`/child/${childId}`);
+      this.backLabel.set('На профіль');
+    }
     this.route.queryParamMap
       .pipe(
         takeUntilDestroyed(this.destroyRef),
         switchMap(params => {
           const name = params.get('name') ?? 'classic';
+          const isRetake = params.get('retake') === 'true';
           return this.api.getSurveyByName(name).pipe(
             catchError(err => {
-              this.errorMsg.set(err?.error?.message ?? err?.message ?? 'Невідома помилка');
-              this.view.set('error');
+              // If the survey definition can't be loaded but we have existing results,
+              // show those results instead of the error screen.
+              const existingSession = this.sessionSvc.getSession(name);
+              if (existingSession && existingSession.results.length > 0) {
+                const last = this.sessionSvc.getLatestResult(existingSession);
+                this.session.set(existingSession);
+                this.finalResult.set(last);
+                this.view.set('result');
+              } else {
+                this.errorMsg.set(err?.error?.message ?? err?.message ?? 'Невідома помилка');
+                this.view.set('error');
+              }
               return of(null);
-            })
+            }),
+            map(def => def ? { def, isRetake } : null)
           );
         })
       )
-      .subscribe(def => {
-        if (!def) return;
+      .subscribe(payload => {
+        if (!payload) return;
+        const { def, isRetake } = payload;
         this.survey.set(def);
+
+        // If retake was requested, clear the old session now that we know the survey exists
+        if (isRetake) {
+          this.sessionSvc.clearSession(def.surveyType);
+        }
 
         // Restore or create session
         const existing = this.sessionSvc.getSession(def.surveyType);
@@ -422,16 +360,23 @@ export class SurveyPageComponent implements OnInit {
   }
 
   onRestart(): void {
-    if (this.survey()) {
-      const def = this.survey()!;
+    const def = this.survey();
+    const sess = this.session();
+    if (def) {
+      // Normal case: survey definition is loaded — clear and restart
       this.sessionSvc.clearSession(def.surveyType);
-      const sess = this.sessionSvc.getOrCreateSession(
+      const newSess = this.sessionSvc.getOrCreateSession(
         def.surveyType, def.id, def.steps.length, this.locale.currentLang
       );
-      this.session.set(sess);
+      this.session.set(newSess);
       this.currentStepNumber.set(1);
       this.finalResult.set(null);
       this.view.set('intro');
+    } else if (sess) {
+      // Fallback case: survey definition failed to load (404) but we showed cached results.
+      // Navigate to the survey page with retake=true so it tries to reload the definition.
+      // If it 404s again the cached results will be shown; if it succeeds the retake proceeds.
+      this.router.navigate(['/survey'], { queryParams: { name: sess.surveyType, retake: 'true' } });
     }
   }
 }

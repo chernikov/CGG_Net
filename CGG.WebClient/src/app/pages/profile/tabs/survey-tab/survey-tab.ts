@@ -93,6 +93,10 @@ export class SurveyTabComponent implements OnInit {
     return this.sessionSvc.hasCompletedSession(surveyType);
   }
 
+  hasResultsOrCompleted(surveyType: string): boolean {
+    return this.sessionSvc.hasCompletedSession(surveyType) || this.sessionSvc.hasAnyResults(surveyType);
+  }
+
   getSession(surveyType: string) {
     return this.sessionSvc.getSession(surveyType);
   }
@@ -104,8 +108,12 @@ export class SurveyTabComponent implements OnInit {
   }
 
   retakeSurvey(surveyType: string): void {
-    this.sessionSvc.clearSession(surveyType);
-    this.startSurvey(surveyType);
+    // Don't clear the session yet — navigate with retake=true so the survey page
+    // clears it only after a successful load. This lets us fall back to existing
+    // results if the survey definition returns 404.
+    const params: Record<string, string> = { name: surveyType, retake: 'true' };
+    if (this.childId()) params['childId'] = this.childId()!;
+    this.router.navigate(['/survey'], { queryParams: params });
   }
 
   viewFullResults(surveyType: string): void {

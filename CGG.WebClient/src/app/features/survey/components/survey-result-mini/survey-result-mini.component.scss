@@ -1,0 +1,123 @@
+.result-mini {
+  position: relative;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,.06);
+}
+.result-mini__survey-name {
+  font-size: .75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: #6b7280;
+  margin: 0 0 .5rem;
+}
+.result-mini__heading {
+  font-size: .9375rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 1rem;
+}
+.result-mini__list {
+  list-style: none;
+  margin: 0 0 1rem;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+}
+.result-mini__item {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: .5rem;
+}
+.result-mini__label {
+  font-size: .875rem;
+  color: #374151;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.result-mini__bar-wrap {
+  width: 100px;
+  height: 6px;
+  background: #e5e7eb;
+  border-radius: 99px;
+  overflow: hidden;
+}
+.result-mini__bar {
+  height: 100%;
+  background: #2563eb;
+  border-radius: 99px;
+  transition: width .4s ease;
+}
+.result-mini__pct {
+  font-size: .75rem;
+  color: #6b7280;
+  min-width: 32px;
+  text-align: right;
+}
+.result-mini__empty {
+  font-size: .875rem;
+  color: #9ca3af;
+}
+.result-mini__actions {
+  display: flex;
+  gap: .75rem;
+  flex-wrap: wrap;
+}
+.result-mini__btn {
+  border: none;
+  border-radius: 8px;
+  padding: .5rem 1rem;
+  font-size: .875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background .15s;
+
+  &--primary {
+    background: #2563eb;
+    color: #fff;
+    &:hover { background: #1d4ed8; }
+  }
+  &--secondary {
+    background: #f3f4f6;
+    color: #374151;
+    &:hover { background: #e5e7eb; }
+  }
+  &--danger {
+    background: #ef4444;
+    color: #fff;
+    &:hover { background: #dc2626; }
+  }
+}
+.result-mini__confirm-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,.92);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+}
+.result-mini__confirm-box {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  text-align: center;
+}
+.result-mini__confirm-text {
+  font-size: .9375rem;
+  font-weight: 500;
+  color: #111827;
+  margin: 0;
+}
+.result-mini__confirm-actions {
+  display: flex;
+  gap: .75rem;
+  justify-content: center;
+}

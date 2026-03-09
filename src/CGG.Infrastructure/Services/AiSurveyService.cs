@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -85,19 +86,31 @@ public class AiSurveyService : IAiSurveyService
 
             // ── 3. Call OpenAI ─────────────────────────────────────────────────
             var model = GetModel(isFinalStep);
-            var (resultJson, tokensUsed) = await CallOpenAiAsync(systemPrompt, userMessage, model, cancellationToken);
+            var sw = Stopwatch.StartNew();
+            var (resultJson, totalTokens, promptTokens, completionTokens) =
+                await CallOpenAiAsync(systemPrompt, userMessage, model, cancellationToken);
+            sw.Stop();
 
             _logger.LogInformation(
-                "AI step {Step} analysed for survey '{SurveyType}'. Tokens: {Tokens}",
-                dto.StepNumber, dto.SurveyType, tokensUsed);
+                "AI step {Step} analysed for survey '{SurveyType}'. Tokens: {Total} (prompt={Prompt}, completion={Completion}), {Ms}ms",
+                dto.StepNumber, dto.SurveyType, totalTokens, promptTokens, completionTokens, sw.ElapsedMilliseconds);
 
             return new AiAnalysisResponseDto
             {
-                StepNumber = dto.StepNumber,
-                ResultJson = resultJson,
-                OutputFormat = isFinalStep ? "full" : "short",
-                TokensUsed = tokensUsed,
-                Success = true
+                StepNumber        = dto.StepNumber,
+                ResultJson        = resultJson,
+                OutputFormat      = isFinalStep ? "full" : "short",
+                PromptTemplateId  = template.Id,
+                Provider          = "openai",
+                Model             = model,
+                SystemPrompt      = systemPrompt,
+                PromptText        = userMessage,
+                UserInput         = answersJson,
+                TokensUsed        = totalTokens,
+                PromptTokens      = promptTokens,
+                CompletionTokens  = completionTokens,
+                ProcessingTimeMs  = (int)sw.ElapsedMilliseconds,
+                Success           = true
             };
         }
         catch (Exception ex)
@@ -120,7 +133,7 @@ public class AiSurveyService : IAiSurveyService
     // Private helpers
     // ──────────────────────────────────────────────────────────────────────────
 
-    private async Task<(string content, int tokens)> CallOpenAiAsync(
+    private async Task<(string content, int totalTokens, int promptTokens, int completionTokens)> CallOpenAiAsync(
         string systemPrompt,
         string userMessage,
         string model,
@@ -166,14 +179,20 @@ public class AiSurveyService : IAiSurveyService
             .GetProperty("content")
             .GetString() ?? "{}";
 
-        var tokens = 0;
-        if (doc.RootElement.TryGetProperty("usage", out var usage) &&
-            usage.TryGetProperty("total_tokens", out var tokensEl))
+        var totalTokens = 0;
+        var promptTokens = 0;
+        var completionTokens = 0;
+        if (doc.RootElement.TryGetProperty("usage", out var usage))
         {
-            tokens = tokensEl.GetInt32();
+            if (usage.TryGetProperty("total_tokens", out var totalEl))
+                totalTokens = totalEl.GetInt32();
+            if (usage.TryGetProperty("prompt_tokens", out var promptEl))
+                promptTokens = promptEl.GetInt32();
+            if (usage.TryGetProperty("completion_tokens", out var completionEl))
+                completionTokens = completionEl.GetInt32();
         }
 
-        return (content, tokens);
+        return (content, totalTokens, promptTokens, completionTokens);
     }
 
     private string GetModel(bool isFinalStep)

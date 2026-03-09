@@ -1,0 +1,27 @@
+.back-header {
+  padding: .75rem 1rem .25rem;
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .375rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: .375rem .25rem;
+  color: #1e3a5f;
+  font-size: .875rem;
+  font-weight: 500;
+  transition: color .2s;
+
+  &:hover {
+    color: #1495e6;
+  }
+
+  svg {
+    width: 1.125rem;
+    height: 1.125rem;
+    flex-shrink: 0;
+  }
+}

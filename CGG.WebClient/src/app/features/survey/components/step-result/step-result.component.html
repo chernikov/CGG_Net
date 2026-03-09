@@ -1,0 +1,54 @@
+<div class="flex flex-col items-center justify-center min-h-screen px-4 py-8">
+  <div class="w-full max-w-lg">
+    <!-- Header -->
+    <div class="text-center mb-6">
+      <span class="text-4xl mb-3 block">&#129302;</span>
+      <h2 class="text-xl font-bold text-slate-800">
+        Результати кроку {{ stepNumber() }} / {{ totalSteps() }}
+      </h2>
+      <p class="text-slate-500 mt-1 text-sm">AI проаналізував ваші відповіді</p>
+    </div>
+
+    <!-- Profession matches -->
+    <div class="bg-white rounded-2xl shadow-md p-6 mb-4">
+      <ul class="flex flex-col gap-4">
+        @for (match of matches(); track match.title; let i = $index) {
+          <li class="flex items-center gap-3">
+            <span class="text-lg w-7 text-center shrink-0">{{ medal(i) }}</span>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-sm font-medium text-slate-700 truncate">{{ match.title }}</span>
+                <span class="text-sm font-bold text-blue-600 ml-2 shrink-0">{{ match.matchPercentage }}%</span>
+              </div>
+              <div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+                <div
+                  class="h-full rounded-full transition-all duration-500 ease-out"
+                  [class]="i === 0 ? 'bg-blue-500' : i === 1 ? 'bg-blue-400' : 'bg-blue-300'"
+                  [style.width.%]="match.matchPercentage"
+                ></div>
+              </div>
+            </div>
+          </li>
+        }
+        @empty {
+          <li class="text-slate-400 text-center py-4">Немає результатів</li>
+        }
+      </ul>
+    </div>
+
+    <!-- Disclaimer -->
+    <p class="text-xs text-slate-400 text-center mb-6">
+      Це попередні результати — вони уточнюються з кожним кроком
+    </p>
+
+    <!-- Continue button -->
+    <div class="text-center">
+      <button
+        class="px-8 py-3 bg-blue-600 text-white rounded-xl font-medium hover:bg-blue-700 transition text-base"
+        (click)="continue.emit()"
+      >
+        Продовжити &rarr;
+      </button>
+    </div>
+  </div>
+</div>

@@ -2,11 +2,12 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BackHeaderComponent } from '../../../shared/components/back-header/back-header.component';
 
 @Component({
   selector: 'app-edit-child',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, BackHeaderComponent],
   templateUrl: './edit-child.html',
   styleUrl: './edit-child.scss'
 })
