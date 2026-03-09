@@ -18,8 +18,9 @@ import { SurveyIntroComponent } from '../../components/survey-intro/survey-intro
 import { SurveyStepComponent } from '../../components/survey-step/survey-step.component';
 import { FeedbackStepComponent } from '../../components/feedback-step/feedback-step.component';
 import { SurveyResultComponent } from '../../components/survey-result/survey-result.component';
+import { StepResultComponent } from '../../components/step-result/step-result.component';
 
-type PageView = 'loading' | 'error' | 'intro' | 'step' | 'analyzing' | 'feedback' | 'result';
+type PageView = 'loading' | 'error' | 'intro' | 'step' | 'analyzing' | 'step-result' | 'ai-error' | 'feedback' | 'result';
 
 @Component({
   selector: 'app-survey-page',
@@ -30,6 +31,7 @@ type PageView = 'loading' | 'error' | 'intro' | 'step' | 'analyzing' | 'feedback
     SurveyStepComponent,
     FeedbackStepComponent,
     SurveyResultComponent,
+    StepResultComponent,
   ],
   template: `
     <div class="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
@@ -60,6 +62,19 @@ type PageView = 'loading' | 'error' | 'intro' | 'step' | 'analyzing' | 'feedback
         </div>
       }
 
+      <!-- AI Error state -->
+      @if (view() === 'ai-error') {
+        <div class="flex flex-col items-center justify-center min-h-screen gap-6 px-4">
+          <span class="text-5xl">🤖</span>
+          <h2 class="text-xl font-bold text-slate-800">Помилка AI аналізу</h2>
+          <p class="text-slate-500 text-center max-w-sm">{{ aiErrorMsg() }}</p>
+          <button
+            class="px-6 py-3 bg-blue-600 text-white rounded-xl font-medium hover:bg-blue-700 transition"
+            (click)="onRetryAi()"
+          >Спробувати знову</button>
+        </div>
+      }
+
       <!-- Intro -->
       @if (view() === 'intro' && survey()) {
         <app-survey-intro
@@ -81,10 +96,13 @@ type PageView = 'loading' | 'error' | 'intro' | 'step' | 'analyzing' | 'feedback
         />
       }
 
-      <!-- Feedback -->
-      @if (view() === 'feedback') {
-        <app-feedback-step
-          (feedbackComplete)="onFeedbackComplete($event)"
+      <!-- Step Result (intermediate AI result) -->
+      @if (view() === 'step-result' && stepResult()) {
+        <app-step-result
+          [aiResult]="stepResult()!"
+          [stepNumber]="stepResult()!.step"
+          [totalSteps]="survey()!.steps.length"
+          (continue)="onStepResultContinue()"
         />
       }
 
@@ -93,7 +111,16 @@ type PageView = 'loading' | 'error' | 'intro' | 'step' | 'analyzing' | 'feedback
         <app-survey-result
           [aiResult]="finalResult()!"
           (restart)="onRestart()"
+          (leaveFeedback)="onLeaveFeedback()"
           (toDashboard)="router.navigate(['/dashboard'])"
+        />
+      }
+
+      <!-- Feedback (after result) -->
+      @if (view() === 'feedback') {
+        <app-feedback-step
+          (feedbackComplete)="onFeedbackComplete($event)"
+          (back)="view.set('result')"
         />
       }
     </div>
@@ -114,6 +141,8 @@ export class SurveyPageComponent implements OnInit {
   errorMsg = signal('');
   currentStepNumber = signal(1);
   finalResult = signal<AiStepResult | null>(null);
+  stepResult = signal<AiStepResult | null>(null);
+  aiErrorMsg = signal('');
 
   // ─── Lifecycle ────────────────────────────────────────────────────────────
 
@@ -149,7 +178,10 @@ export class SurveyPageComponent implements OnInit {
           this.finalResult.set(last);
           this.view.set('result');
         } else if (sess.currentStep === 'feedback') {
-          this.view.set('feedback');
+          // Show result first — user can leave feedback from result screen
+          const last = this.sessionSvc.getLatestResult(sess);
+          this.finalResult.set(last);
+          this.view.set('result');
         } else {
           const stepNum = typeof sess.currentStep === 'number' ? sess.currentStep : 1;
           this.currentStepNumber.set(stepNum);
@@ -280,7 +312,7 @@ export class SurveyPageComponent implements OnInit {
 
     const prevResults = this.sessionSvc.getPreviousResults(updatedSess, stepDef.stepNumber);
 
-    this.api.analyzeStep({
+    const analyzePayload = {
       surveyType: def.surveyType,
       stepNumber: stepDef.stepNumber,
       totalSteps: def.steps.length,
@@ -288,14 +320,42 @@ export class SurveyPageComponent implements OnInit {
       answers: enriched,
       previousResults: prevResults,
       userSurveyId: updatedSess.userSurveyId,
-    }).pipe(
+    };
+
+    console.log('[AI] POST /api/survey/analyze-step', {
+      surveyType: def.surveyType,
+      stepNumber: stepDef.stepNumber,
+      totalSteps: def.steps.length,
+      answersCount: enriched.length,
+    });
+
+    this.api.analyzeStep(analyzePayload).pipe(
       takeUntilDestroyed(this.destroyRef),
       catchError(err => {
-        console.error('AI analysis failed', err);
-        // On error: continue without AI result
-        return of({ stepNumber: stepDef.stepNumber, resultJson: '{}', outputFormat: 'short', tokensUsed: null, success: false, error: err.message });
+        console.error('[AI] Error step', stepDef.stepNumber, err);
+        this.aiErrorMsg.set(err?.error?.message ?? err?.message ?? 'Невідома помилка');
+        this.view.set('ai-error');
+        return of(null);
       })
     ).subscribe(res => {
+      if (!res) return;
+
+      let parsed: unknown = null;
+      try { parsed = JSON.parse(res.resultJson ?? '{}'); } catch { /* ignore */ }
+
+      console.log('[AI] Response step', stepDef.stepNumber, {
+        success: res.success !== false,
+        outputFormat: res.outputFormat,
+        tokensUsed: res.tokensUsed,
+        resultJson: parsed,
+      });
+
+      if (res.success === false) {
+        this.aiErrorMsg.set(res.error ?? 'AI аналіз не вдався');
+        this.view.set('ai-error');
+        return;
+      }
+
       const aiResult: AiStepResult = {
         step: res.stepNumber,
         resultJson: res.resultJson,
@@ -305,28 +365,60 @@ export class SurveyPageComponent implements OnInit {
       };
       updatedSess = this.sessionSvc.saveAiResult(updatedSess, aiResult);
       this.session.set(updatedSess);
-      this.advanceAfterStep(updatedSess);
+
+      const isFinalStep = stepDef.stepNumber >= def.steps.length;
+      if (!isFinalStep) {
+        this.stepResult.set(aiResult);
+        this.view.set('step-result');
+      } else {
+        this.advanceAfterStep(updatedSess);
+      }
     });
   }
 
+  onRetryAi(): void {
+    const sess = this.session()!;
+    const stepNum = typeof sess.currentStep === 'number' ? sess.currentStep - 1 : 1;
+    const answers = this.sessionSvc.getStepAnswers(sess, stepNum);
+    this.currentStepNumber.set(stepNum);
+    this.onStepComplete(answers);
+  }
+
+  onStepResultContinue(): void {
+    this.stepResult.set(null);
+    this.advanceAfterStep(this.session()!);
+  }
+
   private advanceAfterStep(sess: SurveySession): void {
-    if (sess.currentStep === 'feedback') {
-      this.view.set('feedback');
-    } else if (sess.currentStep === 'done') {
+    if (sess.currentStep === 'feedback' || sess.currentStep === 'done') {
       this.finalResult.set(this.sessionSvc.getLatestResult(sess));
       this.view.set('result');
+
     } else {
       this.currentStepNumber.set(sess.currentStep as number);
       this.view.set('step');
     }
   }
 
-  onFeedbackComplete(fb: { rating: number | null; comment: string }): void {
-    let sess = this.sessionSvc.completeFeedback(this.session()!);
+  onLeaveFeedback(): void {
+    this.view.set('feedback');
+  }
+
+  onFeedbackComplete(fb: { rating: number; comment: string }): void {
+    const sess = this.sessionSvc.completeFeedback(this.session()!);
     this.session.set(sess);
-    const last = this.sessionSvc.getLatestResult(sess);
-    this.finalResult.set(last);
     this.view.set('result');
+
+    if (sess.userSurveyId) {
+      this.api.saveFeedback({
+        userSurveyId: sess.userSurveyId,
+        rating: fb.rating,
+        comment: fb.comment,
+      }).pipe(
+        takeUntilDestroyed(this.destroyRef),
+        catchError(err => { console.warn('Could not save feedback:', err); return of(null); })
+      ).subscribe();
+    }
   }
 
   onRestart(): void {

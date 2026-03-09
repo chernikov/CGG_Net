@@ -27,7 +27,7 @@ const FEEDBACK_RATINGS = [1, 2, 3, 4, 5];
             @for (star of stars; track star) {
               <button type="button"
                 class="text-4xl transition-transform hover:scale-110"
-                [class.opacity-30]="rating() !== null && rating()! < star"
+                [class.opacity-30]="rating() < star"
                 (click)="rating.set(star)"
               >⭐</button>
             }
@@ -47,22 +47,32 @@ const FEEDBACK_RATINGS = [1, 2, 3, 4, 5];
           ></textarea>
         </div>
 
-        <button
-          type="button"
-          class="w-full py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition"
-          (click)="submit()"
-        >
-          Переглянути результати →
-        </button>
+        <div class="flex gap-3">
+          <button
+            type="button"
+            class="flex-1 py-4 border-2 border-slate-200 text-slate-600 font-semibold rounded-xl hover:bg-slate-50 transition"
+            (click)="back.emit()"
+          >
+            ← Результати
+          </button>
+          <button
+            type="button"
+            class="flex-1 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition"
+            (click)="submit()"
+          >
+            Зберегти
+          </button>
+        </div>
       </div>
     </div>
   `,
 })
 export class FeedbackStepComponent {
-  @Output() feedbackComplete = new EventEmitter<{ rating: number | null; comment: string }>();
+  @Output() feedbackComplete = new EventEmitter<{ rating: number; comment: string }>();
+  @Output() back = new EventEmitter<void>();
 
   stars = FEEDBACK_RATINGS;
-  rating = signal<number | null>(null);
+  rating = signal<number>(5);
   comment = '';
 
   submit(): void {

@@ -38,6 +38,17 @@ export interface SaveStepResponse {
   error: string | null;
 }
 
+export interface SaveFeedbackRequest {
+  userSurveyId: string;
+  rating: number;
+  comment: string;
+}
+
+export interface SaveFeedbackResponse {
+  success: boolean;
+  error: string | null;
+}
+
 export interface StartSurveyRequest {
   surveyId: string;
   surveyType: string;
@@ -92,6 +103,13 @@ export class SurveyApiService {
    */
   saveAnswer(request: SaveStepRequest): Observable<SaveStepResponse> {
     return this.http.post<SaveStepResponse>(`${this.api}/survey/save-answer`, request);
+  }
+
+  /**
+   * Save user feedback (rating + comment) for a completed survey.
+   */
+  saveFeedback(request: SaveFeedbackRequest): Observable<SaveFeedbackResponse> {
+    return this.http.post<SaveFeedbackResponse>(`${this.api}/survey/feedback`, request);
   }
 
   // ─── Normalization helpers ────────────────────────────────────────────────

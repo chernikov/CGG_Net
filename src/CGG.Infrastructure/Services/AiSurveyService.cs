@@ -137,8 +137,7 @@ public class AiSurveyService : IAiSurveyService
                 new { role = "system", content = systemPrompt },
                 new { role = "user",   content = userMessage  }
             },
-            response_format = new { type = "json_object" },
-            temperature = 0.7
+            response_format = new { type = "json_object" }
         };
 
         var requestJson = JsonSerializer.Serialize(requestBody, _json);
@@ -151,7 +150,12 @@ public class AiSurveyService : IAiSurveyService
             new StringContent(requestJson, Encoding.UTF8, "application/json"),
             ct);
 
-        httpResponse.EnsureSuccessStatusCode();
+        if (!httpResponse.IsSuccessStatusCode)
+        {
+            var errorBody = await httpResponse.Content.ReadAsStringAsync(ct);
+            throw new HttpRequestException(
+                $"OpenAI returned {(int)httpResponse.StatusCode} for model '{model}': {errorBody}");
+        }
 
         var responseBody = await httpResponse.Content.ReadAsStringAsync(ct);
         using var doc = JsonDocument.Parse(responseBody);

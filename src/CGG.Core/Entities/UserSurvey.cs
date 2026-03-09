@@ -27,6 +27,9 @@ public class UserSurvey
     public DateTime StartedAt { get; set; } = DateTime.UtcNow;
     public DateTime? CompletedAt { get; set; }
 
+    public int? FeedbackRating { get; set; }
+    public string? FeedbackComment { get; set; }
+
     // Navigation
     public ICollection<UserSurveyAnswer> Answers { get; set; } = new List<UserSurveyAnswer>();
     public ICollection<AiLog> AiLogs { get; set; } = new List<AiLog>();

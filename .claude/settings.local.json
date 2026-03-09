@@ -10,7 +10,11 @@
       "Bash(rm:*)",
       "mcp__ide__getDiagnostics",
       "Bash(ls not:*)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(npx ng:*)",
+      "WebSearch",
+      "WebFetch(domain:platform.openai.com)",
+      "WebFetch(domain:community.openai.com)"
     ]
   }
 }

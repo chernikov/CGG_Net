@@ -67,49 +67,41 @@ interface FullResult {
 
             <!-- Full format details -->
             @if (match.fitReasons?.length) {
-              <details class="mt-3">
-                <summary class="cursor-pointer text-sm font-semibold text-slate-600 hover:text-blue-600">
-                  Чому це підходить
-                </summary>
+              <div class="mt-3">
+                <p class="text-sm font-semibold text-slate-600">Чому це підходить</p>
                 <ul class="mt-2 pl-4 space-y-1">
                   @for (r of match.fitReasons; track r) {
                     <li class="text-sm text-slate-600 list-disc">{{ r }}</li>
                   }
                 </ul>
-              </details>
+              </div>
             }
 
             @if (match.strongSkills?.length) {
-              <details class="mt-2">
-                <summary class="cursor-pointer text-sm font-semibold text-slate-600 hover:text-blue-600">
-                  Сильні сторони
-                </summary>
+              <div class="mt-3">
+                <p class="text-sm font-semibold text-slate-600">Сильні сторони</p>
                 <div class="mt-2 flex flex-wrap gap-2">
                   @for (s of match.strongSkills; track s) {
                     <span class="px-3 py-1 bg-emerald-50 text-emerald-700 rounded-full text-xs font-medium">{{ s }}</span>
                   }
                 </div>
-              </details>
+              </div>
             }
 
             @if (match.skillsToImprove?.length) {
-              <details class="mt-2">
-                <summary class="cursor-pointer text-sm font-semibold text-slate-600 hover:text-blue-600">
-                  Що розвинути
-                </summary>
+              <div class="mt-3">
+                <p class="text-sm font-semibold text-slate-600">Що розвинути</p>
                 <div class="mt-2 flex flex-wrap gap-2">
                   @for (s of match.skillsToImprove; track s) {
                     <span class="px-3 py-1 bg-amber-50 text-amber-700 rounded-full text-xs font-medium">{{ s }}</span>
                   }
                 </div>
-              </details>
+              </div>
             }
 
             @if (match.salaryRange) {
-              <details class="mt-2">
-                <summary class="cursor-pointer text-sm font-semibold text-slate-600 hover:text-blue-600">
-                  💰 Зарплата
-                </summary>
+              <div class="mt-3">
+                <p class="text-sm font-semibold text-slate-600">💰 Зарплата</p>
                 <div class="mt-2 grid grid-cols-3 gap-2 text-center text-xs">
                   <div class="bg-slate-50 rounded-lg p-2">
                     <div class="text-slate-400 mb-1">Junior</div>
@@ -124,33 +116,38 @@ interface FullResult {
                     <div class="font-semibold text-slate-700">{{ match.salaryRange!.senior }}</div>
                   </div>
                 </div>
-              </details>
+              </div>
             }
 
             @if (match.nextSteps?.length) {
-              <details class="mt-2">
-                <summary class="cursor-pointer text-sm font-semibold text-slate-600 hover:text-blue-600">
-                  🚀 Наступні кроки
-                </summary>
+              <div class="mt-3">
+                <p class="text-sm font-semibold text-slate-600">🚀 Наступні кроки</p>
                 <ul class="mt-2 pl-4 space-y-1">
                   @for (step of match.nextSteps; track step) {
                     <li class="text-sm text-slate-600 list-disc">{{ step }}</li>
                   }
                 </ul>
-              </details>
+              </div>
             }
           </div>
         }
       </div>
 
       <!-- Actions -->
-      <div class="flex gap-4 mt-10 justify-center">
+      <div class="flex flex-wrap gap-3 mt-10 justify-center">
         <button
           type="button"
           class="px-6 py-3 border-2 border-slate-200 rounded-xl text-slate-600 font-medium hover:bg-slate-50 transition"
           (click)="restart.emit()"
         >
           Пройти знову
+        </button>
+        <button
+          type="button"
+          class="px-6 py-3 border-2 border-amber-200 rounded-xl text-amber-700 font-medium hover:bg-amber-50 transition"
+          (click)="leaveFeedback.emit()"
+        >
+          💬 Залишити відгук
         </button>
         <button
           type="button"
@@ -166,6 +163,7 @@ interface FullResult {
 export class SurveyResultComponent implements OnChanges {
   @Input() aiResult!: AiStepResult;
   @Output() restart = new EventEmitter<void>();
+  @Output() leaveFeedback = new EventEmitter<void>();
   @Output() toDashboard = new EventEmitter<void>();
 
   result: FullResult | null = null;
