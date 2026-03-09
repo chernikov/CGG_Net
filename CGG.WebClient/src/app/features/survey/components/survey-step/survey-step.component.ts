@@ -3,7 +3,7 @@ import {
   ChangeDetectionStrategy, ChangeDetectorRef, HostListener
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SurveyStepDef } from '../../models/question.model';
+import { SurveyStepDef, SurveyQuestion } from '../../models/question.model';
 import { StepAnswer } from '../../models/survey-session.model';
 import { QuestionRendererComponent } from '../question-renderer/question-renderer.component';
 
@@ -32,7 +32,7 @@ import { QuestionRendererComponent } from '../question-renderer/question-rendere
           ></div>
         </div>
         <span class="text-sm font-medium text-slate-500">
-          Питання {{ questionIndex() + 1 }}/{{ step.questions.length }}
+          Питання {{ questionIndex() + 1 }}/{{ visibleQuestions().length }}
         </span>
       </div>
 
@@ -87,21 +87,27 @@ export class SurveyStepComponent implements OnChanges {
   @Output() stepComplete = new EventEmitter<StepAnswer[]>();
   /** Emitted on every "Наступне" click with all answers collected so far in this step. */
   @Output() questionAnswered = new EventEmitter<StepAnswer[]>();
+  /** Emitted after debug autofill — allows parent to persist partial answers in session. */
+  @Output() autofillApplied = new EventEmitter<StepAnswer[]>();
 
   private cdr = inject(ChangeDetectorRef);
 
   questionIndex = signal(0);
   answers = signal<Record<string, string>>({});
 
-  currentQuestion = computed(() => this.step?.questions?.[this.questionIndex()] ?? null);
-  isLastQuestion = computed(() => this.questionIndex() === (this.step?.questions?.length ?? 1) - 1);
+  visibleQuestions = computed(() =>
+    (this.step?.questions ?? []).filter(q => this.isVisible(q))
+  );
+
+  currentQuestion = computed(() => this.visibleQuestions()[this.questionIndex()] ?? null);
+  isLastQuestion = computed(() => this.questionIndex() === (this.visibleQuestions().length || 1) - 1);
   canAdvanceQuestion = computed(() => {
     const q = this.currentQuestion();
     if (!q) return false;
     return (this.answers()[q.id] ?? '').trim().length > 0;
   });
   canProceed = computed(() => {
-    const required = this.step?.questions?.filter(q => q.type !== 'feedback') ?? [];
+    const required = this.visibleQuestions().filter(q => q.type !== 'feedback');
     return required.every(q => (this.answers()[q.id] ?? '').trim().length > 0);
   });
 
@@ -133,6 +139,19 @@ export class SurveyStepComponent implements OnChanges {
     }
   }
 
+  private isVisible(q: SurveyQuestion): boolean {
+    if (!q.visibleIf) return true;
+    const { field, equals, contains } = q.visibleIf;
+    const sourceQ = this.step.questions.find(qq => qq.purpose === field);
+    const val = sourceQ ? (this.answers()[sourceQ.id] ?? '') : '';
+    if (equals !== undefined) return val === equals;
+    if (contains !== undefined) {
+      try { return (JSON.parse(val) as string[]).includes(contains); }
+      catch { return val.includes(contains); }
+    }
+    return true;
+  }
+
   prevQuestion(): void {
     if (this.questionIndex() > 0) {
       this.questionIndex.update(i => i - 1);
@@ -151,6 +170,7 @@ export class SurveyStepComponent implements OnChanges {
     }
     this.answers.set(filled);
     this.cdr.markForCheck();
+    this.autofillApplied.emit(this.currentAnswersAsStepAnswers());
   }
 
   submitStep(): void {
@@ -158,7 +178,7 @@ export class SurveyStepComponent implements OnChanges {
   }
 
   private currentAnswersAsStepAnswers(): StepAnswer[] {
-    return this.step.questions.map(q => ({
+    return this.visibleQuestions().map(q => ({
       questionId: q.id,
       questionText: '', // filled by parent from locale
       answer: this.answers()[q.id] ?? '',

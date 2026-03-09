@@ -158,6 +158,17 @@ export class SurveySessionService {
     return [...session.results].sort((a, b) => b.step - a.step)[0];
   }
 
+  /** Saves partial answers for a step without marking it complete or advancing currentStep. */
+  savePartialStepAnswers(session: SurveySession, stepNumber: number, answers: StepAnswer[]): SurveySession {
+    const existing = session.steps.find(s => s.step === stepNumber);
+    if (existing) {
+      existing.answers = answers;
+    } else {
+      session.steps.push({ step: stepNumber, answers, completedAt: new Date().toISOString() });
+    }
+    return this.saveSession(session);
+  }
+
   /** Returns top-N profession matches from the most recent full-format AI result. */
   getTopMatches(session: SurveySession, top = 3): { title: string; matchPercentage: number }[] {
     // Prefer full-format result (last step), fall back to any result

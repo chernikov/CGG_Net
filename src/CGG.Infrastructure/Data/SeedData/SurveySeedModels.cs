@@ -1,3 +1,4 @@
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace CGG.Infrastructure.Data.SeedData
@@ -67,7 +68,13 @@ namespace CGG.Infrastructure.Data.SeedData
         [JsonPropertyName("options")]
         public Dictionary<string, List<string>>? Options { get; set; }
 
+        [JsonPropertyName("optionCodes")]
+        public List<string>? OptionCodes { get; set; }
+
         [JsonPropertyName("purpose")]
         public string? Purpose { get; set; }
+
+        [JsonPropertyName("visibleIf")]
+        public JsonElement? VisibleIf { get; set; }
     }
 }

@@ -48,6 +48,13 @@ export interface QuestionOption {
   translations: TranslationEntry[];
 }
 
+/** Condition controlling when a question is shown */
+export interface VisibleIfCondition {
+  field: string;      // purpose of the controlling question
+  equals?: string;    // show if controlling answer === equals
+  contains?: string;  // show if controlling answer (JSON array or string) contains value
+}
+
 /** A single survey question as returned by the API */
 export interface SurveyQuestion {
   id: string;
@@ -57,6 +64,8 @@ export interface SurveyQuestion {
   sortOrder: number;
   translations: TranslationEntry[];
   options: QuestionOption[];
+  visibleIfJson?: string | null; // raw JSON from API
+  visibleIf?: VisibleIfCondition; // parsed at load time
   // helpers resolved at load time
   min?: number;
   max?: number;

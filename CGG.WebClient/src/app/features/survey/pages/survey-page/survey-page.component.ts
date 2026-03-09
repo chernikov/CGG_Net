@@ -76,6 +76,7 @@ type PageView = 'loading' | 'error' | 'intro' | 'step' | 'analyzing' | 'feedback
           [isLastStep]="currentStepDef()!.stepNumber >= survey()!.steps.length"
           [existingAnswers]="getExistingAnswers()"
           (questionAnswered)="onQuestionAnswered($event)"
+          (autofillApplied)="onAutofillApplied($event)"
           (stepComplete)="onStepComplete($event)"
         />
       }
@@ -221,6 +222,21 @@ export class SurveyPageComponent implements OnInit {
       takeUntilDestroyed(this.destroyRef),
       catchError(err => { console.warn('Could not persist partial answers:', err); return of(null); })
     ).subscribe();
+  }
+
+  /** Persists autofill answers to localStorage without completing the step. */
+  onAutofillApplied(answers: StepAnswer[]): void {
+    const sess = this.session();
+    if (!sess) return;
+    const stepDef = this.currentStepDef()!;
+    const enriched = answers
+      .filter(a => a.answer?.trim())
+      .map(a => {
+        const q = stepDef.questions.find(q => q.id === a.questionId);
+        return { ...a, questionText: q ? this.locale.resolve(q.translations) : '' };
+      });
+    const updated = this.sessionSvc.savePartialStepAnswers(sess, stepDef.stepNumber, enriched);
+    this.session.set(updated);
   }
 
   onStepComplete(answers: StepAnswer[]): void {

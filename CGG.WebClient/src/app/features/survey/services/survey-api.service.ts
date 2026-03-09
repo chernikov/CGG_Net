@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '../../../../environments/environment';
-import { SurveyDef, SurveyStepDef, SurveyQuestion, normalizeQuestionType } from '../models/question.model';
+import { SurveyDef, SurveyStepDef, SurveyQuestion, VisibleIfCondition, normalizeQuestionType } from '../models/question.model';
 import { StepAnswer } from '../models/survey-session.model';
 
 // ─── API response shapes ────────────────────────────────────────────────────
@@ -128,6 +128,11 @@ export class SurveyApiService {
     if (min === undefined) min = 1;
     if (max === undefined && type === 'scale') max = 10;
 
-    return { ...q, type, min, max };
+    let visibleIf: VisibleIfCondition | undefined;
+    if (q.visibleIfJson) {
+      try { visibleIf = JSON.parse(q.visibleIfJson) as VisibleIfCondition; } catch { /* ignore */ }
+    }
+
+    return { ...q, type, min, max, visibleIf };
   }
 }

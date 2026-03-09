@@ -98,6 +98,11 @@ export interface AutofillProfileEntry {
         <!-- Autofill tab -->
         @if (activeTab() === 'autofill') {
           <div class="debug-body">
+            <div class="debug-autofill">
+              <button class="debug-btn debug-btn--reload" (click)="reloadSurveys()">
+                ↺ Reload Surveys
+              </button>
+            </div>
             @if (profiles().length) {
               <div class="debug-autofill">
                 <select
@@ -210,6 +215,8 @@ export interface AutofillProfileEntry {
     }
     .debug-btn:disabled { background: #334155; color: #64748b; cursor: not-allowed; }
     .debug-btn:not(:disabled):hover { background: #2563eb; }
+    .debug-btn--reload { background: #065f46; }
+    .debug-btn--reload:hover { background: #047857; }
 
     .debug-footer {
       padding: 4px 8px; color: #334155; font-size: 10px;
@@ -293,12 +300,20 @@ export class SurveyDebugPanelComponent implements OnInit {
   }
 
   private loadProfiles(surveyType: string): void {
+    if (!surveyType) return;
     this.http
       .get<AutofillProfileEntry[]>(`/api/survey-example?name=${surveyType}`)
       .subscribe({
         next: list => this.profiles.set(list),
         error: () => this.profiles.set([]),
       });
+  }
+
+  reloadSurveys(): void {
+    this.http.post('/api/survey/reload', {}).subscribe({
+      next: () => { this.loadProfiles(this.surveyType()); },
+      error: () => {},
+    });
   }
 
   applyAutofill(): void {

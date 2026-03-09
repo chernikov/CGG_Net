@@ -123,6 +123,7 @@ namespace CGG.Infrastructure.Data
                             StepId = surveyStep.Id,
                             SortOrder = questionSortOrder++,
                             Purpose = qData.Purpose,
+                            VisibleIfJson = qData.VisibleIf.HasValue ? qData.VisibleIf.Value.GetRawText() : null,
                             CreatedAt = DateTime.UtcNow,
                             UpdatedAt = DateTime.UtcNow
                         };
@@ -159,7 +160,9 @@ namespace CGG.Infrastructure.Data
                                     Id = Guid.NewGuid(),
                                     QuestionId = question.Id,
                                     SortOrder = i + 1,
-                                    Value = enOptions[i].ToLower().Replace(" ", "_"),
+                                    Value = (qData.OptionCodes != null && i < qData.OptionCodes.Count)
+                                        ? qData.OptionCodes[i]
+                                        : enOptions[i].ToLower().Replace(" ", "_"),
                                     IsActive = true,
                                     CreatedAt = DateTime.UtcNow
                                 };

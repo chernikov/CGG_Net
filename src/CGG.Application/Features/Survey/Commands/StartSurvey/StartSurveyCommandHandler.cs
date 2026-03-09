@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using CGG.Application.DTOs.Survey;
+using CGG.Application.Specifications.Survey;
 using CGG.Core.Entities;
 using CGG.Core.Interfaces;
 using MediatR;
@@ -13,15 +14,18 @@ public class StartSurveyCommandHandler
     : IRequestHandler<StartSurveyCommand, StartSurveyResponseDto>
 {
     private readonly IUserSurveyRepository _userSurveyRepo;
+    private readonly IReadRepository<CGG.Core.Entities.Survey> _surveyRepo;
     private readonly IUnitOfWork _uow;
     private readonly ILogger<StartSurveyCommandHandler> _logger;
 
     public StartSurveyCommandHandler(
         IUserSurveyRepository userSurveyRepo,
+        IReadRepository<CGG.Core.Entities.Survey> surveyRepo,
         IUnitOfWork uow,
         ILogger<StartSurveyCommandHandler> logger)
     {
         _userSurveyRepo = userSurveyRepo;
+        _surveyRepo = surveyRepo;
         _uow = uow;
         _logger = logger;
     }
@@ -47,12 +51,17 @@ public class StartSurveyCommandHandler
                 }
             }
 
-            // ── 2. Create a fresh UserSurvey ─────────────────────────────────
+            // ── 2. Resolve current SurveyId from DB (DTO value may be stale after reload) ──
+            var surveyDef = await _surveyRepo.FirstOrDefaultAsync(
+                new SurveyByTypeSpecification(dto.SurveyType), cancellationToken);
+
+
+            // ── 3. Create a fresh UserSurvey ─────────────────────────────────
             var survey = new UserSurvey
             {
                 Id        = Guid.NewGuid(),
                 UserId    = request.UserId,
-                SurveyId  = dto.SurveyId == Guid.Empty ? null : dto.SurveyId,
+                SurveyId  = surveyDef?.Id,
                 SurveyType = dto.SurveyType,
                 Language  = dto.Language,
                 Status    = UserSurveyStatus.InProgress,

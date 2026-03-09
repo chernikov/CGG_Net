@@ -8,6 +8,7 @@ namespace CGG.Core.Entities
         // AI Processing
         public bool RequiresAiAnalysis { get; set; } = true; // false for UI/UX feedback questions
         public string? Purpose { get; set; } // Single-word key for autofill mapping: 'gender', 'hobby', etc.
+        public string? VisibleIfJson { get; set; } // Nullable JSON: { "field": "<purpose>", "equals"/"contains": "<value>" }
         
         public bool IsActive { get; set; } = true;
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;

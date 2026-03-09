@@ -29,6 +29,7 @@ public class SurveyQuestionDto
     public string? Purpose { get; set; }
     public int SortOrder { get; set; }
 
+    public string? VisibleIfJson { get; set; }
     public List<SurveyTranslationDto> Translations { get; set; } = new();
     public List<SurveyQuestionOptionDto> Options { get; set; } = new();
 }
