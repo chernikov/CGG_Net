@@ -34,6 +34,7 @@ export const routes: Routes = [
   { path: 'child/:id', component: ProfileComponent, canActivate: [authGuard] },
   { path: 'transactions', component: TransactionsComponent, canActivate: [authGuard] },
   { path: 'buy-credits', loadComponent: () => import('./pages/buy-credits/buy-credits').then(m => m.BuyCreditsComponent), canActivate: [authGuard] },
+  { path: 'payment/result', loadComponent: () => import('./pages/payment-result/payment-result').then(m => m.PaymentResultComponent), canActivate: [authGuard] },
   {
     path: 'survey',
     loadComponent: () =>

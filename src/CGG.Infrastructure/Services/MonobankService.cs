@@ -15,6 +15,7 @@ namespace CGG.Infrastructure.Services;
 public class MonobankService : IMonobankService
 {
     private readonly IRepository<Transaction> _transactionRepo;
+    private readonly IRepository<WebhookLog> _webhookLogRepo;
     private readonly IUserRepository _userRepo;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IHttpClientFactory _httpClientFactory;
@@ -23,6 +24,7 @@ public class MonobankService : IMonobankService
 
     public MonobankService(
         IRepository<Transaction> transactionRepo,
+        IRepository<WebhookLog> webhookLogRepo,
         IUserRepository userRepo,
         IUnitOfWork unitOfWork,
         IHttpClientFactory httpClientFactory,
@@ -30,6 +32,7 @@ public class MonobankService : IMonobankService
         ILogger<MonobankService> logger)
     {
         _transactionRepo = transactionRepo;
+        _webhookLogRepo = webhookLogRepo;
         _userRepo = userRepo;
         _unitOfWork = unitOfWork;
         _httpClientFactory = httpClientFactory;
@@ -150,9 +153,26 @@ public class MonobankService : IMonobankService
             "Monobank webhook received: reference={Reference}, invoiceId={InvoiceId}, status={Status}",
             reference, invoiceId, status);
 
+        // Persist raw log entry immediately so we never miss a webhook even if processing fails
+        var webhookLog = new WebhookLog
+        {
+            Id = Guid.NewGuid(),
+            Source = "monobank",
+            ExternalId = invoiceId,
+            OrderId = reference,
+            Status = status,
+            RawBody = JsonSerializer.Serialize(payload),
+            ProcessingResult = "ok",
+            ReceivedAt = DateTime.UtcNow,
+        };
+        await _webhookLogRepo.AddAsync(webhookLog, ct);
+
         if (string.IsNullOrEmpty(reference) && string.IsNullOrEmpty(invoiceId))
         {
             _logger.LogWarning("Monobank webhook missing both reference and invoiceId — ignoring");
+            webhookLog.ProcessingResult = "skipped";
+            webhookLog.Error = "Missing reference and invoiceId";
+            await _unitOfWork.SaveChangesAsync(ct);
             return;
         }
 
@@ -174,6 +194,9 @@ public class MonobankService : IMonobankService
         if (transaction is null)
         {
             _logger.LogError("Monobank webhook: transaction not found for reference={Reference}, invoiceId={InvoiceId}", reference, invoiceId);
+            webhookLog.ProcessingResult = "error";
+            webhookLog.Error = $"Transaction not found (reference={reference}, invoiceId={invoiceId})";
+            await _unitOfWork.SaveChangesAsync(ct);
             throw new InvalidOperationException($"Транзакцію не знайдено (reference={reference}, invoiceId={invoiceId})");
         }
 
@@ -181,6 +204,9 @@ public class MonobankService : IMonobankService
         if (transaction.Status == "success")
         {
             _logger.LogInformation("Monobank webhook: transaction {Id} already success — skip", transaction.Id);
+            webhookLog.ProcessingResult = "skipped";
+            webhookLog.Error = "Already success";
+            await _unitOfWork.SaveChangesAsync(ct);
             return;
         }
 
@@ -204,6 +230,8 @@ public class MonobankService : IMonobankService
             if (user is null)
             {
                 _logger.LogError("Monobank webhook: user {UserId} not found", transaction.UserId);
+                webhookLog.ProcessingResult = "error";
+                webhookLog.Error = $"User {transaction.UserId} not found";
             }
             else
             {
@@ -221,6 +249,60 @@ public class MonobankService : IMonobankService
         }
 
         await _unitOfWork.SaveChangesAsync(ct);
+    }
+
+    // ── Verify payment via Monobank status API ──────────────────────────────
+
+    public async Task<string> VerifyPaymentAsync(string invoiceId, CancellationToken ct)
+    {
+        _logger.LogInformation("Verifying Monobank invoice {InvoiceId} directly via API", invoiceId);
+
+        try
+        {
+            var client = _httpClientFactory.CreateClient("monobank");
+            var response = await client.GetAsync($"/api/merchant/invoice/status?invoiceId={invoiceId}", ct);
+            var responseBody = await response.Content.ReadAsStringAsync(ct);
+
+            _logger.LogInformation("Monobank invoice status response: {Status} {Body}", response.StatusCode, responseBody);
+
+            if (!response.IsSuccessStatusCode)
+                return "unknown";
+
+            using var doc = JsonDocument.Parse(responseBody);
+            var root = doc.RootElement;
+
+            var rawStatus = root.TryGetProperty("status", out var s) ? s.GetString() : null;
+            var reference = root.TryGetProperty("merchantPaymInfo", out var mpi)
+                         && mpi.TryGetProperty("reference", out var r) ? r.GetString() : null;
+            var amount = root.TryGetProperty("amount", out var a) ? a.GetInt64() : 0;
+
+            // Build fake payload to reuse HandleWebhookAsync logic
+            var fakePayload = new MonobankWebhookPayload
+            {
+                InvoiceId = invoiceId,
+                Status = rawStatus,
+                Amount = amount,
+                MerchantPaymInfo = reference is not null
+                    ? new MonobankMerchantPaymInfo { Reference = reference }
+                    : null,
+            };
+
+            await HandleWebhookAsync(fakePayload, ct);
+
+            return rawStatus switch
+            {
+                "success" or "paid" => "success",
+                "failure" or "failed" => "failure",
+                "expired" => "expired",
+                "reversed" => "reversed",
+                _ => rawStatus ?? "processing"
+            };
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "VerifyPaymentAsync failed for invoiceId={InvoiceId}", invoiceId);
+            return "unknown";
+        }
     }
 
     // ── Helpers ─────────────────────────────────────────────────────────────

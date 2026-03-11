@@ -4,7 +4,9 @@ using System.Threading.Tasks;
 using CGG.Application.DTOs.Credits;
 using CGG.Application.Features.Credits.Commands.CreateMonobankPayment;
 using CGG.Application.Features.Credits.Commands.HandleMonobankWebhook;
+using CGG.Application.Features.Credits.Commands.VerifyPayment;
 using CGG.Application.Features.Credits.Queries.GetCreditsBalance;
+using CGG.Application.Features.Credits.Queries.GetPaymentStatus;
 using CGG.Application.Features.Credits.Queries.GetTransactions;
 using CGG.Application.Interfaces;
 using MediatR;
@@ -71,6 +73,30 @@ namespace CGG.Api.Controllers
                 _logger.LogError(ex, "Failed to create Monobank payment for user {UserId}", userId);
                 return StatusCode(500, new { error = ex.Message });
             }
+        }
+
+        /// <summary>
+        /// Poll payment status by orderId. Used by the payment result page.
+        /// Automatically verifies against Monobank API if transaction is still pending.
+        /// </summary>
+        [HttpGet("payment/status")]
+        public async Task<IActionResult> GetPaymentStatus([FromQuery] string orderId)
+        {
+            if (string.IsNullOrWhiteSpace(orderId))
+                return BadRequest(new { error = "orderId is required." });
+
+            var result = await _mediator.Send(new GetPaymentStatusQuery(orderId));
+            if (result is null) return NotFound(new { error = "Transaction not found." });
+
+            // If still pending and we have an invoiceId — query Monobank directly
+            if (result.Status == "pending" && !string.IsNullOrEmpty(result.InvoiceId))
+            {
+                await _mediator.Send(new VerifyPaymentCommand(result.InvoiceId));
+                // Re-fetch after potential status update
+                result = await _mediator.Send(new GetPaymentStatusQuery(orderId)) ?? result;
+            }
+
+            return Ok(result);
         }
 
         /// <summary>

@@ -41,7 +41,14 @@
             <span class="transaction-date">{{ tx.createdAt | date:'dd.MM.yyyy HH:mm' }}</span>
           </div>
           <div class="transaction-amount">
-            {{ tx.amount > 0 ? '+' : '' }}{{ tx.amount }}
+            @if (tx.amount > 0) {
+              <span class="transaction-amount-credits">+{{ tx.creditsGranted || tx.amount }}</span>
+              @if (tx.amountUAH) {
+                <span class="transaction-amount-uah">-{{ tx.amountUAH }} ₴</span>
+              }
+            } @else {
+              <span>{{ tx.amount }}</span>
+            }
           </div>
         </div>
       }

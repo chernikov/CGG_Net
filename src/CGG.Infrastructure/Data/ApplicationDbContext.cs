@@ -14,6 +14,7 @@ namespace CGG.Infrastructure.Data
         public DbSet<Family> Families { get; set; }
         public DbSet<Member> Members { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<WebhookLog> WebhookLogs { get; set; }
         public DbSet<School> Schools { get; set; }
         
         // Survey-related tables
@@ -65,6 +66,7 @@ namespace CGG.Infrastructure.Data
             builder.ApplyConfiguration(new SurveyExampleAnswerConfiguration());
             builder.ApplyConfiguration(new AiPromptTemplateConfiguration());
             builder.ApplyConfiguration(new AiLogConfiguration());
+            builder.ApplyConfiguration(new WebhookLogConfiguration());
             builder.ApplyConfiguration(new RoleConfiguration());
             builder.ApplyConfiguration(new MemberRoleConfiguration());
         }

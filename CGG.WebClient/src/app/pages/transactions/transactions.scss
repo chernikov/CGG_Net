@@ -118,6 +118,21 @@
     font-size: 0.9375rem;
     font-weight: 700;
     white-space: nowrap;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.125rem;
+
+    .transaction-amount-credits {
+      font-size: 0.9375rem;
+      font-weight: 700;
+    }
+
+    .transaction-amount-uah {
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: #6b7280;
+    }
   }
 
   &.deduction .transaction-amount {
